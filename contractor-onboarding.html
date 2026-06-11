@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Contractor Onboarding — SafeBuild Cloud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --gray-1:#fcfcfc; --gray-2:#f5f5f5; --gray-3:#efefef; --gray-4:#e8e8e8;
+  --gray-5:#e0e0e0; --gray-6:#d8d8d8; --gray-7:#cecece; --gray-8:#bbbbbb;
+  --gray-9:#8d8d8d; --gray-10:#838383; --gray-11:#646464; --gray-12:#202020;
+  --gray-a9:rgba(0,0,0,.55); --gray-a11:rgba(0,0,0,.61); --gray-a12:rgba(0,0,0,.88);
+  --accent-1:#f4f7fe; --accent-2:#e8f0fd; --accent-9:#1754d8; --accent-10:#1249c4;
+  --accent-11:#1040a8; --accent-c:#fff;
+  --red-9:#e5484d; --green-9:#30a46c; --orange-9:#f76b15;
+  --panel:#ffffff; --bg:#fafafa;
+  --r1:4px; --r2:6px; --r3:8px; --r4:10px; --rf:9999px;
+  --s1:0 1px 2px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);
+  --s2:0 2px 8px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.05);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--gray-12);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+input,select,textarea,button{font-family:inherit}
+a{text-decoration:none}
+
+/* ── SHELL ── */
+.shell{display:flex;height:100vh;overflow:hidden}
+
+/* ── SIDEBAR ── */
+.sidebar{width:220px;background:var(--panel);border-right:1px solid rgba(0,0,0,.06);display:flex;flex-direction:column;height:100vh;position:fixed;left:0;top:0;z-index:200;overflow-y:auto;overflow-x:hidden}
+.sidebar-logo{height:56px;display:flex;align-items:center;gap:9px;padding:0 16px;border-bottom:1px solid rgba(0,0,0,.06);flex-shrink:0}
+.logo-mark{width:28px;height:28px;background:var(--accent-9);border-radius:var(--r2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-wordmark{font-size:13px;font-weight:700;color:var(--gray-12);letter-spacing:-.02em;line-height:1.15}
+.logo-wordmark span{display:block;font-weight:400;font-size:10px;color:rgba(0,0,0,.61);letter-spacing:0}
+.sidebar-scroll{flex:1;padding:8px;overflow-y:auto;overflow-x:hidden}
+.nav-group-label{font-size:10px;font-weight:500;color:rgba(0,0,0,.61);text-transform:uppercase;letter-spacing:.06em;padding:14px 8px 4px}
+.nav-item{display:flex;align-items:center;gap:8px;height:34px;padding:0 10px 0 12px;border-radius:var(--r3);font-size:13px;font-weight:500;color:rgba(0,0,0,.61);cursor:pointer;transition:background 80ms ease,color 80ms ease;border-left:2px solid transparent;white-space:nowrap;overflow:hidden}
+.nav-item:hover{background:var(--gray-3);color:var(--gray-12)}
+.nav-item.active{background:var(--gray-12);border-left-color:transparent;color:#fff}
+.nav-item svg{width:15px;height:15px;flex-shrink:0;opacity:.65}
+.nav-item.active svg{opacity:1;color:#fff}
+.nav-item .badge{margin-left:auto;background:rgba(229,72,77,.12);color:#e5484d;font-size:10px;font-weight:600;padding:1px 5px;border-radius:var(--rf)}
+.sidebar-footer{padding:10px 8px;border-top:1px solid rgba(0,0,0,.06);flex-shrink:0}
+.org-pill{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:var(--r3);cursor:pointer;transition:background 80ms ease;margin-bottom:4px}
+.org-pill:hover{background:var(--gray-2)}
+.org-thumb{width:22px;height:22px;border-radius:var(--r1);background:var(--accent-9);font-size:9px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.org-label{font-size:12px;font-weight:500;color:var(--gray-12);flex:1}
+.org-chevron{color:var(--gray-7);flex-shrink:0}
+.role-sw-wrap{padding:8px 8px 0}
+.role-sw-lbl{font-size:10px;font-weight:500;color:rgba(0,0,0,.61);text-transform:uppercase;letter-spacing:.06em;padding:0 4px 5px;display:block}
+.role-sw-btn{display:flex;align-items:center;gap:8px;width:100%;padding:7px 10px;border-radius:var(--r3);border:1px solid rgba(0,0,0,.06);background:var(--panel);cursor:pointer;font-size:12px;font-weight:500;color:var(--gray-12);transition:background 80ms}
+.role-sw-btn:hover{background:var(--gray-2)}
+.role-sw-btn .rs-dot{width:7px;height:7px;border-radius:50%;background:var(--accent-9);flex-shrink:0}
+.role-sw-btn .rs-lbl{flex:1;text-align:left}
+.role-sw-btn .rs-chev{color:var(--gray-7);flex-shrink:0}
+.role-dd{display:none;flex-direction:column;gap:2px;padding:4px;background:var(--panel);border:1px solid rgba(0,0,0,.06);border-radius:var(--r3);box-shadow:0 4px 16px rgba(0,0,0,.1);margin-top:4px}
+.role-dd.open{display:flex}
+.role-opt{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:var(--r2);font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;transition:background 80ms}
+.role-opt:hover{background:var(--gray-2);color:var(--gray-12)}
+.role-opt.cur{background:var(--gray-12);color:#fff}
+.role-opt .ro-dot{width:7px;height:7px;border-radius:50%;background:var(--gray-7);flex-shrink:0}
+.role-opt.cur .ro-dot{background:#fff}
+
+/* ── MAIN ── */
+.main{margin-left:220px;flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+
+/* ── TOPBAR ── */
+.topbar{height:56px;background:var(--panel);border-bottom:1px solid var(--gray-4);display:flex;align-items:center;padding:0 24px;flex-shrink:0;gap:10px;position:sticky;top:0;z-index:50}
+.topbar-title{font-size:13px;font-weight:600;color:var(--gray-12)}
+.topbar-spacer{flex:1}
+.role-sw{display:flex;align-items:center;gap:2px;background:var(--gray-2);border-radius:var(--rf);padding:2px}
+.role-pill{padding:5px 12px;font-size:12px;font-weight:500;border-radius:var(--rf);cursor:pointer;color:var(--gray-11);border:none;background:none;transition:background .15s,color .15s;white-space:nowrap}
+.role-pill.active{background:var(--panel);color:var(--gray-12);box-shadow:var(--s1);font-weight:600}
+.tb-div{width:1px;height:24px;background:var(--gray-4);margin:0 2px}
+.tb-icon{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--r2);cursor:pointer;color:var(--gray-11);border:none;background:none;position:relative}
+.tb-icon:hover{background:var(--gray-2)}
+.tb-icon svg{width:17px;height:17px}
+.notif-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;background:var(--red-9);border-radius:50%;border:1.5px solid var(--panel)}
+.user-chip{display:flex;align-items:center;gap:8px;cursor:pointer;padding:3px 6px;border-radius:var(--r2)}
+.user-chip:hover{background:var(--gray-2)}
+.u-ava{width:30px;height:30px;border-radius:50%;overflow:hidden;padding:0;font-size:0;flex-shrink:0}
+.u-ava img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.u-meta{display:flex;flex-direction:column;line-height:1.2}
+.u-name{font-size:12px;font-weight:600;color:var(--gray-12)}
+.u-role{font-size:10px;color:var(--gray-9)}
+
+/* ── PAGE SCROLL ── */
+.scroll{flex:1;overflow-y:auto;padding:24px 28px 40px}
+
+/* ── PAGE HEAD ── */
+.page-head{margin-bottom:20px}
+.page-head h1{font-size:20px;font-weight:700;color:var(--gray-12);margin-bottom:2px}
+.page-head p{font-size:13px;color:var(--gray-a11)}
+
+/* ── STEPPER ── */
+.stepper{display:flex;align-items:flex-start;gap:0;background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r3);padding:16px 20px;margin-bottom:24px}
+.step-item{display:flex;align-items:flex-start;flex:1;position:relative}
+.step-conn{flex:1;height:1px;background:var(--gray-5);margin:14px 6px 0;transition:background .3s}
+.step-conn.done{background:var(--accent-9)}
+.step-node{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0}
+.step-circle{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;background:var(--gray-3);color:var(--gray-9);border:2px solid var(--gray-5);transition:all .25s}
+.step-item.done .step-circle{background:var(--accent-9);color:#fff;border-color:var(--accent-9)}
+.step-item.active .step-circle{background:var(--accent-9);color:#fff;border-color:var(--accent-9);box-shadow:0 0 0 3px rgba(23,84,216,.18)}
+.step-label{font-size:10px;font-weight:500;color:var(--gray-9);white-space:nowrap;text-align:center;max-width:80px}
+.step-item.active .step-label{color:var(--accent-9);font-weight:600}
+.step-item.done .step-label{color:var(--gray-11)}
+
+/* ── CONTENT GRID ── */
+.cg{display:grid;grid-template-columns:1fr 296px;gap:20px;align-items:start}
+
+/* ── FORM CARD ── */
+.fc{background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r4);margin-bottom:14px;overflow:hidden}
+.fc-head{padding:14px 20px;border-bottom:1px solid var(--gray-4)}
+.fc-head h2{font-size:14px;font-weight:700;color:var(--gray-12)}
+.fc-head p{font-size:12px;color:var(--gray-a11);margin-top:2px}
+.fc-body{padding:20px}
+
+/* ── FORM ELEMENTS ── */
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.full{grid-column:1/-1}
+.fl{font-size:12px;font-weight:500;color:var(--gray-12)}
+.fl .req{color:var(--red-9)}
+.fi,.fs,.ft{width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--gray-5);border-radius:var(--r2);background:var(--panel);color:var(--gray-12);outline:none;transition:border-color .15s}
+.fi::placeholder,.ft::placeholder{color:var(--gray-8)}
+.fi:focus,.fs:focus,.ft:focus{border-color:var(--accent-9);box-shadow:0 0 0 2px rgba(23,84,216,.1)}
+.ft{resize:vertical;min-height:88px}
+.char-ct{font-size:11px;color:var(--gray-9);text-align:right;margin-top:3px}
+.fhint{font-size:11px;color:var(--gray-9)}
+.mb14{margin-bottom:14px}
+
+/* phone */
+.ph-wrap{display:flex}
+.ph-pre{display:flex;align-items:center;gap:4px;padding:8px 10px;border:1px solid var(--gray-5);border-right:none;border-radius:var(--r2) 0 0 var(--r2);background:var(--gray-2);font-size:13px;color:var(--gray-11);white-space:nowrap}
+.ph-wrap .fi{border-radius:0 var(--r2) var(--r2) 0}
+
+/* addr */
+.addr-row{display:grid;grid-template-columns:1fr 140px 1fr;gap:10px;margin-top:8px}
+
+/* radio */
+.radio-grp{display:flex;gap:20px;margin-top:6px}
+.radio-opt{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px}
+.radio-opt input{accent-color:var(--accent-9);cursor:pointer}
+
+/* ref block */
+.ref-blk{border:1px solid var(--gray-4);border-radius:var(--r3);padding:14px;margin-bottom:12px}
+.ref-blk-lbl{font-size:12px;font-weight:600;color:var(--gray-12);margin-bottom:10px}
+
+/* ── TABLES ── */
+.dt{width:100%;border-collapse:collapse}
+.dt th{font-size:11px;font-weight:600;color:var(--gray-9);text-align:left;padding:6px 8px;border-bottom:1px solid var(--gray-4)}
+.dt td{padding:6px 8px;vertical-align:middle}
+.dt .fi{padding:6px 8px;font-size:12px}
+.btn-ra{width:26px;height:26px;display:flex;align-items:center;justify-content:center;border:none;background:none;cursor:pointer;color:var(--gray-9);border-radius:var(--r1)}
+.btn-ra:hover{background:var(--gray-3);color:var(--red-9)}
+.btn-ra svg{width:14px;height:14px}
+.btn-add{display:flex;align-items:center;gap:6px;padding:7px 12px;background:none;border:1px dashed var(--gray-6);border-radius:var(--r2);font-size:12px;font-weight:500;color:var(--accent-9);cursor:pointer;margin-top:10px;transition:background .15s}
+.btn-add:hover{background:var(--accent-1)}
+.btn-add svg{width:13px;height:13px}
+
+/* ── WORKING HOURS ── */
+.wh-list{display:flex;flex-direction:column}
+.wh-day{border-bottom:1px solid var(--gray-4)}
+.wh-day:last-child{border-bottom:none}
+.wh-row{display:flex;align-items:flex-start;gap:16px;padding:14px 0}
+.wh-left{display:flex;align-items:center;gap:10px;width:140px;flex-shrink:0;padding-top:1px}
+.wh-tog{width:38px;height:22px;border-radius:11px;background:var(--gray-5);border:none;cursor:pointer;position:relative;transition:background 150ms;flex-shrink:0;padding:0}
+.wh-tog.on{background:var(--gray-12)}
+.wh-tog span{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform 150ms;box-shadow:0 1px 3px rgba(0,0,0,.25);display:block;pointer-events:none}
+.wh-tog.on span{transform:translateX(16px)}
+.wh-name{font-size:13px;font-weight:500;color:var(--gray-12)}
+.wh-right{flex:1;display:flex;flex-direction:column;gap:8px}
+.wh-slot{display:flex;align-items:center;gap:8px}
+.wh-ti{width:92px;padding:7px 10px;border:1px solid var(--gray-5);border-radius:var(--r3);font-size:13px;font-weight:500;color:var(--gray-12);background:var(--panel);font-family:inherit;outline:none;transition:border-color 80ms;-webkit-appearance:none}
+.wh-ti:focus{border-color:var(--accent-9);box-shadow:0 0 0 3px rgba(23,84,216,.08)}
+.wh-dash{color:var(--gray-8);font-size:14px;flex-shrink:0}
+.wh-rm-slot{width:22px;height:22px;border:none;background:none;cursor:pointer;color:var(--gray-7);border-radius:var(--r2);display:flex;align-items:center;justify-content:center;transition:background 80ms,color 80ms;padding:0;flex-shrink:0}
+.wh-rm-slot:hover{background:var(--gray-3);color:var(--red-9)}
+.wh-unavail{flex:1;font-size:13px;color:var(--gray-8);padding:7px 0;font-style:italic}
+.wh-add-slot{width:24px;height:24px;border:none;background:none;cursor:pointer;color:var(--gray-8);border-radius:var(--r2);display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;font-weight:300;transition:background 80ms,color 80ms;padding:0;flex-shrink:0;margin-top:1px}
+.wh-add-slot:hover{background:var(--gray-3);color:var(--gray-12)}
+.wh-emergency{margin-top:14px;padding-top:14px;border-top:1px solid var(--gray-4);display:flex;align-items:center;gap:10px}
+
+/* ── UPLOAD AREAS ── */
+.upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.upload-area{border:1.5px dashed var(--gray-6);border-radius:var(--r3);padding:22px 14px;text-align:center;cursor:pointer;transition:all .15s}
+.upload-area:hover{border-color:var(--accent-9);background:var(--accent-1)}
+.upload-area svg{width:20px;height:20px;color:var(--gray-9);margin-bottom:8px}
+.upload-area .ua-lbl{font-size:12px;font-weight:600;color:var(--gray-12);margin-bottom:3px}
+.upload-area .ua-sub{font-size:11px;color:var(--gray-9)}
+
+/* ── AREA CHIPS ── */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{display:flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--gray-5);border-radius:var(--rf);font-size:12px;font-weight:500;cursor:pointer;background:var(--panel);color:var(--gray-11);transition:all .15s;user-select:none}
+.chip.sel{background:var(--accent-9);border-color:var(--accent-9);color:#fff}
+.chip svg{width:11px;height:11px}
+
+/* ── SERVICES OFFERED ── */
+.svc-cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.svc-cat-chip{padding:7px 14px;border:1.5px solid var(--gray-5);border-radius:var(--rf);font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;transition:all 80ms;user-select:none;background:var(--panel)}
+.svc-cat-chip:hover{border-color:var(--accent-9);color:var(--accent-9)}
+.svc-cat-chip.sel{border-color:var(--accent-9);background:var(--accent-9);color:#fff}
+.svc-subs{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.svc-sub-group{background:var(--gray-2);border-radius:var(--r3);padding:14px 16px;border-left:3px solid var(--accent-9)}
+.svc-sub-head{font-size:11px;font-weight:600;color:var(--accent-11);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.svc-sub-chips{display:flex;flex-wrap:wrap;gap:6px}
+.svc-sub-chip{padding:5px 10px;border:1px solid var(--gray-5);border-radius:var(--r2);font-size:12px;color:var(--gray-11);cursor:pointer;transition:all 80ms;background:var(--panel);user-select:none}
+.svc-sub-chip:hover{border-color:var(--accent-9);color:var(--accent-9)}
+.svc-sub-chip.sel{border-color:var(--accent-9);background:var(--accent-1);color:var(--accent-11);font-weight:500}
+
+/* ── COMPLIANCE CHECKS ── */
+.check-list{display:flex;flex-direction:column;gap:12px}
+.check-row{display:flex;align-items:flex-start;gap:10px}
+.check-row input[type=checkbox]{width:16px;height:16px;margin-top:1px;accent-color:var(--accent-9);flex-shrink:0;cursor:pointer}
+.check-row label{font-size:13px;color:var(--gray-12);cursor:pointer;line-height:1.5}
+
+/* ── DECL BOX ── */
+.decl-box{background:var(--accent-1);border:1px solid var(--accent-2);border-radius:var(--r3);padding:14px 16px;display:flex;gap:10px;margin-bottom:16px}
+.decl-box svg{width:16px;height:16px;color:var(--accent-9);flex-shrink:0;margin-top:1px}
+.decl-box p{font-size:12px;color:var(--accent-11);line-height:1.5}
+
+/* ── INSURANCE TABLE ── */
+.ins-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.ins-tbl th{font-size:10px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:6px 8px;text-align:left;border-bottom:1px solid var(--gray-4)}
+.ins-tbl td{padding:8px 8px;vertical-align:middle}
+.ins-tbl tr:not(:last-child) td{border-bottom:1px solid var(--gray-3)}
+.ins-type{font-weight:500;color:var(--gray-12);font-size:12px;white-space:nowrap}
+.ins-type small{display:block;font-size:10px;color:var(--gray-9);font-weight:400}
+.ins-amt{display:flex;align-items:center}
+.ins-cur{padding:7px 8px;border:1px solid var(--gray-5);border-right:none;border-radius:var(--r2) 0 0 var(--r2);background:var(--gray-2);font-size:12px;color:var(--gray-11)}
+.ins-amt .fi{border-radius:0 var(--r2) var(--r2) 0;width:80px;font-size:12px;padding:6px 8px}
+
+/* ── DOC DOWNLOADS ── */
+.dl-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--gray-4)}
+.dl-row:last-child{border-bottom:none}
+.dl-info{display:flex;align-items:center;gap:8px}
+.dl-info svg{width:14px;height:14px;color:var(--accent-9)}
+.dl-info span{font-size:12px;font-weight:500;color:var(--gray-12)}
+.btn-dl{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:500;color:var(--accent-9);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:var(--r1)}
+.btn-dl:hover{background:var(--accent-1)}
+.btn-dl svg{width:12px;height:12px}
+
+/* ── REVIEW SUMMARY ── */
+.rv-sec{margin-bottom:16px}
+.rv-sec-title{font-size:11px;font-weight:700;color:var(--gray-9);text-transform:uppercase;letter-spacing:.05em;padding-bottom:6px;border-bottom:1px solid var(--gray-4);margin-bottom:8px}
+.rv-row{display:grid;grid-template-columns:160px 1fr;gap:8px;padding:5px 0;border-bottom:1px solid var(--gray-3)}
+.rv-row:last-child{border-bottom:none}
+.rv-k{font-size:12px;color:var(--gray-9)}
+.rv-v{font-size:12px;font-weight:500;color:var(--gray-12)}
+
+/* ── FORM NAV ── */
+.form-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r4)}
+.btn-prev{display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--panel);border:1px solid var(--gray-5);border-radius:var(--r2);font-size:13px;font-weight:500;color:var(--gray-11);cursor:pointer}
+.btn-prev:hover{background:var(--gray-2)}
+.btn-prev svg{width:14px;height:14px}
+.btn-draft{display:flex;align-items:center;gap:6px;padding:8px 14px;background:none;border:1px solid var(--gray-5);border-radius:var(--r2);font-size:13px;font-weight:500;color:var(--gray-11);cursor:pointer}
+.btn-draft:hover{background:var(--gray-2)}
+.btn-draft svg{width:14px;height:14px}
+.btn-cont{display:flex;align-items:center;gap:6px;padding:9px 20px;background:var(--accent-9);color:#fff;border:none;border-radius:var(--r2);font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
+.btn-cont:hover{background:var(--accent-10)}
+.btn-cont svg{width:14px;height:14px}
+.nav-grp{display:flex;align-items:center;gap:8px}
+
+/* ── RIGHT RAIL ── */
+.rail{display:flex;flex-direction:column;gap:14px;position:sticky;top:20px}
+.rc{background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r4);overflow:hidden}
+.rc-head{padding:12px 14px;border-bottom:1px solid var(--gray-4)}
+.rc-head h3{font-size:13px;font-weight:700;color:var(--gray-12)}
+.rc-head p{font-size:11px;color:var(--gray-a11);margin-top:1px}
+.rc-body{padding:14px}
+
+/* progress donut */
+.prog-wrap{display:flex;align-items:center;gap:14px;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid var(--gray-4)}
+.prog-donut{position:relative;width:56px;height:56px;flex-shrink:0}
+.prog-donut svg{width:56px;height:56px;transform:rotate(-90deg)}
+.prog-donut circle{fill:none;stroke-width:5}
+.prog-track{stroke:var(--gray-4)}
+.prog-fill{stroke:var(--accent-9);stroke-linecap:round;transition:stroke-dashoffset .4s}
+.prog-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--gray-12)}
+.prog-info h4{font-size:13px;font-weight:700;color:var(--gray-12)}
+.prog-info p{font-size:11px;color:var(--gray-a11);margin-top:1px}
+.prog-bar{height:4px;background:var(--gray-4);border-radius:2px;overflow:hidden;margin-top:6px}
+.prog-bar-fill{height:100%;background:var(--accent-9);border-radius:2px;transition:width .4s}
+.prog-note{font-size:10px;color:var(--gray-9);margin-top:4px}
+
+/* req doc items */
+.doc-item{padding:8px 0;border-bottom:1px solid var(--gray-3)}
+.doc-item:last-child{border-bottom:none}
+.doc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin-bottom:3px}
+.doc-left{display:flex;align-items:flex-start;gap:8px}
+.doc-ico{width:28px;height:28px;border-radius:var(--r2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.doc-ico.pdf{background:#fef2f2} .doc-ico.pdf svg{color:#ef4444}
+.doc-ico.doc{background:#eff6ff} .doc-ico.doc svg{color:#3b82f6}
+.doc-ico.cert{background:#f0fdf4} .doc-ico.cert svg{color:#22c55e}
+.doc-ico svg{width:13px;height:13px}
+.doc-name{font-size:11px;font-weight:600;color:var(--gray-12);line-height:1.3}
+.doc-desc{font-size:10px;color:var(--gray-9);line-height:1.3;margin-top:1px}
+.doc-badge{font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;white-space:nowrap;flex-shrink:0}
+.doc-badge.req{background:#fef2f2;color:var(--red-9)}
+.doc-badge.opt{background:var(--gray-2);color:var(--gray-9)}
+.doc-badge.up{background:#f0fdf4;color:var(--green-9)}
+.doc-badge.pend{background:#fff7ed;color:var(--orange-9)}
+.btn-up-doc{display:flex;align-items:center;gap:4px;margin-top:4px;margin-left:36px;padding:3px 8px;background:var(--gray-2);border:1px solid var(--gray-5);border-radius:var(--r1);font-size:10px;font-weight:500;color:var(--gray-11);cursor:pointer}
+.btn-up-doc:hover{background:var(--gray-3)}
+.btn-up-doc svg{width:10px;height:10px}
+.view-all{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:var(--accent-9);background:none;border:none;cursor:pointer;padding:8px 0 0}
+.view-all svg{width:11px;height:11px}
+
+/* next steps */
+.ns-list{display:flex;flex-direction:column;gap:10px}
+.ns-row{display:flex;align-items:flex-start;gap:10px}
+.ns-num{width:20px;height:20px;border-radius:50%;background:var(--accent-1);color:var(--accent-9);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ns-text h5{font-size:11px;font-weight:600;color:var(--gray-12)}
+.ns-text p{font-size:10px;color:var(--gray-9)}
+
+/* help contact */
+.hc-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.hc-row svg{width:14px;height:14px;color:var(--accent-9);flex-shrink:0}
+.hc-row span{font-size:11px;font-weight:600;color:var(--gray-12);display:block}
+.hc-row small{font-size:10px;color:var(--gray-9)}
+
+/* ── STEP PANELS ── */
+.sp{display:none}
+.sp.active{display:block}
+
+/* ── SUCCESS MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 200ms}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--panel);border-radius:var(--r4);box-shadow:0 24px 64px rgba(0,0,0,.18);width:100%;max-width:480px;padding:40px 36px 36px;position:relative;transform:scale(.96) translateY(8px);transition:transform 200ms,opacity 200ms;opacity:0}
+.modal-overlay.open .modal-box{transform:scale(1) translateY(0);opacity:1}
+.success-wrap{text-align:center}
+.s-icon{width:64px;height:64px;background:#f0fdf4;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.s-icon svg{width:32px;height:32px;color:var(--green-9)}
+.success-wrap h2{font-size:20px;font-weight:700;color:var(--gray-12);margin-bottom:8px}
+.success-wrap p{font-size:13px;color:var(--gray-a11);max-width:380px;margin:0 auto 20px;line-height:1.6}
+.ref-no{display:inline-block;background:var(--accent-1);border:1px solid var(--accent-2);border-radius:var(--r2);padding:6px 14px;font-size:13px;font-weight:700;color:var(--accent-9);margin-bottom:28px}
+.tl{display:flex;justify-content:center;gap:0;margin-top:8px}
+.tl-step{flex:1;max-width:130px;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative}
+.tl-step:not(:last-child)::after{content:'';position:absolute;top:16px;left:50%;width:100%;height:1px;background:var(--gray-5)}
+.tl-dot{width:32px;height:32px;border-radius:50%;background:var(--accent-1);border:2px solid var(--accent-9);display:flex;align-items:center;justify-content:center;z-index:1}
+.tl-dot svg{width:14px;height:14px;color:var(--accent-9)}
+.tl-lbl{font-size:10px;font-weight:500;color:var(--gray-11);text-align:center}
+
+/* lucide sizing */
+[data-lucide]{display:inline-block}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- ─── SIDEBAR ─── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 1.5L14.5 5.25V10.75L8 14.5L1.5 10.75V5.25L8 1.5Z" fill="white" opacity="0.9"/>
+        <path d="M8 4.5L11.5 6.5V10.5L8 12.5L4.5 10.5V6.5L8 4.5Z" fill="white"/>
+      </svg>
+    </div>
+    <div class="logo-wordmark">
+      SafeBuild Cloud
+      <span>Contractor Portal</span>
+    </div>
+  </div>
+
+  <div class="sidebar-scroll">
+    <div class="nav-item" onclick="window.location.href='marketplace.html'">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h5v5H2zm7 0h5v5H9zM2 9h5v5H2zm7 0h5v5H9z" opacity="0.8"/></svg>
+      Dashboard
+    </div>
+    <div class="nav-item active">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="12" height="12" rx="1.5"/><path d="M5 5.5h6M5 8h4M5 10.5h3"/></svg>
+      My Application
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="6" r="2.5"/><path d="M3 13.5c0-2.761 2.239-5 5-5s5 2.239 5 5"/></svg>
+      My Profile
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 2h8l-1 4H5L4 2z"/><path d="M5.5 6l1 8h3l1-8"/></svg>
+      Documents
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2.5 2A1.5 1.5 0 001 3.5v6A1.5 1.5 0 002.5 11H5l2.5 2.5L10 11h2.5A1.5 1.5 0 0014 9.5v-6A1.5 1.5 0 0012.5 2h-10z"/></svg>
+      Messages
+      <span class="badge">3</span>
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="2"/><path d="M8 2v2.5M8 11.5V14M2 8h2.5M11.5 8H14M3.75 3.75l1.77 1.77M10.48 10.48l1.77 1.77M3.75 12.25l1.77-1.77M10.48 5.52l1.77-1.77"/></svg>
+      Settings
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="6.5" r="2.5"/><path d="M3.5 13.5c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5"/></svg>
+      Help &amp; Support
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <div style="font-size:10px;font-weight:500;color:rgba(0,0,0,.61);text-transform:uppercase;letter-spacing:0.06em;padding:0 8px 5px;">Organisation</div>
+    <div class="org-pill">
+      <div class="org-thumb">MJ</div>
+      <span class="org-label">MJ Mechanical Ltd</span>
+      <svg class="org-chevron" width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2.5 4l3 3 3-3"/></svg>
+    </div>
+    <div class="role-sw-wrap">
+      <span class="role-sw-lbl">View as</span>
+      <button class="role-sw-btn" onclick="toggleRoleDD()">
+        <span class="rs-dot"></span>
+        <span class="rs-lbl">Contractor</span>
+        <svg class="rs-chev" width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2.5 4l3 3 3-3"/></svg>
+      </button>
+      <div class="role-dd" id="role-dd">
+        <div class="role-opt" onclick="window.location.href='marketplace.html'">
+          <span class="ro-dot"></span> Company Admin
+        </div>
+        <div class="role-opt cur">
+          <span class="ro-dot"></span> Contractor
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ─── MAIN ─── -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button style="display:flex;align-items:center;gap:6px;padding:6px 10px;background:none;border:1px solid var(--gray-4);border-radius:var(--r3);font-size:12px;font-weight:500;color:var(--gray-9);cursor:pointer;transition:background 80ms,color 80ms;white-space:nowrap;flex-shrink:0" onmouseover="this.style.background='var(--gray-2)';this.style.color='var(--gray-12)'" onmouseout="this.style.background='none';this.style.color='var(--gray-9)'" onclick="history.length > 1 ? history.back() : location.href='marketplace.html'">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
+      Dashboard
+    </button>
+    <span class="topbar-title" style="margin-left:4px">Contractor Application</span>
+    <div class="topbar-spacer"></div>
+
+    <button class="tb-icon" title="Notifications">
+      <i data-lucide="bell"></i>
+      <span class="notif-dot"></span>
+    </button>
+    <button class="tb-icon" title="Messages">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+    <div class="tb-div"></div>
+
+    <div class="user-chip">
+      <div class="u-ava"><img src="https://i.pravatar.cc/40?img=11" alt="Michael Brown"></div>
+      <div class="u-meta">
+        <span class="u-name">Michael Brown</span>
+        <span class="u-role">Contractor</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE SCROLL -->
+  <div class="scroll">
+    <div class="page-head">
+      <h1>Join the SafeBuild Contractor Framework</h1>
+      <p>Complete the application form below to become a verified contractor.</p>
+    </div>
+
+    <!-- STEPPER -->
+    <div class="stepper" id="stepper"></div>
+
+    <div class="cg">
+
+      <!-- ─── LEFT: FORM ─── -->
+      <div id="form-content">
+
+        <!-- ═══ STEP 1 ═══ -->
+        <div class="sp active" id="sp-1">
+
+          <div class="fc">
+            <div class="fc-head"><h2>1. Business Information</h2></div>
+            <div class="fc-body">
+              <div class="fg2">
+                <div class="fg">
+                  <label class="fl">Business / Company Name <span class="req">*</span></label>
+                  <input id="f-company" class="fi" type="text" placeholder="Enter registered business name">
+                </div>
+                <div class="fg">
+                  <label class="fl">Trading Name (if different)</label>
+                  <input id="f-trading" class="fi" type="text" placeholder="Enter trading name">
+                </div>
+                <div class="fg">
+                  <label class="fl">Company Registration Number <span class="req">*</span></label>
+                  <input id="f-reg" class="fi" type="text" placeholder="Enter company number">
+                </div>
+                <div class="fg">
+                  <label class="fl">VAT Registration Number</label>
+                  <input id="f-vat" class="fi" type="text" placeholder="Enter VAT number (if applicable)">
+                </div>
+                <div class="fg">
+                  <label class="fl">Business Type <span class="req">*</span></label>
+                  <select id="f-biz-type" class="fs">
+                    <option value="">Select business type</option>
+                    <option>Sole Trader</option>
+                    <option>Partnership</option>
+                    <option>Limited Company (Ltd)</option>
+                    <option>Public Limited Company (PLC)</option>
+                    <option>Limited Liability Partnership (LLP)</option>
+                  </select>
+                </div>
+                <div class="fg">
+                  <label class="fl">Date Established <span class="req">*</span></label>
+                  <input id="f-date-est" class="fi" type="date">
+                </div>
+                <div class="fg full">
+                  <label class="fl">Registered Address <span class="req">*</span></label>
+                  <input id="f-addr1" class="fi" type="text" placeholder="Address line 1" style="margin-bottom:8px">
+                  <input id="f-addr2" class="fi" type="text" placeholder="Address line 2">
+                  <div class="addr-row">
+                    <input id="f-city" class="fi" type="text" placeholder="City">
+                    <input id="f-postcode" class="fi" type="text" placeholder="Postcode">
+                    <select class="fs"><option>United Kingdom</option><option>England</option><option>Scotland</option><option>Wales</option><option>Northern Ireland</option></select>
+                  </div>
+                </div>
+                <div class="fg">
+                  <label class="fl">Primary Contact Name <span class="req">*</span></label>
+                  <input id="f-contact" class="fi" type="text" placeholder="Enter full name">
+                </div>
+                <div class="fg">
+                  <label class="fl">Job Title</label>
+                  <input id="f-jobtitle" class="fi" type="text" placeholder="Enter job title">
+                </div>
+                <div class="fg">
+                  <label class="fl">Email Address <span class="req">*</span></label>
+                  <input id="f-email" class="fi" type="email" placeholder="Enter email address">
+                </div>
+                <div class="fg">
+                  <label class="fl">Phone Number <span class="req">*</span></label>
+                  <div class="ph-wrap">
+                    <div class="ph-pre">🇬🇧 +44</div>
+                    <input id="f-phone" class="fi" type="tel" placeholder="Enter phone number">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>2. Business Overview</h2></div>
+            <div class="fc-body">
+              <div class="fg mb14">
+                <label class="fl">Describe your business and the services you provide <span class="req">*</span></label>
+                <textarea id="f-bio" class="ft" maxlength="1000" placeholder="Provide a brief overview of your business, services and experience..." oninput="cc('bio-ct',this.value.length)"></textarea>
+                <div class="char-ct" id="bio-ct">0 / 1000</div>
+              </div>
+              <div class="fg mb14">
+                <label class="fl">Services Offered <span class="req">*</span></label>
+                <div style="font-size:12px;color:var(--gray-9);margin-bottom:10px">Select your main service categories, then choose specific specialisms for each.</div>
+                <div class="svc-cats" id="svc-cats">
+                  <div class="svc-cat-chip" data-cat="Core Property Compliance" onclick="toggleSvcCat(this)">Core Property Compliance</div>
+                  <div class="svc-cat-chip" data-cat="Mechanical &amp; Electrical" onclick="toggleSvcCat(this)">Mechanical &amp; Electrical</div>
+                  <div class="svc-cat-chip" data-cat="Repairs &amp; Maintenance" onclick="toggleSvcCat(this)">Repairs &amp; Maintenance</div>
+                  <div class="svc-cat-chip" data-cat="Building Safety" onclick="toggleSvcCat(this)">Building Safety</div>
+                  <div class="svc-cat-chip" data-cat="Damp, Mould &amp; Disrepair" onclick="toggleSvcCat(this)">Damp, Mould &amp; Disrepair</div>
+                  <div class="svc-cat-chip" data-cat="Asset Management" onclick="toggleSvcCat(this)">Asset Management</div>
+                  <div class="svc-cat-chip" data-cat="Professional Consultancy" onclick="toggleSvcCat(this)">Professional Consultancy</div>
+                </div>
+                <div class="svc-subs" id="svc-subs">
+                  <div class="svc-sub-group" data-cat="Core Property Compliance" style="display:none">
+                    <div class="svc-sub-head">Core Property Compliance — Specialisms</div>
+                    <div class="svc-sub-chips">
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Gas compliance</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Electrical compliance</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Fire safety compliance</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Asbestos management</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Water hygiene / legionella</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Lift compliance</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Pressure systems</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Play area / external safety</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Environmental hazards</div>
+                    </div>
+                  </div>
+                  <div class="svc-sub-group" data-cat="Mechanical &amp; Electrical" style="display:none">
+                    <div class="svc-sub-head">Mechanical &amp; Electrical — Specialisms</div>
+                    <div class="svc-sub-chips">
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Domestic heating engineers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Commercial mechanical engineers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Electrical engineers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Mechanical design consultants</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Electrical design consultants</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Ventilation specialists</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Controls / BMS specialists</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Renewables / low-carbon specialists</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Metering &amp; billing specialists</div>
+                    </div>
+                  </div>
+                  <div class="svc-sub-group" data-cat="Repairs &amp; Maintenance" style="display:none">
+                    <div class="svc-sub-head">Repairs &amp; Maintenance — Specialisms</div>
+                    <div class="svc-sub-chips">
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Responsive repairs operatives</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Multi-trade operatives</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Plumbers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Electricians</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Carpenters / joiners</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Roofers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Glaziers / window specialists</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Drainage contractors</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Groundworkers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Voids team</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Out-of-hours emergency contractors</div>
+                    </div>
+                  </div>
+                  <div class="svc-sub-group" data-cat="Building Safety" style="display:none">
+                    <div class="svc-sub-head">Building Safety — Specialisms</div>
+                    <div class="svc-sub-chips">
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Building Safety Manager / Lead</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Fire engineers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Structural engineers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Clerk of Works / Quality Inspector</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Facade / cladding consultants</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Building control consultants</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Resident safety engagement specialists</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Golden thread / building info managers</div>
+                    </div>
+                  </div>
+                  <div class="svc-sub-group" data-cat="Damp, Mould &amp; Disrepair" style="display:none">
+                    <div class="svc-sub-head">Damp, Mould &amp; Disrepair — Specialisms</div>
+                    <div class="svc-sub-chips">
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Damp and mould surveyors</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Building pathologists</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Ventilation engineers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Mould remediation contractors</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Leak detection specialists</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Retrofit assessors / coordinators</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Environmental health / HHSRS specialists</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Disrepair surveyors</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Tenant liaison officers</div>
+                    </div>
+                  </div>
+                  <div class="svc-sub-group" data-cat="Asset Management" style="display:none">
+                    <div class="svc-sub-head">Asset Management — Specialisms</div>
+                    <div class="svc-sub-chips">
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Asset strategy managers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Stock condition surveyors</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Asset data analysts</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Planned maintenance managers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Quantity surveyors</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Project managers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Energy / sustainability specialists</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Decent Homes / property standards specialists</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">GIS / property data specialists</div>
+                    </div>
+                  </div>
+                  <div class="svc-sub-group" data-cat="Professional Consultancy" style="display:none">
+                    <div class="svc-sub-head">Professional Consultancy — Specialisms</div>
+                    <div class="svc-sub-chips">
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Building surveyors</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Chartered surveyors</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">M&amp;E consultants</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Fire risk assessors / engineers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Structural engineers</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Asbestos consultants</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Principal designers / CDM advisors</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Cost consultants / QS</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Clerk of Works</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Legal disrepair experts</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Procurement consultants</div>
+                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Data / systems consultants</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="fg2">
+                <div class="fg">
+                  <label class="fl">Areas Covered <span class="req">*</span></label>
+                  <select id="f-areas" class="fs" multiple size="6" style="height:auto;padding:4px 0">
+                    <option>London (All Zones)</option>
+                    <option>North London</option>
+                    <option>East London</option>
+                    <option>West London</option>
+                    <option>South London</option>
+                    <option>Essex</option>
+                    <option selected>Kent</option>
+                    <option selected>Surrey</option>
+                    <option>Hertfordshire</option>
+                    <option>Berkshire</option>
+                    <option>Buckinghamshire</option>
+                    <option>National Coverage</option>
+                  </select>
+                  <div style="font-size:11px;color:var(--gray-9);margin-top:4px">Hold Ctrl / Cmd to select multiple areas</div>
+                </div>
+                <div class="fg">
+                  <label class="fl">Number of Employees</label>
+                  <select id="f-employees" class="fs">
+                    <option value="">Select range</option>
+                    <option>1–5</option><option>6–10</option><option>11–25</option>
+                    <option>26–50</option><option>51–100</option><option>100+</option>
+                  </select>
+                </div>
+                <div class="fg">
+                  <label class="fl">Annual Turnover</label>
+                  <select id="f-turnover" class="fs">
+                    <option value="">Select range</option>
+                    <option>Under £100k</option><option>£100k – £500k</option>
+                    <option>£500k – £1M</option><option>£1M – £5M</option><option>£5M+</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>3. Experience &amp; References</h2></div>
+            <div class="fc-body">
+              <div class="fg2 mb14">
+                <div class="fg">
+                  <label class="fl">Years of Experience in Industry <span class="req">*</span></label>
+                  <select id="f-experience" class="fs">
+                    <option value="">Select years</option>
+                    <option>1–2 years</option><option>3–5 years</option>
+                    <option>6–10 years</option><option>10–15 years</option><option>15+ years</option>
+                  </select>
+                </div>
+                <div class="fg">
+                  <label class="fl">Number of Completed Projects (approx.) <span class="req">*</span></label>
+                  <input id="f-projects" class="fi" type="number" placeholder="Enter number of projects">
+                </div>
+              </div>
+              <p class="fl mb14">Please provide two business references <span class="req">*</span></p>
+              <div class="ref-blk">
+                <div class="ref-blk-lbl">Reference 1</div>
+                <div class="fg2">
+                  <div class="fg"><label class="fl">Contact Name</label><input class="fi" type="text" placeholder="Enter name"></div>
+                  <div class="fg"><label class="fl">Company Name</label><input class="fi" type="text" placeholder="Enter company"></div>
+                  <div class="fg"><label class="fl">Email</label><input class="fi" type="email" placeholder="Enter email"></div>
+                  <div class="fg"><label class="fl">Phone Number</label><input class="fi" type="tel" placeholder="Enter phone number"></div>
+                  <div class="fg">
+                    <label class="fl">Relationship</label>
+                    <select class="fs"><option value="">Select relationship</option><option>Previous Client</option><option>Partner Organisation</option><option>Industry Colleague</option></select>
+                  </div>
+                </div>
+              </div>
+              <div class="ref-blk">
+                <div class="ref-blk-lbl">Reference 2</div>
+                <div class="fg2">
+                  <div class="fg"><label class="fl">Contact Name</label><input class="fi" type="text" placeholder="Enter name"></div>
+                  <div class="fg"><label class="fl">Company Name</label><input class="fi" type="text" placeholder="Enter company"></div>
+                  <div class="fg"><label class="fl">Email</label><input class="fi" type="email" placeholder="Enter email"></div>
+                  <div class="fg"><label class="fl">Phone Number</label><input class="fi" type="tel" placeholder="Enter phone number"></div>
+                  <div class="fg">
+                    <label class="fl">Relationship</label>
+                    <select class="fs"><option value="">Select relationship</option><option>Previous Client</option><option>Partner Organisation</option><option>Industry Colleague</option></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>4. Additional Information</h2></div>
+            <div class="fc-body">
+              <div class="fg mb14">
+                <label class="fl">Why do you want to join the SafeBuild Contractor Framework? <span class="req">*</span></label>
+                <textarea id="f-why" class="ft" maxlength="1000" placeholder="Tell us why you want to work with us..." oninput="cc('why-ct',this.value.length)"></textarea>
+                <div class="char-ct" id="why-ct">0 / 1000</div>
+              </div>
+              <div class="fg mb14">
+                <label class="fl">Do you have any previous experience working with social housing providers?</label>
+                <div class="radio-grp">
+                  <label class="radio-opt"><input type="radio" name="soc" value="yes"> Yes</label>
+                  <label class="radio-opt"><input type="radio" name="soc" value="no" checked> No</label>
+                </div>
+              </div>
+              <div class="fg">
+                <label class="fl">Any additional information you would like to provide?</label>
+                <textarea class="ft" maxlength="1000" placeholder="Provide any additional information that supports your application..." oninput="cc('add-ct',this.value.length)"></textarea>
+                <div class="char-ct" id="add-ct">0 / 1000</div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /step 1 -->
+
+        <!-- ═══ STEP 2 ═══ -->
+        <div class="sp" id="sp-2">
+
+          <div class="fc">
+            <div class="fc-head"><h2>5. Accreditations &amp; Certifications</h2><p>Add your relevant accreditations and professional memberships.</p></div>
+            <div class="fc-body">
+              <table class="dt" id="accred-tbl">
+                <thead><tr>
+                  <th>Accreditation / Certification</th><th>Issuing Body</th>
+                  <th>Certificate Number</th><th>Expiry Date</th><th></th>
+                </tr></thead>
+                <tbody>
+                  <tr>
+                    <td><input class="fi" type="text" placeholder="e.g. Gas Safe Register" style="font-size:12px;padding:6px 8px"></td>
+                    <td><input class="fi" type="text" placeholder="Issuing body" style="font-size:12px;padding:6px 8px"></td>
+                    <td><input class="fi" type="text" placeholder="Cert number" style="font-size:12px;padding:6px 8px"></td>
+                    <td><input class="fi" type="date" style="font-size:12px;padding:6px 8px"></td>
+                    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn-add" onclick="addAccredRow()"><i data-lucide="plus-circle"></i> Add Another Accreditation</button>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>6. Compliance &amp; Insurance</h2><p>Upload your compliance documents and insurance certificates.</p></div>
+            <div class="fc-body">
+              <div class="upload-grid">
+                <div class="upload-area"><i data-lucide="upload"></i><div class="ua-lbl">Health &amp; Safety Policy</div><div class="ua-sub">Click to upload file</div></div>
+                <div class="upload-area"><i data-lucide="upload"></i><div class="ua-lbl">Risk Assessment (Sample)</div><div class="ua-sub">Click to upload file</div></div>
+                <div class="upload-area"><i data-lucide="upload"></i><div class="ua-lbl">Method Statement (Sample)</div><div class="ua-sub">Click to upload file</div></div>
+                <div class="upload-area"><i data-lucide="upload"></i><div class="ua-lbl">DBS / CRB Certificate</div><div class="ua-sub">Click to upload file</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>7. Banking &amp; Payment Details</h2><p>Provide your bank details for secure payments.</p></div>
+            <div class="fc-body">
+              <div class="fg2">
+                <div class="fg"><label class="fl">Account Holder Name <span class="req">*</span></label><input id="f-acct-holder" class="fi" type="text" placeholder="Enter account holder name"></div>
+                <div class="fg"><label class="fl">Bank Name <span class="req">*</span></label><input id="f-bank" class="fi" type="text" placeholder="Enter bank name"></div>
+                <div class="fg"><label class="fl">Sort Code <span class="req">*</span></label><input id="f-sort" class="fi" type="text" placeholder="00-00-00"></div>
+                <div class="fg"><label class="fl">Account Number <span class="req">*</span></label><input id="f-acct-num" class="fi" type="text" placeholder="Enter account number"></div>
+                <div class="fg"><label class="fl">IBAN (if applicable)</label><input class="fi" type="text" placeholder="Enter IBAN"></div>
+                <div class="fg"><label class="fl">BIC / SWIFT (if applicable)</label><input class="fi" type="text" placeholder="Enter BIC / SWIFT"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>8. Review &amp; Declaration</h2><p>Please review your information and confirm your declaration.</p></div>
+            <div class="fc-body">
+              <div class="decl-box">
+                <i data-lucide="info"></i>
+                <p>Please ensure all information provided is accurate and all required documents have been uploaded. Inaccurate information may delay your application.</p>
+              </div>
+              <div class="fg mb14">
+                <label class="fl">Declaration <span class="req">*</span></label>
+                <div class="check-row" style="margin-top:6px">
+                  <input type="checkbox" id="decl">
+                  <label for="decl">I confirm that the information in this application is true and accurate to the best of my knowledge. I understand that SafeBuild may verify this information and reserves the right to reject or remove any application that does not meet the framework requirements.</label>
+                </div>
+              </div>
+              <div class="fg2">
+                <div class="fg"><label class="fl">Full Name <span class="req">*</span></label><input class="fi" type="text" placeholder="Enter your full name"></div>
+                <div class="fg"><label class="fl">Date <span class="req">*</span></label><input class="fi" type="date" value="2026-06-11"></div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /step 2 -->
+
+        <!-- ═══ STEP 3 ═══ -->
+        <div class="sp" id="sp-3">
+
+          <div class="fc">
+            <div class="fc-head"><h2>9. Education &amp; Training</h2><p>Provide details of relevant education, training and professional development.</p></div>
+            <div class="fc-body">
+              <table class="dt" id="edu-tbl">
+                <thead><tr>
+                  <th>Qualification / Course</th><th>Awarding Body</th>
+                  <th>Date Obtained</th><th>Expiry Date (if any)</th>
+                  <th>Certificate</th><th></th>
+                </tr></thead>
+                <tbody>
+                  <tr>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="NVQ Level 3 in Plumbing"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="City &amp; Guilds"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date" value="2018-06-12"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date" value="2028-06-12"></td>
+                    <td><button class="btn-ra" title="Upload"><i data-lucide="upload"></i></button></td>
+                    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>
+                  </tr>
+                  <tr>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="SMSTS Certificate"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="CITB"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date" value="2022-09-15"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date" value="2027-09-15"></td>
+                    <td><button class="btn-ra" title="Upload"><i data-lucide="upload"></i></button></td>
+                    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn-add" onclick="addEduRow()"><i data-lucide="plus-circle"></i> Add Another Qualification</button>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>10. Key Personnel</h2><p>List key personnel who will be working on projects.</p></div>
+            <div class="fc-body">
+              <table class="dt" id="pers-tbl">
+                <thead><tr>
+                  <th>Full Name</th><th>Job Title / Role</th>
+                  <th>Qualifications (Brief)</th><th>CV</th><th></th>
+                </tr></thead>
+                <tbody>
+                  <tr>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="Michael Brown"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="Operations Manager"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="BSc Construction Management"></td>
+                    <td><button class="btn-ra" title="Upload CV"><i data-lucide="upload"></i></button></td>
+                    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>
+                  </tr>
+                  <tr>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="Sarah White"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="Site Supervisor"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="NVQ Level 4, SMSTS"></td>
+                    <td><button class="btn-ra" title="Upload CV"><i data-lucide="upload"></i></button></td>
+                    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn-add" onclick="addPersonnelRow()"><i data-lucide="plus-circle"></i> Add Another Person</button>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>11. Location &amp; Coverage</h2><p>Where are you based and the areas you are willing to work in?</p></div>
+            <div class="fc-body">
+              <div class="fg mb14">
+                <label class="fl">Registered Office Address</label>
+                <textarea class="ft" style="min-height:56px">12 Builder Street, London, SW1A 1AA</textarea>
+              </div>
+              <div class="fg2 mb14">
+                <div class="fg">
+                  <label class="fl">Primary Base / Office Location</label>
+                  <select class="fs"><option>London</option><option>Birmingham</option><option>Manchester</option></select>
+                </div>
+                <div class="fg">
+                  <label class="fl">Willing to Travel</label>
+                  <select class="fs">
+                    <option>Up to 25 miles</option><option selected>Up to 50 miles</option>
+                    <option>Up to 100 miles</option><option>Nationwide</option>
+                  </select>
+                </div>
+              </div>
+              <div class="fg">
+                <label class="fl">Areas You Cover <span class="req">*</span></label>
+                <div class="chips">
+                  <div class="chip sel" onclick="toggleChip(this)"><i data-lucide="map-pin"></i> North London</div>
+                  <div class="chip sel" onclick="toggleChip(this)"><i data-lucide="check"></i> East London</div>
+                  <div class="chip" onclick="toggleChip(this)">West London</div>
+                  <div class="chip" onclick="toggleChip(this)">South London</div>
+                  <div class="chip sel" onclick="toggleChip(this)"><i data-lucide="check"></i> Kent</div>
+                  <div class="chip sel" onclick="toggleChip(this)"><i data-lucide="check"></i> Surrey</div>
+                  <div class="chip" onclick="toggleChip(this)">Essex</div>
+                  <div class="chip" onclick="toggleChip(this)">Hertfordshire</div>
+                  <div class="chip" onclick="toggleChip(this)">Berkshire</div>
+                  <div class="chip" onclick="toggleChip(this)">Buckinghamshire</div>
+                  <div class="chip" onclick="toggleChip(this)">Other (Please specify)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>12. Working Hours</h2><p>Let clients know when you are available to work.</p></div>
+            <div class="fc-body">
+              <div class="wh-list" id="wh-list">
+
+                <!-- Monday -->
+                <div class="wh-day">
+                  <div class="wh-row">
+                    <div class="wh-left">
+                      <button class="wh-tog on" onclick="toggleWHDay(this)"><span></span></button>
+                      <span class="wh-name">Monday</span>
+                    </div>
+                    <div class="wh-right">
+                      <div class="wh-slot">
+                        <input type="time" class="wh-ti" value="08:00">
+                        <span class="wh-dash">–</span>
+                        <input type="time" class="wh-ti" value="16:00">
+                        <button class="wh-rm-slot" onclick="removeWHSlot(this)" title="Remove"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg></button>
+                      </div>
+                      <div class="wh-slot">
+                        <input type="time" class="wh-ti" value="17:00">
+                        <span class="wh-dash">–</span>
+                        <input type="time" class="wh-ti" value="18:00">
+                        <button class="wh-rm-slot" onclick="removeWHSlot(this)" title="Remove"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg></button>
+                      </div>
+                    </div>
+                    <div class="wh-unavail" style="display:none">Unavailable</div>
+                    <button class="wh-add-slot" onclick="addWHSlot(this)" title="Add time slot">+</button>
+                  </div>
+                </div>
+
+                <!-- Tuesday -->
+                <div class="wh-day">
+                  <div class="wh-row">
+                    <div class="wh-left">
+                      <button class="wh-tog on" onclick="toggleWHDay(this)"><span></span></button>
+                      <span class="wh-name">Tuesday</span>
+                    </div>
+                    <div class="wh-right">
+                      <div class="wh-slot">
+                        <input type="time" class="wh-ti" value="08:00">
+                        <span class="wh-dash">–</span>
+                        <input type="time" class="wh-ti" value="16:00">
+                        <button class="wh-rm-slot" onclick="removeWHSlot(this)" title="Remove"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg></button>
+                      </div>
+                    </div>
+                    <div class="wh-unavail" style="display:none">Unavailable</div>
+                    <button class="wh-add-slot" onclick="addWHSlot(this)" title="Add time slot">+</button>
+                  </div>
+                </div>
+
+                <!-- Wednesday -->
+                <div class="wh-day">
+                  <div class="wh-row">
+                    <div class="wh-left">
+                      <button class="wh-tog on" onclick="toggleWHDay(this)"><span></span></button>
+                      <span class="wh-name">Wednesday</span>
+                    </div>
+                    <div class="wh-right">
+                      <div class="wh-slot">
+                        <input type="time" class="wh-ti" value="08:00">
+                        <span class="wh-dash">–</span>
+                        <input type="time" class="wh-ti" value="16:00">
+                        <button class="wh-rm-slot" onclick="removeWHSlot(this)" title="Remove"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg></button>
+                      </div>
+                    </div>
+                    <div class="wh-unavail" style="display:none">Unavailable</div>
+                    <button class="wh-add-slot" onclick="addWHSlot(this)" title="Add time slot">+</button>
+                  </div>
+                </div>
+
+                <!-- Thursday -->
+                <div class="wh-day">
+                  <div class="wh-row">
+                    <div class="wh-left">
+                      <button class="wh-tog on" onclick="toggleWHDay(this)"><span></span></button>
+                      <span class="wh-name">Thursday</span>
+                    </div>
+                    <div class="wh-right">
+                      <div class="wh-slot">
+                        <input type="time" class="wh-ti" value="08:00">
+                        <span class="wh-dash">–</span>
+                        <input type="time" class="wh-ti" value="16:00">
+                        <button class="wh-rm-slot" onclick="removeWHSlot(this)" title="Remove"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg></button>
+                      </div>
+                    </div>
+                    <div class="wh-unavail" style="display:none">Unavailable</div>
+                    <button class="wh-add-slot" onclick="addWHSlot(this)" title="Add time slot">+</button>
+                  </div>
+                </div>
+
+                <!-- Friday -->
+                <div class="wh-day">
+                  <div class="wh-row">
+                    <div class="wh-left">
+                      <button class="wh-tog" onclick="toggleWHDay(this)"><span></span></button>
+                      <span class="wh-name">Friday</span>
+                    </div>
+                    <div class="wh-right" style="display:none">
+                      <div class="wh-slot">
+                        <input type="time" class="wh-ti">
+                        <span class="wh-dash">–</span>
+                        <input type="time" class="wh-ti">
+                        <button class="wh-rm-slot" onclick="removeWHSlot(this)" title="Remove"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg></button>
+                      </div>
+                    </div>
+                    <div class="wh-unavail">Unavailable</div>
+                    <button class="wh-add-slot" onclick="addWHSlot(this)" title="Add time slot" style="display:none">+</button>
+                  </div>
+                </div>
+
+                <!-- Saturday -->
+                <div class="wh-day">
+                  <div class="wh-row">
+                    <div class="wh-left">
+                      <button class="wh-tog" onclick="toggleWHDay(this)"><span></span></button>
+                      <span class="wh-name">Saturday</span>
+                    </div>
+                    <div class="wh-right" style="display:none">
+                      <div class="wh-slot">
+                        <input type="time" class="wh-ti">
+                        <span class="wh-dash">–</span>
+                        <input type="time" class="wh-ti">
+                        <button class="wh-rm-slot" onclick="removeWHSlot(this)" title="Remove"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg></button>
+                      </div>
+                    </div>
+                    <div class="wh-unavail">Unavailable</div>
+                    <button class="wh-add-slot" onclick="addWHSlot(this)" title="Add time slot" style="display:none">+</button>
+                  </div>
+                </div>
+
+                <!-- Sunday -->
+                <div class="wh-day">
+                  <div class="wh-row">
+                    <div class="wh-left">
+                      <button class="wh-tog on" onclick="toggleWHDay(this)"><span></span></button>
+                      <span class="wh-name">Sunday</span>
+                    </div>
+                    <div class="wh-right">
+                      <div class="wh-slot">
+                        <input type="time" class="wh-ti" value="08:00">
+                        <span class="wh-dash">–</span>
+                        <input type="time" class="wh-ti" value="16:00">
+                        <button class="wh-rm-slot" onclick="removeWHSlot(this)" title="Remove"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg></button>
+                      </div>
+                    </div>
+                    <div class="wh-unavail" style="display:none">Unavailable</div>
+                    <button class="wh-add-slot" onclick="addWHSlot(this)" title="Add time slot">+</button>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Emergency row -->
+              <div class="wh-emergency">
+                <label style="display:inline-flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+                  <input type="checkbox" id="f-emergency-247" checked style="accent-color:var(--green-9);width:15px;height:15px">
+                  <span style="font-weight:500;color:var(--gray-12)">Emergency / Out-of-hours</span>
+                </label>
+                <span style="color:var(--green-9);font-weight:600;font-size:12px;margin-left:4px">24 / 7 available</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>13. Additional Information</h2><p>Any further information that supports your application.</p></div>
+            <div class="fc-body">
+              <div class="fg mb14"><label class="fl">Professional Memberships (if any)</label><input id="f-memberships" class="fi" type="text" value="The Chartered Institute of Building (CIOB)"></div>
+              <div class="fg mb14"><label class="fl">Awards / Achievements (if any)</label><textarea class="ft" style="min-height:56px">Considerate Constructors Scheme – Silver Award 2023</textarea></div>
+            </div>
+          </div>
+        </div><!-- /step 3 -->
+
+        <!-- ═══ STEP 4 ═══ -->
+        <div class="sp" id="sp-4">
+
+          <div class="fc">
+            <div class="fc-head"><h2>13. Compliance Declarations</h2><p>Please confirm your compliance with the following requirements.</p></div>
+            <div class="fc-body">
+              <div class="check-list">
+                <div class="check-row"><input type="checkbox" id="c1"><label for="c1">I confirm that my business complies with all relevant UK laws and regulations.</label></div>
+                <div class="check-row"><input type="checkbox" id="c2"><label for="c2">I confirm that my business has appropriate policies and procedures in place for Health &amp; Safety.</label></div>
+                <div class="check-row"><input type="checkbox" id="c3"><label for="c3">I confirm that my business has a zero-tolerance approach to modern slavery and human trafficking.</label></div>
+                <div class="check-row"><input type="checkbox" id="c4"><label for="c4">I confirm that my business complies with the Bribery Act 2010.</label></div>
+                <div class="check-row"><input type="checkbox" id="c5"><label for="c5">I confirm that all information provided in this application is true and accurate.</label></div>
+                <div class="check-row"><input type="checkbox" id="c6"><label for="c6">I understand that any false information may result in rejection or removal from the framework.</label></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>14. Insurance Details</h2><p>Provide details of your current insurance policies.</p></div>
+            <div class="fc-body" style="overflow-x:auto">
+              <table class="ins-tbl">
+                <thead><tr>
+                  <th>Type of Insurance</th><th>Insurer</th><th>Policy Number</th>
+                  <th>Expiry Date</th><th>Limit of Indemnity</th><th>Cert.</th><th></th>
+                </tr></thead>
+                <tbody id="ins-tbody">
+                  <tr>
+                    <td><div class="ins-type">Public Liability Insurance<small>Minimum £5M cover</small></div></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px;min-width:100px" type="text" placeholder="Insurer"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px;min-width:100px" type="text" placeholder="Policy no."></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date"></td>
+                    <td><div class="ins-amt"><span class="ins-cur">£</span><input class="fi" style="font-size:12px;padding:6px 8px;width:80px" type="text" placeholder="Amount"></div></td>
+                    <td><button class="btn-ra"><i data-lucide="upload"></i></button></td>
+                    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>
+                  </tr>
+                  <tr>
+                    <td><div class="ins-type">Employers' Liability Insurance<small>Minimum £10M cover</small></div></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px;min-width:100px" type="text" placeholder="Insurer"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px;min-width:100px" type="text" placeholder="Policy no."></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date"></td>
+                    <td><div class="ins-amt"><span class="ins-cur">£</span><input class="fi" style="font-size:12px;padding:6px 8px;width:80px" type="text" placeholder="Amount"></div></td>
+                    <td><button class="btn-ra"><i data-lucide="upload"></i></button></td>
+                    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>
+                  </tr>
+                  <tr>
+                    <td><div class="ins-type">Professional Indemnity<small>If applicable</small></div></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px;min-width:100px" type="text" placeholder="Insurer"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px;min-width:100px" type="text" placeholder="Policy no."></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date"></td>
+                    <td><div class="ins-amt"><span class="ins-cur">£</span><input class="fi" style="font-size:12px;padding:6px 8px;width:80px" type="text" placeholder="Amount"></div></td>
+                    <td><button class="btn-ra"><i data-lucide="upload"></i></button></td>
+                    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>
+                  </tr>
+                  <tr>
+                    <td><div class="ins-type">Contract Works Insurance<small>Optional</small></div></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px;min-width:100px" type="text" placeholder="Insurer"></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px;min-width:100px" type="text" placeholder="Policy no."></td>
+                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date"></td>
+                    <td><div class="ins-amt"><span class="ins-cur">£</span><input class="fi" style="font-size:12px;padding:6px 8px;width:80px" type="text" placeholder="Amount"></div></td>
+                    <td><button class="btn-ra"><i data-lucide="upload"></i></button></td>
+                    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn-add" onclick="addInsRow()"><i data-lucide="plus-circle"></i> Add Another Insurance</button>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>15. Additional Documents (If applicable)</h2><p>Upload any additional documents that support your application.</p></div>
+            <div class="fc-body">
+              <div class="upload-grid">
+                <div class="upload-area"><i data-lucide="upload"></i><div class="ua-lbl">Company Brochure / Profile</div><div class="ua-sub">PDF, DOC, DOCX, JPG, PNG (Max 10MB)</div></div>
+                <div class="upload-area"><i data-lucide="upload"></i><div class="ua-lbl">Quality Management System (e.g. ISO 9001)</div><div class="ua-sub">PDF, DOC, DOCX, JPG, PNG (Max 10MB)</div></div>
+                <div class="upload-area"><i data-lucide="upload"></i><div class="ua-lbl">Environmental Management (e.g. ISO 14001)</div><div class="ua-sub">PDF, DOC, DOCX, JPG, PNG (Max 10MB)</div></div>
+                <div class="upload-area"><i data-lucide="upload"></i><div class="ua-lbl">Any Other Relevant Certificates</div><div class="ua-sub">PDF, DOC, DOCX, JPG, PNG (Max 10MB)</div></div>
+              </div>
+              <div class="fg" style="margin-top:14px">
+                <label class="fl">Please provide details of any other relevant information</label>
+                <textarea class="ft" maxlength="1000" placeholder="Enter your message..." oninput="cc('adddoc-ct',this.value.length)"></textarea>
+                <div class="char-ct" id="adddoc-ct">0 / 1000</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head"><h2>16. Framework &amp; Terms</h2><p>Please review and accept the framework terms and conditions.</p></div>
+            <div class="fc-body">
+              <div class="dl-row"><div class="dl-info"><i data-lucide="file-text"></i><span>SafeBuild Contractor Framework Terms &amp; Conditions</span></div><button class="btn-dl"><i data-lucide="download"></i> Download</button></div>
+              <div class="dl-row"><div class="dl-info"><i data-lucide="file-text"></i><span>Data Protection &amp; Privacy Policy</span></div><button class="btn-dl"><i data-lucide="download"></i> Download</button></div>
+              <div class="dl-row"><div class="dl-info"><i data-lucide="file-text"></i><span>Supplier Code of Conduct</span></div><button class="btn-dl"><i data-lucide="download"></i> Download</button></div>
+              <div class="dl-row"><div class="dl-info"><i data-lucide="file-text"></i><span>Health &amp; Safety Requirements</span></div><button class="btn-dl"><i data-lucide="download"></i> Download</button></div>
+              <div class="check-row" style="margin-top:14px">
+                <input type="checkbox" id="terms">
+                <label for="terms">I have read and agree to the above terms and conditions. <span class="req">*</span></label>
+              </div>
+            </div>
+          </div>
+        </div><!-- /step 4 -->
+
+        <!-- ═══ STEP 5: REVIEW ═══ -->
+        <div class="sp" id="sp-5">
+          <div class="fc">
+            <div class="fc-head"><h2>Review Your Application</h2><p>Please review all sections before final submission. Click any section to go back and edit.</p></div>
+            <div class="fc-body" id="rv-content">
+              <!-- populated dynamically by buildReview() -->
+            </div>
+          </div>
+        </div><!-- /step 5 -->
+
+
+        <!-- FORM NAV BUTTONS -->
+        <div class="form-nav" id="form-nav">
+          <div class="nav-grp">
+            <button class="btn-prev" id="btn-prev" onclick="prevStep()">
+              <i data-lucide="arrow-left"></i> Previous
+            </button>
+          </div>
+          <div class="nav-grp">
+            <button class="btn-draft"><i data-lucide="save"></i> Save Draft</button>
+            <button class="btn-cont" id="btn-cont" onclick="nextStep()">
+              Save &amp; Continue <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /form-content -->
+
+      <!-- ─── RIGHT RAIL ─── -->
+      <div class="rail">
+
+        <!-- Application Progress -->
+        <div class="rc">
+          <div class="rc-head"><h3>Application Progress</h3></div>
+          <div class="rc-body">
+            <div class="prog-wrap">
+              <div class="prog-donut">
+                <svg viewBox="0 0 56 56">
+                  <circle class="prog-track" cx="28" cy="28" r="23"/>
+                  <circle class="prog-fill" id="prog-circle" cx="28" cy="28" r="23" stroke-dasharray="144.51" stroke-dashoffset="115.61"/>
+                </svg>
+                <div class="prog-pct" id="prog-pct">20%</div>
+              </div>
+              <div class="prog-info">
+                <h4 id="prog-step">Step 1 of 5</h4>
+                <p id="prog-name">Business Details</p>
+                <div class="prog-bar"><div class="prog-bar-fill" id="prog-bar" style="width:20%"></div></div>
+              </div>
+            </div>
+            <p class="prog-note" id="prog-note">Please complete all required fields</p>
+          </div>
+        </div>
+
+        <!-- Required Documents -->
+        <div class="rc">
+          <div class="rc-head">
+            <h3>Required Documents</h3>
+            <p>Please upload all required documents. All files must be current and valid.</p>
+          </div>
+          <div class="rc-body" id="rail-docs">
+            <div class="doc-item">
+              <div class="doc-top">
+                <div class="doc-left"><div class="doc-ico pdf"><i data-lucide="file-text"></i></div><div><div class="doc-name">Company Registration Certificate</div><div class="doc-desc">Certificate of Incorporation from Companies House</div></div></div>
+                <span class="doc-badge req">Required</span>
+              </div>
+              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
+            </div>
+            <div class="doc-item">
+              <div class="doc-top">
+                <div class="doc-left"><div class="doc-ico doc"><i data-lucide="file"></i></div><div><div class="doc-name">Proof of Address</div><div class="doc-desc">Utility bill or bank statement (within last 3 months)</div></div></div>
+                <span class="doc-badge req">Required</span>
+              </div>
+              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
+            </div>
+            <div class="doc-item">
+              <div class="doc-top">
+                <div class="doc-left"><div class="doc-ico pdf"><i data-lucide="shield"></i></div><div><div class="doc-name">Public Liability Insurance</div><div class="doc-desc">Minimum £5M cover certificate</div></div></div>
+                <span class="doc-badge req">Required</span>
+              </div>
+              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
+            </div>
+            <div class="doc-item">
+              <div class="doc-top">
+                <div class="doc-left"><div class="doc-ico pdf"><i data-lucide="shield"></i></div><div><div class="doc-name">Employers' Liability Insurance</div><div class="doc-desc">Minimum £10M cover certificate</div></div></div>
+                <span class="doc-badge req">Required</span>
+              </div>
+              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
+            </div>
+            <div class="doc-item">
+              <div class="doc-top">
+                <div class="doc-left"><div class="doc-ico cert"><i data-lucide="file-check"></i></div><div><div class="doc-name">Health &amp; Safety Policy</div><div class="doc-desc">Your company health and safety policy document</div></div></div>
+                <span class="doc-badge req">Required</span>
+              </div>
+              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
+            </div>
+            <div class="doc-item">
+              <div class="doc-top">
+                <div class="doc-left"><div class="doc-ico pdf"><i data-lucide="file-text"></i></div><div><div class="doc-name">Risk Assessments (Sample)</div><div class="doc-desc">A sample risk assessment document</div></div></div>
+                <span class="doc-badge req">Required</span>
+              </div>
+              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
+            </div>
+            <div class="doc-item">
+              <div class="doc-top">
+                <div class="doc-left"><div class="doc-ico cert"><i data-lucide="award"></i></div><div><div class="doc-name">Accreditations &amp; Certifications</div><div class="doc-desc">Any relevant certificates</div></div></div>
+                <span class="doc-badge req">Required</span>
+              </div>
+              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
+            </div>
+            <div class="doc-item">
+              <div class="doc-top">
+                <div class="doc-left"><div class="doc-ico pdf"><i data-lucide="users"></i></div><div><div class="doc-name">DBS / CRB Policy</div><div class="doc-desc">Your safeguarding / DBS policy</div></div></div>
+                <span class="doc-badge req">Required</span>
+              </div>
+              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- What happens next -->
+        <div class="rc">
+          <div class="rc-head"><h3>What happens next?</h3></div>
+          <div class="rc-body">
+            <div class="ns-list">
+              <div class="ns-row"><div class="ns-num">1</div><div class="ns-text"><h5>Application Review</h5><p>We will review your application and documents.</p></div></div>
+              <div class="ns-row"><div class="ns-num">2</div><div class="ns-text"><h5>Verification</h5><p>We may contact you for additional information.</p></div></div>
+              <div class="ns-row"><div class="ns-num">3</div><div class="ns-text"><h5>Approval</h5><p>Once approved, you'll be part of our framework.</p></div></div>
+              <div class="ns-row"><div class="ns-num">4</div><div class="ns-text"><h5>Start Getting Work</h5><p>Receive job invitations and grow your business.</p></div></div>
+            </div>
+            <p style="font-size:10px;color:var(--gray-9);margin-top:12px;line-height:1.5;border-top:1px solid var(--gray-4);padding-top:10px">All applications are subject to our terms and conditions and compliance checks. <a href="#" style="color:var(--accent-9)">Learn more about our contractor framework</a></p>
+          </div>
+        </div>
+
+      </div><!-- /rail -->
+    </div><!-- /cg -->
+  </div><!-- /scroll -->
+</div><!-- /main -->
+</div><!-- /shell -->
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>
+const STEPS = [
+  'Business Details',
+  'Experience & Services',
+  'Accreditations & Docs',
+  'Compliance & Insurance',
+  'Review & Submit'
+];
+const PCTS = [20, 40, 60, 80, 100];
+const CIRC = 2 * Math.PI * 23; // 144.51
+
+let cur = 1;
+
+function cc(id, n) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = n + ' / 1000';
+}
+
+function renderStepper() {
+  const el = document.getElementById('stepper');
+  let html = '';
+  STEPS.forEach((label, i) => {
+    const n = i + 1;
+    const cls = n < cur ? 'done' : n === cur ? 'active' : '';
+    const inner = n < cur
+      ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
+      : n;
+    html += `<div class="step-item ${cls}"><div class="step-node"><div class="step-circle">${inner}</div><div class="step-label">${label}</div></div></div>`;
+    if (i < STEPS.length - 1) {
+      const connCls = n < cur ? 'done' : '';
+      html += `<div class="step-conn ${connCls}"></div>`;
+    }
+  });
+  el.innerHTML = html;
+}
+
+function updateProgress() {
+  const pct = PCTS[Math.min(cur - 1, 4)];
+  const offset = CIRC * (1 - pct / 100);
+  const circle = document.getElementById('prog-circle');
+  if (circle) circle.style.strokeDashoffset = offset;
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-step').textContent = 'Step ' + Math.min(cur, 5) + ' of 5';
+  document.getElementById('prog-name').textContent = STEPS[Math.min(cur - 1, 4)];
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('prog-note').textContent = pct === 100 ? 'Ready to submit!' : 'Please complete all required fields';
+}
+
+function showStep(n) {
+  document.querySelectorAll('.sp').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById('sp-' + n);
+  if (panel) panel.classList.add('active');
+
+  const nav = document.getElementById('form-nav');
+  nav.style.display = '';
+
+  document.getElementById('btn-prev').style.visibility = n > 1 ? 'visible' : 'hidden';
+
+  const cont = document.getElementById('btn-cont');
+  if (n === 5) {
+    cont.innerHTML = '<i data-lucide="send"></i> Submit Application';
+  } else {
+    cont.innerHTML = 'Save &amp; Continue <i data-lucide="arrow-right"></i>';
+  }
+  lucide.createIcons();
+}
+
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? (el.value || '').trim() : '';
+}
+function orDash(v) { return v || '—'; }
+
+function rvRow(k, v) {
+  return `<div class="rv-row"><span class="rv-k">${k}</span><span class="rv-v">${orDash(v)}</span></div>`;
+}
+function rvSec(title, rows, editStep) {
+  return `<div class="rv-sec">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:6px;border-bottom:1px solid var(--gray-4);margin-bottom:8px">
+      <div class="rv-sec-title" style="border:none;padding:0;margin:0">${title}</div>
+      <button onclick="jumpToStep(${editStep})" style="font-size:11px;font-weight:500;color:var(--accent-9);background:none;border:none;cursor:pointer;padding:2px 6px;border-radius:var(--r1)" onmouseover="this.style.background='var(--accent-1)'" onmouseout="this.style.background='none'">Edit</button>
+    </div>
+    ${rows}
+  </div>`;
+}
+
+function buildReview() {
+  const container = document.getElementById('rv-content');
+  if (!container) return;
+
+  // Address
+  const addrParts = [val('f-addr1'), val('f-addr2'), val('f-city'), val('f-postcode')].filter(Boolean);
+  const addr = addrParts.join(', ') || '—';
+
+  // Area chips (step 3)
+  const chipEls = document.querySelectorAll('.chips .chip.sel');
+  const areaChips = Array.from(chipEls).map(c => c.textContent.trim()).join(', ');
+
+  // Accreditations table (step 2)
+  const accredRows = Array.from(document.querySelectorAll('#accred-tbl tbody tr')).map(tr => {
+    const cells = tr.querySelectorAll('input');
+    const name = cells[0]?.value?.trim();
+    const body = cells[1]?.value?.trim();
+    const num  = cells[2]?.value?.trim();
+    const exp  = cells[3]?.value?.trim();
+    if (!name) return '';
+    return rvRow(name, [body, num, exp ? 'Exp: ' + exp : ''].filter(Boolean).join(' · '));
+  }).filter(Boolean).join('');
+
+  // Insurance table (step 4)
+  const insRows = Array.from(document.querySelectorAll('#ins-tbody tr')).map(tr => {
+    const typEl = tr.querySelector('.ins-type');
+    const inputs = tr.querySelectorAll('input.fi');
+    const typeName = typEl ? typEl.firstChild.textContent.trim() : inputs[0]?.value?.trim();
+    const insurer  = inputs[0]?.value?.trim();
+    const expiry   = inputs[2]?.value?.trim();
+    const amount   = inputs[3]?.value?.trim();
+    if (!typeName) return '';
+    const detail = [insurer, expiry ? 'Exp: ' + expiry : '', amount ? '£' + amount : ''].filter(Boolean).join(' · ');
+    return rvRow(typeName, detail || '—');
+  }).filter(Boolean).join('');
+
+  // Compliance checkboxes (step 4)
+  const checkIds = ['c1','c2','c3','c4','c5','c6'];
+  const complianceChecked = checkIds.filter(id => document.getElementById(id)?.checked).length;
+  const complianceStatus = complianceChecked === 6
+    ? `<span style="color:var(--green-9)">✓ All ${complianceChecked} declarations confirmed</span>`
+    : complianceChecked > 0
+      ? `<span style="color:var(--orange-9)">${complianceChecked} of 6 confirmed</span>`
+      : `<span style="color:var(--red-9)">Not confirmed</span>`;
+
+  // Why join
+  const why = val('f-why');
+
+  container.innerHTML = `
+    ${rvSec('Business Information', `
+      ${rvRow('Company Name', val('f-company'))}
+      ${val('f-trading') ? rvRow('Trading Name', val('f-trading')) : ''}
+      ${rvRow('Registration No.', val('f-reg'))}
+      ${val('f-vat') ? rvRow('VAT Number', val('f-vat')) : ''}
+      ${rvRow('Business Type', val('f-biz-type'))}
+      ${rvRow('Date Established', val('f-date-est'))}
+      ${rvRow('Registered Address', addr)}
+      ${rvRow('Primary Contact', val('f-contact'))}
+      ${val('f-jobtitle') ? rvRow('Job Title', val('f-jobtitle')) : ''}
+      ${rvRow('Email', val('f-email'))}
+      ${val('f-phone') ? rvRow('Phone', '+44 ' + val('f-phone')) : ''}
+    `, 1)}
+
+    ${rvSec('Business Overview', `
+      ${val('f-bio') ? rvRow('Description', val('f-bio').length > 120 ? val('f-bio').slice(0, 120) + '…' : val('f-bio')) : ''}
+      ${(function(){
+        const cats = Array.from(document.querySelectorAll('.svc-cat-chip.sel'));
+        if (!cats.length) return rvRow('Services Offered', '—');
+        return cats.map(cat => {
+          const subs = Array.from(document.querySelectorAll(`.svc-sub-group[data-cat="${cat.dataset.cat}"] .svc-sub-chip.sel`)).map(c => c.textContent.trim());
+          return rvRow(cat.dataset.cat, subs.length ? subs.join(', ') : '<span style="color:var(--gray-8)">No specialisms selected</span>');
+        }).join('');
+      })()}
+      ${rvRow('Areas Covered', val('f-areas'))}
+      ${rvRow('No. of Employees', val('f-employees'))}
+      ${rvRow('Annual Turnover', val('f-turnover'))}
+    `, 1)}
+
+    ${rvSec('Experience', `
+      ${rvRow('Years of Experience', val('f-experience'))}
+      ${rvRow('Completed Projects', val('f-projects'))}
+      ${val('f-why') ? rvRow('Why Join SafeBuild', why.length > 120 ? why.slice(0,120)+'…' : why) : ''}
+    `, 1)}
+
+    ${accredRows ? rvSec('Accreditations &amp; Certifications', accredRows, 2) : ''}
+
+    ${rvSec('Banking Details', `
+      ${rvRow('Account Holder', val('f-acct-holder'))}
+      ${rvRow('Bank', val('f-bank'))}
+      ${val('f-sort') ? rvRow('Sort Code', val('f-sort')) : ''}
+      ${val('f-acct-num') ? rvRow('Account Number', '••••' + val('f-acct-num').slice(-4)) : ''}
+    `, 2)}
+
+    ${rvSec('Location &amp; Coverage', `
+      ${areaChips ? rvRow('Areas Covered', areaChips) : ''}
+      ${rvRow('Professional Memberships', val('f-memberships'))}
+    `, 3)}
+
+    ${rvSec('Working Hours', (function() {
+      const days = Array.from(document.querySelectorAll('#wh-list .wh-day')).map(day => {
+        const name = day.querySelector('.wh-name')?.textContent || '';
+        const isOn = day.querySelector('.wh-tog')?.classList.contains('on');
+        if (!isOn) return rvRow(name, '<span style="color:var(--gray-8)">Unavailable</span>');
+        const slots = Array.from(day.querySelectorAll('.wh-slot')).map(slot => {
+          const times = slot.querySelectorAll('.wh-ti');
+          const from = times[0]?.value || '';
+          const to = times[1]?.value || '';
+          return from && to ? from + ' – ' + to : null;
+        }).filter(Boolean).join(', ');
+        return rvRow(name, slots || '—');
+      });
+      const emerg = document.getElementById('f-emergency-247');
+      days.push(rvRow('Emergency / Out-of-hours', emerg?.checked ? '<span style="color:var(--green-9);font-weight:600">24 / 7</span>' : 'Not available'));
+      return days.join('') || rvRow('Hours', '—');
+    })(), 3)}
+
+    ${insRows ? rvSec('Insurance', insRows, 4) : ''}
+
+    ${rvSec('Compliance', `
+      <div class="rv-row"><span class="rv-k">Declarations</span><span class="rv-v">${complianceStatus}</span></div>
+    `, 4)}
+
+    <div class="decl-box" style="margin-top:4px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <p>By submitting this application, you confirm all information is accurate and complete. Your application will be reviewed by the SafeBuild compliance team within 3–5 business days.</p>
+    </div>
+  `;
+  lucide.createIcons();
+}
+
+function jumpToStep(n) {
+  cur = n;
+  renderStepper();
+  updateProgress();
+  showStep(cur);
+  document.querySelector('.scroll').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep() {
+  if (cur < 5) {
+    cur++;
+    if (cur === 5) buildReview();
+    renderStepper();
+    updateProgress();
+    showStep(cur);
+    document.querySelector('.scroll').scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (cur === 5) {
+    document.getElementById('success-modal').classList.add('open');
+    lucide.createIcons();
+  }
+}
+
+function prevStep() {
+  if (cur > 1) {
+    cur--;
+    renderStepper();
+    updateProgress();
+    showStep(cur);
+    document.querySelector('.scroll').scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function toggleChip(el) {
+  el.classList.toggle('sel');
+  lucide.createIcons();
+}
+
+function toggleSvcCat(el) {
+  const isOn = el.classList.toggle('sel');
+  const cat = el.dataset.cat;
+  const subGroup = document.querySelector(`.svc-sub-group[data-cat="${CSS.escape ? CSS.escape(cat) : cat}"]`)
+    || Array.from(document.querySelectorAll('.svc-sub-group')).find(g => g.dataset.cat === cat);
+  if (!subGroup) return;
+  subGroup.style.display = isOn ? '' : 'none';
+  if (!isOn) subGroup.querySelectorAll('.svc-sub-chip.sel').forEach(c => c.classList.remove('sel'));
+}
+
+function addAccredRow() {
+  const tbody = document.querySelector('#accred-tbl tbody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" placeholder="Accreditation name"></td>
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" placeholder="Issuing body"></td>
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" placeholder="Cert number"></td>
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date"></td>
+    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>`;
+  tbody.appendChild(tr);
+  lucide.createIcons();
+}
+
+function addEduRow() {
+  const tbody = document.querySelector('#edu-tbl tbody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" placeholder="Qualification / Course"></td>
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" placeholder="Awarding Body"></td>
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date"></td>
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date"></td>
+    <td><button class="btn-ra" title="Upload"><i data-lucide="upload"></i></button></td>
+    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>`;
+  tbody.appendChild(tr);
+  lucide.createIcons();
+}
+
+function addPersonnelRow() {
+  const tbody = document.querySelector('#pers-tbl tbody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" placeholder="Full name"></td>
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" placeholder="Job title / role"></td>
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" placeholder="Qualifications"></td>
+    <td><button class="btn-ra" title="Upload CV"><i data-lucide="upload"></i></button></td>
+    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>`;
+  tbody.appendChild(tr);
+  lucide.createIcons();
+}
+
+function toggleWHDay(btn) {
+  const isOn = btn.classList.toggle('on');
+  const row = btn.closest('.wh-row');
+  const slots = row.querySelector('.wh-right');
+  const unavail = row.querySelector('.wh-unavail');
+  const addBtn = row.querySelector('.wh-add-slot');
+  slots.style.display = isOn ? '' : 'none';
+  unavail.style.display = isOn ? 'none' : '';
+  if (addBtn) addBtn.style.display = isOn ? '' : 'none';
+}
+
+function addWHSlot(btn) {
+  const right = btn.closest('.wh-row').querySelector('.wh-right');
+  const div = document.createElement('div');
+  div.className = 'wh-slot';
+  div.innerHTML = `<input type="time" class="wh-ti"><span class="wh-dash">–</span><input type="time" class="wh-ti"><button class="wh-rm-slot" onclick="removeWHSlot(this)" title="Remove"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg></button>`;
+  right.appendChild(div);
+}
+
+function removeWHSlot(btn) {
+  const slot = btn.closest('.wh-slot');
+  const right = slot.closest('.wh-right');
+  if (right.querySelectorAll('.wh-slot').length > 1) slot.remove();
+}
+
+function addInsRow() {
+  const tbody = document.getElementById('ins-tbody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><input class="fi" style="font-size:12px;padding:6px 8px;min-width:100px" type="text" placeholder="Type of insurance"></td>
+    <td><input class="fi" style="font-size:12px;padding:6px 8px;min-width:100px" type="text" placeholder="Insurer"></td>
+    <td><input class="fi" style="font-size:12px;padding:6px 8px;min-width:100px" type="text" placeholder="Policy no."></td>
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date"></td>
+    <td><div class="ins-amt"><span class="ins-cur">£</span><input class="fi" style="font-size:12px;padding:6px 8px;width:80px" type="text" placeholder="Amount"></div></td>
+    <td><button class="btn-ra"><i data-lucide="upload"></i></button></td>
+    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>`;
+  tbody.appendChild(tr);
+  lucide.createIcons();
+}
+
+function toggleRoleDD() {
+  document.getElementById('role-dd').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.role-sw-wrap')) {
+    const dd = document.getElementById('role-dd');
+    if (dd) dd.classList.remove('open');
+  }
+});
+
+// Init
+renderStepper();
+updateProgress();
+showStep(1);
+lucide.createIcons();
+</script>
+
+<!-- ── SUCCESS MODAL ── -->
+<div class="modal-overlay" id="success-modal">
+  <div class="modal-box">
+    <div class="success-wrap">
+      <div class="s-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h2>Application Submitted Successfully!</h2>
+      <p>Your contractor application has been received. Our compliance team will review your submission and contact you within 3–5 business days.</p>
+      <div class="ref-no">Reference: SBC-2026-04821</div>
+      <div class="tl">
+        <div class="tl-step"><div class="tl-dot"><i data-lucide="file-check"></i></div><div class="tl-lbl">Application Review</div></div>
+        <div class="tl-step"><div class="tl-dot"><i data-lucide="search"></i></div><div class="tl-lbl">Verification</div></div>
+        <div class="tl-step"><div class="tl-dot"><i data-lucide="shield-check"></i></div><div class="tl-lbl">Approval</div></div>
+        <div class="tl-step"><div class="tl-dot"><i data-lucide="briefcase"></i></div><div class="tl-lbl">Start Getting Work</div></div>
+      </div>
+      <button onclick="window.location.href='marketplace.html'" style="margin-top:28px;display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:var(--accent-9);color:#fff;border:none;border-radius:var(--r3);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">
+        Go to Dashboard
+      </button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
