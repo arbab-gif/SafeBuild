@@ -43,7 +43,7 @@ a{text-decoration:none}
 .nav-group-label{font-size:10px;font-weight:500;color:rgba(0,0,0,.61);text-transform:uppercase;letter-spacing:.06em;padding:14px 8px 4px}
 .nav-item{display:flex;align-items:center;gap:8px;height:34px;padding:0 10px 0 12px;border-radius:var(--r3);font-size:13px;font-weight:500;color:rgba(0,0,0,.61);cursor:pointer;transition:background 80ms ease,color 80ms ease;border-left:2px solid transparent;white-space:nowrap;overflow:hidden}
 .nav-item:hover{background:var(--gray-3);color:var(--gray-12)}
-.nav-item.active{background:var(--gray-12);border-left-color:transparent;color:#fff}
+.nav-item.active{background:var(--accent-9);border-left-color:transparent;color:#fff}
 .nav-item svg{width:15px;height:15px;flex-shrink:0;opacity:.65}
 .nav-item.active svg{opacity:1;color:#fff}
 .nav-item .badge{margin-left:auto;background:rgba(229,72,77,.12);color:#e5484d;font-size:10px;font-weight:600;padding:1px 5px;border-radius:var(--rf)}
@@ -203,6 +203,21 @@ a{text-decoration:none}
 .chip.sel{background:var(--accent-9);border-color:var(--accent-9);color:#fff}
 .chip svg{width:11px;height:11px}
 
+/* ── MULTI-SELECT DROPDOWN ── */
+.ms-wrap{position:relative}
+.ms-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:8px 10px;border:1px solid var(--gray-5);border-radius:var(--r2);background:var(--panel);cursor:pointer;font-size:13px;font-family:inherit;transition:border-color 80ms}
+.ms-btn:focus{outline:none;border-color:var(--accent-9)}
+.ms-val{flex:1;text-align:left;color:var(--gray-9)}
+.ms-val.has-val{color:var(--gray-12)}
+.ms-chev{width:14px;height:14px;color:var(--gray-8);transition:transform 150ms;flex-shrink:0}
+.ms-wrap.open .ms-chev{transform:rotate(180deg)}
+.ms-wrap.open .ms-btn{border-color:var(--accent-9)}
+.ms-dd{display:none;position:fixed;background:var(--panel);border:1px solid var(--gray-5);border-radius:var(--r3);box-shadow:var(--s2);z-index:9999;max-height:240px;overflow-y:auto;padding:4px}
+.ms-wrap.open .ms-dd{display:block}
+.ms-opt{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:var(--r2);cursor:pointer;font-size:13px;color:var(--gray-12);transition:background 80ms;user-select:none}
+.ms-opt:hover{background:var(--gray-2)}
+.ms-opt input{accent-color:var(--accent-9);width:14px;height:14px;cursor:pointer;flex-shrink:0}
+
 /* ── SERVICES OFFERED ── */
 .svc-cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
 .svc-cat-chip{padding:7px 14px;border:1.5px solid var(--gray-5);border-radius:var(--rf);font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;transition:all 80ms;user-select:none;background:var(--panel)}
@@ -215,6 +230,11 @@ a{text-decoration:none}
 .svc-sub-chip{padding:5px 10px;border:1px solid var(--gray-5);border-radius:var(--r2);font-size:12px;color:var(--gray-11);cursor:pointer;transition:all 80ms;background:var(--panel);user-select:none}
 .svc-sub-chip:hover{border-color:var(--accent-9);color:var(--accent-9)}
 .svc-sub-chip.sel{border-color:var(--accent-9);background:var(--accent-1);color:var(--accent-11);font-weight:500}
+.svc-price-row{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--gray-4);flex-wrap:wrap}
+.svc-price-lbl{font-size:12px;font-weight:500;color:var(--gray-11);white-space:nowrap}
+.svc-cur{font-size:13px;font-weight:600;color:var(--gray-12)}
+.svc-price{width:90px!important;padding:6px 8px!important;font-size:13px!important}
+.svc-unit{width:90px;padding:5px 8px;font-size:12px;border:1px solid var(--gray-5);border-radius:var(--r2);background:var(--panel);font-family:inherit;color:var(--gray-12)}
 
 /* ── COMPLIANCE CHECKS ── */
 .check-list{display:flex;flex-direction:column;gap:12px}
@@ -672,24 +692,6 @@ a{text-decoration:none}
               </div>
               <div class="fg2">
                 <div class="fg">
-                  <label class="fl">Areas Covered <span class="req">*</span></label>
-                  <select id="f-areas" class="fs" multiple size="6" style="height:auto;padding:4px 0">
-                    <option>London (All Zones)</option>
-                    <option>North London</option>
-                    <option>East London</option>
-                    <option>West London</option>
-                    <option>South London</option>
-                    <option>Essex</option>
-                    <option selected>Kent</option>
-                    <option selected>Surrey</option>
-                    <option>Hertfordshire</option>
-                    <option>Berkshire</option>
-                    <option>Buckinghamshire</option>
-                    <option>National Coverage</option>
-                  </select>
-                  <div style="font-size:11px;color:var(--gray-9);margin-top:4px">Hold Ctrl / Cmd to select multiple areas</div>
-                </div>
-                <div class="fg">
                   <label class="fl">Number of Employees</label>
                   <select id="f-employees" class="fs">
                     <option value="">Select range</option>
@@ -924,17 +926,24 @@ a{text-decoration:none}
                 <label class="fl">Registered Office Address</label>
                 <textarea class="ft" style="min-height:56px">12 Builder Street, London, SW1A 1AA</textarea>
               </div>
-              <div class="fg2 mb14">
+              <div class="fg2 mb14" style="grid-template-columns:1fr 1fr auto;align-items:end">
                 <div class="fg">
                   <label class="fl">Primary Base / Office Location</label>
                   <select class="fs"><option>London</option><option>Birmingham</option><option>Manchester</option></select>
                 </div>
                 <div class="fg">
                   <label class="fl">Willing to Travel</label>
-                  <select class="fs">
+                  <select class="fs" id="f-travel-range">
                     <option>Up to 25 miles</option><option selected>Up to 50 miles</option>
                     <option>Up to 100 miles</option><option>Nationwide</option>
                   </select>
+                </div>
+                <div class="fg" style="flex-shrink:0;min-width:0">
+                  <label class="fl" style="white-space:nowrap">National Coverage</label>
+                  <div style="display:flex;align-items:center;gap:8px;padding:8px 0">
+                    <button type="button" class="wh-tog" id="national-tog" onclick="toggleNational(this)"><span></span></button>
+                    <span id="national-lbl" style="font-size:13px;font-weight:500;color:var(--gray-9)">No</span>
+                  </div>
                 </div>
               </div>
               <div class="fg">
@@ -1524,11 +1533,21 @@ function buildReview() {
         const cats = Array.from(document.querySelectorAll('.svc-cat-chip.sel'));
         if (!cats.length) return rvRow('Services Offered', '—');
         return cats.map(cat => {
-          const subs = Array.from(document.querySelectorAll(`.svc-sub-group[data-cat="${cat.dataset.cat}"] .svc-sub-chip.sel`)).map(c => c.textContent.trim());
-          return rvRow(cat.dataset.cat, subs.length ? subs.join(', ') : '<span style="color:var(--gray-8)">No specialisms selected</span>');
+          const group = Array.from(document.querySelectorAll('.svc-sub-group')).find(g => g.dataset.cat === cat.dataset.cat);
+          const subs = group ? Array.from(group.querySelectorAll('.svc-sub-chip.sel')).map(c => c.textContent.trim()) : [];
+          const price = group ? group.querySelector('.svc-price')?.value : '';
+          const unit  = group ? group.querySelector('.svc-unit')?.value : '';
+          const priceStr = price ? `<span style="color:var(--green-9);font-weight:600">From £${price}/${unit}</span>` : '<span style="color:var(--orange-9)">Price not set</span>';
+          return `<div class="rv-row" style="flex-direction:column;align-items:flex-start;gap:4px">
+            <div style="display:flex;justify-content:space-between;width:100%">
+              <span class="rv-k" style="font-weight:600;color:var(--gray-12)">${cat.dataset.cat}</span>
+              <span>${priceStr}</span>
+            </div>
+            ${subs.length ? `<span class="rv-v" style="font-size:11px;color:var(--gray-9)">${subs.join(' · ')}</span>` : ''}
+          </div>`;
         }).join('');
       })()}
-      ${rvRow('Areas Covered', val('f-areas'))}
+      ${rvRow('Areas Covered', Array.from(document.querySelectorAll('#f-areas-dd input:checked')).map(i=>i.value).join(', ') || '—')}
       ${rvRow('No. of Employees', val('f-employees'))}
       ${rvRow('Annual Turnover', val('f-turnover'))}
     `, 1)}
@@ -1622,14 +1641,75 @@ function toggleChip(el) {
   lucide.createIcons();
 }
 
+function toggleMSDD(btn) {
+  const wrap = btn.closest('.ms-wrap');
+  const dd = wrap.querySelector('.ms-dd');
+  const isOpen = wrap.classList.toggle('open');
+  if (isOpen) {
+    const rect = btn.getBoundingClientRect();
+    dd.style.top = (rect.bottom + 4) + 'px';
+    dd.style.left = rect.left + 'px';
+    dd.style.width = rect.width + 'px';
+  }
+}
+
+function updateMSVal(input) {
+  const wrap = input.closest('.ms-wrap');
+  const checked = Array.from(wrap.querySelectorAll('input:checked')).map(i => i.value);
+  const valEl = wrap.querySelector('.ms-val');
+  if (!checked.length) {
+    valEl.textContent = 'Select areas';
+    valEl.classList.remove('has-val');
+  } else if (checked.length <= 2) {
+    valEl.textContent = checked.join(', ');
+    valEl.classList.add('has-val');
+  } else {
+    valEl.textContent = checked.slice(0, 2).join(', ') + ' +' + (checked.length - 2) + ' more';
+    valEl.classList.add('has-val');
+  }
+}
+
+// Initialise display value on load
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.ms-wrap').forEach(wrap => {
+    const any = wrap.querySelector('input:checked');
+    if (any) updateMSVal(any);
+  });
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    document.querySelectorAll('.ms-wrap.open').forEach(wrap => {
+      if (!wrap.contains(e.target)) wrap.classList.remove('open');
+    });
+  });
+});
+
 function toggleSvcCat(el) {
   const isOn = el.classList.toggle('sel');
   const cat = el.dataset.cat;
-  const subGroup = document.querySelector(`.svc-sub-group[data-cat="${CSS.escape ? CSS.escape(cat) : cat}"]`)
-    || Array.from(document.querySelectorAll('.svc-sub-group')).find(g => g.dataset.cat === cat);
+  const subGroup = Array.from(document.querySelectorAll('.svc-sub-group')).find(g => g.dataset.cat === cat);
   if (!subGroup) return;
   subGroup.style.display = isOn ? '' : 'none';
-  if (!isOn) subGroup.querySelectorAll('.svc-sub-chip.sel').forEach(c => c.classList.remove('sel'));
+  if (!isOn) {
+    subGroup.querySelectorAll('.svc-sub-chip.sel').forEach(c => c.classList.remove('sel'));
+    return;
+  }
+  if (!subGroup.querySelector('.svc-price-row')) {
+    const row = document.createElement('div');
+    row.className = 'svc-price-row';
+    row.innerHTML = `
+      <span class="svc-price-lbl">Starting price from</span>
+      <span class="svc-cur">£</span>
+      <input type="number" class="fi svc-price" placeholder="0.00" min="0" step="0.01" style="width:90px;padding:6px 8px;font-size:13px">
+      <span style="font-size:12px;color:var(--gray-9)">per</span>
+      <select class="svc-unit">
+        <option>hour</option>
+        <option>day</option>
+        <option>job</option>
+        <option>visit</option>
+        <option>m²</option>
+      </select>`;
+    subGroup.appendChild(row);
+  }
 }
 
 function addAccredRow() {
@@ -1672,6 +1752,11 @@ function addPersonnelRow() {
   lucide.createIcons();
 }
 
+function toggleNational(btn) {
+  const on = btn.classList.toggle('on');
+  document.getElementById('national-lbl').textContent = on ? 'Yes' : 'No';
+  document.getElementById('national-lbl').style.color = on ? 'var(--gray-12)' : 'var(--gray-9)';
+}
 function toggleWHDay(btn) {
   const isOn = btn.classList.toggle('on');
   const row = btn.closest('.wh-row');

@@ -92,7 +92,7 @@
       border-left: 2px solid transparent; white-space: nowrap; overflow: hidden;
     }
     .nav-item:hover { background: var(--gray-3); color: var(--gray-12); }
-    .nav-item.active { background: var(--gray-12); border-left-color: transparent; color: white; }
+    .nav-item.active { background: var(--accent-9); border-left-color: transparent; color: white; }
     .nav-item svg { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.65; }
     .nav-item.active svg { opacity: 1; color: white; }
     .sidebar-footer {
@@ -815,7 +815,7 @@
       <div class="tab-link" onclick="setTab(this,'reviews')">Reviews <span class="tab-count">128</span></div>
       <div class="tab-link" onclick="setTab(this,'portfolio')">Portfolio</div>
       <div class="tab-link" onclick="setTab(this,'accreditations')">Accreditations</div>
-      <div class="tab-link" onclick="setTab(this,'certifications')">Certifications</div>
+      <div class="tab-link" onclick="setTab(this,'certifications')">Insurance</div>
       <div class="tab-link" onclick="setTab(this,'compliance')">Compliance Docs</div>
       <div class="tab-link" onclick="setTab(this,'qa')">Q&amp;A</div>
     </div>
@@ -866,91 +866,90 @@
               <span style="background:var(--gray-2);color:var(--gray-alpha-11);font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--radius-full);">Hertfordshire</span>
             </div>
           </div>
-          <div style="padding:14px 0 14px 16px;">
-            <div style="font-size:10px;font-weight:600;color:var(--gray-alpha-11);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Working Hours</div>
-            <div style="display:flex;flex-direction:column;gap:4px;">
-              <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray-12);">
-                <span style="color:var(--gray-7);">Mon – Fri</span>
-                <span style="width:1px;height:12px;background:var(--gray-alpha-4);display:inline-block;"></span>
-                <span style="font-weight:500;">7:30 AM – 6:00 PM</span>
-              </div>
-              <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray-12);">
-                <span style="color:var(--gray-7);">Saturday</span>
-                <span style="width:1px;height:12px;background:var(--gray-alpha-4);display:inline-block;"></span>
-                <span style="font-weight:500;">8:00 AM – 1:00 PM</span>
-              </div>
-              <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
-                <span style="color:var(--gray-7);">Emergency</span>
-                <span style="width:1px;height:12px;background:var(--gray-alpha-4);display:inline-block;"></span>
-                <span style="font-weight:600;color:var(--color-success);">24 / 7</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
       <!-- Services -->
       <div class="section-card">
         <div class="section-title">Services Offered</div>
-        <div class="services-grid">
-          <div class="service-item">
-            <div class="service-ico" style="background:#fce7f3;">
-              <i data-lucide="flame" style="color:#be185d;width:18px;height:18px;"></i>
+
+        <!-- Core Property Compliance -->
+        <div style="margin-bottom:14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:32px;height:32px;background:#fff7ed;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <i data-lucide="shield-check" style="color:#ea580c;width:16px;height:16px;"></i>
+              </div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--gray-12)">Core Property Compliance</div>
+                <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Gas compliance · Electrical compliance · Lift compliance · Water hygiene / legionella</div>
+              </div>
             </div>
-            <div>
-              <div class="service-name">Gas Safety Inspection</div>
-              <div class="service-from">From £85</div>
-            </div>
-          </div>
-          <div class="service-item">
-            <div class="service-ico" style="background:#fef9c3;">
-              <i data-lucide="thermometer" style="color:#ca8a04;width:18px;height:18px;"></i>
-            </div>
-            <div>
-              <div class="service-name">Boiler Servicing</div>
-              <div class="service-from">From £120</div>
-            </div>
-          </div>
-          <div class="service-item">
-            <div class="service-ico" style="background:#fee2e2;">
-              <i data-lucide="zap" style="color:#b91c1c;width:18px;height:18px;"></i>
-            </div>
-            <div>
-              <div class="service-name">Emergency Repair</div>
-              <div class="service-from">From £195</div>
-            </div>
-          </div>
-          <div class="service-item">
-            <div class="service-ico" style="background:#dbeafe;">
-              <i data-lucide="wrench" style="color:#1d4ed8;width:18px;height:18px;"></i>
-            </div>
-            <div>
-              <div class="service-name">Planned Maintenance</div>
-              <div class="service-from">From £240/day</div>
-            </div>
-          </div>
-          <div class="service-item">
-            <div class="service-ico" style="background:#dcfce7;">
-              <i data-lucide="file-check" style="color:#15803d;width:18px;height:18px;"></i>
-            </div>
-            <div>
-              <div class="service-name">CP12 Certificate</div>
-              <div class="service-from">From £85</div>
-            </div>
-          </div>
-          <div class="service-item">
-            <div class="service-ico" style="background:#f3e8ff;">
-              <i data-lucide="home" style="color:#7e22ce;width:18px;height:18px;"></i>
-            </div>
-            <div>
-              <div class="service-name">Central Heating Install</div>
-              <div class="service-from">From £1,200</div>
+            <div style="text-align:right;flex-shrink:0;margin-left:12px">
+              <div style="font-size:12px;font-weight:700;color:var(--green-9)">From £85/job</div>
+              <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px">Starting price</div>
             </div>
           </div>
         </div>
+
+        <!-- Mechanical & Electrical -->
+        <div style="margin-bottom:14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:32px;height:32px;background:#dbeafe;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <i data-lucide="zap" style="color:#1d4ed8;width:16px;height:16px;"></i>
+              </div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--gray-12)">Mechanical &amp; Electrical</div>
+                <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Domestic heating engineers · Commercial mechanical engineers · Electrical engineers</div>
+              </div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:12px">
+              <div style="font-size:12px;font-weight:700;color:var(--green-9)">From £65/hour</div>
+              <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px">Starting price</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Repairs & Maintenance -->
+        <div style="margin-bottom:14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--gray-1)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:32px;height:32px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <i data-lucide="wrench" style="color:#15803d;width:16px;height:16px;"></i>
+              </div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--gray-12)">Repairs &amp; Maintenance</div>
+                <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Responsive repairs · Multi-trade operatives · Plumbers · Electricians · Roofers</div>
+              </div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:12px">
+              <div style="font-size:12px;font-weight:700;color:var(--green-9)">From £240/day</div>
+              <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px">Starting price</div>
+            </div>
+          </div>
+        </div>
+
         <div class="view-all-link" onclick="setTab(document.querySelector('.tab-link:nth-child(2)'),'services')">
-          View all 14 services
+          View all services &amp; pricing
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 2l4 4-4 4"/></svg>
+        </div>
+      </div>
+
+      <!-- Working Hours -->
+      <div class="section-card">
+        <div class="section-title">Availability &amp; Working Hours</div>
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:14px">
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4)"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Mon</div><div style="font-size:10px;color:var(--accent-9);font-weight:500">08:00–16:00</div></div>
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4)"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Tue</div><div style="font-size:10px;color:var(--accent-9);font-weight:500">08:00–16:00</div></div>
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4)"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Wed</div><div style="font-size:10px;color:var(--accent-9);font-weight:500">08:00–16:00</div></div>
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4)"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Thu</div><div style="font-size:10px;color:var(--accent-9);font-weight:500">08:00–16:00</div></div>
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4);opacity:.45"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Fri</div><div style="font-size:10px;color:var(--gray-9)">Unavailable</div></div>
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4);opacity:.45"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Sat</div><div style="font-size:10px;color:var(--gray-9)">Unavailable</div></div>
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4)"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Sun</div><div style="font-size:10px;color:var(--accent-9);font-weight:500">08:00–16:00</div></div>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;font-size:12px;font-weight:600;color:#15803d">
+          <i data-lucide="phone-call" style="width:13px;height:13px;"></i> Emergency / Out-of-hours: 24 / 7 available
         </div>
       </div>
 
@@ -1040,76 +1039,240 @@
 
     </div><!-- /overview -->
 
-    <!-- OTHER TABS (placeholders) -->
+    <!-- ── SERVICES TAB ── -->
     <div class="tab-panel" id="tab-services">
       <div class="section-card">
-        <div class="section-title">All Services (14)</div>
-        <div class="services-grid" id="allServicesGrid"></div>
+        <div class="section-title">Services Offered &amp; Pricing</div>
+
+        <!-- Core Property Compliance -->
+        <div style="margin-bottom:16px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;background:#fff7ed;border-radius:var(--radius-3);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="shield-check" style="color:#ea580c;width:18px;height:18px;"></i></div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--gray-12)">Core Property Compliance</div>
+                <div style="font-size:12px;color:var(--gray-alpha-11);margin-top:2px">Statutory compliance across all building safety disciplines</div>
+              </div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:12px">
+              <div style="font-size:14px;font-weight:700;color:var(--color-success)">From £85/job</div>
+              <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px">Starting price</div>
+            </div>
+          </div>
+          <div style="padding:14px 16px;display:flex;flex-wrap:wrap;gap:6px">
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Gas compliance</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Electrical compliance</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Fire safety compliance</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Lift compliance</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Water hygiene / legionella</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Asbestos management</span>
+          </div>
+        </div>
+
+        <!-- Mechanical & Electrical -->
+        <div style="margin-bottom:16px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;background:#dbeafe;border-radius:var(--radius-3);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="zap" style="color:#1d4ed8;width:18px;height:18px;"></i></div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--gray-12)">Mechanical &amp; Electrical</div>
+                <div style="font-size:12px;color:var(--gray-alpha-11);margin-top:2px">Full M&amp;E services for residential and commercial properties</div>
+              </div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:12px">
+              <div style="font-size:14px;font-weight:700;color:var(--color-success)">From £65/hour</div>
+              <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px">Starting price</div>
+            </div>
+          </div>
+          <div style="padding:14px 16px;display:flex;flex-wrap:wrap;gap:6px">
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Domestic heating engineers</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Commercial mechanical engineers</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Electrical engineers</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Ventilation specialists</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Renewables / low-carbon specialists</span>
+          </div>
+        </div>
+
+        <!-- Repairs & Maintenance -->
+        <div style="border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-3);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="wrench" style="color:#15803d;width:18px;height:18px;"></i></div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--gray-12)">Repairs &amp; Maintenance</div>
+                <div style="font-size:12px;color:var(--gray-alpha-11);margin-top:2px">Responsive and planned repair works across all trades</div>
+              </div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:12px">
+              <div style="font-size:14px;font-weight:700;color:var(--color-success)">From £240/day</div>
+              <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px">Starting price</div>
+            </div>
+          </div>
+          <div style="padding:14px 16px;display:flex;flex-wrap:wrap;gap:6px">
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Responsive repairs operatives</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Multi-trade operatives</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Plumbers</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Electricians</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Roofers</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Out-of-hours emergency contractors</span>
+          </div>
+        </div>
       </div>
+
     </div>
 
+    <!-- ── REVIEWS TAB ── -->
     <div class="tab-panel" id="tab-reviews">
       <div class="section-card">
-        <div class="section-title">All Reviews (128)</div>
-        <p style="font-size:13px;color:var(--gray-alpha-11);">Full review history loads here.</p>
-      </div>
-    </div>
-
-    <div class="tab-panel" id="tab-portfolio">
-      <div class="section-card">
-        <div class="section-title">Project Portfolio</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
-          <img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=300&h=140&fit=crop" alt="">
-          <img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=300&h=140&fit=crop" alt="">
-          <img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=140&fit=crop" alt="">
-          <img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&h=140&fit=crop" alt="">
-          <img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=300&h=140&fit=crop" alt="">
-          <img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=140&fit=crop" alt="">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div class="section-title" style="margin-bottom:0">All Reviews <span style="color:var(--gray-9);font-weight:400;font-size:13px">(128)</span></div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="font-size:22px;font-weight:700;color:var(--gray-12)">4.9</span>
+            <div>
+              <div style="color:#f59e0b;font-size:13px">★★★★★</div>
+              <div style="font-size:11px;color:var(--gray-alpha-11)">128 reviews</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-item">
+          <div class="review-header"><div class="reviewer-row"><div class="reviewer-ava"><img src="https://i.pravatar.cc/40?img=44" alt=""></div><div><div class="reviewer-name">Sarah Johnson</div><div class="reviewer-org">Housing Officer, ABC Housing</div></div></div><div style="display:flex;align-items:center;gap:8px"><div style="color:#f59e0b;font-size:12px">★★★★★</div><span style="font-size:11px;color:var(--gray-alpha-11)">2 days ago</span></div></div>
+          <p style="font-size:13px;color:var(--gray-alpha-11);line-height:1.6;margin:8px 0">Excellent service! Completed the annual gas safety inspections across 48 units on time and to a very high standard. Documentation submitted to our compliance system same day.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Gas Safety</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">On Time</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Professional</span></div>
+        </div>
+        <div class="review-item">
+          <div class="review-header"><div class="reviewer-row"><div class="reviewer-ava"><img src="https://i.pravatar.cc/40?img=11" alt=""></div><div><div class="reviewer-name">Michael Brown</div><div class="reviewer-org">Property Manager, Southwark Council</div></div></div><div style="display:flex;align-items:center;gap:8px"><div style="color:#f59e0b;font-size:12px">★★★★☆</div><span style="font-size:11px;color:var(--gray-alpha-11)">1 week ago</span></div></div>
+          <p style="font-size:13px;color:var(--gray-alpha-11);line-height:1.6;margin:8px 0">Great communication throughout the planned maintenance programme. Responded to an emergency call-out within 90 minutes on a Saturday — exactly what we need for our residents.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Emergency Response</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Communication</span></div>
+        </div>
+        <div class="review-item">
+          <div class="review-header"><div class="reviewer-row"><div class="reviewer-ava"><img src="https://i.pravatar.cc/40?img=32" alt=""></div><div><div class="reviewer-name">Emma Wilson</div><div class="reviewer-org">Maintenance Manager, PGR Housing</div></div></div><div style="display:flex;align-items:center;gap:8px"><div style="color:#f59e0b;font-size:12px">★★★★★</div><span style="font-size:11px;color:var(--gray-alpha-11)">2 weeks ago</span></div></div>
+          <p style="font-size:13px;color:var(--gray-alpha-11);line-height:1.6;margin:8px 0">Reliable, efficient and competitively priced. Helped us achieve full CP12 compliance across our entire estate ahead of schedule.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Compliant</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Value for Money</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">CP12</span></div>
+        </div>
+        <div class="review-item">
+          <div class="review-header"><div class="reviewer-row"><div class="reviewer-ava"><img src="https://i.pravatar.cc/40?img=58" alt=""></div><div><div class="reviewer-name">James Patel</div><div class="reviewer-org">Compliance Lead, Orbit Group</div></div></div><div style="display:flex;align-items:center;gap:8px"><div style="color:#f59e0b;font-size:12px">★★★★★</div><span style="font-size:11px;color:var(--gray-alpha-11)">3 weeks ago</span></div></div>
+          <p style="font-size:13px;color:var(--gray-alpha-11);line-height:1.6;margin:8px 0">We've used MJ Mechanical for electrical compliance across 200+ units. Consistently high quality, all certs uploaded to our portal within 24 hours. Highly recommended.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Electrical</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Documentation</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Reliable</span></div>
         </div>
       </div>
     </div>
 
+    <!-- ── PORTFOLIO TAB ── -->
+    <div class="tab-panel" id="tab-portfolio">
+      <div class="section-card">
+        <div class="section-title">Project Portfolio</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+          <div style="border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4)">
+            <img style="width:100%;height:130px;object-fit:cover;display:block" src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=130&fit=crop" alt="Gas servicing project">
+            <div style="padding:10px 12px"><div style="font-size:12px;font-weight:600;color:var(--gray-12)">Annual Gas Compliance — 120 Units</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">Southwark Council · 2024</div></div>
+          </div>
+          <div style="border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4)">
+            <img style="width:100%;height:130px;object-fit:cover;display:block" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=130&fit=crop" alt="Electrical works">
+            <div style="padding:10px 12px"><div style="font-size:12px;font-weight:600;color:var(--gray-12)">Full Rewire Programme — 48 Properties</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">ABC Housing Association · 2023</div></div>
+          </div>
+          <div style="border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4)">
+            <img style="width:100%;height:130px;object-fit:cover;display:block" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=130&fit=crop" alt="Boiler installation">
+            <div style="padding:10px 12px"><div style="font-size:12px;font-weight:600;color:var(--gray-12)">Boiler Replacement Programme</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">PGR Housing · 2023</div></div>
+          </div>
+          <div style="border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4)">
+            <img style="width:100%;height:130px;object-fit:cover;display:block" src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=130&fit=crop" alt="Planned maintenance">
+            <div style="padding:10px 12px"><div style="font-size:12px;font-weight:600;color:var(--gray-12)">Planned Maintenance Contract</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">Orbit Group · 2022–2024</div></div>
+          </div>
+          <div style="border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4)">
+            <img style="width:100%;height:130px;object-fit:cover;display:block" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&h=130&fit=crop" alt="Lift compliance">
+            <div style="padding:10px 12px"><div style="font-size:12px;font-weight:600;color:var(--gray-12)">Lift Compliance Audit — 35 Blocks</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">LB Lambeth · 2024</div></div>
+          </div>
+          <div style="border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4)">
+            <img style="width:100%;height:130px;object-fit:cover;display:block" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=130&fit=crop" alt="Legionella">
+            <div style="padding:10px 12px"><div style="font-size:12px;font-weight:600;color:var(--gray-12)">Legionella Risk Assessment Programme</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">Clarion Housing · 2024</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ACCREDITATIONS TAB ── -->
     <div class="tab-panel" id="tab-accreditations">
       <div class="section-card">
         <div class="section-title">Accreditations &amp; Memberships</div>
         <div class="cert-grid">
           <div class="cert-item">
-            <div class="cert-ico" style="background:#fce7f3;"><i data-lucide="flame" style="color:#be185d;width:18px;height:18px;"></i></div>
-            <div><div class="cert-name">Gas Safe Register</div><div class="cert-ref">Reg No. 553421</div></div>
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Gas Safe Register</div><div class="cert-ref">Reg No. 553421 · Expires Oct 2026</div></div>
             <span class="cert-status valid">Valid</span>
           </div>
           <div class="cert-item">
-            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="shield" style="color:#1d4ed8;width:18px;height:18px;"></i></div>
-            <div><div class="cert-name">CHAS Accredited</div><div class="cert-ref">Health &amp; Safety</div></div>
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">CHAS Accredited</div><div class="cert-ref">Health &amp; Safety · Expires Mar 2026</div></div>
             <span class="cert-status valid">Valid</span>
           </div>
           <div class="cert-item">
-            <div class="cert-ico" style="background:#dcfce7;"><i data-lucide="award" style="color:#15803d;width:18px;height:18px;"></i></div>
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">NICEIC Approved Contractor</div><div class="cert-ref">Electrical · Annual renewal</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">SMSTS Certificate</div><div class="cert-ref">CITB · Site Management Safety</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
             <div><div class="cert-name">NHF Preferred Supplier</div><div class="cert-ref">Framework 2024–2027</div></div>
             <span class="cert-status valid">Active</span>
           </div>
           <div class="cert-item">
-            <div class="cert-ico" style="background:#fef3c7;"><i data-lucide="badge-check" style="color:#b45309;width:18px;height:18px;"></i></div>
-            <div><div class="cert-name">Trustmark Registered</div><div class="cert-ref">Govt Endorsed</div></div>
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Trustmark Registered</div><div class="cert-ref">Government Endorsed · 2024</div></div>
             <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">CSCS Card (CITB)</div><div class="cert-ref">Construction Skills Certification</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Considerate Constructors Scheme</div><div class="cert-ref">Silver Award 2023</div></div>
+            <span class="cert-status valid">Active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Personnel -->
+      <div class="section-card">
+        <div class="section-title">Key Personnel</div>
+        <div class="cert-grid">
+          <div class="cert-item">
+            <img src="https://i.pravatar.cc/40?img=12" alt="Michael Brown" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0">
+            <div><div class="cert-name">Michael Brown</div><div class="cert-ref">Operations Manager · BSc Construction Management</div></div>
+          </div>
+          <div class="cert-item">
+            <img src="https://i.pravatar.cc/40?img=47" alt="Sarah White" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0">
+            <div><div class="cert-name">Sarah White</div><div class="cert-ref">Site Supervisor · NVQ Level 4, SMSTS</div></div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ── CERTIFICATIONS TAB ── -->
     <div class="tab-panel" id="tab-certifications">
       <div class="section-card">
-        <div class="section-title">Compliance Certificates</div>
+        <div class="section-title">Compliance &amp; Insurance</div>
         <div class="cert-grid">
           <div class="cert-item">
-            <div class="cert-ico" style="background:#dcfce7;"><i data-lucide="file-check" style="color:#15803d;width:18px;height:18px;"></i></div>
-            <div><div class="cert-name">Public Liability Insurance</div><div class="cert-ref">£10M cover · Expires Dec 2025</div></div>
+            <div class="cert-ico" style="background:#dcfce7;"><i data-lucide="shield-check" style="color:#15803d;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Public Liability Insurance</div><div class="cert-ref">£10M cover · Expires Dec 2026</div></div>
             <span class="cert-status valid">Valid</span>
           </div>
           <div class="cert-item">
             <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="users" style="color:#1d4ed8;width:18px;height:18px;"></i></div>
-            <div><div class="cert-name">Employers Liability</div><div class="cert-ref">£5M cover · Expires Dec 2025</div></div>
+            <div><div class="cert-name">Employers' Liability Insurance</div><div class="cert-ref">£10M cover · Expires Dec 2026</div></div>
             <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#fce7f3;"><i data-lucide="flame" style="color:#be185d;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Gas Safe Registration</div><div class="cert-ref">Reg No. 553421 · Expires Oct 2025</div></div>
+            <span class="cert-status expiring">Expiring Soon</span>
           </div>
           <div class="cert-item">
             <div class="cert-ico" style="background:#fef9c3;"><i data-lucide="search" style="color:#ca8a04;width:18px;height:18px;"></i></div>
@@ -1117,25 +1280,103 @@
             <span class="cert-status valid">Valid</span>
           </div>
           <div class="cert-item">
-            <div class="cert-ico" style="background:#fce7f3;"><i data-lucide="flame" style="color:#be185d;width:18px;height:18px;"></i></div>
-            <div><div class="cert-name">Gas Safe Registration</div><div class="cert-ref">Expires Oct 2025</div></div>
-            <span class="cert-status expiring">Expiring Soon</span>
+            <div class="cert-ico" style="background:#f3e8ff;"><i data-lucide="zap" style="color:#7e22ce;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Electrical Installation Condition Report</div><div class="cert-ref">NICEIC · Renewed annually</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#fff7ed;"><i data-lucide="droplets" style="color:#ea580c;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Legionella Risk Assessment</div><div class="cert-ref">All managed properties · 2024</div></div>
+            <span class="cert-status valid">Valid</span>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ── COMPLIANCE DOCS TAB ── -->
     <div class="tab-panel" id="tab-compliance">
       <div class="section-card">
         <div class="section-title">Compliance Documents</div>
-        <p style="font-size:13px;color:var(--gray-alpha-11);">Uploaded compliance documents visible to authorised housing officers.</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="file-check" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Company Registration Certificate</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Companies House · Reg No. 09823741</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="file-check" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Proof of Address</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Bank statement · 12 Builder Street, London, SW1A 1AA</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="file-check" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Public Liability Insurance Certificate</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">£10M cover · Allianz Insurance · Expires Dec 2026</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="file-check" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Employers' Liability Insurance</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">£10M cover · Allianz Insurance · Expires Dec 2026</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="file-text" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Health &amp; Safety Policy</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Company H&amp;S Policy Document · Updated Jan 2024</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="file-text" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Risk Assessment (Sample)</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Generic site risk assessment template</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#fef9c3;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="alert-triangle" style="color:#ca8a04;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">DBS / CRB Policy</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Safeguarding policy · Renewal due Sep 2025</div></div>
+            <span style="padding:2px 8px;background:#fef9c3;color:#ca8a04;border-radius:20px;font-size:11px;font-weight:600">Review Due</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="award" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Accreditations &amp; Certifications</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Gas Safe, CHAS, NICEIC, SMSTS · All current</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- ── Q&A TAB ── -->
     <div class="tab-panel" id="tab-qa">
       <div class="section-card">
         <div class="section-title">Q&amp;A</div>
-        <p style="font-size:13px;color:var(--gray-alpha-11);">Questions and answers from housing officers and managers.</p>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+            <div style="padding:12px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+              <div style="font-size:12px;font-weight:600;color:var(--gray-12)">Q: Do you cover emergency call-outs outside of business hours?</div>
+              <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">Asked by Sarah Johnson, ABC Housing · 1 month ago</div>
+            </div>
+            <div style="padding:12px 14px;font-size:13px;color:var(--gray-alpha-11);line-height:1.6">Yes — we operate a 24/7 emergency response service. Our target response time is 90 minutes for urgent issues. Emergency call-outs are priced at our out-of-hours rate starting from £195/visit.</div>
+          </div>
+          <div style="border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+            <div style="padding:12px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+              <div style="font-size:12px;font-weight:600;color:var(--gray-12)">Q: What areas do you cover and do you charge travel?</div>
+              <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">Asked by James Patel, Orbit Group · 2 months ago</div>
+            </div>
+            <div style="padding:12px 14px;font-size:13px;color:var(--gray-alpha-11);line-height:1.6">We currently cover Kent, Surrey, and surrounding London boroughs. No travel charge is applied for jobs within our primary coverage area (up to 50 miles from our London base). National coverage is available for framework contracts.</div>
+          </div>
+          <div style="border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+            <div style="padding:12px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+              <div style="font-size:12px;font-weight:600;color:var(--gray-12)">Q: Are all operatives DBS checked and insured?</div>
+              <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">Asked by Emma Wilson, PGR Housing · 3 months ago</div>
+            </div>
+            <div style="padding:12px 14px;font-size:13px;color:var(--gray-alpha-11);line-height:1.6">Yes — all operatives hold enhanced DBS checks (renewed 2024). We carry £10M public liability and £10M employers' liability insurance. All certifications are uploaded to SafeBuild and available to view in the Certifications tab.</div>
+          </div>
+        </div>
       </div>
     </div>
 
