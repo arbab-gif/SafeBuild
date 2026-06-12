@@ -100,15 +100,15 @@ a{text-decoration:none}
 .page-head p{font-size:13px;color:var(--gray-a11)}
 
 /* ── STEPPER ── */
-.stepper{display:flex;align-items:flex-start;gap:0;background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r3);padding:16px 20px;margin-bottom:24px}
-.step-item{display:flex;align-items:flex-start;flex:1;position:relative}
-.step-conn{flex:1;height:1px;background:var(--gray-5);margin:14px 6px 0;transition:background .3s}
+.stepper{display:flex;align-items:center;justify-content:center;gap:0;background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r3);padding:20px 24px;margin-bottom:24px}
+.step-item{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;min-width:0}
+.step-conn{flex:1;height:2px;background:var(--gray-5);align-self:flex-start;margin-top:13px;min-width:20px;transition:background .3s}
 .step-conn.done{background:var(--accent-9)}
-.step-node{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0}
-.step-circle{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;background:var(--gray-3);color:var(--gray-9);border:2px solid var(--gray-5);transition:all .25s}
+.step-node{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0}
+.step-circle{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;background:var(--gray-3);color:var(--gray-9);border:2px solid var(--gray-5);transition:all .25s;flex-shrink:0}
 .step-item.done .step-circle{background:var(--accent-9);color:#fff;border-color:var(--accent-9)}
 .step-item.active .step-circle{background:var(--accent-9);color:#fff;border-color:var(--accent-9);box-shadow:0 0 0 3px rgba(23,84,216,.18)}
-.step-label{font-size:10px;font-weight:500;color:var(--gray-9);white-space:nowrap;text-align:center;max-width:80px}
+.step-label{font-size:10px;font-weight:500;color:var(--gray-9);text-align:center;width:90px;line-height:1.3;word-break:break-word}
 .step-item.active .step-label{color:var(--accent-9);font-weight:600}
 .step-item.done .step-label{color:var(--gray-11)}
 
@@ -1468,13 +1468,58 @@ function buildReview() {
   const container = document.getElementById('rv-content');
   if (!container) return;
 
-  // Address
+  // Helper: get ref block field values
+  function refBlock(idx) {
+    const blk = document.querySelectorAll('.ref-blk')[idx];
+    if (!blk) return null;
+    const inputs = blk.querySelectorAll('input');
+    const sel    = blk.querySelector('select');
+    return {
+      name:         inputs[0]?.value?.trim() || '',
+      company:      inputs[1]?.value?.trim() || '',
+      email:        inputs[2]?.value?.trim() || '',
+      phone:        inputs[3]?.value?.trim() || '',
+      relationship: sel?.value || ''
+    };
+  }
+
+  // Address (step 1)
   const addrParts = [val('f-addr1'), val('f-addr2'), val('f-city'), val('f-postcode')].filter(Boolean);
   const addr = addrParts.join(', ') || '—';
 
-  // Area chips (step 3)
-  const chipEls = document.querySelectorAll('.chips .chip.sel');
-  const areaChips = Array.from(chipEls).map(c => c.textContent.trim()).join(', ');
+  // References
+  const ref1 = refBlock(0);
+  const ref2 = refBlock(1);
+
+  // Social housing radio
+  const socVal = document.querySelector('input[name="soc"]:checked')?.value;
+  const socLabel = socVal === 'yes' ? '<span style="color:var(--green-9);font-weight:600">Yes</span>' : socVal === 'no' ? 'No' : '—';
+
+  // Additional info textarea (step 1, section 4 — no id)
+  const addInfoEl = document.querySelector('#step-1 .ft:not(#f-bio):not(#f-why)');
+  const addInfo = addInfoEl?.value?.trim() || '';
+
+  // Services (step 1)
+  const svcHtml = (function(){
+    const cats = Array.from(document.querySelectorAll('.svc-cat-chip.sel'));
+    if (!cats.length) return rvRow('Services Offered', '—');
+    return cats.map(cat => {
+      const group = Array.from(document.querySelectorAll('.svc-sub-group')).find(g => g.dataset.cat === cat.dataset.cat);
+      const subs  = group ? Array.from(group.querySelectorAll('.svc-sub-chip.sel')).map(c => c.textContent.trim()) : [];
+      const price = group?.querySelector('.svc-price')?.value || '';
+      const unit  = group?.querySelector('.svc-unit')?.value || '';
+      const priceStr = price
+        ? `<span style="color:var(--green-9);font-weight:600">From £${price}/${unit}</span>`
+        : `<span style="color:var(--orange-9)">Price not set</span>`;
+      return `<div class="rv-row" style="flex-direction:column;align-items:flex-start;gap:4px">
+        <div style="display:flex;justify-content:space-between;width:100%">
+          <span class="rv-k" style="font-weight:600;color:var(--gray-12)">${cat.dataset.cat}</span>
+          <span>${priceStr}</span>
+        </div>
+        ${subs.length ? `<span class="rv-v" style="font-size:11px;color:var(--gray-9)">${subs.join(' · ')}</span>` : ''}
+      </div>`;
+    }).join('');
+  })();
 
   // Accreditations table (step 2)
   const accredRows = Array.from(document.querySelectorAll('#accred-tbl tbody tr')).map(tr => {
@@ -1484,36 +1529,109 @@ function buildReview() {
     const num  = cells[2]?.value?.trim();
     const exp  = cells[3]?.value?.trim();
     if (!name) return '';
-    return rvRow(name, [body, num, exp ? 'Exp: ' + exp : ''].filter(Boolean).join(' · '));
+    return rvRow(name, [body, num ? 'No. ' + num : '', exp ? 'Exp: ' + exp : ''].filter(Boolean).join(' · '));
   }).filter(Boolean).join('');
+
+  // Banking (IBAN / BIC — no ids, grab by placeholder)
+  const bankingInputs = document.querySelectorAll('[placeholder*="IBAN"], [placeholder*="BIC"], [placeholder*="SWIFT"]');
+  const ibanVal = bankingInputs[0]?.value?.trim() || '';
+  const bicVal  = bankingInputs[1]?.value?.trim() || '';
+
+  // Education & Training table (step 3)
+  const eduRows = Array.from(document.querySelectorAll('#edu-tbl tbody tr')).map(tr => {
+    const inputs = tr.querySelectorAll('input');
+    const qual   = inputs[0]?.value?.trim();
+    const body   = inputs[1]?.value?.trim();
+    const obtained = inputs[2]?.value?.trim();
+    const expiry   = inputs[3]?.value?.trim();
+    if (!qual) return '';
+    return rvRow(qual, [body, obtained ? 'Obtained: ' + obtained : '', expiry ? 'Exp: ' + expiry : ''].filter(Boolean).join(' · '));
+  }).filter(Boolean).join('');
+
+  // Key Personnel table (step 3)
+  const persRows = Array.from(document.querySelectorAll('#pers-tbl tbody tr')).map(tr => {
+    const inputs = tr.querySelectorAll('input');
+    const name   = inputs[0]?.value?.trim();
+    const role   = inputs[1]?.value?.trim();
+    const quals  = inputs[2]?.value?.trim();
+    if (!name) return '';
+    return rvRow(name, [role, quals].filter(Boolean).join(' · '));
+  }).filter(Boolean).join('');
+
+  // Location (step 3)
+  const officeAddr = document.querySelector('[placeholder*="office address"], [placeholder*="Office Address"]')?.value?.trim() || '';
+  const primaryBase = document.querySelector('#step-3 select')?.value?.trim() || '';
+  const travelRange = val('f-travel-range');
+  const nationalCov = document.getElementById('national-tog')?.classList.contains('on') ? '<span style="color:var(--green-9);font-weight:600">Yes</span>' : 'No';
+  const chipEls = document.querySelectorAll('.chips .chip.sel');
+  const areaChips = Array.from(chipEls).map(c => c.textContent.trim()).join(', ');
+
+  // Working Hours (step 3)
+  const whHtml = (function() {
+    const days = Array.from(document.querySelectorAll('#wh-list .wh-day')).map(day => {
+      const name = day.querySelector('.wh-name')?.textContent || '';
+      const isOn = day.querySelector('.wh-tog')?.classList.contains('on');
+      if (!isOn) return rvRow(name, '<span style="color:var(--gray-8)">Unavailable</span>');
+      const slots = Array.from(day.querySelectorAll('.wh-slot')).map(slot => {
+        const times = slot.querySelectorAll('.wh-ti');
+        const from = times[0]?.value || '';
+        const to   = times[1]?.value || '';
+        return from && to ? from + ' – ' + to : null;
+      }).filter(Boolean).join(', ');
+      return rvRow(name, slots || '—');
+    });
+    const emerg = document.getElementById('f-emergency-247');
+    days.push(rvRow('Emergency / Out-of-hours', emerg?.checked
+      ? '<span style="color:var(--green-9);font-weight:600">24 / 7</span>'
+      : '<span style="color:var(--gray-8)">Not available</span>'));
+    return days.join('') || rvRow('Hours', '—');
+  })();
+
+  // Awards (step 3 — no id)
+  const awardsEl = document.querySelector('[placeholder*="award" i], [placeholder*="achievement" i]');
+  const awards = awardsEl?.value?.trim() || document.querySelector('#step-3 .ft[style*="56px"]')?.value?.trim() || '';
 
   // Insurance table (step 4)
   const insRows = Array.from(document.querySelectorAll('#ins-tbody tr')).map(tr => {
-    const typEl = tr.querySelector('.ins-type');
-    const inputs = tr.querySelectorAll('input.fi');
+    const typEl   = tr.querySelector('.ins-type');
+    const inputs  = tr.querySelectorAll('input.fi');
     const typeName = typEl ? typEl.firstChild.textContent.trim() : inputs[0]?.value?.trim();
     const insurer  = inputs[0]?.value?.trim();
+    const policyNo = inputs[1]?.value?.trim();
     const expiry   = inputs[2]?.value?.trim();
     const amount   = inputs[3]?.value?.trim();
     if (!typeName) return '';
-    const detail = [insurer, expiry ? 'Exp: ' + expiry : '', amount ? '£' + amount : ''].filter(Boolean).join(' · ');
+    const detail = [insurer, policyNo ? 'Policy: ' + policyNo : '', expiry ? 'Exp: ' + expiry : '', amount ? '£' + amount + 'M' : ''].filter(Boolean).join(' · ');
     return rvRow(typeName, detail || '—');
   }).filter(Boolean).join('');
 
-  // Compliance checkboxes (step 4)
+  // Compliance declarations (step 4)
   const checkIds = ['c1','c2','c3','c4','c5','c6'];
-  const complianceChecked = checkIds.filter(id => document.getElementById(id)?.checked).length;
-  const complianceStatus = complianceChecked === 6
-    ? `<span style="color:var(--green-9)">✓ All ${complianceChecked} declarations confirmed</span>`
-    : complianceChecked > 0
-      ? `<span style="color:var(--orange-9)">${complianceChecked} of 6 confirmed</span>`
-      : `<span style="color:var(--red-9)">Not confirmed</span>`;
+  const declLabels = [
+    'Compliance with all applicable UK laws',
+    'Health & Safety policies maintained',
+    'Zero-tolerance modern slavery policy',
+    'Bribery Act 2010 compliance',
+    'Information is accurate and complete',
+    'Aware of consequences of false information'
+  ];
+  const complianceHtml = checkIds.map((id, i) => {
+    const checked = document.getElementById(id)?.checked;
+    const icon = checked
+      ? '<span style="color:var(--green-9);font-weight:600">✓ Confirmed</span>'
+      : '<span style="color:var(--red-9)">✗ Not confirmed</span>';
+    return rvRow(declLabels[i], icon);
+  }).join('');
 
-  // Why join
-  const why = val('f-why');
+  // Terms & conditions checkbox (step 4)
+  const termsChecked = document.getElementById('terms')?.checked;
+  const termsStatus = termsChecked
+    ? '<span style="color:var(--green-9);font-weight:600">✓ Accepted</span>'
+    : '<span style="color:var(--orange-9)">Not yet accepted</span>';
 
   container.innerHTML = `
-    ${rvSec('Business Information', `
+
+    ${rvSec('1. Business Information', `
       ${rvRow('Company Name', val('f-company'))}
       ${val('f-trading') ? rvRow('Trading Name', val('f-trading')) : ''}
       ${rvRow('Registration No.', val('f-reg'))}
@@ -1527,73 +1645,77 @@ function buildReview() {
       ${val('f-phone') ? rvRow('Phone', '+44 ' + val('f-phone')) : ''}
     `, 1)}
 
-    ${rvSec('Business Overview', `
-      ${val('f-bio') ? rvRow('Description', val('f-bio').length > 120 ? val('f-bio').slice(0, 120) + '…' : val('f-bio')) : ''}
-      ${(function(){
-        const cats = Array.from(document.querySelectorAll('.svc-cat-chip.sel'));
-        if (!cats.length) return rvRow('Services Offered', '—');
-        return cats.map(cat => {
-          const group = Array.from(document.querySelectorAll('.svc-sub-group')).find(g => g.dataset.cat === cat.dataset.cat);
-          const subs = group ? Array.from(group.querySelectorAll('.svc-sub-chip.sel')).map(c => c.textContent.trim()) : [];
-          const price = group ? group.querySelector('.svc-price')?.value : '';
-          const unit  = group ? group.querySelector('.svc-unit')?.value : '';
-          const priceStr = price ? `<span style="color:var(--green-9);font-weight:600">From £${price}/${unit}</span>` : '<span style="color:var(--orange-9)">Price not set</span>';
-          return `<div class="rv-row" style="flex-direction:column;align-items:flex-start;gap:4px">
-            <div style="display:flex;justify-content:space-between;width:100%">
-              <span class="rv-k" style="font-weight:600;color:var(--gray-12)">${cat.dataset.cat}</span>
-              <span>${priceStr}</span>
-            </div>
-            ${subs.length ? `<span class="rv-v" style="font-size:11px;color:var(--gray-9)">${subs.join(' · ')}</span>` : ''}
-          </div>`;
-        }).join('');
-      })()}
-      ${rvRow('Areas Covered', Array.from(document.querySelectorAll('#f-areas-dd input:checked')).map(i=>i.value).join(', ') || '—')}
+    ${rvSec('2. Business Overview', `
+      ${val('f-bio') ? rvRow('Description', val('f-bio').length > 200 ? val('f-bio').slice(0,200)+'…' : val('f-bio')) : ''}
+      ${svcHtml}
       ${rvRow('No. of Employees', val('f-employees'))}
       ${rvRow('Annual Turnover', val('f-turnover'))}
     `, 1)}
 
-    ${rvSec('Experience', `
+    ${rvSec('3. Experience & References', `
       ${rvRow('Years of Experience', val('f-experience'))}
       ${rvRow('Completed Projects', val('f-projects'))}
-      ${val('f-why') ? rvRow('Why Join SafeBuild', why.length > 120 ? why.slice(0,120)+'…' : why) : ''}
+      ${rvRow('Social Housing Experience', socLabel)}
+      ${ref1 && ref1.name ? `
+        <div class="rv-row" style="flex-direction:column;align-items:flex-start;gap:4px;padding-top:8px;border-top:1px solid var(--gray-alpha-3)">
+          <span class="rv-k" style="font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--gray-alpha-9)">Reference 1</span>
+        </div>
+        ${rvRow('Contact Name', ref1.name)}
+        ${ref1.company ? rvRow('Company', ref1.company) : ''}
+        ${ref1.email ? rvRow('Email', ref1.email) : ''}
+        ${ref1.phone ? rvRow('Phone', ref1.phone) : ''}
+        ${ref1.relationship ? rvRow('Relationship', ref1.relationship) : ''}
+      ` : ''}
+      ${ref2 && ref2.name ? `
+        <div class="rv-row" style="flex-direction:column;align-items:flex-start;gap:4px;padding-top:8px;border-top:1px solid var(--gray-alpha-3)">
+          <span class="rv-k" style="font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--gray-alpha-9)">Reference 2</span>
+        </div>
+        ${rvRow('Contact Name', ref2.name)}
+        ${ref2.company ? rvRow('Company', ref2.company) : ''}
+        ${ref2.email ? rvRow('Email', ref2.email) : ''}
+        ${ref2.phone ? rvRow('Phone', ref2.phone) : ''}
+        ${ref2.relationship ? rvRow('Relationship', ref2.relationship) : ''}
+      ` : ''}
     `, 1)}
 
-    ${accredRows ? rvSec('Accreditations &amp; Certifications', accredRows, 2) : ''}
+    ${rvSec('4. Additional Information', `
+      ${val('f-why') ? rvRow('Why Join SafeBuild', val('f-why').length > 200 ? val('f-why').slice(0,200)+'…' : val('f-why')) : ''}
+      ${addInfo ? rvRow('Additional Notes', addInfo.length > 200 ? addInfo.slice(0,200)+'…' : addInfo) : ''}
+    `, 1)}
 
-    ${rvSec('Banking Details', `
+    ${eduRows ? rvSec('9. Education & Training', eduRows, 3) : ''}
+
+    ${persRows ? rvSec('10. Key Personnel', persRows, 3) : ''}
+
+    ${accredRows ? rvSec('Accreditations & Certifications', accredRows, 2) : ''}
+
+    ${rvSec('11. Location & Coverage', `
+      ${officeAddr ? rvRow('Office Address', officeAddr) : ''}
+      ${primaryBase ? rvRow('Primary Base', primaryBase) : ''}
+      ${travelRange ? rvRow('Willing to Travel', travelRange) : ''}
+      ${rvRow('National Coverage', nationalCov)}
+      ${areaChips ? rvRow('Areas You Cover', areaChips) : ''}
+      ${val('f-memberships') ? rvRow('Professional Memberships', val('f-memberships')) : ''}
+      ${awards ? rvRow('Awards / Achievements', awards) : ''}
+    `, 3)}
+
+    ${rvSec('12. Working Hours', whHtml, 3)}
+
+    ${rvSec('13. Banking Details', `
       ${rvRow('Account Holder', val('f-acct-holder'))}
       ${rvRow('Bank', val('f-bank'))}
       ${val('f-sort') ? rvRow('Sort Code', val('f-sort')) : ''}
       ${val('f-acct-num') ? rvRow('Account Number', '••••' + val('f-acct-num').slice(-4)) : ''}
+      ${ibanVal ? rvRow('IBAN', ibanVal) : ''}
+      ${bicVal  ? rvRow('BIC / SWIFT', bicVal) : ''}
     `, 2)}
 
-    ${rvSec('Location &amp; Coverage', `
-      ${areaChips ? rvRow('Areas Covered', areaChips) : ''}
-      ${rvRow('Professional Memberships', val('f-memberships'))}
-    `, 3)}
+    ${insRows ? rvSec('14. Compliance & Insurance', insRows, 4) : ''}
 
-    ${rvSec('Working Hours', (function() {
-      const days = Array.from(document.querySelectorAll('#wh-list .wh-day')).map(day => {
-        const name = day.querySelector('.wh-name')?.textContent || '';
-        const isOn = day.querySelector('.wh-tog')?.classList.contains('on');
-        if (!isOn) return rvRow(name, '<span style="color:var(--gray-8)">Unavailable</span>');
-        const slots = Array.from(day.querySelectorAll('.wh-slot')).map(slot => {
-          const times = slot.querySelectorAll('.wh-ti');
-          const from = times[0]?.value || '';
-          const to = times[1]?.value || '';
-          return from && to ? from + ' – ' + to : null;
-        }).filter(Boolean).join(', ');
-        return rvRow(name, slots || '—');
-      });
-      const emerg = document.getElementById('f-emergency-247');
-      days.push(rvRow('Emergency / Out-of-hours', emerg?.checked ? '<span style="color:var(--green-9);font-weight:600">24 / 7</span>' : 'Not available'));
-      return days.join('') || rvRow('Hours', '—');
-    })(), 3)}
+    ${rvSec('15. Compliance Declarations', complianceHtml, 4)}
 
-    ${insRows ? rvSec('Insurance', insRows, 4) : ''}
-
-    ${rvSec('Compliance', `
-      <div class="rv-row"><span class="rv-k">Declarations</span><span class="rv-v">${complianceStatus}</span></div>
+    ${rvSec('16. Framework Terms', `
+      ${rvRow('Terms & Conditions', termsStatus)}
     `, 4)}
 
     <div class="decl-box" style="margin-top:4px">
