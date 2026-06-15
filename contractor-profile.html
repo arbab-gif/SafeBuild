@@ -4244,32 +4244,73 @@
 </div>
 
 <!-- Contact Modal -->
-<div id="contact-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1000;align-items:center;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
-  <div style="background:#fff;border-radius:var(--radius-6);padding:28px;width:420px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.18);">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+<div id="contact-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(3px);" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#fff;border-radius:16px;padding:28px 28px 24px;width:360px;max-width:90vw;box-shadow:0 24px 64px rgba(0,0,0,0.18);">
+
+    <!-- Header -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
       <div>
-        <div style="font-size:16px;font-weight:700;color:var(--gray-12);">Contact Contractor</div>
-        <div style="font-size:12px;color:var(--gray-alpha-11);margin-top:2px;">MJ Mechanical Ltd · Ref: SB-CTR-2024-7842</div>
+        <div style="font-size:15px;font-weight:700;color:var(--gray-12);">Contact Contractor</div>
+        <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px;">MJ Mechanical Ltd · Ref: SB-CTR-2024-7842</div>
       </div>
-      <button onclick="document.getElementById('contact-modal').style.display='none'" style="width:28px;height:28px;border:none;background:var(--gray-2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--gray-9);">×</button>
+      <button onclick="document.getElementById('contact-modal').style.display='none'" style="width:28px;height:28px;border:none;background:var(--gray-2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--gray-9);flex-shrink:0;">×</button>
     </div>
-    <div style="display:flex;flex-direction:column;gap:12px;">
+
+    <!-- Contractor row -->
+    <div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gray-1);border:1px solid var(--gray-alpha-4);border-radius:10px;margin:16px 0;">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;" alt="Mike Johnson">
       <div>
-        <label style="font-size:11px;font-weight:500;color:var(--gray-alpha-11);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Subject</label>
-        <input type="text" placeholder="e.g. Quote request for project…" style="width:100%;height:36px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);padding:0 10px;font-size:13px;font-family:inherit;outline:none;background:var(--gray-1);">
-      </div>
-      <div>
-        <label style="font-size:11px;font-weight:500;color:var(--gray-alpha-11);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Message</label>
-        <textarea placeholder="Write your message here…" rows="4" style="width:100%;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);padding:8px 10px;font-size:13px;font-family:inherit;outline:none;background:var(--gray-1);resize:vertical;line-height:1.5;"></textarea>
-      </div>
-      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px;">
-        <button onclick="document.getElementById('contact-modal').style.display='none'" class="btn-outline" style="height:36px;padding:0 16px;">Cancel</button>
-        <button class="btn-filled" style="height:36px;padding:0 16px;" onclick="alert('Message sent to MJ Mechanical Ltd');document.getElementById('contact-modal').style.display='none'">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" style="width:13px;height:13px;"><path d="M2 8l12-6-6 12-2-5-4-1z"/></svg>
-          Send Message
-        </button>
+        <div style="font-size:13px;font-weight:600;color:var(--gray-12);">Mike Johnson</div>
+        <div style="font-size:11px;color:var(--gray-alpha-11);">Gas Engineer · MJ Mechanical Ltd</div>
+        <div style="display:flex;align-items:center;gap:4px;margin-top:3px;">
+          <div style="width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;"></div>
+          <span style="font-size:10px;font-weight:500;color:#1a7f4b;">Available now</span>
+        </div>
       </div>
     </div>
+
+    <!-- Contact options -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+
+      <!-- Voice Call -->
+      <button onclick="alert('Initiating voice call to MJ Mechanical Ltd…')" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--gray-alpha-4);border-radius:10px;background:#fff;cursor:pointer;text-align:left;transition:background 100ms,border-color 100ms;width:100%;" onmouseover="this.style.background='var(--gray-1)';this.style.borderColor='var(--gray-5)'" onmouseout="this.style.background='#fff';this.style.borderColor='var(--gray-alpha-4)'">
+        <div style="width:42px;height:42px;border-radius:50%;background:rgba(34,197,94,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .99h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--gray-12);">Voice Call</div>
+          <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px;">+44 20 7946 0321</div>
+        </div>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;color:var(--gray-6);flex-shrink:0;"><path d="M6 3l5 5-5 5"/></svg>
+      </button>
+
+      <!-- Messages -->
+      <button onclick="alert('Opening message thread with MJ Mechanical Ltd…')" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--gray-alpha-4);border-radius:10px;background:#fff;cursor:pointer;text-align:left;transition:background 100ms,border-color 100ms;width:100%;" onmouseover="this.style.background='var(--gray-1)';this.style.borderColor='var(--gray-5)'" onmouseout="this.style.background='#fff';this.style.borderColor='var(--gray-alpha-4)'">
+        <div style="width:42px;height:42px;border-radius:50%;background:rgba(23,84,216,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1754d8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--gray-12);">Messages</div>
+          <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px;">Send a message or document</div>
+        </div>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;color:var(--gray-6);flex-shrink:0;"><path d="M6 3l5 5-5 5"/></svg>
+      </button>
+
+      <!-- Video Call -->
+      <button onclick="alert('Starting video call with MJ Mechanical Ltd…')" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--gray-alpha-4);border-radius:10px;background:#fff;cursor:pointer;text-align:left;transition:background 100ms,border-color 100ms;width:100%;" onmouseover="this.style.background='var(--gray-1)';this.style.borderColor='var(--gray-5)'" onmouseout="this.style.background='#fff';this.style.borderColor='var(--gray-alpha-4)'">
+        <div style="width:42px;height:42px;border-radius:50%;background:rgba(139,92,246,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--gray-12);">Video Call</div>
+          <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px;">Start a video meeting</div>
+        </div>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;color:var(--gray-6);flex-shrink:0;"><path d="M6 3l5 5-5 5"/></svg>
+      </button>
+
+    </div>
+
+    <button onclick="document.getElementById('contact-modal').style.display='none'" style="width:100%;margin-top:14px;height:36px;border:1px solid var(--gray-alpha-4);border-radius:8px;background:transparent;font-size:13px;font-weight:500;color:var(--gray-alpha-11);cursor:pointer;">Cancel</button>
   </div>
 </div>
 
