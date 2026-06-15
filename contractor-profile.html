@@ -1690,15 +1690,6 @@
         </div>
       </div>
 
-      <!-- QR Code block — click to expand -->
-      <div onclick="document.getElementById('qr-modal').style.display='flex'" style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;group;" title="Click to enlarge QR code">
-        <div id="qr-canvas" style="width:64px;height:64px;border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4);background:#fff;display:flex;align-items:center;justify-content:center;transition:box-shadow 150ms;"></div>
-        <span style="font-size:9px;font-weight:500;color:var(--accent-9);text-align:center;line-height:1.3;display:flex;align-items:center;gap:3px;">
-          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" style="width:9px;height:9px;"><path d="M1 4V1h3M8 1h3v3M1 8v3h3M8 11h3V8"/></svg>
-          Scan to verify
-        </span>
-      </div>
-
       <!-- Right: rating + actions -->
       <div class="profile-header-right">
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
@@ -4181,12 +4172,6 @@
     // Generate QR codes
     if (typeof QRCode !== 'undefined') {
       const QR_URL = 'https://safebuild.cloud/verify/SB-CTR-2024-7842';
-      // Small header QR
-      new QRCode(document.getElementById('qr-canvas'), {
-        text: QR_URL, width: 64, height: 64,
-        colorDark: '#202020', colorLight: '#ffffff',
-        correctLevel: QRCode.CorrectLevel.M
-      });
       // Large modal QR
       new QRCode(document.getElementById('qr-modal-canvas'), {
         text: QR_URL, width: 180, height: 180,
