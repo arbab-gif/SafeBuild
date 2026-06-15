@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     /* ============================================================
        DESIGN SYSTEM TOKENS
@@ -207,20 +208,19 @@
     .back-btn {
       display: flex;
       align-items: center;
-      gap: 5px;
+      justify-content: center;
+      width: 32px;
       height: 32px;
-      padding: 0 10px 0 8px;
+      padding: 0;
       border: 1px solid var(--gray-alpha-4);
       border-radius: var(--radius-3);
       background: transparent;
-      font-size: 12px;
-      font-weight: 500;
       color: var(--gray-alpha-11);
       transition: background 80ms ease, color 80ms ease;
-      white-space: nowrap;
+      flex-shrink: 0;
     }
     .back-btn:hover { background: var(--gray-3); color: var(--gray-12); }
-    .back-btn svg { width: 13px; height: 13px; }
+    .back-btn svg { width: 15px; height: 15px; }
 
     .breadcrumb-sep {
       color: var(--gray-6);
@@ -1601,12 +1601,10 @@
      TOPBAR
 ============================================================ -->
 <header class="topbar">
-  <button class="back-btn" onclick="history.back()">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3L5 8l5 5"/></svg>
-    Contractors &amp; DLOs
+  <button class="back-btn" onclick="history.back()" title="Back to Contractors &amp; DLOs">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 3L5 8l5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
-  <span class="breadcrumb-sep">/</span>
-  <span class="breadcrumb-curr">MJ Mechanical Ltd</span>
+  <span class="breadcrumb-curr" style="margin-left:4px;">MJ Mechanical Ltd</span>
 
   <div class="topbar-search">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><path d="M11 11l2.5 2.5"/></svg>
@@ -1643,13 +1641,9 @@
   <div class="profile-header">
     <div class="profile-header-top">
 
-      <!-- Company logo — hexagon SVG in teal rounded square -->
-      <div class="company-logo">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          <path d="M18 4L32 11.5V24.5L18 32L4 24.5V11.5L18 4Z" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"/>
-          <path d="M18 9L28 14.5V22.5L18 28L8 22.5V14.5L18 9Z" fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"/>
-          <path d="M18 14L24 17.5V21.5L18 25L12 21.5V17.5L18 14Z" fill="white"/>
-        </svg>
+      <!-- Contractor photo -->
+      <div class="company-logo" style="background:none;padding:0;overflow:hidden;">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="MJ Mechanical Ltd" style="width:64px;height:64px;object-fit:cover;border-radius:var(--radius-5);display:block;">
       </div>
 
       <!-- Identity -->
@@ -1685,6 +1679,12 @@
         </div>
       </div>
 
+      <!-- QR Code block -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;">
+        <div id="qr-canvas" style="width:64px;height:64px;border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4);background:#fff;display:flex;align-items:center;justify-content:center;"></div>
+        <span style="font-size:9px;font-weight:500;color:var(--gray-alpha-11);text-align:center;line-height:1.3;">Scan to<br>verify</span>
+      </div>
+
       <!-- Right: rating + actions -->
       <div class="profile-header-right">
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
@@ -1705,14 +1705,22 @@
               </div>
             </div>
           </div>
-          <div class="header-actions" style="margin-top:4px;">
+          <!-- Reference number -->
+          <div style="font-size:11px;color:var(--gray-alpha-11);text-align:right;margin-top:2px;">
+            Ref: <span style="font-family:monospace;font-weight:600;color:var(--gray-12);letter-spacing:0.04em;" id="contractor-ref">SB-CTR-2024-7842</span>
+          </div>
+          <div class="header-actions" style="margin-top:6px;">
             <button class="btn-outline">
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="5" cy="8" r="1.5"/><circle cx="11" cy="4" r="1.5"/><circle cx="11" cy="12" r="1.5"/><path d="M6.5 7.25l3-2M6.5 8.75l3 2"/></svg>
-              Share profile
+              Share
             </button>
             <button class="btn-outline">
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 13.5L2 7.5a3.5 3.5 0 015-5L8 3.5l1-1a3.5 3.5 0 015 5l-6 6z"/></svg>
-              ☆ Shortlist
+              Shortlist
+            </button>
+            <button class="btn-outline" onclick="document.getElementById('contact-modal').style.display='flex'">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 4h10a1 1 0 011 1v6a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z"/><path d="M2 5l6 4 6-4"/></svg>
+              Contact
             </button>
             <button class="btn-filled">
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10" stroke-linecap="round"/></svg>
@@ -3961,6 +3969,18 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    // Generate QR code
+    if (typeof QRCode !== 'undefined') {
+      new QRCode(document.getElementById('qr-canvas'), {
+        text: 'https://safebuild.cloud/verify/SB-CTR-2024-7842',
+        width: 64,
+        height: 64,
+        colorDark: '#202020',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    }
   });
 
   function setActive(el) {
@@ -3976,5 +3996,36 @@
     if (panel) panel.classList.add('active');
   }
 </script>
+
+<!-- Contact Modal -->
+<div id="contact-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1000;align-items:center;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#fff;border-radius:var(--radius-6);padding:28px;width:420px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.18);">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div>
+        <div style="font-size:16px;font-weight:700;color:var(--gray-12);">Contact Contractor</div>
+        <div style="font-size:12px;color:var(--gray-alpha-11);margin-top:2px;">MJ Mechanical Ltd · Ref: SB-CTR-2024-7842</div>
+      </div>
+      <button onclick="document.getElementById('contact-modal').style.display='none'" style="width:28px;height:28px;border:none;background:var(--gray-2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--gray-9);">×</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div>
+        <label style="font-size:11px;font-weight:500;color:var(--gray-alpha-11);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Subject</label>
+        <input type="text" placeholder="e.g. Quote request for project…" style="width:100%;height:36px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);padding:0 10px;font-size:13px;font-family:inherit;outline:none;background:var(--gray-1);">
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:500;color:var(--gray-alpha-11);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Message</label>
+        <textarea placeholder="Write your message here…" rows="4" style="width:100%;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);padding:8px 10px;font-size:13px;font-family:inherit;outline:none;background:var(--gray-1);resize:vertical;line-height:1.5;"></textarea>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px;">
+        <button onclick="document.getElementById('contact-modal').style.display='none'" class="btn-outline" style="height:36px;padding:0 16px;">Cancel</button>
+        <button class="btn-filled" style="height:36px;padding:0 16px;" onclick="alert('Message sent to MJ Mechanical Ltd');document.getElementById('contact-modal').style.display='none'">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" style="width:13px;height:13px;"><path d="M2 8l12-6-6 12-2-5-4-1z"/></svg>
+          Send Message
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
