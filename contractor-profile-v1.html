@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>MJ Mechanical Ltd — Contractor Profile — SafeBuild Cloud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       DESIGN SYSTEM TOKENS
+    ============================================================ */
+    :root {
+      --color-background: #fafafa;
+      --panel-solid: #ffffff;
+      --panel-translucent: rgba(255,255,255,0.85);
+      --gray-1: #fafafa; --gray-2: #f4f4f5; --gray-3: #ececec;
+      --gray-4: #e4e4e4; --gray-5: #d4d4d4; --gray-6: #c4c4c4;
+      --gray-7: #b4b4b4; --gray-8: #a1a1a1; --gray-9: #8a8a8a;
+      --gray-11: rgba(0,0,0,0.61); --gray-12: #202020;
+      --gray-alpha-4: rgba(0,0,0,0.09); --gray-alpha-11: rgba(0,0,0,0.61);
+      --accent-9: #1754d8; --accent-10: #1347b8;
+      --accent-alpha-3: rgba(0,90,255,0.08);
+      --color-success: #1a7f4b; --color-warning: #b45309;
+      --color-danger: #c0392b; --color-info: #1754d8;
+      --green-alpha-3: rgba(34,197,94,0.12);
+      --amber-alpha-3: rgba(245,158,11,0.12);
+      --red-alpha-3: rgba(239,68,68,0.12);
+      --blue-alpha-3: rgba(23,84,216,0.08);
+      --purple-alpha-3: rgba(139,92,246,0.1);
+      --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;
+      --space-5:20px;--space-6:24px;--space-8:32px;
+      --radius-1:4px;--radius-2:6px;--radius-3:8px;
+      --radius-5:12px;--radius-6:16px;--radius-full:9999px;
+      --shadow-light: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-card-hover: 0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-feature-settings: 'cv02','cv03','cv04','cv11';
+      background: var(--color-background);
+      color: var(--gray-12);
+      line-height: 1.2;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    button { font-family: inherit; cursor: pointer; }
+    input, select, textarea { font-family: inherit; }
+    a { text-decoration: none; color: inherit; }
+
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--gray-4); border-radius: 3px; }
+
+    /* ============================================================
+       SIDEBAR
+    ============================================================ */
+    .sidebar {
+      position: fixed; inset: 0 auto 0 0; width: 220px;
+      background: var(--panel-solid);
+      border-right: 1px solid var(--gray-alpha-4);
+      display: flex; flex-direction: column;
+      z-index: 200; overflow-y: auto; overflow-x: hidden;
+    }
+    .sidebar-logo {
+      height: 56px; display: flex; align-items: center;
+      gap: 9px; padding: 0 16px;
+      border-bottom: 1px solid var(--gray-alpha-4); flex-shrink: 0;
+    }
+    .logo-mark {
+      width: 28px; height: 28px; background: var(--accent-9);
+      border-radius: var(--radius-2);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .logo-wordmark { font-size: 13px; font-weight: 700; color: var(--gray-12); letter-spacing: -0.02em; line-height: 1.15; }
+    .logo-wordmark span { display: block; font-weight: 400; font-size: 10px; color: var(--gray-alpha-11); letter-spacing: 0; }
+    .sidebar-scroll { flex: 1; padding: 8px; overflow-y: auto; }
+    .nav-group-label {
+      font-size: 10px; font-weight: 500; color: var(--gray-alpha-11);
+      text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 8px 4px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 8px; height: 34px;
+      padding: 0 10px 0 12px; border-radius: var(--radius-3);
+      font-size: 13px; font-weight: 500; color: var(--gray-alpha-11);
+      cursor: pointer; transition: background 80ms ease, color 80ms ease;
+      border-left: 2px solid transparent; white-space: nowrap; overflow: hidden;
+    }
+    .nav-item:hover { background: var(--gray-3); color: var(--gray-12); }
+    .nav-item.active { background: var(--accent-9); border-left-color: transparent; color: white; }
+    .nav-item svg { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.65; }
+    .nav-item.active svg { opacity: 1; color: white; }
+    .sidebar-footer {
+      padding: 10px 8px; border-top: 1px solid var(--gray-alpha-4); flex-shrink: 0;
+    }
+    .org-pill {
+      display: flex; align-items: center; gap: 8px; padding: 7px 8px;
+      border-radius: var(--radius-3); cursor: pointer; transition: background 80ms ease; margin-bottom: 4px;
+    }
+    .org-pill:hover { background: var(--gray-2); }
+    .org-thumb {
+      width: 22px; height: 22px; border-radius: var(--radius-1);
+      background: var(--accent-9); font-size: 9px; font-weight: 700; color: white;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .org-label { font-size: 12px; font-weight: 500; color: var(--gray-12); flex: 1; }
+    .org-chevron { color: var(--gray-7); flex-shrink: 0; }
+
+    /* ============================================================
+       TOPBAR
+    ============================================================ */
+    .topbar {
+      position: fixed; top: 0; left: 220px; right: 0; height: 56px;
+      background: var(--panel-solid); border-bottom: 1px solid var(--gray-alpha-4);
+      display: flex; align-items: center; padding: 0 24px; gap: 14px; z-index: 100;
+    }
+    .back-btn { display:flex; align-items:center; gap:6px; padding:6px 10px; background:none; border:1px solid var(--gray-alpha-4); border-radius:var(--radius-3); font-size:12px; font-weight:500; color:var(--gray-alpha-11); cursor:pointer; transition:background 80ms, color 80ms; white-space:nowrap; }
+    .back-btn:hover { background:var(--gray-2); color:var(--gray-12); }
+    .back-btn svg { width:14px; height:14px; flex-shrink:0; }
+    .back-context { font-size:12px; color:var(--gray-alpha-11); font-weight:400; }
+    .topbar-search { flex: 1; max-width: 380px; position: relative; }
+    .topbar-search-ico {
+      position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+      color: var(--gray-8); pointer-events: none; display: flex;
+    }
+    .topbar-search input {
+      width: 100%; height: 34px; background: var(--gray-2);
+      border: 1px solid var(--gray-alpha-4); border-radius: var(--radius-3);
+      padding: 0 12px 0 34px; font-size: 13px; color: var(--gray-12);
+    }
+    .topbar-search input::placeholder { color: var(--gray-8); }
+    .topbar-search input:focus { border-color: var(--accent-9); outline: none; background: white; }
+    .kbd-hint { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 2px; }
+    .kbd { background: var(--gray-3); border: 1px solid var(--gray-5); border-radius: 3px; font-size: 10px; padding: 1px 4px; color: var(--gray-alpha-11); font-family: inherit; }
+    .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+    .topbar-divider { width: 1px; height: 20px; background: var(--gray-alpha-4); margin: 0 4px; }
+    .icon-btn {
+      width: 34px; height: 34px; border: none; background: transparent;
+      border-radius: var(--radius-3); display: flex; align-items: center; justify-content: center;
+      color: var(--gray-alpha-11); position: relative; transition: background 80ms ease;
+    }
+    .icon-btn:hover { background: var(--gray-3); color: var(--gray-12); }
+    .notif-dot {
+      position: absolute; top: 7px; right: 7px; width: 7px; height: 7px;
+      background: var(--color-danger); border-radius: 50%; border: 1.5px solid white;
+    }
+    .user-chip {
+      display: flex; align-items: center; gap: 8px; padding: 3px 8px 3px 3px;
+      border-radius: var(--radius-full); cursor: pointer; transition: background 80ms ease;
+    }
+    .user-chip:hover { background: var(--gray-3); }
+    .user-ava {
+      width: 28px; height: 28px; border-radius: 50%; background: var(--accent-9);
+      font-size: 10px; font-weight: 700; color: white;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .user-ava img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+    .user-info { display: flex; flex-direction: column; }
+    .user-name { font-size: 13px; font-weight: 600; color: var(--gray-12); line-height: 1.2; }
+    .user-role { font-size: 10px; color: var(--gray-alpha-11); }
+
+    /* ============================================================
+       PAGE LAYOUT
+    ============================================================ */
+    .page-wrap {
+      margin-left: 220px;
+      margin-top: 56px;
+      padding: 20px 28px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* ============================================================
+       SHARED BUTTONS
+    ============================================================ */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 34px; padding: 0 14px;
+      background: var(--accent-9); color: white;
+      border: none; border-radius: var(--radius-3);
+      font-size: 13px; font-weight: 600;
+      transition: background 80ms ease;
+      white-space: nowrap;
+    }
+    .btn-primary:hover { background: var(--accent-10); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 34px; padding: 0 14px;
+      background: white; color: var(--gray-12);
+      border: 1px solid var(--gray-alpha-4); border-radius: var(--radius-3);
+      font-size: 13px; font-weight: 500;
+      transition: background 80ms ease, border-color 80ms ease;
+      white-space: nowrap;
+    }
+    .btn-outline:hover { background: var(--gray-2); border-color: var(--gray-5); }
+    .btn-sm {
+      display: inline-flex; align-items: center; gap: 5px;
+      height: 30px; padding: 0 11px;
+      background: white; color: var(--gray-12);
+      border: 1px solid var(--gray-alpha-4); border-radius: var(--radius-2);
+      font-size: 12px; font-weight: 500;
+      transition: background 80ms ease;
+    }
+    .btn-sm:hover { background: var(--gray-2); }
+    .btn-sm-primary {
+      display: inline-flex; align-items: center; gap: 5px;
+      height: 30px; padding: 0 11px;
+      background: var(--accent-9); color: white;
+      border: none; border-radius: var(--radius-2);
+      font-size: 12px; font-weight: 600;
+      transition: background 80ms ease;
+    }
+    .btn-sm-primary:hover { background: var(--accent-10); }
+    .btn-block {
+      width: 100%; height: 38px; display: flex; align-items: center; justify-content: center;
+      gap: 7px; background: var(--accent-9); color: white;
+      border: none; border-radius: var(--radius-3);
+      font-size: 13px; font-weight: 600; transition: background 80ms ease;
+    }
+    .btn-block:hover { background: var(--accent-10); }
+    .btn-block-outline {
+      width: 100%; height: 38px; display: flex; align-items: center; justify-content: center;
+      gap: 7px; background: white; color: var(--accent-9);
+      border: 1.5px solid var(--accent-9); border-radius: var(--radius-3);
+      font-size: 13px; font-weight: 600; transition: background 80ms ease;
+    }
+    .btn-block-outline:hover { background: var(--accent-alpha-3); }
+
+    /* ============================================================
+       PROFILE HERO
+    ============================================================ */
+    .profile-card {
+      background: var(--panel-solid);
+      border: 1px solid var(--gray-alpha-4);
+      border-radius: var(--radius-5);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .profile-cover {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #0f2d6e 0%, #1754d8 60%, #2563eb 100%);
+    }
+
+    .profile-header {
+      padding: 0 24px 20px;
+      position: relative;
+    }
+
+    .profile-avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-top: -40px;
+      margin-bottom: 12px;
+    }
+
+    .profile-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      border: 3px solid white;
+      object-fit: cover;
+      display: block;
+      box-shadow: var(--shadow-light);
+    }
+
+    .online-dot {
+      position: absolute;
+      bottom: 3px; right: 3px;
+      width: 14px; height: 14px;
+      background: #22c55e;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    .profile-identity-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .profile-name-block {}
+
+    .profile-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gray-12);
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .verified-icon { color: var(--accent-9); flex-shrink: 0; }
+
+    .profile-badge-row {
+      display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px;
+    }
+
+    .p-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 9px;
+      border-radius: var(--radius-full);
+      font-size: 11px; font-weight: 600;
+    }
+    .p-badge.toprated { background: var(--amber-alpha-3); color: var(--color-warning); }
+    .p-badge.pro { background: var(--blue-alpha-3); color: var(--accent-9); }
+    .p-badge.approved { background: var(--green-alpha-3); color: var(--color-success); }
+    .p-badge.framework { background: var(--purple-alpha-3); color: #7c3aed; }
+
+    .profile-meta-row {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 12px; color: var(--gray-alpha-11);
+      flex-wrap: wrap;
+    }
+    .profile-meta-row .sep { color: var(--gray-5); }
+
+    .star-val { font-weight: 700; color: var(--gray-12); }
+    .star-ico { color: #f59e0b; }
+
+    .profile-cta {
+      display: flex; gap: 8px; align-items: center; flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .profile-stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--gray-alpha-4);
+      margin-top: 16px;
+    }
+    .pstat {
+      padding: 14px 16px;
+      display: flex; align-items: center; gap: 10px;
+      border-right: 1px solid var(--gray-alpha-4);
+    }
+    .pstat:last-child { border-right: none; }
+    .pstat-ico { color: var(--gray-8); flex-shrink: 0; }
+    .pstat-label { font-size: 10px; color: var(--gray-alpha-11); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; margin-bottom: 2px; }
+    .pstat-val { font-size: 14px; font-weight: 700; color: var(--gray-12); }
+
+    /* ============================================================
+       TABS
+    ============================================================ */
+    .tab-bar {
+      background: var(--panel-solid);
+      border: 1px solid var(--gray-alpha-4);
+      border-radius: var(--radius-5);
+      display: flex;
+      overflow-x: auto;
+      margin-bottom: 16px;
+      padding: 0 8px;
+    }
+    .tab-bar::-webkit-scrollbar { height: 0; }
+    .tab-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 0 12px; height: 44px;
+      font-size: 13px; font-weight: 500; color: var(--gray-alpha-11);
+      border-bottom: 2px solid transparent;
+      cursor: pointer; white-space: nowrap;
+      transition: color 80ms ease, border-color 80ms ease;
+    }
+    .tab-link:hover { color: var(--gray-12); }
+    .tab-link.active { color: var(--accent-9); border-bottom-color: var(--accent-9); font-weight: 600; }
+    .tab-count {
+      background: var(--gray-3); color: var(--gray-alpha-11);
+      font-size: 10px; font-weight: 600; padding: 1px 5px;
+      border-radius: var(--radius-full);
+    }
+
+    /* ============================================================
+       TAB PANELS
+    ============================================================ */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .section-card {
+      background: var(--panel-solid);
+      border: 1px solid var(--gray-alpha-4);
+      border-radius: var(--radius-5);
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: 15px; font-weight: 700; color: var(--gray-12);
+      margin-bottom: 14px; letter-spacing: -0.01em;
+    }
+
+    /* About */
+    .about-body {
+      font-size: 13px; color: var(--gray-alpha-11); line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    .check-list {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 7px 20px; margin-bottom: 16px;
+    }
+    .check-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; color: var(--gray-12);
+    }
+    .check-icon { color: var(--color-success); flex-shrink: 0; }
+    .about-meta { font-size: 13px; color: var(--gray-alpha-11); margin-bottom: 6px; }
+    .about-meta strong { color: var(--gray-12); font-weight: 600; }
+
+    /* Services grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .service-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px;
+      border: 1px solid var(--gray-alpha-4);
+      border-radius: var(--radius-3);
+      transition: border-color 80ms ease, box-shadow 80ms ease;
+      cursor: pointer;
+    }
+    .service-item:hover { border-color: var(--accent-9); box-shadow: 0 0 0 2px var(--accent-alpha-3); }
+    .service-ico {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .service-name { font-size: 12px; font-weight: 600; color: var(--gray-12); margin-bottom: 1px; }
+    .service-from { font-size: 11px; color: var(--gray-alpha-11); }
+
+    .view-all-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 12px; font-weight: 600; color: var(--accent-9);
+      margin-top: 12px; cursor: pointer;
+    }
+    .view-all-link:hover { text-decoration: underline; }
+
+    /* Reviews */
+    .review-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--gray-alpha-4);
+    }
+    .review-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .review-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .reviewer-row { display: flex; align-items: center; gap: 10px; }
+    .reviewer-ava {
+      width: 34px; height: 34px; border-radius: 50%; overflow: hidden; flex-shrink: 0;
+    }
+    .reviewer-ava img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .reviewer-name { font-size: 13px; font-weight: 600; color: var(--gray-12); }
+    .reviewer-org { font-size: 11px; color: var(--gray-alpha-11); margin-top: 1px; }
+    .review-rating-date { text-align: right; }
+    .review-stars { display: flex; gap: 2px; margin-bottom: 2px; justify-content: flex-end; }
+    .review-stars .s { color: #f59e0b; font-size: 13px; }
+    .review-stars .s.empty { color: var(--gray-4); }
+    .review-score { font-size: 11px; font-weight: 600; color: var(--gray-12); }
+    .review-date { font-size: 11px; color: var(--gray-alpha-11); margin-top: 1px; }
+    .review-body { font-size: 13px; color: var(--gray-alpha-11); line-height: 1.6; margin-bottom: 8px; }
+    .review-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+    .review-tag {
+      background: var(--gray-2); color: var(--gray-alpha-11);
+      font-size: 11px; font-weight: 500; padding: 2px 8px;
+      border-radius: var(--radius-full);
+    }
+
+    /* Certifications tab */
+    .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .cert-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px; border: 1px solid var(--gray-alpha-4); border-radius: var(--radius-3);
+    }
+    .cert-ico {
+      width: 40px; height: 40px; border-radius: var(--radius-3); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cert-name { font-size: 13px; font-weight: 600; color: var(--gray-12); }
+    .cert-ref { font-size: 11px; color: var(--gray-alpha-11); margin-top: 2px; }
+    .cert-status {
+      margin-left: auto; padding: 2px 7px;
+      border-radius: var(--radius-full); font-size: 10px; font-weight: 600;
+    }
+    .cert-status.valid { background: var(--green-alpha-3); color: var(--color-success); }
+    .cert-status.expiring { background: var(--amber-alpha-3); color: var(--color-warning); }
+
+    /* ============================================================
+       RIGHT RAIL
+    ============================================================ */
+    .right-rail { display: flex; flex-direction: column; gap: 14px; }
+
+    .rail-card {
+      background: var(--panel-solid);
+      border: 1px solid var(--gray-alpha-4);
+      border-radius: var(--radius-5);
+      padding: 18px;
+    }
+
+    .rail-title {
+      font-size: 14px; font-weight: 700; color: var(--gray-12);
+      margin-bottom: 14px; letter-spacing: -0.01em;
+    }
+
+    .field-label { font-size: 11px; font-weight: 600; color: var(--gray-alpha-11); text-transform: uppercase; letter-spacing: 0.04em; display: block; margin-bottom: 5px; }
+    .field-select {
+      width: 100%; height: 36px; border: 1px solid var(--gray-alpha-4);
+      border-radius: var(--radius-3); padding: 0 10px;
+      font-size: 13px; color: var(--gray-12); background: white;
+      appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a1a1a1' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+      padding-right: 28px;
+    }
+    .field-select:focus { border-color: var(--accent-9); outline: none; }
+    .field-input {
+      width: 100%; height: 36px; border: 1px solid var(--gray-alpha-4);
+      border-radius: var(--radius-3); padding: 0 10px;
+      font-size: 13px; color: var(--gray-12); background: white;
+    }
+    .field-input:focus { border-color: var(--accent-9); outline: none; }
+    .field-group { margin-bottom: 12px; }
+
+    .assign-note {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; color: var(--gray-alpha-11); margin-top: 10px;
+    }
+
+    /* Contractor level */
+    .level-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--blue-alpha-3); color: var(--accent-9);
+      padding: 4px 10px; border-radius: var(--radius-full);
+      font-size: 12px; font-weight: 700; margin-bottom: 10px;
+    }
+    .level-desc { font-size: 12px; color: var(--gray-alpha-11); line-height: 1.5; margin-bottom: 12px; }
+    .verify-list { display: flex; flex-direction: column; gap: 6px; }
+    .verify-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--gray-12);
+    }
+    .verify-icon { color: var(--color-success); flex-shrink: 0; }
+    .learn-more { font-size: 12px; font-weight: 600; color: var(--accent-9); margin-top: 10px; display: inline-block; cursor: pointer; }
+    .learn-more:hover { text-decoration: underline; }
+
+    /* Stats */
+    .exp-list { display: flex; flex-direction: column; gap: 10px; }
+    .exp-row {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .exp-ico {
+      width: 32px; height: 32px; border-radius: var(--radius-2);
+      background: var(--gray-2); display: flex; align-items: center; justify-content: center;
+      color: var(--gray-9); flex-shrink: 0;
+    }
+    .exp-val { font-size: 15px; font-weight: 700; color: var(--gray-12); line-height: 1; }
+    .exp-label { font-size: 11px; color: var(--gray-alpha-11); margin-top: 2px; }
+
+    /* Portfolio images */
+    .portfolio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .portfolio-img {
+      width: 100%; height: 90px; object-fit: cover;
+      border-radius: var(--radius-2); display: block;
+    }
+    .portfolio-more {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; color: var(--accent-9);
+      margin-top: 8px; cursor: pointer; gap: 4px;
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+      background: var(--gray-12); color: white; padding: 10px 18px;
+      border-radius: var(--radius-3); font-size: 13px; font-weight: 500;
+      opacity: 0; transition: opacity 200ms ease, transform 200ms ease;
+      pointer-events: none; white-space: nowrap; z-index: 9999;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* Lucide icons */
+    .lucide { display: block; flex-shrink: 0; }
+  </style>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+
+<!-- ============================================================
+     SIDEBAR
+============================================================ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="1.8"><path d="M2 12V6L7 2l5 4v6"/><path d="M5 12V8h4v4"/></svg>
+    </div>
+    <div class="logo-wordmark">SafeBuild Cloud<span>Compliance Platform</span></div>
+  </div>
+  <div class="sidebar-scroll">
+    <div class="nav-group-label">Main</div>
+    <div class="nav-item" onclick="location.href='marketplace.html'">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+      Dashboard
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 14V6L8 2l6 4v8"/><path d="M6 14v-4h4v4"/></svg>
+      Portfolio
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M14 10c0 2-2.5 4-6 4S2 12 2 10l2-6h8l2 6z"/><circle cx="8" cy="5" r="2"/></svg>
+      Residents
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2a4 4 0 000 8"/><path d="M4 14s0-4 4-4 4 4 4 4"/><path d="M11 5.5a2.5 2.5 0 010 5"/><path d="M13.5 4A5 5 0 0113.5 14"/></svg>
+      Repairs
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M5 7h6M5 10h4"/></svg>
+      Planned Maintenance
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2l1.5 3h3.2l-2.6 2 1 3.2L8 8.5 4.9 10.2l1-3.2L3.3 5H6.5z"/></svg>
+      Compliance
+    </div>
+    <div class="nav-item active">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="5"/><path d="M10.5 10.5l3 3"/><path d="M5 7h4M7 5v4"/></svg>
+      Contractors & DLOs
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 5h10M3 8h10M3 11h6"/></svg>
+      Procurement
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z"/><path d="M5 4V2h6v2"/></svg>
+      Orders
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 12V4l6-2 6 2v8l-6 2z"/></svg>
+      Finance
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 12V4.5L8 2l6 2.5V12l-6 2z"/><path d="M8 2v12"/></svg>
+      Reports
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6"/><path d="M8 5v4l2.5 1.5"/></svg>
+      Insights
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 3h10v2L9 9v4l-2-1V9L3 5z"/></svg>
+      Documents
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="2.5"/><path d="M8 2v1.5M8 12.5V14M14 8h-1.5M3.5 8H2M12.2 3.8l-1.1 1.1M4.9 11.1l-1.1 1.1M12.2 12.2l-1.1-1.1M4.9 4.9L3.8 3.8"/></svg>
+      Settings
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <div class="org-pill">
+      <div class="org-thumb">SH</div>
+      <span class="org-label">SafeBuild Housing</span>
+      <svg class="org-chevron" width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2.5 4l3 3 3-3"/></svg>
+    </div>
+    <div class="nav-item" style="margin-top:2px;">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="6.5" r="2.5"/><path d="M3.5 13.5c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5"/></svg>
+      Help & Support
+    </div>
+  </div>
+</aside>
+
+<!-- ============================================================
+     TOPBAR
+============================================================ -->
+<header class="topbar">
+  <button class="back-btn" onclick="history.length > 1 ? history.back() : location.href='marketplace.html'">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
+    Contractors &amp; DLOs
+  </button>
+
+  <div class="topbar-search">
+    <div class="topbar-search-ico">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5.5" cy="5.5" r="4"/><path d="M10 10l2 2"/></svg>
+    </div>
+    <input type="text" placeholder="Search contractors, trades, skills…">
+    <div class="kbd-hint"><span class="kbd">⌘</span><span class="kbd">K</span></div>
+  </div>
+
+  <div class="topbar-right">
+    <button class="btn-outline" onclick="toast('Upload scope / RFQ feature coming soon')">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v7M3 4l3-3 3 3"/><path d="M1 9v1.5A1.5 1.5 0 002.5 12h7A1.5 1.5 0 0011 10.5V9"/></svg>
+      Upload scope / RFQ
+    </button>
+    <button class="btn-primary" onclick="document.getElementById('assignPanel').scrollIntoView({behavior:'smooth'})">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2v8M2 6h8"/></svg>
+      Assign a Job
+    </button>
+    <div class="topbar-divider"></div>
+    <button class="icon-btn" title="Notifications">
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7.5 2a4.5 4.5 0 014.5 4.5v3l1 2H2l1-2V6.5A4.5 4.5 0 017.5 2z"/><path d="M6 12.5a1.5 1.5 0 003 0"/></svg>
+      <span class="notif-dot"></span>
+    </button>
+    <button class="icon-btn" title="Messages">
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2.5 2A1.5 1.5 0 001 3.5v6A1.5 1.5 0 002.5 11H5l2.5 2.5L10 11h2.5A1.5 1.5 0 0014 9.5v-6A1.5 1.5 0 0012.5 2h-10z"/></svg>
+    </button>
+    <div class="user-chip">
+      <div class="user-ava"><img src="https://i.pravatar.cc/40?img=3" alt="James Martin"></div>
+      <div class="user-info">
+        <span class="user-name">James Martin</span>
+        <span class="user-role">Company Admin</span>
+      </div>
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="var(--gray-7)" stroke-width="1.4"><path d="M2 3.5l3 3 3-3"/></svg>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     PAGE
+============================================================ -->
+<div class="page-wrap">
+
+  <!-- =========================================================
+       MAIN COLUMN
+  ========================================================== -->
+  <div class="main-col">
+
+    <!-- PROFILE HERO CARD -->
+    <div class="profile-card">
+      <img class="profile-cover" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&h=140&fit=crop&q=80" alt="Cover" onerror="this.style.background='linear-gradient(135deg,#0f2d6e,#1754d8)'">
+
+      <div class="profile-header">
+        <div class="profile-avatar-wrap">
+          <img class="profile-avatar" src="https://i.pravatar.cc/160?img=11" alt="MJ Mechanical Ltd">
+          <div class="online-dot" title="Available for work"></div>
+        </div>
+
+        <div class="profile-identity-row">
+          <div class="profile-name-block">
+            <div class="profile-name">
+              MJ Mechanical Ltd
+              <svg class="verified-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#1754d8"/><path d="M5.5 9l2.5 2.5 5-5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div style="font-size:12px;color:var(--gray-alpha-11);margin-bottom:7px;font-weight:500;display:flex;align-items:center;gap:6px;">
+              <span style="background:var(--gray-2);color:var(--gray-alpha-11);font-size:11px;font-weight:500;padding:2px 9px;border-radius:var(--radius-full);">Gas &amp; Heating</span>
+            </div>
+            <div class="profile-badge-row">
+              <span class="p-badge toprated">⭐ Top Rated</span>
+            </div>
+            <div class="profile-meta-row">
+              <span><span class="star-ico">★</span> <span class="star-val">4.9</span> <span style="color:var(--gray-alpha-11);font-size:12px;">(128 reviews)</span></span>
+              <span class="sep">·</span>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="6" cy="5" r="2"/><path d="M1 11c0-2.5 2.2-4.5 5-4.5s5 2 5 4.5"/></svg>
+              London & South East, UK
+              <span class="sep">·</span>
+              <span style="color:#22c55e;font-weight:600;font-size:12px;">● Available now</span>
+            </div>
+          </div>
+
+          <div class="profile-cta">
+            <button class="btn-outline" onclick="toast('MJ Mechanical Ltd saved to shortlist')">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6.5 11L2 6.2a2.8 2.8 0 014-3.9l.5.5.5-.5a2.8 2.8 0 014 3.9L6.5 11z"/></svg>
+              Save Contractor
+            </button>
+            <button class="btn-primary" onclick="document.getElementById('assignPanel').scrollIntoView({behavior:'smooth'})">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="1" width="11" height="11" rx="1.5"/><path d="M4 6.5h5M6.5 4v5"/></svg>
+              Assign a Job
+            </button>
+          </div>
+        </div>
+
+        <div class="profile-stats-strip">
+          <div class="pstat">
+            <svg class="pstat-ico" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6"/><path d="M8 4.5v4l2.5 1.5"/></svg>
+            <div>
+              <div class="pstat-label">Response Time</div>
+              <div class="pstat-val">2 Hours</div>
+            </div>
+          </div>
+          <div class="pstat">
+            <svg class="pstat-ico" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8l3 3 7-7"/></svg>
+            <div>
+              <div class="pstat-label">SLA Performance</div>
+              <div class="pstat-val">95%</div>
+            </div>
+          </div>
+          <div class="pstat">
+            <svg class="pstat-ico" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 12V5l6-3 6 3v7l-6 2z"/></svg>
+            <div>
+              <div class="pstat-label">Jobs Completed</div>
+              <div class="pstat-val">612</div>
+            </div>
+          </div>
+          <div class="pstat">
+            <svg class="pstat-ico" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 13V5l5-3 5 3v8"/><rect x="6" y="9" width="4" height="4"/></svg>
+            <div>
+              <div class="pstat-label">Member Since</div>
+              <div class="pstat-val">Mar 2019</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tab-bar">
+      <div class="tab-link active" onclick="setTab(this,'overview')">Overview</div>
+      <div class="tab-link" onclick="setTab(this,'services')">Services</div>
+      <div class="tab-link" onclick="setTab(this,'reviews')">Reviews <span class="tab-count">128</span></div>
+      <div class="tab-link" onclick="setTab(this,'portfolio')">Portfolio</div>
+      <div class="tab-link" onclick="setTab(this,'accreditations')">Accreditations</div>
+      <div class="tab-link" onclick="setTab(this,'certifications')">Insurance</div>
+      <div class="tab-link" onclick="setTab(this,'compliance')">Compliance Docs</div>
+      <div class="tab-link" onclick="setTab(this,'qa')">Q&amp;A</div>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div class="tab-panel active" id="tab-overview">
+
+      <!-- About -->
+      <div class="section-card">
+        <div class="section-title">About MJ Mechanical Ltd</div>
+        <p class="about-body">
+          MJ Mechanical Ltd is a specialist gas and heating contractor with over 14 years of experience delivering high-quality, compliant services to housing associations, local authorities, and private landlords across London and the South East. We are Gas Safe registered and operate a fully managed compliance workflow aligned with the Building Safety Act 2022.
+        </p>
+        <div class="check-list">
+          <div class="check-item">
+            <svg class="check-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 7l3 3 6-6"/></svg>
+            Gas Safety Inspections (CP12)
+          </div>
+          <div class="check-item">
+            <svg class="check-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 7l3 3 6-6"/></svg>
+            Central Heating Installation
+          </div>
+          <div class="check-item">
+            <svg class="check-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 7l3 3 6-6"/></svg>
+            Boiler Servicing & Repair
+          </div>
+          <div class="check-item">
+            <svg class="check-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 7l3 3 6-6"/></svg>
+            Emergency Gas Repairs (24/7)
+          </div>
+          <div class="check-item">
+            <svg class="check-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 7l3 3 6-6"/></svg>
+            Landlord Gas Safety Certificates
+          </div>
+          <div class="check-item">
+            <svg class="check-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 7l3 3 6-6"/></svg>
+            Planned Maintenance Programmes
+          </div>
+        </div>
+        <div style="border-top:1px solid var(--gray-alpha-4);margin-top:16px;display:grid;grid-template-columns:1fr 1fr;">
+          <div style="padding:14px 16px 14px 0;border-right:1px solid var(--gray-alpha-4);">
+            <div style="font-size:10px;font-weight:600;color:var(--gray-alpha-11);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Areas Covered</div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;">
+              <span style="background:var(--blue-alpha-3);color:var(--accent-9);font-size:11px;font-weight:600;padding:3px 10px;border-radius:var(--radius-full);">London (All Zones)</span>
+              <span style="background:var(--gray-2);color:var(--gray-alpha-11);font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--radius-full);">Essex</span>
+              <span style="background:var(--gray-2);color:var(--gray-alpha-11);font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--radius-full);">Kent</span>
+              <span style="background:var(--gray-2);color:var(--gray-alpha-11);font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--radius-full);">Surrey</span>
+              <span style="background:var(--gray-2);color:var(--gray-alpha-11);font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--radius-full);">Hertfordshire</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="section-card">
+        <div class="section-title">Services Offered</div>
+
+        <!-- Core Property Compliance -->
+        <div style="margin-bottom:14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:32px;height:32px;background:#fff7ed;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <i data-lucide="shield-check" style="color:#ea580c;width:16px;height:16px;"></i>
+              </div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--gray-12)">Core Property Compliance</div>
+                <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Gas compliance · Electrical compliance · Lift compliance · Water hygiene / legionella</div>
+              </div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:12px">
+              <div style="font-size:12px;font-weight:700;color:var(--green-9)">From £85/job</div>
+              <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px">Starting price</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mechanical & Electrical -->
+        <div style="margin-bottom:14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:32px;height:32px;background:#dbeafe;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <i data-lucide="zap" style="color:#1d4ed8;width:16px;height:16px;"></i>
+              </div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--gray-12)">Mechanical &amp; Electrical</div>
+                <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Domestic heating engineers · Commercial mechanical engineers · Electrical engineers</div>
+              </div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:12px">
+              <div style="font-size:12px;font-weight:700;color:var(--green-9)">From £65/hour</div>
+              <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px">Starting price</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Repairs & Maintenance -->
+        <div style="margin-bottom:14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--gray-1)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:32px;height:32px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <i data-lucide="wrench" style="color:#15803d;width:16px;height:16px;"></i>
+              </div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--gray-12)">Repairs &amp; Maintenance</div>
+                <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Responsive repairs · Multi-trade operatives · Plumbers · Electricians · Roofers</div>
+              </div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:12px">
+              <div style="font-size:12px;font-weight:700;color:var(--green-9)">From £240/day</div>
+              <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px">Starting price</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="view-all-link" onclick="setTab(document.querySelector('.tab-link:nth-child(2)'),'services')">
+          View all services &amp; pricing
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 2l4 4-4 4"/></svg>
+        </div>
+      </div>
+
+      <!-- Working Hours -->
+      <div class="section-card">
+        <div class="section-title">Availability &amp; Working Hours</div>
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:14px">
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4)"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Mon</div><div style="font-size:10px;color:var(--accent-9);font-weight:500">08:00–16:00</div></div>
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4)"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Tue</div><div style="font-size:10px;color:var(--accent-9);font-weight:500">08:00–16:00</div></div>
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4)"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Wed</div><div style="font-size:10px;color:var(--accent-9);font-weight:500">08:00–16:00</div></div>
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4)"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Thu</div><div style="font-size:10px;color:var(--accent-9);font-weight:500">08:00–16:00</div></div>
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4);opacity:.45"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Fri</div><div style="font-size:10px;color:var(--gray-9)">Unavailable</div></div>
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4);opacity:.45"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Sat</div><div style="font-size:10px;color:var(--gray-9)">Unavailable</div></div>
+          <div style="text-align:center;padding:10px 6px;border-radius:var(--radius-3);border:1px solid var(--gray-alpha-4)"><div style="font-size:11px;font-weight:600;color:var(--gray-12);margin-bottom:4px">Sun</div><div style="font-size:10px;color:var(--accent-9);font-weight:500">08:00–16:00</div></div>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;font-size:12px;font-weight:600;color:#15803d">
+          <i data-lucide="phone-call" style="width:13px;height:13px;"></i> Emergency / Out-of-hours: 24 / 7 available
+        </div>
+      </div>
+
+      <!-- Recent Reviews -->
+      <div class="section-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+          <div class="section-title" style="margin-bottom:0;">Recent Reviews</div>
+          <span class="view-all-link" onclick="setTab(document.querySelectorAll('.tab-link')[2],'reviews')">View all 128 reviews →</span>
+        </div>
+
+        <div class="review-item">
+          <div class="review-header">
+            <div class="reviewer-row">
+              <div class="reviewer-ava"><img src="https://i.pravatar.cc/40?img=44" alt="Sarah Johnson"></div>
+              <div>
+                <div class="reviewer-name">Sarah Johnson</div>
+                <div class="reviewer-org">Housing Officer, ABC Housing Association</div>
+              </div>
+            </div>
+            <div class="review-rating-date">
+              <div class="review-stars">
+                <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
+                <span class="review-score" style="margin-left:3px;">5.0</span>
+              </div>
+              <div class="review-date">2 days ago</div>
+            </div>
+          </div>
+          <p class="review-body">Excellent service! Completed the annual gas safety inspections across 48 units on time and to a very high standard. Documentation submitted to our compliance system same day. Very professional team.</p>
+          <div class="review-tags">
+            <span class="review-tag">Gas Safety</span>
+            <span class="review-tag">On Time</span>
+            <span class="review-tag">Professional</span>
+            <span class="review-tag">Documentation</span>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-header">
+            <div class="reviewer-row">
+              <div class="reviewer-ava"><img src="https://i.pravatar.cc/40?img=8" alt="Michael Brown"></div>
+              <div>
+                <div class="reviewer-name">Michael Brown</div>
+                <div class="reviewer-org">Property Manager, Southwark Council</div>
+              </div>
+            </div>
+            <div class="review-rating-date">
+              <div class="review-stars">
+                <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
+                <span class="review-score" style="margin-left:3px;">4.8</span>
+              </div>
+              <div class="review-date">1 week ago</div>
+            </div>
+          </div>
+          <p class="review-body">Great communication throughout the planned maintenance programme. Responded to an emergency call-out within 90 minutes on a Saturday — exactly what we need for our residents. Will definitely use again.</p>
+          <div class="review-tags">
+            <span class="review-tag">Emergency Response</span>
+            <span class="review-tag">Communication</span>
+            <span class="review-tag">Reliable</span>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-header">
+            <div class="reviewer-row">
+              <div class="reviewer-ava"><img src="https://i.pravatar.cc/40?img=47" alt="Emma Wilson"></div>
+              <div>
+                <div class="reviewer-name">Emma Wilson</div>
+                <div class="reviewer-org">Maintenance Manager, PQR Housing</div>
+              </div>
+            </div>
+            <div class="review-rating-date">
+              <div class="review-stars">
+                <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
+                <span class="review-score" style="margin-left:3px;">5.0</span>
+              </div>
+              <div class="review-date">2 weeks ago</div>
+            </div>
+          </div>
+          <p class="review-body">Reliable, efficient and competitively priced. Helped us achieve full CP12 compliance across our entire estate ahead of schedule. The compliance documentation is always accurate and submitted promptly. Highly recommended.</p>
+          <div class="review-tags">
+            <span class="review-tag">Compliant</span>
+            <span class="review-tag">Value for Money</span>
+            <span class="review-tag">CP12</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /overview -->
+
+    <!-- ── SERVICES TAB ── -->
+    <div class="tab-panel" id="tab-services">
+      <div class="section-card">
+        <div class="section-title">Services Offered &amp; Pricing</div>
+
+        <!-- Core Property Compliance -->
+        <div style="margin-bottom:16px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;background:#fff7ed;border-radius:var(--radius-3);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="shield-check" style="color:#ea580c;width:18px;height:18px;"></i></div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--gray-12)">Core Property Compliance</div>
+                <div style="font-size:12px;color:var(--gray-alpha-11);margin-top:2px">Statutory compliance across all building safety disciplines</div>
+              </div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:12px">
+              <div style="font-size:14px;font-weight:700;color:var(--color-success)">From £85/job</div>
+              <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px">Starting price</div>
+            </div>
+          </div>
+          <div style="padding:14px 16px;display:flex;flex-wrap:wrap;gap:6px">
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Gas compliance</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Electrical compliance</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Fire safety compliance</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Lift compliance</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Water hygiene / legionella</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Asbestos management</span>
+          </div>
+        </div>
+
+        <!-- Mechanical & Electrical -->
+        <div style="margin-bottom:16px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;background:#dbeafe;border-radius:var(--radius-3);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="zap" style="color:#1d4ed8;width:18px;height:18px;"></i></div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--gray-12)">Mechanical &amp; Electrical</div>
+                <div style="font-size:12px;color:var(--gray-alpha-11);margin-top:2px">Full M&amp;E services for residential and commercial properties</div>
+              </div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:12px">
+              <div style="font-size:14px;font-weight:700;color:var(--color-success)">From £65/hour</div>
+              <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px">Starting price</div>
+            </div>
+          </div>
+          <div style="padding:14px 16px;display:flex;flex-wrap:wrap;gap:6px">
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Domestic heating engineers</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Commercial mechanical engineers</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Electrical engineers</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Ventilation specialists</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Renewables / low-carbon specialists</span>
+          </div>
+        </div>
+
+        <!-- Repairs & Maintenance -->
+        <div style="border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-3);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="wrench" style="color:#15803d;width:18px;height:18px;"></i></div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--gray-12)">Repairs &amp; Maintenance</div>
+                <div style="font-size:12px;color:var(--gray-alpha-11);margin-top:2px">Responsive and planned repair works across all trades</div>
+              </div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:12px">
+              <div style="font-size:14px;font-weight:700;color:var(--color-success)">From £240/day</div>
+              <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px">Starting price</div>
+            </div>
+          </div>
+          <div style="padding:14px 16px;display:flex;flex-wrap:wrap;gap:6px">
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Responsive repairs operatives</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Multi-trade operatives</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Plumbers</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Electricians</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Roofers</span>
+            <span style="padding:4px 10px;border:1px solid var(--accent-alpha-4);background:var(--accent-alpha-2);border-radius:20px;font-size:11px;font-weight:500;color:var(--accent-9)">Out-of-hours emergency contractors</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── REVIEWS TAB ── -->
+    <div class="tab-panel" id="tab-reviews">
+      <div class="section-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div class="section-title" style="margin-bottom:0">All Reviews <span style="color:var(--gray-9);font-weight:400;font-size:13px">(128)</span></div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="font-size:22px;font-weight:700;color:var(--gray-12)">4.9</span>
+            <div>
+              <div style="color:#f59e0b;font-size:13px">★★★★★</div>
+              <div style="font-size:11px;color:var(--gray-alpha-11)">128 reviews</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-item">
+          <div class="review-header"><div class="reviewer-row"><div class="reviewer-ava"><img src="https://i.pravatar.cc/40?img=44" alt=""></div><div><div class="reviewer-name">Sarah Johnson</div><div class="reviewer-org">Housing Officer, ABC Housing</div></div></div><div style="display:flex;align-items:center;gap:8px"><div style="color:#f59e0b;font-size:12px">★★★★★</div><span style="font-size:11px;color:var(--gray-alpha-11)">2 days ago</span></div></div>
+          <p style="font-size:13px;color:var(--gray-alpha-11);line-height:1.6;margin:8px 0">Excellent service! Completed the annual gas safety inspections across 48 units on time and to a very high standard. Documentation submitted to our compliance system same day.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Gas Safety</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">On Time</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Professional</span></div>
+        </div>
+        <div class="review-item">
+          <div class="review-header"><div class="reviewer-row"><div class="reviewer-ava"><img src="https://i.pravatar.cc/40?img=11" alt=""></div><div><div class="reviewer-name">Michael Brown</div><div class="reviewer-org">Property Manager, Southwark Council</div></div></div><div style="display:flex;align-items:center;gap:8px"><div style="color:#f59e0b;font-size:12px">★★★★☆</div><span style="font-size:11px;color:var(--gray-alpha-11)">1 week ago</span></div></div>
+          <p style="font-size:13px;color:var(--gray-alpha-11);line-height:1.6;margin:8px 0">Great communication throughout the planned maintenance programme. Responded to an emergency call-out within 90 minutes on a Saturday — exactly what we need for our residents.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Emergency Response</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Communication</span></div>
+        </div>
+        <div class="review-item">
+          <div class="review-header"><div class="reviewer-row"><div class="reviewer-ava"><img src="https://i.pravatar.cc/40?img=32" alt=""></div><div><div class="reviewer-name">Emma Wilson</div><div class="reviewer-org">Maintenance Manager, PGR Housing</div></div></div><div style="display:flex;align-items:center;gap:8px"><div style="color:#f59e0b;font-size:12px">★★★★★</div><span style="font-size:11px;color:var(--gray-alpha-11)">2 weeks ago</span></div></div>
+          <p style="font-size:13px;color:var(--gray-alpha-11);line-height:1.6;margin:8px 0">Reliable, efficient and competitively priced. Helped us achieve full CP12 compliance across our entire estate ahead of schedule.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Compliant</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Value for Money</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">CP12</span></div>
+        </div>
+        <div class="review-item">
+          <div class="review-header"><div class="reviewer-row"><div class="reviewer-ava"><img src="https://i.pravatar.cc/40?img=58" alt=""></div><div><div class="reviewer-name">James Patel</div><div class="reviewer-org">Compliance Lead, Orbit Group</div></div></div><div style="display:flex;align-items:center;gap:8px"><div style="color:#f59e0b;font-size:12px">★★★★★</div><span style="font-size:11px;color:var(--gray-alpha-11)">3 weeks ago</span></div></div>
+          <p style="font-size:13px;color:var(--gray-alpha-11);line-height:1.6;margin:8px 0">We've used MJ Mechanical for electrical compliance across 200+ units. Consistently high quality, all certs uploaded to our portal within 24 hours. Highly recommended.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Electrical</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Documentation</span><span style="padding:3px 8px;background:var(--gray-2);border-radius:20px;font-size:11px;color:var(--gray-11)">Reliable</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PORTFOLIO TAB ── -->
+    <div class="tab-panel" id="tab-portfolio">
+      <div class="section-card">
+        <div class="section-title">Project Portfolio</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+          <div style="border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4)">
+            <img style="width:100%;height:130px;object-fit:cover;display:block" src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=130&fit=crop" alt="Gas servicing project">
+            <div style="padding:10px 12px"><div style="font-size:12px;font-weight:600;color:var(--gray-12)">Annual Gas Compliance — 120 Units</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">Southwark Council · 2024</div></div>
+          </div>
+          <div style="border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4)">
+            <img style="width:100%;height:130px;object-fit:cover;display:block" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=130&fit=crop" alt="Electrical works">
+            <div style="padding:10px 12px"><div style="font-size:12px;font-weight:600;color:var(--gray-12)">Full Rewire Programme — 48 Properties</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">ABC Housing Association · 2023</div></div>
+          </div>
+          <div style="border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4)">
+            <img style="width:100%;height:130px;object-fit:cover;display:block" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=130&fit=crop" alt="Boiler installation">
+            <div style="padding:10px 12px"><div style="font-size:12px;font-weight:600;color:var(--gray-12)">Boiler Replacement Programme</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">PGR Housing · 2023</div></div>
+          </div>
+          <div style="border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4)">
+            <img style="width:100%;height:130px;object-fit:cover;display:block" src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=130&fit=crop" alt="Planned maintenance">
+            <div style="padding:10px 12px"><div style="font-size:12px;font-weight:600;color:var(--gray-12)">Planned Maintenance Contract</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">Orbit Group · 2022–2024</div></div>
+          </div>
+          <div style="border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4)">
+            <img style="width:100%;height:130px;object-fit:cover;display:block" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&h=130&fit=crop" alt="Lift compliance">
+            <div style="padding:10px 12px"><div style="font-size:12px;font-weight:600;color:var(--gray-12)">Lift Compliance Audit — 35 Blocks</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">LB Lambeth · 2024</div></div>
+          </div>
+          <div style="border-radius:var(--radius-3);overflow:hidden;border:1px solid var(--gray-alpha-4)">
+            <img style="width:100%;height:130px;object-fit:cover;display:block" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=130&fit=crop" alt="Legionella">
+            <div style="padding:10px 12px"><div style="font-size:12px;font-weight:600;color:var(--gray-12)">Legionella Risk Assessment Programme</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">Clarion Housing · 2024</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ACCREDITATIONS TAB ── -->
+    <div class="tab-panel" id="tab-accreditations">
+      <div class="section-card">
+        <div class="section-title">Accreditations &amp; Memberships</div>
+        <div class="cert-grid">
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Gas Safe Register</div><div class="cert-ref">Reg No. 553421 · Expires Oct 2026</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">CHAS Accredited</div><div class="cert-ref">Health &amp; Safety · Expires Mar 2026</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">NICEIC Approved Contractor</div><div class="cert-ref">Electrical · Annual renewal</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">SMSTS Certificate</div><div class="cert-ref">CITB · Site Management Safety</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">NHF Preferred Supplier</div><div class="cert-ref">Framework 2024–2027</div></div>
+            <span class="cert-status valid">Active</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Trustmark Registered</div><div class="cert-ref">Government Endorsed · 2024</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">CSCS Card (CITB)</div><div class="cert-ref">Construction Skills Certification</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="award" style="color:#1754d8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Considerate Constructors Scheme</div><div class="cert-ref">Silver Award 2023</div></div>
+            <span class="cert-status valid">Active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Personnel -->
+      <div class="section-card">
+        <div class="section-title">Key Personnel</div>
+        <div class="cert-grid">
+          <div class="cert-item">
+            <img src="https://i.pravatar.cc/40?img=12" alt="Michael Brown" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0">
+            <div style="flex:1"><div class="cert-name">Michael Brown</div><div class="cert-ref">Operations Manager · BSc Construction Management</div></div>
+            <button onclick="toast('CV download coming soon')" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer;white-space:nowrap;flex-shrink:0"><i data-lucide="download" style="width:12px;height:12px;"></i> CV</button>
+          </div>
+          <div class="cert-item">
+            <img src="https://i.pravatar.cc/40?img=47" alt="Sarah White" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0">
+            <div style="flex:1"><div class="cert-name">Sarah White</div><div class="cert-ref">Site Supervisor · NVQ Level 4, SMSTS</div></div>
+            <button onclick="toast('CV download coming soon')" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer;white-space:nowrap;flex-shrink:0"><i data-lucide="download" style="width:12px;height:12px;"></i> CV</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CERTIFICATIONS TAB ── -->
+    <div class="tab-panel" id="tab-certifications">
+      <div class="section-card">
+        <div class="section-title">Compliance &amp; Insurance</div>
+        <div class="cert-grid">
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dcfce7;"><i data-lucide="shield-check" style="color:#15803d;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Public Liability Insurance</div><div class="cert-ref">£10M cover · Expires Dec 2026</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#dbeafe;"><i data-lucide="users" style="color:#1d4ed8;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Employers' Liability Insurance</div><div class="cert-ref">£10M cover · Expires Dec 2026</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#fce7f3;"><i data-lucide="flame" style="color:#be185d;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Gas Safe Registration</div><div class="cert-ref">Reg No. 553421 · Expires Oct 2025</div></div>
+            <span class="cert-status expiring">Expiring Soon</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#fef9c3;"><i data-lucide="search" style="color:#ca8a04;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">DBS Check (Enhanced)</div><div class="cert-ref">All operatives · Renewed 2024</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#f3e8ff;"><i data-lucide="zap" style="color:#7e22ce;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Electrical Installation Condition Report</div><div class="cert-ref">NICEIC · Renewed annually</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico" style="background:#fff7ed;"><i data-lucide="droplets" style="color:#ea580c;width:18px;height:18px;"></i></div>
+            <div><div class="cert-name">Legionella Risk Assessment</div><div class="cert-ref">All managed properties · 2024</div></div>
+            <span class="cert-status valid">Valid</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── COMPLIANCE DOCS TAB ── -->
+    <div class="tab-panel" id="tab-compliance">
+      <div class="section-card">
+        <div class="section-title">Compliance Documents</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="file-check" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Company Registration Certificate</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Companies House · Reg No. 09823741</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="file-check" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Proof of Address</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Bank statement · 12 Builder Street, London, SW1A 1AA</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="file-check" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Public Liability Insurance Certificate</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">£10M cover · Allianz Insurance · Expires Dec 2026</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="file-check" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Employers' Liability Insurance</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">£10M cover · Allianz Insurance · Expires Dec 2026</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="file-text" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Health &amp; Safety Policy</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Company H&amp;S Policy Document · Updated Jan 2024</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="file-text" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Risk Assessment (Sample)</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Generic site risk assessment template</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#fef9c3;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="alert-triangle" style="color:#ca8a04;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">DBS / CRB Policy</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Safeguarding policy · Renewal due Sep 2025</div></div>
+            <span style="padding:2px 8px;background:#fef9c3;color:#ca8a04;border-radius:20px;font-size:11px;font-weight:600">Review Due</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3)">
+            <div style="width:36px;height:36px;background:#dcfce7;border-radius:var(--radius-2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-lucide="award" style="color:#15803d;width:16px;height:16px;"></i></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--gray-12)">Accreditations &amp; Certifications</div><div style="font-size:11px;color:var(--gray-alpha-11);margin-top:1px">Gas Safe, CHAS, NICEIC, SMSTS · All current</div></div>
+            <span style="padding:2px 8px;background:#dcfce7;color:#15803d;border-radius:20px;font-size:11px;font-weight:600">Verified</span>
+            <button style="padding:5px 10px;border:1px solid var(--gray-alpha-4);border-radius:var(--radius-2);background:none;font-size:11px;font-weight:500;color:var(--accent-9);cursor:pointer">View</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Q&A TAB ── -->
+    <div class="tab-panel" id="tab-qa">
+      <div class="section-card">
+        <div class="section-title">Q&amp;A</div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+            <div style="padding:12px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+              <div style="font-size:12px;font-weight:600;color:var(--gray-12)">Q: Do you cover emergency call-outs outside of business hours?</div>
+              <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">Asked by Sarah Johnson, ABC Housing · 1 month ago</div>
+            </div>
+            <div style="padding:12px 14px;font-size:13px;color:var(--gray-alpha-11);line-height:1.6">Yes — we operate a 24/7 emergency response service. Our target response time is 90 minutes for urgent issues. Emergency call-outs are priced at our out-of-hours rate starting from £195/visit.</div>
+          </div>
+          <div style="border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+            <div style="padding:12px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+              <div style="font-size:12px;font-weight:600;color:var(--gray-12)">Q: What areas do you cover and do you charge travel?</div>
+              <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">Asked by James Patel, Orbit Group · 2 months ago</div>
+            </div>
+            <div style="padding:12px 14px;font-size:13px;color:var(--gray-alpha-11);line-height:1.6">We currently cover Kent, Surrey, and surrounding London boroughs. No travel charge is applied for jobs within our primary coverage area (up to 50 miles from our London base). National coverage is available for framework contracts.</div>
+          </div>
+          <div style="border:1px solid var(--gray-alpha-4);border-radius:var(--radius-3);overflow:hidden">
+            <div style="padding:12px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4)">
+              <div style="font-size:12px;font-weight:600;color:var(--gray-12)">Q: Are all operatives DBS checked and insured?</div>
+              <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px">Asked by Emma Wilson, PGR Housing · 3 months ago</div>
+            </div>
+            <div style="padding:12px 14px;font-size:13px;color:var(--gray-alpha-11);line-height:1.6">Yes — all operatives hold enhanced DBS checks (renewed 2024). We carry £10M public liability and £10M employers' liability insurance. All certifications are uploaded to SafeBuild and available to view in the Certifications tab.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main-col -->
+
+  <!-- =========================================================
+       RIGHT RAIL
+  ========================================================== -->
+  <div class="right-rail">
+
+    <!-- ASSIGN A JOB -->
+    <div class="rail-card" id="assignPanel">
+      <div class="rail-title">Assign a Job</div>
+
+      <div class="field-group">
+        <label class="field-label">Service Category</label>
+        <select class="field-select">
+          <option value="">Select service type</option>
+          <option selected>Gas Safety Inspection</option>
+          <option>Boiler Servicing</option>
+          <option>Emergency Gas Repair</option>
+          <option>Planned Maintenance</option>
+          <option>CP12 Certificate</option>
+          <option>Central Heating</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Property / Location</label>
+        <input class="field-input" type="text" placeholder="Block, estate or postcode">
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+        <div>
+          <label class="field-label">Priority</label>
+          <select class="field-select">
+            <option>Standard</option>
+            <option>Urgent</option>
+            <option>Emergency</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label">Due Date</label>
+          <input class="field-input" type="date">
+        </div>
+      </div>
+
+      <button class="btn-block" onclick="toast('Job assigned to MJ Mechanical Ltd')">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7l3 3 7-7"/></svg>
+        Dispatch Job
+      </button>
+      <div class="assign-note">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="6" cy="6" r="5"/><path d="M6 4.5v4M6 3.5v.5"/></svg>
+        Usually responds within 2 hours
+      </div>
+    </div>
+
+    <!-- CONTRACTOR LEVEL -->
+    <div class="rail-card">
+      <div class="rail-title">Contractor Level</div>
+      <div class="level-badge">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="6,1 7.8,4.2 11.5,4.7 8.7,7.4 9.4,11 6,9.2 2.6,11 3.3,7.4 0.5,4.7 4.2,4.2"/></svg>
+        Pro Contractor
+      </div>
+      <p class="level-desc">Top performing contractor with proven compliance track record across social housing portfolios.</p>
+      <div class="verify-list">
+        <div class="verify-item">
+          <svg class="verify-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="6" fill="#dcfce7" stroke="#22c55e"/><path d="M4 7l2 2 4-4" stroke="#16a34a" stroke-width="1.5"/></svg>
+          Identity Verified
+        </div>
+        <div class="verify-item">
+          <svg class="verify-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="6" fill="#dcfce7" stroke="#22c55e"/><path d="M4 7l2 2 4-4" stroke="#16a34a" stroke-width="1.5"/></svg>
+          Gas Safe Registered
+        </div>
+        <div class="verify-item">
+          <svg class="verify-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="6" fill="#dcfce7" stroke="#22c55e"/><path d="M4 7l2 2 4-4" stroke="#16a34a" stroke-width="1.5"/></svg>
+          Insurance Verified
+        </div>
+        <div class="verify-item">
+          <svg class="verify-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="6" fill="#dcfce7" stroke="#22c55e"/><path d="M4 7l2 2 4-4" stroke="#16a34a" stroke-width="1.5"/></svg>
+          DBS Checked
+        </div>
+        <div class="verify-item">
+          <svg class="verify-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="6" fill="#dcfce7" stroke="#22c55e"/><path d="M4 7l2 2 4-4" stroke="#16a34a" stroke-width="1.5"/></svg>
+          Address Verified
+        </div>
+      </div>
+      <span class="learn-more" onclick="toast('Opening verification details…')">Learn more about levels →</span>
+    </div>
+
+    <!-- EXPERIENCE & STATS -->
+    <div class="rail-card">
+      <div class="rail-title">Experience &amp; Stats</div>
+      <div class="exp-list">
+        <div class="exp-row">
+          <div class="exp-ico"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7.5" cy="7.5" r="5.5"/><path d="M7.5 4v4l2.5 1.5"/></svg></div>
+          <div><div class="exp-val">14+</div><div class="exp-label">Years Experience</div></div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-ico"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 13V5.5L7.5 2l5.5 3.5V13"/><rect x="5.5" y="8" width="4" height="5"/></svg></div>
+          <div><div class="exp-val">612</div><div class="exp-label">Jobs Completed</div></div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-ico"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><polygon points="7.5,1.5 9.2,5.5 13.5,5.8 10.2,8.7 11.2,13 7.5,10.8 3.8,13 4.8,8.7 1.5,5.8 5.8,5.5"/></svg></div>
+          <div><div class="exp-val">95%</div><div class="exp-label">Positive Reviews</div></div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-ico"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="4" width="11" height="9" rx="1"/><path d="M5 4V2.5a.5.5 0 01.5-.5h4a.5.5 0 01.5.5V4"/><path d="M5 8h5M5 10.5h3"/></svg></div>
+          <div><div class="exp-val">£1.8M+</div><div class="exp-label">Total Contract Value</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESPONSE & DELIVERY -->
+    <div class="rail-card">
+      <div class="rail-title">Response &amp; Delivery</div>
+      <div class="exp-list">
+        <div class="exp-row">
+          <div class="exp-ico"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7.5" cy="7.5" r="5.5"/><path d="M7.5 4v4l2 1.5"/></svg></div>
+          <div><div class="exp-val">2 Hours</div><div class="exp-label">Avg. Response Time</div></div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-ico"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="11" height="11" rx="1"/><path d="M2 6h11"/><path d="M6 2v4M10 2v4"/></svg></div>
+          <div><div class="exp-val">Same Day</div><div class="exp-label">Avg. Job Completion</div></div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-ico"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2.5 8l3 3 7-7"/></svg></div>
+          <div><div class="exp-val">95%</div><div class="exp-label">SLA Performance</div></div>
+        </div>
+      </div>
+      <span class="learn-more" onclick="toast('Opening performance report…')">View Performance Details →</span>
+    </div>
+
+    <!-- FEATURED PROJECTS -->
+    <div class="rail-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <div class="rail-title" style="margin-bottom:0;">Featured Projects</div>
+        <span class="view-all-link" style="margin-top:0;" onclick="setTab(document.querySelectorAll('.tab-link')[3],'portfolio')">View all</span>
+      </div>
+      <div class="portfolio-grid">
+        <img class="portfolio-img" src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=200&h=90&fit=crop" alt="" onerror="this.style.background='var(--gray-3)'">
+        <img class="portfolio-img" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=200&h=90&fit=crop" alt="" onerror="this.style.background='var(--gray-3)'">
+        <img class="portfolio-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=90&fit=crop" alt="" onerror="this.style.background='var(--gray-3)'">
+        <img class="portfolio-img" src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=200&h=90&fit=crop" alt="" onerror="this.style.background='var(--gray-3)'">
+      </div>
+    </div>
+
+  </div><!-- /right-rail -->
+
+</div><!-- /page-wrap -->
+
+<div id="toast"></div>
+
+<script>
+  // Tabs
+  function setTab(el, id) {
+    document.querySelectorAll('.tab-link').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    if (el) el.classList.add('active');
+    const panel = document.getElementById('tab-' + id);
+    if (panel) panel.classList.add('active');
+  }
+
+  // Toast
+  let toastTimer;
+  function toast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
+  }
+
+  // Init Lucide icons
+  lucide.createIcons();
+</script>
+</body>
+</html>
