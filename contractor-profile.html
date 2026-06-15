@@ -4096,10 +4096,10 @@
     if (typeof lucide !== 'undefined') lucide.createIcons();
 
     // Init Leaflet map — deferred so the tab panel is visible first
-    let mapInitialised = false;
-    function initMap() {
-      if (mapInitialised || typeof L === 'undefined') return;
-      mapInitialised = true;
+    window.mapInitialised = false;
+    window.initMap = function() {
+      if (window.mapInitialised || typeof L === 'undefined') return;
+      window.mapInitialised = true;
       const contractorLat = 51.5451, contractorLng = -0.0553;
       const map = L.map('contractor-map', { zoomControl: true, attributionControl: true });
 
