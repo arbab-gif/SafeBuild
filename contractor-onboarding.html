@@ -791,7 +791,7 @@ a{text-decoration:none}
               <table class="dt" id="accred-tbl">
                 <thead><tr>
                   <th>Accreditation / Certification</th><th>Issuing Body</th>
-                  <th>Certificate Number</th><th>Expiry Date</th><th></th>
+                  <th>Certificate Number</th><th>Expiry Date</th><th>Certificate Upload</th><th></th>
                 </tr></thead>
                 <tbody>
                   <tr>
@@ -799,6 +799,12 @@ a{text-decoration:none}
                     <td><input class="fi" type="text" placeholder="Issuing body" style="font-size:12px;padding:6px 8px"></td>
                     <td><input class="fi" type="text" placeholder="Cert number" style="font-size:12px;padding:6px 8px"></td>
                     <td><input class="fi" type="date" style="font-size:12px;padding:6px 8px"></td>
+                    <td>
+                      <label style="display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 10px;border:1px solid var(--gray-4);border-radius:6px;font-size:11px;font-weight:500;color:var(--gray-11);cursor:pointer;white-space:nowrap;background:#fff;" title="Upload certificate">
+                        <i data-lucide="upload" style="width:12px;height:12px;"></i> Upload
+                        <input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" onchange="markUploaded(this)">
+                      </label>
+                    </td>
                     <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>
                   </tr>
                 </tbody>
@@ -1838,13 +1844,33 @@ function addAccredRow() {
   const tbody = document.querySelector('#accred-tbl tbody');
   const tr = document.createElement('tr');
   tr.innerHTML = `
-    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" placeholder="Accreditation name"></td>
+    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" placeholder="e.g. Gas Safe Register"></td>
     <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" placeholder="Issuing body"></td>
     <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" placeholder="Cert number"></td>
     <td><input class="fi" style="font-size:12px;padding:6px 8px" type="date"></td>
+    <td>
+      <label style="display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 10px;border:1px solid var(--gray-4);border-radius:6px;font-size:11px;font-weight:500;color:var(--gray-11);cursor:pointer;white-space:nowrap;background:#fff;" title="Upload certificate">
+        <i data-lucide="upload" style="width:12px;height:12px;"></i> Upload
+        <input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" onchange="markUploaded(this)">
+      </label>
+    </td>
     <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>`;
   tbody.appendChild(tr);
   lucide.createIcons();
+}
+
+function markUploaded(input) {
+  const label = input.closest('label');
+  if (!label) return;
+  const name = input.files[0]?.name || '';
+  const short = name.length > 14 ? name.substring(0, 12) + '…' : name;
+  label.style.background = 'rgba(26,127,75,0.08)';
+  label.style.borderColor = 'rgba(26,127,75,0.3)';
+  label.style.color = '#1a7f4b';
+  label.querySelector('[data-lucide]').setAttribute('data-lucide', 'check-circle');
+  lucide.createIcons();
+  const txt = label.childNodes[1];
+  if (txt && txt.nodeType === 3) txt.textContent = ' ' + (short || 'Uploaded');
 }
 
 function addEduRow() {
