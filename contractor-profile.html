@@ -1667,6 +1667,10 @@
           </span>
           <span class="badge badge-pro">Pro Contractor</span>
           <span class="badge badge-top">⭐ Top Rated</span>
+          <span class="badge" style="background:rgba(23,84,216,0.08);border:1px solid rgba(23,84,216,0.2);color:var(--accent-9);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;display:inline-flex;align-items:center;gap:4px;">
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" style="width:9px;height:9px;"><rect x="1" y="7" width="3" height="4" rx="0.5"/><rect x="4.5" y="4" width="3" height="7" rx="0.5"/><rect x="8" y="1" width="3" height="10" rx="0.5"/></svg>
+            Organisation
+          </span>
         </div>
         <div class="company-tagline">Gas, Heating &amp; Mechanical Specialists</div>
 
@@ -1753,6 +1757,7 @@
         Location
       </span>
     </button>
+    <button class="tab" onclick="setTab(this,'tab-personnel')">Key Personnel</button>
     <button class="tab" onclick="setTab(this,'tab-reviews')">Reviews</button>
     <button class="tab" onclick="setTab(this,'tab-accreditations')">Accreditations</button>
     <button class="tab" onclick="setTab(this,'tab-certifications')">Certifications</button>
@@ -2570,6 +2575,174 @@
   </div><!-- /content-grid -->
 
   </div><!-- /tab-overview -->
+
+  <!-- ── KEY PERSONNEL TAB ── -->
+  <div class="tab-panel" id="tab-personnel">
+    <div class="section-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div class="section-title" style="margin:0;">Key Personnel</div>
+        <div style="font-size:12px;color:var(--gray-alpha-11);">24 team members · <span style="color:#1a7f4b;font-weight:600;">All documents verified</span></div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:860px;">
+          <thead>
+            <tr>
+              <th style="background:var(--gray-2);font-size:11px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:8px 12px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Name</th>
+              <th style="background:var(--gray-2);font-size:11px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:8px 12px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Position</th>
+              <th style="background:var(--gray-2);font-size:11px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:8px 12px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Role</th>
+              <th style="background:var(--gray-2);font-size:11px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:8px 12px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Email</th>
+              <th style="background:var(--gray-2);font-size:11px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:8px 12px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">CV</th>
+              <th style="background:var(--gray-2);font-size:11px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:8px 12px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Certifications</th>
+              <th style="background:var(--gray-2);font-size:11px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:8px 12px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Accreditations</th>
+              <th style="background:var(--gray-2);font-size:11px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:8px 12px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Insurance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Row 1 -->
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);font-weight:600;color:var(--gray-12);">Michael Johnson</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-11);">Managing Director</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-11);">Director / Owner</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-11);">m.johnson@mjmechanical.co.uk</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <button onclick="viewPersonnelDoc('Michael Johnson','CV')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;">
+                  <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View
+                </button>
+              </td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <button onclick="viewPersonnelDoc('Michael Johnson','SMSTS Certificate')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> SMSTS</button>
+                  <button onclick="viewPersonnelDoc('Michael Johnson','First Aid at Work')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> First Aid</button>
+                </div>
+              </td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <button onclick="viewPersonnelDoc('Michael Johnson','CHAS Accreditation')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> CHAS</button>
+              </td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <button onclick="viewPersonnelDoc('Michael Johnson','Public Liability Insurance')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> PL Insurance</button>
+              </td>
+            </tr>
+            <!-- Row 2 -->
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);font-weight:600;color:var(--gray-12);">Sarah Ahmed</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-11);">Senior Gas Engineer</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-11);">Gas Engineer</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-11);">s.ahmed@mjmechanical.co.uk</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <button onclick="viewPersonnelDoc('Sarah Ahmed','CV')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button>
+              </td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <button onclick="viewPersonnelDoc('Sarah Ahmed','Gas Safe Register')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> Gas Safe</button>
+                  <button onclick="viewPersonnelDoc('Sarah Ahmed','NVQ Level 3')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> NVQ L3</button>
+                </div>
+              </td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <button onclick="viewPersonnelDoc('Sarah Ahmed','SafeContractor')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> SafeContractor</button>
+              </td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <button onclick="viewPersonnelDoc('Sarah Ahmed','Employers Liability Insurance')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> EL Insurance</button>
+              </td>
+            </tr>
+            <!-- Row 3 -->
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);font-weight:600;color:var(--gray-12);">David Clarke</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-11);">Lead Electrician</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-11);">Electrician</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-11);">d.clarke@mjmechanical.co.uk</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <button onclick="viewPersonnelDoc('David Clarke','CV')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button>
+              </td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <button onclick="viewPersonnelDoc('David Clarke','NICEIC Approved')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> NICEIC</button>
+                  <button onclick="viewPersonnelDoc('David Clarke','18th Edition Wiring')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> 18th Ed.</button>
+                </div>
+              </td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <button onclick="viewPersonnelDoc('David Clarke','ECA Member')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> ECA</button>
+              </td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <button onclick="viewPersonnelDoc('David Clarke','Public Liability Insurance')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> PL</button>
+                  <button onclick="viewPersonnelDoc('David Clarke','Professional Indemnity Insurance')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> PI</button>
+                </div>
+              </td>
+            </tr>
+            <!-- Row 4 -->
+            <tr>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);font-weight:600;color:var(--gray-12);">Priya Patel</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-11);">Health &amp; Safety Manager</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-11);">Health &amp; Safety Manager</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-11);">p.patel@mjmechanical.co.uk</td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <button onclick="viewPersonnelDoc('Priya Patel','CV')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button>
+              </td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <button onclick="viewPersonnelDoc('Priya Patel','SMSTS Certificate')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> SMSTS</button>
+                  <button onclick="viewPersonnelDoc('Priya Patel','IOSH Managing Safely')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> IOSH</button>
+                </div>
+              </td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <button onclick="viewPersonnelDoc('Priya Patel','ISO 45001:2018')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> ISO 45001</button>
+                  <button onclick="viewPersonnelDoc('Priya Patel','CHAS Accreditation')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> CHAS</button>
+                </div>
+              </td>
+              <td style="padding:10px 12px;border-bottom:1px solid var(--gray-alpha-4);">
+                <button onclick="viewPersonnelDoc('Priya Patel','Employers Liability Insurance')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> EL Insurance</button>
+              </td>
+            </tr>
+            <!-- Row 5 -->
+            <tr>
+              <td style="padding:10px 12px;font-weight:600;color:var(--gray-12);">James Okafor</td>
+              <td style="padding:10px 12px;color:var(--gray-11);">Senior Project Manager</td>
+              <td style="padding:10px 12px;color:var(--gray-11);">Project Manager</td>
+              <td style="padding:10px 12px;color:var(--gray-11);">j.okafor@mjmechanical.co.uk</td>
+              <td style="padding:10px 12px;">
+                <button onclick="viewPersonnelDoc('James Okafor','CV')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button>
+              </td>
+              <td style="padding:10px 12px;">
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <button onclick="viewPersonnelDoc('James Okafor','SMSTS Certificate')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> SMSTS</button>
+                  <button onclick="viewPersonnelDoc('James Okafor','CSCS Gold Card')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> CSCS</button>
+                </div>
+              </td>
+              <td style="padding:10px 12px;">
+                <button onclick="viewPersonnelDoc('James Okafor','Constructionline Gold')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> Constructionline</button>
+              </td>
+              <td style="padding:10px 12px;">
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <button onclick="viewPersonnelDoc('James Okafor','Public Liability Insurance')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> PL</button>
+                  <button onclick="viewPersonnelDoc('James Okafor','Professional Indemnity Insurance')" style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid rgba(23,84,216,0.25);border-radius:5px;background:rgba(23,84,216,0.05);font-size:10px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> PI</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:14px;padding:10px 14px;background:var(--gray-1);border:1px solid var(--gray-alpha-4);border-radius:8px;font-size:11px;color:var(--gray-alpha-11);">
+        Showing 5 of 24 team members. Documents shown are verified by SafeBuild. Click <strong>View</strong> to open a document preview.
+      </div>
+    </div>
+
+    <!-- Personnel Document Viewer Modal -->
+    <div id="personnel-doc-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:1003;align-items:center;justify-content:center;backdrop-filter:blur(4px);" onclick="if(event.target===this)this.style.display='none'">
+      <div style="background:#fff;border-radius:14px;width:580px;max-width:92vw;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,0.22);overflow:hidden;">
+        <div style="padding:14px 18px;border-bottom:1px solid var(--gray-alpha-4);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+          <div>
+            <div style="font-size:14px;font-weight:700;color:var(--gray-12);" id="pd-modal-title">Document</div>
+            <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px;" id="pd-modal-sub">MJ Mechanical Ltd</div>
+          </div>
+          <button onclick="document.getElementById('personnel-doc-modal').style.display='none'" style="width:28px;height:28px;border:none;background:var(--gray-2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--gray-9);">×</button>
+        </div>
+        <div style="flex:1;overflow:auto;padding:24px;background:var(--gray-1);">
+          <div id="pd-preview" style="background:#fff;border-radius:8px;border:1px solid var(--gray-alpha-4);box-shadow:0 2px 12px rgba(0,0,0,0.06);min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 28px;text-align:center;gap:14px;"></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-personnel -->
 
   <!-- ── REVIEWS TAB ── -->
   <div class="tab-panel" id="tab-reviews">
@@ -4300,6 +4473,25 @@
 
   function closeMapFullscreen() {
     document.getElementById('map-fullscreen-modal').style.display = 'none';
+  }
+
+  function viewPersonnelDoc(person, docType) {
+    const isCv = docType === 'CV';
+    document.getElementById('pd-modal-title').textContent = isCv ? person + ' — CV' : person + ' · ' + docType;
+    document.getElementById('pd-modal-sub').textContent = 'MJ Mechanical Ltd · Key Personnel Document';
+    document.getElementById('pd-preview').innerHTML = `
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(23,84,216,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:4px;">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#1754d8" stroke-width="1.5" style="width:32px;height:32px;">${isCv ? '<circle cx="16" cy="10" r="5"/><path d="M6 26c0-5.5 4.5-10 10-10s10 4.5 10 10"/>' : '<rect x="4" y="2" width="24" height="28" rx="2"/><path d="M9 9h14M9 14h14M9 19h8"/><circle cx="22" cy="22" r="5" fill="rgba(23,84,216,0.1)"/><path d="M20 22l1.5 1.5L24 20" stroke-linecap="round" stroke-linejoin="round"/>'}
+        </svg>
+      </div>
+      <div style="font-size:18px;font-weight:800;color:var(--gray-12);letter-spacing:-0.02em;">${isCv ? person : docType}</div>
+      <div style="font-size:12px;color:var(--gray-alpha-11);">${isCv ? 'Curriculum Vitae' : 'Certificate / Accreditation Document'}</div>
+      <div style="font-size:13px;font-weight:600;color:var(--gray-12);margin-top:4px;">${person}</div>
+      <div style="margin-top:10px;padding:8px 16px;background:rgba(26,127,75,0.08);border:1px solid rgba(26,127,75,0.2);border-radius:99px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#1a7f4b;">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" style="width:12px;height:12px;"><path d="M2 7l3 3 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Verified by SafeBuild
+      </div>`;
+    document.getElementById('personnel-doc-modal').style.display = 'flex';
   }
 
   function viewCert(name, certNo) {
