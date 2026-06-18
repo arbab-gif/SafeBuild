@@ -111,6 +111,7 @@ a{text-decoration:none}
 .step-label{font-size:10px;font-weight:500;color:var(--gray-9);text-align:center;width:90px;line-height:1.3;word-break:break-word}
 .step-item.active .step-label{color:var(--accent-9);font-weight:600}
 .step-item.done .step-label{color:var(--gray-11)}
+.step-item.done:hover .step-circle,.step-item.active:hover .step-circle{box-shadow:0 0 0 4px rgba(23,84,216,.2);}
 
 /* ── CONTENT GRID ── */
 .cg{display:grid;grid-template-columns:1fr 296px;gap:20px;align-items:start}
@@ -1411,7 +1412,8 @@ function renderStepper() {
     const inner = n < cur
       ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
       : n;
-    html += `<div class="step-item ${cls}"><div class="step-node"><div class="step-circle">${inner}</div><div class="step-label">${label}</div></div></div>`;
+    const clickable = n <= cur;
+    html += `<div class="step-item ${cls}" ${clickable ? `onclick="goToStep(${n})" title="Go to ${label}"` : ''} style="${clickable ? 'cursor:pointer;' : ''}"><div class="step-node"><div class="step-circle">${inner}</div><div class="step-label">${label}</div></div></div>`;
     if (i < STEPS.length - 1) {
       const connCls = n < cur ? 'done' : '';
       html += `<div class="step-conn ${connCls}"></div>`;
@@ -1733,6 +1735,16 @@ function buildReview() {
 }
 
 function jumpToStep(n) {
+  cur = n;
+  renderStepper();
+  updateProgress();
+  showStep(cur);
+  document.querySelector('.scroll').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToStep(n) {
+  if (n < 1 || n > cur) return;
+  if (n === 5) buildReview();
   cur = n;
   renderStepper();
   updateProgress();
