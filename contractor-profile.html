@@ -3665,41 +3665,99 @@
         </div>
 
         <div class="section-card" style="margin-bottom:0;">
-          <div class="section-title">Health &amp; Safety Compliance</div>
-          <div class="check-row">
-            <span class="check-label">H&amp;S Policy (current)</span>
-            <span class="check-pass"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8l3 3 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg> Verified — Jan 2024</span>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <div class="section-title" style="margin:0;">Health &amp; Safety Compliance</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;color:#c0392b;background:rgba(192,57,43,0.08);border:1px solid rgba(192,57,43,0.2);padding:3px 8px;border-radius:20px;">
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" style="width:10px;height:10px;"><circle cx="7" cy="7" r="5.5"/><path d="M7 4v3.5" stroke-linecap="round"/><circle cx="7" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>
+                2 expired
+              </span>
+              <span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;color:#b45309;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);padding:3px 8px;border-radius:20px;">
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" style="width:10px;height:10px;"><circle cx="7" cy="7" r="5.5"/><path d="M7 4v3.5" stroke-linecap="round"/><circle cx="7" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>
+                1 expiring soon
+              </span>
+            </div>
           </div>
-          <div class="check-row">
-            <span class="check-label">Risk Assessments (RAMS)</span>
-            <span class="check-pass"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8l3 3 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg> Up to date</span>
+
+          <div style="overflow-x:auto;">
+            <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:560px;">
+              <thead>
+                <tr>
+                  <th style="background:var(--gray-2);font-size:10px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:7px 10px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Document</th>
+                  <th style="background:var(--gray-2);font-size:10px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:7px 10px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Ref No.</th>
+                  <th style="background:var(--gray-2);font-size:10px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:7px 10px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Issued</th>
+                  <th style="background:var(--gray-2);font-size:10px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:7px 10px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Expiry</th>
+                  <th style="background:var(--gray-2);font-size:10px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:7px 10px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Status</th>
+                  <th style="background:var(--gray-2);font-size:10px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:7px 10px;border-bottom:1px solid var(--gray-alpha-4);text-align:left;white-space:nowrap;">Doc</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- EXPIRED -->
+                <tr style="background:rgba(192,57,43,0.03);">
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);font-weight:500;color:var(--gray-12);">Health &amp; Safety Policy</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);font-family:monospace;font-size:11px;color:var(--gray-alpha-11);">HS-POL-2024-01</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-alpha-11);">Jan 2024</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);color:#c0392b;font-weight:600;">Dec 2025</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);"><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;color:#c0392b;background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.2);padding:2px 7px;border-radius:20px;">Expired</span></td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);"><button onclick="viewCert('H&S Policy','HS-POL-2024-01')" style="display:inline-flex;align-items:center;gap:3px;height:24px;padding:0 8px;border:1px solid var(--gray-4);border-radius:5px;background:#fff;font-size:10px;font-weight:600;color:var(--gray-11);cursor:pointer;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
+                </tr>
+                <!-- EXPIRED -->
+                <tr style="background:rgba(192,57,43,0.03);">
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);font-weight:500;color:var(--gray-12);">CHAS Accreditation</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);font-family:monospace;font-size:11px;color:var(--gray-alpha-11);">CHAS-2024-0391</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-alpha-11);">Jan 2024</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);color:#c0392b;font-weight:600;">Mar 2026</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);"><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;color:#c0392b;background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.2);padding:2px 7px;border-radius:20px;">Expired</span></td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);"><button onclick="viewCert('CHAS Accreditation','CHAS-2024-0391')" style="display:inline-flex;align-items:center;gap:3px;height:24px;padding:0 8px;border:1px solid var(--gray-4);border-radius:5px;background:#fff;font-size:10px;font-weight:600;color:var(--gray-11);cursor:pointer;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
+                </tr>
+                <!-- EXPIRING SOON -->
+                <tr style="background:rgba(245,158,11,0.03);">
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);font-weight:500;color:var(--gray-12);">COSHH Assessment</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);font-family:monospace;font-size:11px;color:var(--gray-alpha-11);">COSHH-2025-MJ</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-alpha-11);">Sep 2025</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);color:#b45309;font-weight:600;">Sep 2026</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);"><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;color:#b45309;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);padding:2px 7px;border-radius:20px;">Expiring Soon</span></td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);"><button onclick="viewCert('COSHH Assessment','COSHH-2025-MJ')" style="display:inline-flex;align-items:center;gap:3px;height:24px;padding:0 8px;border:1px solid var(--gray-4);border-radius:5px;background:#fff;font-size:10px;font-weight:600;color:var(--gray-11);cursor:pointer;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
+                </tr>
+                <!-- VALID -->
+                <tr>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);font-weight:500;color:var(--gray-12);">Risk Assessment &amp; RAMS</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);font-family:monospace;font-size:11px;color:var(--gray-alpha-11);">RAMS-2025-MJ</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-alpha-11);">Mar 2025</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-alpha-11);">Mar 2027</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);"><span class="status-pill status-valid">Valid</span></td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);"><button onclick="viewCert('RAMS','RAMS-2025-MJ')" style="display:inline-flex;align-items:center;gap:3px;height:24px;padding:0 8px;border:1px solid var(--gray-4);border-radius:5px;background:#fff;font-size:10px;font-weight:600;color:var(--gray-11);cursor:pointer;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);font-weight:500;color:var(--gray-12);">Fire Risk Assessment</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);font-family:monospace;font-size:11px;color:var(--gray-alpha-11);">FRA-2025-MJ</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-alpha-11);">Nov 2025</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-alpha-11);">Nov 2026</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);"><span class="status-pill status-valid">Valid</span></td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);"><button onclick="viewCert('Fire Risk Assessment','FRA-2025-MJ')" style="display:inline-flex;align-items:center;gap:3px;height:24px;padding:0 8px;border:1px solid var(--gray-4);border-radius:5px;background:#fff;font-size:10px;font-weight:600;color:var(--gray-11);cursor:pointer;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);font-weight:500;color:var(--gray-12);">Asbestos Survey &amp; Register</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);font-family:monospace;font-size:11px;color:var(--gray-alpha-11);">ASB-2024-MJ</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-alpha-11);">Jun 2024</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);color:var(--gray-alpha-11);">Jun 2027</td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);"><span class="status-pill status-valid">Valid</span></td>
+                  <td style="padding:8px 10px;border-bottom:1px solid var(--gray-alpha-4);"><button onclick="viewCert('Asbestos Survey','ASB-2024-MJ')" style="display:inline-flex;align-items:center;gap:3px;height:24px;padding:0 8px;border:1px solid var(--gray-4);border-radius:5px;background:#fff;font-size:10px;font-weight:600;color:var(--gray-11);cursor:pointer;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 10px;font-weight:500;color:var(--gray-12);">ISO 45001:2018 H&amp;S Management</td>
+                  <td style="padding:8px 10px;font-family:monospace;font-size:11px;color:var(--gray-alpha-11);">BSI-45001-7821</td>
+                  <td style="padding:8px 10px;color:var(--gray-alpha-11);">Jul 2023</td>
+                  <td style="padding:8px 10px;color:var(--gray-alpha-11);">Jul 2026</td>
+                  <td style="padding:8px 10px;"><span class="status-pill status-valid">Valid</span></td>
+                  <td style="padding:8px 10px;"><button onclick="viewCert('ISO 45001:2018','BSI-45001-7821')" style="display:inline-flex;align-items:center;gap:3px;height:24px;padding:0 8px;border:1px solid var(--gray-4);border-radius:5px;background:#fff;font-size:10px;font-weight:600;color:var(--gray-11);cursor:pointer;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div class="check-row">
-            <span class="check-label">COSHH assessments</span>
-            <span class="check-pass"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8l3 3 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg> Completed</span>
-          </div>
-          <div class="check-row">
-            <span class="check-label">Toolbox Talk records</span>
-            <span class="check-pass"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8l3 3 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg> Monthly</span>
-          </div>
-          <div class="check-row">
-            <span class="check-label">PPE compliance</span>
-            <span class="check-pass"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8l3 3 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg> Verified</span>
-          </div>
-          <div class="check-row">
-            <span class="check-label">Accident / near-miss reporting</span>
-            <span class="check-pass"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8l3 3 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg> RIDDOR compliant</span>
-          </div>
-          <div class="check-row">
-            <span class="check-label">SMSTS trained supervisors</span>
-            <span class="check-pass"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8l3 3 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg> 3 on team</span>
-          </div>
-          <div class="check-row">
-            <span class="check-label">Lone working policy</span>
-            <span class="check-pass"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8l3 3 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg> In place</span>
-          </div>
-          <div style="margin-top:12px;padding:8px 10px;background:var(--gray-2);border-radius:var(--radius-3);font-size:11px;color:var(--gray-alpha-11);text-align:center;">
-            Last H&amp;S audit: March 2025 &nbsp;·&nbsp; CHAS accredited &nbsp;·&nbsp; Zero major incidents (24 months)
+          <div style="margin-top:10px;padding:8px 12px;background:rgba(192,57,43,0.05);border:1px solid rgba(192,57,43,0.15);border-radius:7px;font-size:11px;color:#c0392b;display:flex;align-items:center;gap:7px;">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" style="width:13px;height:13px;flex-shrink:0;"><circle cx="8" cy="8" r="6.5"/><path d="M8 5v3.5" stroke-linecap="round"/><circle cx="8" cy="11" r=".7" fill="currentColor" stroke="none"/></svg>
+            Contractor has been notified to renew 2 expired documents. Renewal reminders sent 14 Jun 2026.
           </div>
         </div>
       </div>
