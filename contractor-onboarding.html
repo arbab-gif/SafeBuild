@@ -113,6 +113,36 @@ a{text-decoration:none}
 .step-item.done .step-label{color:var(--gray-11)}
 .step-item.done:hover .step-circle,.step-item.active:hover .step-circle{box-shadow:0 0 0 4px rgba(23,84,216,.2);}
 
+/* ── CONTRACTOR TYPE SELECTOR ── */
+.type-selector{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:0}
+.type-card{border:2px solid var(--gray-4);border-radius:10px;padding:18px 20px;cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s;background:#fff;display:flex;flex-direction:column;gap:8px;position:relative}
+.type-card:hover{border-color:var(--gray-7);box-shadow:var(--s2)}
+.type-card.selected{border-color:var(--accent-9);background:rgba(23,84,216,0.03);box-shadow:0 0 0 1px var(--accent-9)}
+.type-card-icon{width:38px;height:38px;border-radius:8px;background:var(--gray-2);display:flex;align-items:center;justify-content:center;color:var(--gray-9);transition:background .2s,color .2s}
+.type-card.selected .type-card-icon{background:rgba(23,84,216,0.1);color:var(--accent-9)}
+.type-card-title{font-size:14px;font-weight:700;color:var(--gray-12)}
+.type-card-desc{font-size:12px;color:var(--gray-9);line-height:1.5}
+.type-card-radio{position:absolute;top:14px;right:14px;width:18px;height:18px;border-radius:50%;border:2px solid var(--gray-5);display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s}
+.type-card.selected .type-card-radio{border-color:var(--accent-9);background:var(--accent-9)}
+.type-card.selected .type-card-radio::after{content:'';display:block;width:7px;height:7px;border-radius:50%;background:#fff}
+.type-notice{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:12px;line-height:1.5;display:none}
+.type-notice.visible{display:block}
+.type-notice.sole{background:rgba(247,107,21,0.07);border:1px solid rgba(247,107,21,0.2);color:var(--gray-11)}
+.type-notice.org{background:rgba(23,84,216,0.06);border:1px solid rgba(23,84,216,0.15);color:var(--gray-11)}
+
+/* ── KEY PERSONNEL ── */
+.personnel-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.personnel-filter{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.personnel-table{width:100%;border-collapse:collapse;font-size:12px}
+.personnel-table th{background:var(--gray-2);font-size:11px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid var(--gray-4);text-align:left;white-space:nowrap}
+.personnel-table td{padding:8px 10px;border-bottom:1px solid var(--gray-4);vertical-align:middle;color:var(--gray-12)}
+.personnel-table tr:last-child td{border-bottom:none}
+.personnel-table tr:hover td{background:var(--gray-1)}
+.upload-btn{display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid var(--gray-4);border-radius:6px;background:#fff;font-size:11px;font-weight:500;color:var(--gray-11);cursor:pointer;white-space:nowrap;transition:border-color .15s,color .15s}
+.upload-btn:hover{border-color:var(--accent-9);color:var(--accent-9)}
+.upload-btn.uploaded{border-color:rgba(26,127,75,0.3);background:rgba(26,127,75,0.06);color:#1a7f4b}
+.empty-personnel{text-align:center;padding:36px 20px;color:var(--gray-9);font-size:12px}
+
 /* ── CONTENT GRID ── */
 .cg{display:grid;grid-template-columns:1fr 296px;gap:20px;align-items:start}
 
@@ -498,6 +528,37 @@ a{text-decoration:none}
         <!-- ═══ STEP 1 ═══ -->
         <div class="sp active" id="sp-1">
 
+          <!-- Contractor Type Selector -->
+          <div class="fc" id="fc-type-selector">
+            <div class="fc-head"><h2>Contractor Type</h2><p>Select the type that best describes how you operate. This determines which sections of the application apply to you.</p></div>
+            <div class="fc-body">
+              <div class="type-selector">
+                <div class="type-card" id="type-sole" onclick="setContractorType('sole')">
+                  <div class="type-card-radio"></div>
+                  <div class="type-card-icon">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" style="width:20px;height:20px;"><circle cx="10" cy="7" r="3.5"/><path d="M3 17c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke-linecap="round"/></svg>
+                  </div>
+                  <div class="type-card-title">Sole Trader</div>
+                  <div class="type-card-desc">You operate as an individual contractor. No employees or team members — just you running your own business.</div>
+                </div>
+                <div class="type-card" id="type-org" onclick="setContractorType('org')">
+                  <div class="type-card-radio"></div>
+                  <div class="type-card-icon">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" style="width:20px;height:20px;"><rect x="2" y="10" width="5" height="8" rx="1"/><rect x="7.5" y="6" width="5" height="12" rx="1"/><rect x="13" y="2" width="5" height="16" rx="1"/></svg>
+                  </div>
+                  <div class="type-card-title">Organisation</div>
+                  <div class="type-card-desc">You operate as a company with employees, subcontractors, or a team. We'll collect details for key personnel and their certifications.</div>
+                </div>
+              </div>
+              <div class="type-notice sole" id="type-notice-sole">
+                <strong>Sole Trader selected</strong> — We'll skip employee and team-level sections. Your personal accreditations and certifications will still be collected.
+              </div>
+              <div class="type-notice org" id="type-notice-org">
+                <strong>Organisation selected</strong> — You'll be asked to add key personnel, their roles, CVs, and certifications. Use the role filter to manage large teams.
+              </div>
+            </div>
+          </div>
+
           <div class="fc">
             <div class="fc-head"><h2>1. Business Information</h2></div>
             <div class="fc-body">
@@ -691,7 +752,7 @@ a{text-decoration:none}
                   </div>
                 </div>
               </div>
-              <div class="fg2">
+              <div class="fg2 org-only" id="org-fields" style="display:none">
                 <div class="fg">
                   <label class="fl">Number of Employees</label>
                   <select id="f-employees" class="fs">
@@ -785,6 +846,61 @@ a{text-decoration:none}
 
         <!-- ═══ STEP 2 ═══ -->
         <div class="sp" id="sp-2">
+
+          <!-- Key Personnel — Organisation only -->
+          <div class="fc org-only" id="fc-personnel" style="display:none">
+            <div class="fc-head">
+              <h2>5. Key Personnel &amp; Team</h2>
+              <p>Add your team members, their roles, CVs and certifications. Use the role filter to manage large teams — admins can filter by role to review certificates for specific positions.</p>
+            </div>
+            <div class="fc-body">
+              <div class="personnel-toolbar">
+                <div class="personnel-filter">
+                  <label class="fl" style="white-space:nowrap;margin:0;font-size:12px;">Filter by role:</label>
+                  <select id="personnel-role-filter" class="fs" style="min-width:180px;height:32px;font-size:12px;" onchange="filterPersonnel()">
+                    <option value="">All roles</option>
+                    <option>Gas Engineer</option>
+                    <option>Electrician</option>
+                    <option>Plumber</option>
+                    <option>Project Manager</option>
+                    <option>Site Manager</option>
+                    <option>SMSTS Officer</option>
+                    <option>Fire Safety Officer</option>
+                    <option>Asbestos Surveyor</option>
+                    <option>Quantity Surveyor</option>
+                    <option>Director / Owner</option>
+                    <option>Operations Manager</option>
+                    <option>Health &amp; Safety Manager</option>
+                    <option>Compliance Manager</option>
+                    <option>Other</option>
+                  </select>
+                  <input id="personnel-search" class="fi" type="text" placeholder="Search by name…" style="height:32px;font-size:12px;max-width:200px;" oninput="filterPersonnel()">
+                </div>
+                <button class="btn-cont" onclick="addPersonnelRow()" style="height:32px;font-size:12px;padding:0 14px;flex-shrink:0;">
+                  <i data-lucide="user-plus"></i> Add Person
+                </button>
+              </div>
+              <table class="personnel-table" id="personnel-table">
+                <thead>
+                  <tr>
+                    <th>Full Name</th>
+                    <th>Role / Position</th>
+                    <th>Email</th>
+                    <th>CV</th>
+                    <th>Certifications</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="personnel-tbody">
+                  <tr id="personnel-empty-row">
+                    <td colspan="6" class="empty-personnel">
+                      No team members added yet. Click <strong>Add Person</strong> to get started.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
           <div class="fc">
             <div class="fc-head"><h2>5. Accreditations &amp; Certifications</h2><p>Add your relevant accreditations and professional memberships.</p></div>
@@ -922,7 +1038,7 @@ a{text-decoration:none}
                   </tr>
                 </tbody>
               </table>
-              <button class="btn-add" onclick="addPersonnelRow()"><i data-lucide="plus-circle"></i> Add Another Person</button>
+              <button class="btn-add" onclick="addLegacyPersonnelRow()"><i data-lucide="plus-circle"></i> Add Another Person</button>
             </div>
           </div>
 
@@ -1742,6 +1858,112 @@ function jumpToStep(n) {
   document.querySelector('.scroll').scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+/* ── CONTRACTOR TYPE ── */
+let contractorType = '';
+
+function setContractorType(type) {
+  contractorType = type;
+  document.getElementById('type-sole').classList.toggle('selected', type === 'sole');
+  document.getElementById('type-org').classList.toggle('selected', type === 'org');
+  document.getElementById('type-notice-sole').classList.toggle('visible', type === 'sole');
+  document.getElementById('type-notice-org').classList.toggle('visible', type === 'org');
+  const orgFields = document.getElementById('org-fields');
+  const fcPersonnel = document.getElementById('fc-personnel');
+  if (type === 'sole') {
+    orgFields.style.display = 'none';
+    fcPersonnel.style.display = 'none';
+  } else {
+    orgFields.style.display = '';
+    fcPersonnel.style.display = '';
+  }
+}
+
+/* ── KEY PERSONNEL ── */
+let personnelRows = [];
+
+const ROLE_OPTIONS = ['Gas Engineer','Electrician','Plumber','Project Manager','Site Manager','SMSTS Officer','Fire Safety Officer','Asbestos Surveyor','Quantity Surveyor','Director / Owner','Operations Manager','Health & Safety Manager','Compliance Manager','Other'];
+
+function addPersonnelRow() {
+  const id = 'pr-' + Date.now();
+  personnelRows.push(id);
+  const emptyRow = document.getElementById('personnel-empty-row');
+  if (emptyRow) emptyRow.remove();
+  const roleOpts = ROLE_OPTIONS.map(r => `<option>${r}</option>`).join('');
+  const tbody = document.getElementById('personnel-tbody');
+  const tr = document.createElement('tr');
+  tr.id = id;
+  tr.dataset.role = '';
+  tr.dataset.name = '';
+  tr.innerHTML = `
+    <td><input class="fi" type="text" placeholder="Full name" style="height:28px;font-size:12px;padding:4px 8px;" oninput="this.closest('tr').dataset.name=this.value.toLowerCase();filterPersonnel()"></td>
+    <td>
+      <select class="fs" style="height:28px;font-size:12px;" onchange="this.closest('tr').dataset.role=this.value;filterPersonnel()">
+        <option value="">Select role</option>
+        ${roleOpts}
+      </select>
+    </td>
+    <td><input class="fi" type="email" placeholder="Email" style="height:28px;font-size:12px;padding:4px 8px;"></td>
+    <td>
+      <label class="upload-btn" title="Upload CV">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M7 1v7m0-7L4.5 3.5M7 1l2.5 2.5"/><path d="M2 11h10" stroke-linecap="round"/></svg>
+        Upload CV
+        <input type="file" accept=".pdf,.doc,.docx" style="display:none;" onchange="markPersonnelUpload(this,'CV')">
+      </label>
+    </td>
+    <td>
+      <label class="upload-btn" title="Upload Certifications">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><rect x="2" y="1" width="10" height="12" rx="1"/><path d="M4 4h6M4 6.5h6M4 9h4"/></svg>
+        Certs
+        <input type="file" accept=".pdf,.jpg,.png" multiple style="display:none;" onchange="markPersonnelUpload(this,'Certs')">
+      </label>
+    </td>
+    <td>
+      <button onclick="removePersonnelRow('${id}')" style="width:26px;height:26px;border:1px solid var(--gray-4);border-radius:6px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray-9);" title="Remove">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;"><path d="M2 3h10M5 3V2h4v1M5.5 5.5v5M8.5 5.5v5M3 3l.7 9h6.6L11 3"/></svg>
+      </button>
+    </td>`;
+  tbody.appendChild(tr);
+  lucide.createIcons();
+  filterPersonnel();
+}
+
+function removePersonnelRow(id) {
+  const tr = document.getElementById(id);
+  if (tr) tr.remove();
+  personnelRows = personnelRows.filter(r => r !== id);
+  if (document.querySelectorAll('#personnel-tbody tr:not(#personnel-empty-row)').length === 0) {
+    const tbody = document.getElementById('personnel-tbody');
+    const emptyTr = document.createElement('tr');
+    emptyTr.id = 'personnel-empty-row';
+    emptyTr.innerHTML = '<td colspan="6" class="empty-personnel">No team members added yet. Click <strong>Add Person</strong> to get started.</td>';
+    tbody.appendChild(emptyTr);
+  }
+  filterPersonnel();
+}
+
+function markPersonnelUpload(input, label) {
+  const btn = input.closest('label');
+  if (!btn) return;
+  const count = input.files?.length || 0;
+  if (count === 0) return;
+  btn.classList.add('uploaded');
+  const txt = count > 1 ? `${count} files` : (input.files[0].name.length > 10 ? input.files[0].name.substring(0,9)+'…' : input.files[0].name);
+  btn.childNodes[2].textContent = ' ' + txt;
+}
+
+function filterPersonnel() {
+  const roleFilter = document.getElementById('personnel-role-filter')?.value.toLowerCase() || '';
+  const search = document.getElementById('personnel-search')?.value.toLowerCase() || '';
+  let visible = 0;
+  document.querySelectorAll('#personnel-tbody tr:not(#personnel-empty-row)').forEach(tr => {
+    const role = (tr.dataset.role || '').toLowerCase();
+    const name = (tr.dataset.name || '').toLowerCase();
+    const show = (!roleFilter || role === roleFilter) && (!search || name.includes(search));
+    tr.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+}
+
 function goToStep(n) {
   if (n < 1 || n > cur) return;
   if (n === 5) buildReview();
@@ -1899,7 +2121,7 @@ function addEduRow() {
   lucide.createIcons();
 }
 
-function addPersonnelRow() {
+function addLegacyPersonnelRow() {
   const tbody = document.querySelector('#pers-tbl tbody');
   const tr = document.createElement('tr');
   tr.innerHTML = `
