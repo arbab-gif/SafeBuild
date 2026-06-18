@@ -1865,6 +1865,32 @@ let personnelRows = [];
 
 const ROLE_OPTIONS = ['Gas Engineer','Electrician','Plumber','Project Manager','Site Manager','SMSTS Officer','Fire Safety Officer','Asbestos Surveyor','Quantity Surveyor','Director / Owner','Operations Manager','Health & Safety Manager','Compliance Manager','Other'];
 
+function multiUploadCell(cellId, label, accept) {
+  return `<div style="display:flex;flex-direction:column;gap:3px;min-width:86px;">
+    <div id="${cellId}"></div>
+    <button type="button" onclick="addCellUpload('${cellId}','${label}','${accept}')"
+      style="display:inline-flex;align-items:center;gap:3px;height:22px;padding:0 8px;border:1px dashed var(--gray-5);border-radius:5px;background:transparent;font-size:10px;font-weight:500;color:var(--gray-9);cursor:pointer;white-space:nowrap;width:fit-content;">
+      + Add
+    </button>
+  </div>`;
+}
+
+function addCellUpload(cellId, label, accept) {
+  const cell = document.getElementById(cellId);
+  if (!cell) return;
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'display:flex;align-items:center;gap:3px;margin-bottom:2px;';
+  wrap.innerHTML = `
+    <label class="upload-btn" title="Upload ${label}" style="height:22px;padding:0 7px;font-size:10px;">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;flex-shrink:0;"><path d="M7 1v7m0-7L4.5 3.5M7 1l2.5 2.5"/><path d="M2 11h10" stroke-linecap="round"/></svg>
+      <span>Upload</span>
+      <input type="file" accept="${accept}" style="display:none;" onchange="markPersonnelUpload(this,'${label}')">
+    </label>
+    <button type="button" onclick="this.closest('div').remove()"
+      style="width:14px;height:14px;border:none;background:none;cursor:pointer;color:var(--gray-8);font-size:13px;line-height:1;flex-shrink:0;" title="Remove">×</button>`;
+  cell.appendChild(wrap);
+}
+
 function addPersonnelRow() {
   const id = 'pr-' + Date.now();
   personnelRows.push(id);
@@ -1873,29 +1899,28 @@ function addPersonnelRow() {
   const tbody = document.getElementById('personnel-tbody');
   const tr = document.createElement('tr');
   tr.id = id;
-  const upBtn = (label, accept, multi) => `
+  const singleUpBtn = (label, accept) => `
     <label class="upload-btn" title="Upload ${label}">
       <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M7 1v7m0-7L4.5 3.5M7 1l2.5 2.5"/><path d="M2 11h10" stroke-linecap="round"/></svg>
       ${label}
-      <input type="file" accept="${accept}" ${multi ? 'multiple' : ''} style="display:none;" onchange="markPersonnelUpload(this,'${label}')">
+      <input type="file" accept="${accept}" style="display:none;" onchange="markPersonnelUpload(this,'${label}')">
     </label>`;
   tr.innerHTML = `
     <td><input class="fi" type="text" placeholder="Full name" style="height:28px;font-size:12px;padding:4px 8px;min-width:120px;"></td>
     <td><input class="fi" type="text" placeholder="e.g. Senior Engineer" style="height:28px;font-size:12px;padding:4px 8px;min-width:110px;"></td>
     <td><input class="fi" type="text" placeholder="e.g. Gas Engineer" style="height:28px;font-size:12px;padding:4px 8px;min-width:110px;"></td>
     <td><input class="fi" type="email" placeholder="Email address" style="height:28px;font-size:12px;padding:4px 8px;min-width:140px;"></td>
-    <td>${upBtn('CV', '.pdf,.doc,.docx', false)}</td>
-    <td>${upBtn('Certs', '.pdf,.jpg,.png', true)}</td>
-    <td>${upBtn('Accreds', '.pdf,.jpg,.png', true)}</td>
-    <td>${upBtn('Insurance', '.pdf,.jpg,.png', false)}</td>
+    <td>${singleUpBtn('CV', '.pdf,.doc,.docx')}</td>
+    <td>${multiUploadCell(id+'-certs', 'Certification', '.pdf,.jpg,.png')}</td>
+    <td>${multiUploadCell(id+'-accreds', 'Accreditation', '.pdf,.jpg,.png')}</td>
+    <td>${multiUploadCell(id+'-ins', 'Insurance', '.pdf,.jpg,.png')}</td>
     <td>
-      <button onclick="removePersonnelRow('${id}')" style="width:26px;height:26px;border:1px solid var(--gray-4);border-radius:6px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray-9);" title="Remove">
+      <button onclick="removePersonnelRow('${id}')" style="width:26px;height:26px;border:1px solid var(--gray-4);border-radius:6px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray-9);" title="Remove row">
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;"><path d="M2 3h10M5 3V2h4v1M5.5 5.5v5M8.5 5.5v5M3 3l.7 9h6.6L11 3"/></svg>
       </button>
     </td>`;
   tbody.appendChild(tr);
   lucide.createIcons();
-  filterPersonnel();
 }
 
 function removePersonnelRow(id) {
