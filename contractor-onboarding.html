@@ -1853,6 +1853,7 @@ function jumpToStep(n) {
 
 /* ── CONTRACTOR TYPE ── */
 let contractorType = '';
+let personnelSeeded = false;
 
 function setContractorType(type) {
   contractorType = type;
@@ -1868,7 +1869,80 @@ function setContractorType(type) {
   } else {
     orgFields.style.display = '';
     fcPersonnel.style.display = '';
+    if (!personnelSeeded) { personnelSeeded = true; seedPersonnelData(); }
   }
+}
+
+const PERSONNEL_SEED = [
+  {
+    name: 'Michael Johnson', position: 'Managing Director', role: 'Director / Owner',
+    email: 'm.johnson@mjmechanical.co.uk',
+    certs: ['SMSTS', 'First Aid at Work'],
+    accreds: ['CHAS Accredited'],
+    ins: ['Public Liability Insurance']
+  },
+  {
+    name: 'Sarah Ahmed', position: 'Senior Gas Engineer', role: 'Gas Engineer',
+    email: 's.ahmed@mjmechanical.co.uk',
+    certs: ['Gas Safe Register', 'NVQ Level 3'],
+    accreds: ['SafeContractor Approved'],
+    ins: ['Employers Liability Insurance']
+  },
+  {
+    name: 'David Clarke', position: 'Lead Electrician', role: 'Electrician',
+    email: 'd.clarke@mjmechanical.co.uk',
+    certs: ['NICEIC Approved Contractor', '18th Edition Wiring Regulations', 'ECA Member'],
+    accreds: [],
+    ins: ['Public Liability Insurance', 'Professional Indemnity Insurance']
+  },
+  {
+    name: 'Priya Patel', position: 'Health & Safety Manager', role: 'Health & Safety Manager',
+    email: 'p.patel@mjmechanical.co.uk',
+    certs: ['SMSTS'],
+    accreds: ['ISO 45001:2018', 'CHAS Accredited'],
+    ins: ['Employers Liability Insurance'],
+    certsCustom: ['IOSH Managing Safely']
+  },
+  {
+    name: 'James Okafor', position: 'Senior Project Manager', role: 'Project Manager',
+    email: 'j.okafor@mjmechanical.co.uk',
+    certs: ['SMSTS', 'CSCS Gold Card'],
+    accreds: ['Constructionline Gold'],
+    ins: ['Public Liability Insurance', 'Professional Indemnity Insurance']
+  }
+];
+
+function seedPersonnelData() {
+  PERSONNEL_SEED.forEach(person => {
+    addPersonnelRow();
+    const rows = document.querySelectorAll('#personnel-tbody tr:not(#personnel-empty-row)');
+    const tr = rows[rows.length - 1];
+    if (!tr) return;
+    const textInputs = tr.querySelectorAll('input[type=text], input[type=email]');
+    if (textInputs[0]) textInputs[0].value = person.name;
+    if (textInputs[1]) textInputs[1].value = person.position;
+    if (textInputs[2]) textInputs[2].value = person.role;
+    if (textInputs[3]) textInputs[3].value = person.email;
+    const id = tr.id;
+    const addEntry = (cellId, label, accept, optsKey, value, customText) => {
+      addCellUpload(cellId, label, accept, optsKey);
+      const entries = document.querySelectorAll(`#${cellId} .cell-entry`);
+      const entry = entries[entries.length - 1];
+      if (!entry) return;
+      const sel = entry.querySelector('select');
+      if (customText) {
+        sel.value = '__other__';
+        const inp = entry.querySelector('.cell-custom-input');
+        if (inp) { inp.style.display = 'block'; inp.value = customText; }
+      } else if (sel) {
+        sel.value = value;
+      }
+    };
+    (person.certs || []).forEach(v => addEntry(id+'-certs', 'Certification', '.pdf,.jpg,.png', 'certs', v));
+    (person.certsCustom || []).forEach(v => addEntry(id+'-certs', 'Certification', '.pdf,.jpg,.png', 'certs', '__other__', v));
+    (person.accreds || []).forEach(v => addEntry(id+'-accreds', 'Accreditation', '.pdf,.jpg,.png', 'accreds', v));
+    (person.ins || []).forEach(v => addEntry(id+'-ins', 'Insurance', '.pdf,.jpg,.png', 'ins', v));
+  });
 }
 
 /* ── KEY PERSONNEL ── */
