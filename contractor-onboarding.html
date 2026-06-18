@@ -1865,29 +1865,31 @@ let personnelRows = [];
 
 const ROLE_OPTIONS = ['Gas Engineer','Electrician','Plumber','Project Manager','Site Manager','SMSTS Officer','Fire Safety Officer','Asbestos Surveyor','Quantity Surveyor','Director / Owner','Operations Manager','Health & Safety Manager','Compliance Manager','Other'];
 
-function multiUploadCell(cellId, label, accept) {
-  return `<div style="display:flex;flex-direction:column;gap:3px;min-width:86px;">
+function multiUploadCell(cellId, label, accept, datalistId) {
+  return `<div style="display:flex;flex-direction:column;gap:3px;min-width:160px;">
     <div id="${cellId}"></div>
-    <button type="button" onclick="addCellUpload('${cellId}','${label}','${accept}')"
+    <button type="button" onclick="addCellUpload('${cellId}','${label}','${accept}','${datalistId}')"
       style="display:inline-flex;align-items:center;gap:3px;height:22px;padding:0 8px;border:1px dashed var(--gray-5);border-radius:5px;background:transparent;font-size:10px;font-weight:500;color:var(--gray-9);cursor:pointer;white-space:nowrap;width:fit-content;">
       + Add
     </button>
   </div>`;
 }
 
-function addCellUpload(cellId, label, accept) {
+function addCellUpload(cellId, label, accept, datalistId) {
   const cell = document.getElementById(cellId);
   if (!cell) return;
   const wrap = document.createElement('div');
-  wrap.style.cssText = 'display:flex;align-items:center;gap:3px;margin-bottom:2px;';
+  wrap.style.cssText = 'display:flex;align-items:center;gap:4px;margin-bottom:3px;';
   wrap.innerHTML = `
-    <label class="upload-btn" title="Upload ${label}" style="height:22px;padding:0 7px;font-size:10px;">
+    <input list="${datalistId}" placeholder="Select or type…"
+      style="flex:1;min-width:0;height:24px;font-size:11px;padding:0 7px;border:1px solid var(--gray-4);border-radius:5px;font-family:inherit;color:var(--gray-12);background:#fff;outline:none;">
+    <label style="display:inline-flex;align-items:center;gap:3px;height:24px;padding:0 7px;border:1px solid var(--gray-4);border-radius:5px;background:#fff;font-size:10px;font-weight:500;color:var(--gray-11);cursor:pointer;white-space:nowrap;flex-shrink:0;" title="Upload file">
       <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;flex-shrink:0;"><path d="M7 1v7m0-7L4.5 3.5M7 1l2.5 2.5"/><path d="M2 11h10" stroke-linecap="round"/></svg>
-      <span>Upload</span>
+      <span>File</span>
       <input type="file" accept="${accept}" style="display:none;" onchange="markPersonnelUpload(this,'${label}')">
     </label>
     <button type="button" onclick="this.closest('div').remove()"
-      style="width:14px;height:14px;border:none;background:none;cursor:pointer;color:var(--gray-8);font-size:13px;line-height:1;flex-shrink:0;" title="Remove">×</button>`;
+      style="width:16px;height:16px;border:none;background:none;cursor:pointer;color:var(--gray-7);font-size:14px;line-height:1;flex-shrink:0;" title="Remove">×</button>`;
   cell.appendChild(wrap);
 }
 
@@ -1911,9 +1913,9 @@ function addPersonnelRow() {
     <td><input class="fi" type="text" placeholder="e.g. Gas Engineer" style="height:28px;font-size:12px;padding:4px 8px;min-width:110px;"></td>
     <td><input class="fi" type="email" placeholder="Email address" style="height:28px;font-size:12px;padding:4px 8px;min-width:140px;"></td>
     <td>${singleUpBtn('CV', '.pdf,.doc,.docx')}</td>
-    <td>${multiUploadCell(id+'-certs', 'Certification', '.pdf,.jpg,.png')}</td>
-    <td>${multiUploadCell(id+'-accreds', 'Accreditation', '.pdf,.jpg,.png')}</td>
-    <td>${multiUploadCell(id+'-ins', 'Insurance', '.pdf,.jpg,.png')}</td>
+    <td>${multiUploadCell(id+'-certs', 'Certification', '.pdf,.jpg,.png', 'dl-certifications')}</td>
+    <td>${multiUploadCell(id+'-accreds', 'Accreditation', '.pdf,.jpg,.png', 'dl-accreditations')}</td>
+    <td>${multiUploadCell(id+'-ins', 'Insurance', '.pdf,.jpg,.png', 'dl-insurance')}</td>
     <td>
       <button onclick="removePersonnelRow('${id}')" style="width:26px;height:26px;border:1px solid var(--gray-4);border-radius:6px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray-9);" title="Remove row">
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;"><path d="M2 3h10M5 3V2h4v1M5.5 5.5v5M8.5 5.5v5M3 3l.7 9h6.6L11 3"/></svg>
@@ -2191,6 +2193,72 @@ updateProgress();
 showStep(1);
 lucide.createIcons();
 </script>
+
+<!-- ── PERSONNEL DATALISTS ── -->
+<datalist id="dl-certifications">
+  <option>Gas Safe Register</option>
+  <option>NICEIC Approved Contractor</option>
+  <option>NAPIT Registered</option>
+  <option>ECA Member</option>
+  <option>CHAS Premier</option>
+  <option>Constructionline Gold</option>
+  <option>SMSTS (Site Management Safety Training Scheme)</option>
+  <option>SSSTS (Site Supervisor Safety Training Scheme)</option>
+  <option>First Aid at Work</option>
+  <option>PASMA Working at Height</option>
+  <option>IPAF Powered Access</option>
+  <option>Asbestos Awareness (Cat A)</option>
+  <option>Asbestos Non-Licensed (Cat B)</option>
+  <option>Asbestos Licensed (Cat C)</option>
+  <option>Water Jetting (WJSA)</option>
+  <option>NVQ Level 2</option>
+  <option>NVQ Level 3</option>
+  <option>NVQ Level 4</option>
+  <option>NVQ Level 5</option>
+  <option>City & Guilds</option>
+  <option>CSCS Gold Card</option>
+  <option>CSCS Blue Card</option>
+  <option>CSCS Green Card</option>
+  <option>18th Edition Wiring Regulations</option>
+  <option>BPEC Certification</option>
+</datalist>
+
+<datalist id="dl-accreditations">
+  <option>CHAS Accredited</option>
+  <option>Constructionline Silver</option>
+  <option>Constructionline Gold</option>
+  <option>Constructionline Platinum</option>
+  <option>SafeContractor Approved</option>
+  <option>Achilles UVDB</option>
+  <option>ISO 9001:2015 (Quality Management)</option>
+  <option>ISO 14001:2015 (Environmental Management)</option>
+  <option>ISO 45001:2018 (Health & Safety)</option>
+  <option>Trustmark Government Endorsed</option>
+  <option>Federation of Master Builders (FMB)</option>
+  <option>NHBC Registered Builder</option>
+  <option>BBA Certificate</option>
+  <option>BREEAM Assessor</option>
+  <option>RICS Regulated</option>
+  <option>Alcumus SafeContractor</option>
+  <option>Exor Approved</option>
+  <option>SMAS Worksafe</option>
+  <option>Altius Assured</option>
+  <option>NHF Preferred Supplier</option>
+</datalist>
+
+<datalist id="dl-insurance">
+  <option>Public Liability Insurance</option>
+  <option>Employers Liability Insurance</option>
+  <option>Professional Indemnity Insurance</option>
+  <option>Contractors All Risks</option>
+  <option>Plant & Equipment Insurance</option>
+  <option>Tool Insurance</option>
+  <option>Motor Fleet Insurance</option>
+  <option>Product Liability Insurance</option>
+  <option>Contract Works Insurance</option>
+  <option>Directors & Officers Insurance</option>
+  <option>Cyber Liability Insurance</option>
+</datalist>
 
 <!-- ── SUCCESS MODAL ── -->
 <div class="modal-overlay" id="success-modal">
