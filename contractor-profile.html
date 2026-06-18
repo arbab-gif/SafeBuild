@@ -1830,16 +1830,27 @@
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:280px 1fr;gap:0;border-top:1px solid var(--gray-alpha-4);">
+    <div style="display:grid;grid-template-columns:270px 1fr;gap:0;border-top:1px solid var(--gray-alpha-4);">
 
       <!-- Left: location details -->
-      <div style="padding:16px;border-right:1px solid var(--gray-alpha-4);display:flex;flex-direction:column;gap:14px;">
+      <div style="padding:16px;border-right:1px solid var(--gray-alpha-4);display:flex;flex-direction:column;gap:14px;overflow-y:auto;max-height:520px;">
 
         <!-- Current job -->
         <div>
           <div style="font-size:10px;font-weight:600;color:var(--gray-alpha-11);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Current Job</div>
           <div style="font-size:13px;font-weight:600;color:var(--gray-12);line-height:1.3;">Boiler Servicing &amp; CP12</div>
           <div style="font-size:11px;color:var(--gray-alpha-11);margin-top:2px;">Job Ref: <span style="font-family:monospace;font-weight:600;color:var(--accent-9);">WO-2024-8831</span></div>
+        </div>
+
+        <!-- ETA to next job banner -->
+        <div style="background:linear-gradient(135deg,rgba(23,84,216,0.06) 0%,rgba(23,84,216,0.03) 100%);border:1px solid rgba(23,84,216,0.15);border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:10px;">
+          <div style="width:34px;height:34px;border-radius:50%;background:rgba(23,84,216,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg viewBox="0 0 16 16" fill="none" stroke="var(--accent-9)" stroke-width="1.5" style="width:15px;height:15px;"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2 1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;color:var(--accent-9);" id="eta-label">15 min to next job</div>
+            <div style="font-size:10px;color:var(--gray-alpha-11);margin-top:1px;">38 Stoke Newington Rd, N16 · ~14:00</div>
+          </div>
         </div>
 
         <!-- Current address -->
@@ -1887,28 +1898,70 @@
             <div style="display:flex;align-items:center;gap:8px;margin-left:2px;">
               <div style="width:2px;height:14px;background:var(--gray-3);margin-left:2px;border:1px dashed var(--gray-4);"></div>
             </div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <div style="width:6px;height:6px;border-radius:50%;background:var(--gray-4);flex-shrink:0;border:1px dashed var(--gray-6);"></div>
-              <div style="font-size:11px;color:var(--gray-8);">Next: 38 Stoke Newington Rd, N16 <span style="color:var(--gray-alpha-11);">~14:00</span></div>
+            <div style="display:flex;align-items:flex-start;gap:8px;">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--gray-4);flex-shrink:0;margin-top:3px;border:1px dashed var(--gray-6);"></div>
+              <div>
+                <div style="font-size:11px;color:var(--gray-8);">Next: 38 Stoke Newington Rd, N16 <span style="color:var(--gray-alpha-11);">~14:00</span></div>
+                <div style="margin-top:3px;display:inline-flex;align-items:center;gap:4px;background:rgba(23,84,216,0.08);border:1px solid rgba(23,84,216,0.15);border-radius:99px;padding:2px 7px;">
+                  <svg viewBox="0 0 12 12" fill="none" stroke="var(--accent-9)" stroke-width="1.5" style="width:9px;height:9px;"><circle cx="6" cy="6" r="4.5"/><path d="M6 4v2.5l1.5 1" stroke-linecap="round"/></svg>
+                  <span style="font-size:10px;font-weight:600;color:var(--accent-9);" id="eta-badge">15 min away</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- Right: Leaflet map -->
+      <!-- Right: Leaflet map (enlarged) -->
       <div style="position:relative;">
-        <div id="contractor-map" style="height:320px;width:100%;border-radius:0 0 var(--radius-5) 0;"></div>
-        <!-- Map overlay badge -->
+        <div id="contractor-map" style="height:520px;width:100%;border-radius:0 0 var(--radius-5) 0;"></div>
+
+        <!-- Maximize button -->
+        <button onclick="openMapFullscreen()" title="Expand map" style="position:absolute;top:10px;right:10px;z-index:1000;width:32px;height:32px;background:white;border:1px solid var(--gray-alpha-4);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.1);transition:background 100ms;" onmouseover="this.style.background='var(--gray-1)'" onmouseout="this.style.background='white'">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;color:var(--gray-12);"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <!-- Contractor badge -->
         <div style="position:absolute;bottom:12px;left:12px;background:white;border:1px solid var(--gray-alpha-4);border-radius:8px;padding:8px 12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);z-index:1000;display:flex;align-items:center;gap:8px;pointer-events:none;">
           <div style="width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:pulse-dot 2s infinite;"></div>
           <div>
             <div style="font-size:11px;font-weight:600;color:var(--gray-12);">Mike Johnson</div>
-            <div style="font-size:10px;color:var(--gray-alpha-11);">Gas Engineer · Moving</div>
+            <div style="font-size:10px;color:var(--gray-alpha-11);">Gas Engineer · On site</div>
           </div>
+        </div>
+
+        <!-- ETA overlay on map -->
+        <div style="position:absolute;bottom:12px;right:12px;background:white;border:1px solid rgba(23,84,216,0.2);border-radius:8px;padding:7px 11px;box-shadow:0 2px 8px rgba(0,0,0,0.1);z-index:1000;pointer-events:none;">
+          <div style="font-size:10px;color:var(--gray-alpha-11);margin-bottom:1px;">Next job ETA</div>
+          <div style="font-size:12px;font-weight:700;color:var(--accent-9);">15 min</div>
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- Fullscreen Map Modal -->
+  <div id="map-fullscreen-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px);" onclick="if(event.target===this)closeMapFullscreen()">
+    <div style="width:92vw;height:88vh;background:#fff;border-radius:12px;overflow:hidden;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.3);">
+      <div style="padding:12px 16px;border-bottom:1px solid var(--gray-alpha-4);display:flex;align-items:center;justify-content:space-between;background:#fff;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse-dot 2s infinite;"></div>
+          <span style="font-size:13px;font-weight:600;color:var(--gray-12);">Live Location — Mike Johnson</span>
+          <span style="font-size:11px;font-weight:500;background:rgba(34,197,94,0.1);color:#1a7f4b;border:1px solid rgba(34,197,94,0.2);border-radius:99px;padding:2px 8px;">On Job · WO-2024-8831</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="font-size:12px;font-weight:600;color:var(--accent-9);">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;vertical-align:-1px;margin-right:3px;"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2 1.5" stroke-linecap="round"/></svg>
+            15 min to next job
+          </div>
+          <button onclick="closeMapFullscreen()" style="height:30px;padding:0 12px;border:1px solid var(--gray-alpha-4);border-radius:6px;background:transparent;font-size:12px;font-weight:500;color:var(--gray-12);cursor:pointer;display:flex;align-items:center;gap:5px;">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;"><path d="M6 2H2v4M10 2h4v4M14 12v-4h-4M2 8v4h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Minimise
+          </button>
+        </div>
+      </div>
+      <div id="contractor-map-fs" style="height:calc(100% - 49px);width:100%;"></div>
     </div>
   </div>
 
@@ -4188,6 +4241,54 @@
   function setActive(el) {
     document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
     el.classList.add('active');
+  }
+
+  // ETA countdown (counts down from 15 mins)
+  let etaMins = 15;
+  setInterval(function() {
+    if (etaMins > 1) etaMins--;
+    const txt = etaMins === 1 ? '1 min away' : etaMins + ' min away';
+    const lbl = etaMins === 1 ? '1 min to next job' : etaMins + ' min to next job';
+    const b = document.getElementById('eta-badge'); if (b) b.textContent = txt;
+    const l = document.getElementById('eta-label'); if (l) l.textContent = lbl;
+  }, 60000);
+
+  let fsMap = null;
+  function openMapFullscreen() {
+    document.getElementById('map-fullscreen-modal').style.display = 'flex';
+    if (!fsMap && typeof L !== 'undefined') {
+      const lat = 51.5451, lng = -0.0553;
+      fsMap = L.map('contractor-map-fs', { zoomControl: true });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: 18
+      }).addTo(fsMap);
+      fsMap.setView([lat, lng], 15);
+      const icon = L.divIcon({
+        className: '',
+        html: `<div style="position:relative;width:36px;height:36px;">
+          <div style="position:absolute;inset:0;border-radius:50%;background:rgba(23,84,216,0.15);animation:pulse-dot 2s infinite;"></div>
+          <div style="position:absolute;inset:6px;border-radius:50%;background:#1754d8;border:2px solid white;box-shadow:0 2px 8px rgba(23,84,216,0.5);display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 16 16" fill="white" style="width:10px;height:10px;"><path d="M8 2a4 4 0 014 4c0 3-4 8-4 8S4 9 4 6a4 4 0 014-4z"/></svg>
+          </div></div>`,
+        iconSize: [36, 36], iconAnchor: [18, 18]
+      });
+      L.marker([lat, lng], { icon }).addTo(fsMap)
+        .bindPopup('<div style="font-family:Inter,sans-serif;font-size:12px;font-weight:600;">Mike Johnson · On Job<br><span style="color:#1754d8;">WO-2024-8831</span></div>', { closeButton: false }).openPopup();
+      const nextIcon = L.divIcon({
+        className: '',
+        html: `<div style="width:22px;height:22px;border-radius:50%;background:rgba(245,158,11,0.2);border:2px solid #f59e0b;display:flex;align-items:center;justify-content:center;"><div style="width:8px;height:8px;border-radius:50%;background:#f59e0b;"></div></div>`,
+        iconSize: [22, 22], iconAnchor: [11, 11]
+      });
+      L.marker([51.5483, -0.0731], { icon: nextIcon }).addTo(fsMap)
+        .bindPopup('<div style="font-family:Inter,sans-serif;font-size:11px;">Next job: 38 Stoke Newington Rd<br><b style="color:#1754d8;">15 min away · ~14:00</b></div>', { closeButton: false });
+      L.polyline([[lat, lng],[51.5483,-0.0731]], { color:'#1754d8', weight:2.5, opacity:0.5, dashArray:'6,6' }).addTo(fsMap);
+    } else if (fsMap) {
+      setTimeout(function() { fsMap.invalidateSize(); }, 100);
+    }
+  }
+
+  function closeMapFullscreen() {
+    document.getElementById('map-fullscreen-modal').style.display = 'none';
   }
 
   function refreshLocation() {
