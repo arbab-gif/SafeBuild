@@ -1510,8 +1510,7 @@ function renderStepper() {
     const inner = n < cur
       ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
       : n;
-    const clickable = n <= cur;
-    html += `<div class="step-item ${cls}" ${clickable ? `onclick="goToStep(${n})" title="Go to ${label}"` : ''} style="${clickable ? 'cursor:pointer;' : ''}"><div class="step-node"><div class="step-circle">${inner}</div><div class="step-label">${label}</div></div></div>`;
+    html += `<div class="step-item ${cls}" onclick="goToStep(${n})" title="Go to ${label}" style="cursor:pointer;"><div class="step-node"><div class="step-circle">${inner}</div><div class="step-label">${label}</div></div></div>`;
     if (i < STEPS.length - 1) {
       const connCls = n < cur ? 'done' : '';
       html += `<div class="step-conn ${connCls}"></div>`;
@@ -1963,7 +1962,7 @@ function filterPersonnel() {
 }
 
 function goToStep(n) {
-  if (n < 1 || n > cur) return;
+  if (n < 1 || n > 5) return;
   if (n === 5) buildReview();
   cur = n;
   renderStepper();
