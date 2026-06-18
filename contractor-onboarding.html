@@ -131,13 +131,14 @@ a{text-decoration:none}
 .type-notice.org{background:rgba(23,84,216,0.06);border:1px solid rgba(23,84,216,0.15);color:var(--gray-11)}
 
 /* ── KEY PERSONNEL ── */
-.personnel-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
-.personnel-filter{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
-.personnel-table{width:100%;border-collapse:collapse;font-size:12px}
-.personnel-table th{background:var(--gray-2);font-size:11px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid var(--gray-4);text-align:left;white-space:nowrap}
-.personnel-table td{padding:8px 10px;border-bottom:1px solid var(--gray-4);vertical-align:middle;color:var(--gray-12)}
-.personnel-table tr:last-child td{border-bottom:none}
-.personnel-table tr:hover td{background:var(--gray-1)}
+.personnel-card-form{border:1px solid var(--gray-4);border-radius:10px;overflow:hidden;margin-bottom:14px;background:#fff}
+.personnel-card-form:last-child{margin-bottom:0}
+.personnel-card-header{background:var(--gray-2);padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--gray-alpha-4);flex-wrap:wrap}
+.personnel-card-initials{width:32px;height:32px;border-radius:50%;background:rgba(23,84,216,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700;color:var(--accent-9)}
+.personnel-doc-grid{display:grid;grid-template-columns:1fr 140px 120px 100px 80px 28px;gap:6px;padding:6px 14px;align-items:center;border-bottom:1px solid var(--gray-alpha-4)}
+.personnel-doc-grid:last-of-type{border-bottom:none}
+.personnel-doc-colhead{background:var(--gray-1);padding:5px 14px;display:grid;grid-template-columns:1fr 140px 120px 100px 80px 28px;gap:6px;border-bottom:1px solid var(--gray-alpha-4);font-size:10px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.04em}
+.personnel-doc-addrow{padding:7px 14px;border-top:1px dashed var(--gray-alpha-5)}
 .upload-btn{display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid var(--gray-4);border-radius:6px;background:#fff;font-size:11px;font-weight:500;color:var(--gray-11);cursor:pointer;white-space:nowrap;transition:border-color .15s,color .15s}
 .upload-btn:hover{border-color:var(--accent-9);color:var(--accent-9)}
 .upload-btn.uploaded{border-color:rgba(26,127,75,0.3);background:rgba(26,127,75,0.06);color:#1a7f4b}
@@ -885,29 +886,12 @@ a{text-decoration:none}
                 <i data-lucide="user-plus"></i> Add Person
               </button>
             </div>
-            <div class="fc-body" style="padding-top:0;overflow-x:auto;">
-              <table class="personnel-table" id="personnel-table" style="min-width:900px;">
-                <thead>
-                  <tr>
-                    <th style="min-width:140px;">Full Name</th>
-                    <th style="min-width:130px;">Position</th>
-                    <th style="min-width:130px;">Role</th>
-                    <th style="min-width:160px;">Email</th>
-                    <th>CV</th>
-                    <th>Certifications</th>
-                    <th>Accreditations</th>
-                    <th>Insurance</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody id="personnel-tbody">
-                  <tr id="personnel-empty-row">
-                    <td colspan="9" class="empty-personnel">
-                      No team members added yet. Click <strong>Add Person</strong> to get started.
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="fc-body" style="padding-top:0;">
+              <div id="personnel-cards">
+                <div id="personnel-empty" style="text-align:center;padding:36px 20px;color:var(--gray-9);font-size:12px;border:1px dashed var(--gray-5);border-radius:8px;">
+                  No team members added yet. Click <strong>Add Person</strong> to get started.
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1904,71 +1888,70 @@ const PERSONNEL_SEED = [
   {
     name: 'Michael Johnson', position: 'Managing Director', role: 'Director / Owner',
     email: 'm.johnson@mjmechanical.co.uk',
-    certs: ['SMSTS', 'First Aid at Work'],
-    accreds: ['CHAS Accredited'],
-    ins: ['Public Liability Insurance']
+    docs: [
+      { type: 'SMSTS',                    issuingBody: 'CITB',               certNo: 'SM-2024-10821',   expiry: '2027-11-01' },
+      { type: 'First Aid at Work',        issuingBody: 'St John Ambulance',  certNo: 'FA-78932',        expiry: '2026-06-01' },
+      { type: 'CHAS Accredited',          issuingBody: 'CHAS Ltd',           certNo: 'CHAS-2024-0391',  expiry: '2025-12-01' },
+      { type: 'Public Liability Insurance', issuingBody: 'Aviva',            certNo: 'POL-AV-881023',   expiry: '2026-03-01' }
+    ]
   },
   {
     name: 'Sarah Ahmed', position: 'Senior Gas Engineer', role: 'Gas Engineer',
     email: 's.ahmed@mjmechanical.co.uk',
-    certs: ['Gas Safe Register', 'NVQ Level 3'],
-    accreds: ['SafeContractor Approved'],
-    ins: ['Employers Liability Insurance']
+    docs: [
+      { type: 'Gas Safe Register',        issuingBody: 'Gas Safe Register',  certNo: 'GS-554821',       expiry: '2027-01-01' },
+      { type: 'NVQ Level 3',              issuingBody: 'City & Guilds',      certNo: 'NVQ-L3-9034',     expiry: '' },
+      { type: 'SafeContractor Approved',  issuingBody: 'Alcumus',            certNo: 'SC-2025-00712',   expiry: '2026-08-01' },
+      { type: 'Employers Liability Insurance', issuingBody: 'RSA',           certNo: 'EL-RSA-445009',   expiry: '2026-03-01' }
+    ]
   },
   {
     name: 'David Clarke', position: 'Lead Electrician', role: 'Electrician',
     email: 'd.clarke@mjmechanical.co.uk',
-    certs: ['NICEIC Approved Contractor', '18th Edition Wiring Regulations', 'ECA Member'],
-    accreds: [],
-    ins: ['Public Liability Insurance', 'Professional Indemnity Insurance']
+    docs: [
+      { type: 'NICEIC Approved Contractor',         issuingBody: 'NICEIC',       certNo: 'NIC-300124',      expiry: '2026-10-01' },
+      { type: '18th Edition Wiring Regulations',    issuingBody: 'City & Guilds',certNo: 'CG-2382-18TH',   expiry: '' },
+      { type: 'ECA Member',                         issuingBody: 'ECA',          certNo: 'ECA-MEM-6612',    expiry: '2025-12-01' },
+      { type: 'Public Liability Insurance',         issuingBody: 'AXA',          certNo: 'AXA-PL-220481',   expiry: '2026-03-01' },
+      { type: 'Professional Indemnity Insurance',   issuingBody: 'AXA',          certNo: 'AXA-PI-220482',   expiry: '2026-03-01' }
+    ]
   },
   {
     name: 'Priya Patel', position: 'Health & Safety Manager', role: 'Health & Safety Manager',
     email: 'p.patel@mjmechanical.co.uk',
-    certs: ['SMSTS'],
-    accreds: ['ISO 45001:2018', 'CHAS Accredited'],
-    ins: ['Employers Liability Insurance'],
-    certsCustom: ['IOSH Managing Safely']
+    docs: [
+      { type: 'SMSTS',             issuingBody: 'CITB',       certNo: 'SM-2023-09214',    expiry: '2028-09-01' },
+      { type: '__other__', customText: 'IOSH Managing Safely', issuingBody: 'IOSH',       certNo: 'IOSH-MS-33421',    expiry: '' },
+      { type: 'ISO 45001:2018',    issuingBody: 'BSI Group',  certNo: 'BSI-45001-7821',   expiry: '2026-07-01' },
+      { type: 'CHAS Accredited',   issuingBody: 'CHAS Ltd',   certNo: 'CHAS-2024-0392',   expiry: '2025-12-01' },
+      { type: 'Employers Liability Insurance', issuingBody: 'Zurich', certNo: 'ZU-EL-109034', expiry: '2026-03-01' }
+    ]
   },
   {
     name: 'James Okafor', position: 'Senior Project Manager', role: 'Project Manager',
     email: 'j.okafor@mjmechanical.co.uk',
-    certs: ['SMSTS', 'CSCS Gold Card'],
-    accreds: ['Constructionline Gold'],
-    ins: ['Public Liability Insurance', 'Professional Indemnity Insurance']
+    docs: [
+      { type: 'SMSTS',                           issuingBody: 'CITB',           certNo: 'SM-2022-07763',   expiry: '2027-04-01' },
+      { type: 'CSCS Gold Card',                  issuingBody: 'CSCS',           certNo: 'CSCS-G-481920',   expiry: '2028-02-01' },
+      { type: 'Constructionline Gold',           issuingBody: 'Constructionline', certNo: 'CL-G-2025-5582', expiry: '2026-11-01' },
+      { type: 'Public Liability Insurance',      issuingBody: 'Hiscox',         certNo: 'HX-PL-330219',    expiry: '2026-03-01' },
+      { type: 'Professional Indemnity Insurance', issuingBody: 'Hiscox',        certNo: 'HX-PI-330220',    expiry: '2026-03-01' }
+    ]
   }
 ];
 
 function seedPersonnelData() {
   PERSONNEL_SEED.forEach(person => {
-    addPersonnelRow();
-    const rows = document.querySelectorAll('#personnel-tbody tr:not(#personnel-empty-row)');
-    const tr = rows[rows.length - 1];
-    if (!tr) return;
-    const textInputs = tr.querySelectorAll('input[type=text], input[type=email]');
-    if (textInputs[0]) textInputs[0].value = person.name;
-    if (textInputs[1]) textInputs[1].value = person.position;
-    if (textInputs[2]) textInputs[2].value = person.role;
-    if (textInputs[3]) textInputs[3].value = person.email;
-    const id = tr.id;
-    const addEntry = (cellId, label, accept, optsKey, value, customText) => {
-      addCellUpload(cellId, label, accept, optsKey);
-      const entries = document.querySelectorAll(`#${cellId} .cell-entry`);
-      const entry = entries[entries.length - 1];
-      if (!entry) return;
-      const sel = entry.querySelector('select');
-      if (customText) {
-        sel.value = '__other__';
-        const inp = entry.querySelector('.cell-custom-input');
-        if (inp) { inp.style.display = 'block'; inp.value = customText; }
-      } else if (sel) {
-        sel.value = value;
-      }
-    };
-    (person.certs || []).forEach(v => addEntry(id+'-certs', 'Certification', '.pdf,.jpg,.png', 'certs', v));
-    (person.certsCustom || []).forEach(v => addEntry(id+'-certs', 'Certification', '.pdf,.jpg,.png', 'certs', '__other__', v));
-    (person.accreds || []).forEach(v => addEntry(id+'-accreds', 'Accreditation', '.pdf,.jpg,.png', 'accreds', v));
-    (person.ins || []).forEach(v => addEntry(id+'-ins', 'Insurance', '.pdf,.jpg,.png', 'ins', v));
+    const id = addPersonnelRow();
+    const card = document.getElementById(id);
+    if (!card) return;
+    const header = card.querySelector('.personnel-card-header');
+    const inputs = header.querySelectorAll('input[type=text], input[type=email]');
+    if (inputs[0]) { inputs[0].value = person.name; updatePersonInitials(id, person.name); }
+    if (inputs[1]) inputs[1].value = person.position;
+    if (inputs[2]) inputs[2].value = person.role;
+    if (inputs[3]) inputs[3].value = person.email;
+    (person.docs || []).forEach(doc => addPersonnelDoc(id, doc));
   });
 }
 
@@ -2032,50 +2015,127 @@ function addCellUpload(cellId, label, accept, optsKey) {
   cell.appendChild(wrap);
 }
 
+const DOC_TYPE_OPTS = [
+  { group: 'Certifications', items: ['Gas Safe Register','NICEIC Approved Contractor','NAPIT Registered','ECA Member','SMSTS','SSSTS','First Aid at Work','PASMA','IPAF','NVQ Level 2','NVQ Level 3','NVQ Level 4','NVQ Level 5','City & Guilds','CSCS Gold Card','CSCS Blue Card','18th Edition Wiring Regulations','BPEC Certification','Asbestos Awareness (Cat A)','Asbestos Non-Licensed (Cat B)','Asbestos Licensed (Cat C)'] },
+  { group: 'Accreditations', items: ['CHAS Accredited','Constructionline Silver','Constructionline Gold','Constructionline Platinum','SafeContractor Approved','ISO 9001:2015','ISO 14001:2015','ISO 45001:2018','Trustmark','FMB Member','NHBC Registered','RICS Regulated','Alcumus SafeContractor','SMAS Worksafe','NHF Preferred Supplier'] },
+  { group: 'Insurance', items: ['Public Liability Insurance','Employers Liability Insurance','Professional Indemnity Insurance','Contractors All Risks','Plant & Equipment Insurance','Tool Insurance','Motor Fleet Insurance','Product Liability Insurance','Contract Works Insurance'] }
+];
+
+function buildDocTypeOptions() {
+  return DOC_TYPE_OPTS.map(g =>
+    `<optgroup label="${g.group}">${g.items.map(i=>`<option value="${i}">${i}</option>`).join('')}</optgroup>`
+  ).join('') + '<optgroup label="Other"><option value="__other__">Other / Custom…</option></optgroup>';
+}
+
 function addPersonnelRow() {
   const id = 'pr-' + Date.now();
   personnelRows.push(id);
-  const emptyRow = document.getElementById('personnel-empty-row');
-  if (emptyRow) emptyRow.remove();
-  const tbody = document.getElementById('personnel-tbody');
-  const tr = document.createElement('tr');
-  tr.id = id;
-  const singleUpBtn = (label, accept) => `
-    <label class="upload-btn" title="Upload ${label}">
-      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M7 1v7m0-7L4.5 3.5M7 1l2.5 2.5"/><path d="M2 11h10" stroke-linecap="round"/></svg>
-      ${label}
-      <input type="file" accept="${accept}" style="display:none;" onchange="markPersonnelUpload(this,'${label}')">
-    </label>`;
-  tr.innerHTML = `
-    <td><input class="fi" type="text" placeholder="Full name" style="height:28px;font-size:12px;padding:4px 8px;min-width:120px;"></td>
-    <td><input class="fi" type="text" placeholder="e.g. Senior Engineer" style="height:28px;font-size:12px;padding:4px 8px;min-width:110px;"></td>
-    <td><input class="fi" type="text" placeholder="e.g. Gas Engineer" style="height:28px;font-size:12px;padding:4px 8px;min-width:110px;"></td>
-    <td><input class="fi" type="email" placeholder="Email address" style="height:28px;font-size:12px;padding:4px 8px;min-width:140px;"></td>
-    <td>${singleUpBtn('CV', '.pdf,.doc,.docx')}</td>
-    <td>${multiUploadCell(id+'-certs', 'Certification', '.pdf,.jpg,.png', 'certs')}</td>
-    <td>${multiUploadCell(id+'-accreds', 'Accreditation', '.pdf,.jpg,.png', 'accreds')}</td>
-    <td>${multiUploadCell(id+'-ins', 'Insurance', '.pdf,.jpg,.png', 'ins')}</td>
-    <td>
-      <button onclick="removePersonnelRow('${id}')" style="width:26px;height:26px;border:1px solid var(--gray-4);border-radius:6px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray-9);" title="Remove row">
-        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;"><path d="M2 3h10M5 3V2h4v1M5.5 5.5v5M8.5 5.5v5M3 3l.7 9h6.6L11 3"/></svg>
+  const empty = document.getElementById('personnel-empty');
+  if (empty) empty.remove();
+  const container = document.getElementById('personnel-cards');
+  const card = document.createElement('div');
+  card.id = id;
+  card.className = 'personnel-card-form';
+  card.innerHTML = `
+    <div class="personnel-card-header">
+      <div class="personnel-card-initials" id="${id}-initials">—</div>
+      <input class="fi" type="text" placeholder="Full name" oninput="updatePersonInitials('${id}',this.value)" style="flex:2;min-width:120px;height:30px;font-size:12px;font-weight:600;">
+      <input class="fi" type="text" placeholder="Position (e.g. Managing Director)" style="flex:2.5;min-width:120px;height:30px;font-size:12px;">
+      <input class="fi" type="text" placeholder="Role (e.g. Gas Engineer)" style="flex:2;min-width:110px;height:30px;font-size:12px;">
+      <input class="fi" type="email" placeholder="Email address" style="flex:2.5;min-width:130px;height:30px;font-size:12px;">
+      <label class="upload-btn" title="Upload CV" style="flex-shrink:0;">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M7 1v7m0-7L4.5 3.5M7 1l2.5 2.5"/><path d="M2 11h10" stroke-linecap="round"/></svg>
+        Upload CV
+        <input type="file" accept=".pdf,.doc,.docx" style="display:none;" onchange="markPersonnelUpload(this,'CV')">
+      </label>
+      <button onclick="removePersonnelRow('${id}')" style="width:28px;height:28px;border:1px solid rgba(192,57,43,0.3);border-radius:6px;background:rgba(192,57,43,0.05);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#c0392b;flex-shrink:0;" title="Remove person">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M2 3h10M5 3V2h4v1M5.5 5.5v5M8.5 5.5v5M3 3l.7 9h6.6L11 3"/></svg>
       </button>
-    </td>`;
-  tbody.appendChild(tr);
-  lucide.createIcons();
+    </div>
+    <div class="personnel-doc-colhead">
+      <span>Accreditation / Certification / Insurance</span>
+      <span>Issuing Body</span>
+      <span>Certificate No.</span>
+      <span>Expiry Date</span>
+      <span>Upload</span>
+      <span></span>
+    </div>
+    <div id="${id}-docs"></div>
+    <div class="personnel-doc-addrow">
+      <button type="button" onclick="addPersonnelDoc('${id}')" style="display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 12px;border:1px solid rgba(23,84,216,0.3);border-radius:6px;background:rgba(23,84,216,0.04);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" style="width:11px;height:11px;"><path d="M7 2v10M2 7h10"/></svg>
+        Add Document
+      </button>
+    </div>`;
+  container.appendChild(card);
+  return id;
 }
 
 function removePersonnelRow(id) {
-  const tr = document.getElementById(id);
-  if (tr) tr.remove();
+  const card = document.getElementById(id);
+  if (card) card.remove();
   personnelRows = personnelRows.filter(r => r !== id);
-  if (document.querySelectorAll('#personnel-tbody tr:not(#personnel-empty-row)').length === 0) {
-    const tbody = document.getElementById('personnel-tbody');
-    const emptyTr = document.createElement('tr');
-    emptyTr.id = 'personnel-empty-row';
-    emptyTr.innerHTML = '<td colspan="6" class="empty-personnel">No team members added yet. Click <strong>Add Person</strong> to get started.</td>';
-    tbody.appendChild(emptyTr);
+  if (personnelRows.length === 0) {
+    const container = document.getElementById('personnel-cards');
+    const empty = document.createElement('div');
+    empty.id = 'personnel-empty';
+    empty.style.cssText = 'text-align:center;padding:36px 20px;color:var(--gray-9);font-size:12px;border:1px dashed var(--gray-5);border-radius:8px;';
+    empty.innerHTML = 'No team members added yet. Click <strong>Add Person</strong> to get started.';
+    container.appendChild(empty);
   }
-  filterPersonnel();
+}
+
+function updatePersonInitials(id, name) {
+  const el = document.getElementById(id + '-initials');
+  if (!el) return;
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  el.textContent = parts.length >= 2
+    ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+    : (parts[0]?.[0]?.toUpperCase() || '—');
+}
+
+function addPersonnelDoc(personId, opts = {}) {
+  const container = document.getElementById(personId + '-docs');
+  if (!container) return;
+  const row = document.createElement('div');
+  row.className = 'personnel-doc-grid';
+  row.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:3px;">
+      <select class="fs" style="height:28px;font-size:11px;padding:3px 6px;" onchange="toggleDocCustom(this)">
+        <option value="">Select type…</option>
+        ${buildDocTypeOptions()}
+      </select>
+      <input type="text" class="fi doc-custom-input" placeholder="Type document name…" style="display:none;height:24px;font-size:11px;padding:3px 7px;">
+    </div>
+    <input class="fi" type="text" placeholder="Issuing body" style="height:28px;font-size:11px;padding:3px 7px;">
+    <input class="fi" type="text" placeholder="Cert / ref no." style="height:28px;font-size:11px;padding:3px 7px;font-family:monospace;letter-spacing:.02em;">
+    <input class="fi" type="date" style="height:28px;font-size:11px;padding:3px 6px;">
+    <label class="upload-btn" style="justify-content:center;padding:0 6px;">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M7 1v7m0-7L4.5 3.5M7 1l2.5 2.5"/><path d="M2 11h10" stroke-linecap="round"/></svg>
+      Upload
+      <input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" onchange="markPersonnelUpload(this,'Doc')">
+    </label>
+    <button type="button" onclick="this.closest('.personnel-doc-grid').remove()" style="width:22px;height:22px;border:none;background:none;cursor:pointer;color:var(--gray-7);font-size:16px;display:flex;align-items:center;justify-content:center;border-radius:4px;line-height:1;" title="Remove">×</button>`;
+  if (opts.type) {
+    const sel = row.querySelector('select');
+    if (opts.type === '__other__') {
+      sel.value = '__other__';
+      const inp = row.querySelector('.doc-custom-input');
+      inp.style.display = 'block'; inp.value = opts.customText || '';
+    } else { sel.value = opts.type; }
+  }
+  const textInputs = row.querySelectorAll('input[type=text]');
+  if (opts.issuingBody && textInputs[1]) textInputs[1].value = opts.issuingBody;
+  if (opts.certNo && textInputs[2]) textInputs[2].value = opts.certNo;
+  if (opts.expiry) row.querySelector('input[type=date]').value = opts.expiry;
+  container.appendChild(row);
+}
+
+function toggleDocCustom(sel) {
+  const inp = sel.closest('div')?.querySelector('.doc-custom-input');
+  if (!inp) return;
+  if (sel.value === '__other__') { inp.style.display = 'block'; inp.focus(); }
+  else { inp.style.display = 'none'; inp.value = ''; }
 }
 
 function markPersonnelUpload(input, label) {
@@ -2088,18 +2148,6 @@ function markPersonnelUpload(input, label) {
   btn.childNodes[2].textContent = ' ' + txt;
 }
 
-function filterPersonnel() {
-  const roleFilter = document.getElementById('personnel-role-filter')?.value.toLowerCase() || '';
-  const search = document.getElementById('personnel-search')?.value.toLowerCase() || '';
-  let visible = 0;
-  document.querySelectorAll('#personnel-tbody tr:not(#personnel-empty-row)').forEach(tr => {
-    const role = (tr.dataset.role || '').toLowerCase();
-    const name = (tr.dataset.name || '').toLowerCase();
-    const show = (!roleFilter || role === roleFilter) && (!search || name.includes(search));
-    tr.style.display = show ? '' : 'none';
-    if (show) visible++;
-  });
-}
 
 function goToStep(n) {
   if (n < 1 || n > 5) return;
