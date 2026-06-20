@@ -60,7 +60,7 @@ a{text-decoration:none}
 .role-sw-btn .rs-dot{width:7px;height:7px;border-radius:50%;background:var(--accent-9);flex-shrink:0}
 .role-sw-btn .rs-lbl{flex:1;text-align:left}
 .role-sw-btn .rs-chev{color:var(--gray-7);flex-shrink:0}
-.role-dd{display:none;flex-direction:column;gap:2px;padding:4px;background:var(--panel);border:1px solid rgba(0,0,0,.06);border-radius:var(--r3);box-shadow:0 4px 16px rgba(0,0,0,.1);margin-top:4px}
+.role-dd{display:none;flex-direction:column;gap:2px;padding:4px;background:var(--panel);border:1px solid rgba(0,0,0,.06);border-radius:var(--r3);box-shadow:0 4px 16px rgba(0,0,0,.1);position:fixed;z-index:9999;min-width:180px}
 .role-dd.open{display:flex}
 .role-opt{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:var(--r2);font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;transition:background 80ms}
 .role-opt:hover{background:var(--gray-2);color:var(--gray-12)}
@@ -185,6 +185,8 @@ a{text-decoration:none}
 /* ref block */
 .ref-blk{border:1px solid var(--gray-4);border-radius:var(--r3);padding:14px;margin-bottom:12px}
 .ref-blk-lbl{font-size:12px;font-weight:600;color:var(--gray-12);margin-bottom:10px}
+.portfolio-card{border:1px solid var(--gray-4);border-radius:var(--r3);padding:16px;margin-bottom:12px;background:#fff}
+.portfolio-card:last-child{margin-bottom:0}
 
 /* ── TABLES ── */
 .dt{width:100%;border-collapse:collapse}
@@ -599,9 +601,52 @@ a{text-decoration:none}
                   <label class="fl">Trading Name (if different)</label>
                   <input id="f-trading" class="fi" type="text" placeholder="Enter trading name">
                 </div>
-                <div class="fg">
+                <div class="fg full">
+                  <label class="fl">Business Tagline <span class="req">*</span></label>
+                  <input id="f-tagline" class="fi" type="text" maxlength="80" placeholder="e.g. Gas, Heating & Mechanical Specialists">
+                  <div class="char-ct" style="margin-top:4px;font-size:11px;color:var(--gray-9);">Shown under your company name on your profile. Max 80 characters.</div>
+                </div>
+                <!-- Logo (org) / Profile Photo (sole trader) — toggled by setContractorType() -->
+                <div class="fg full" id="logo-wrap">
+                  <label class="fl">Company Logo</label>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div id="logo-preview" style="width:56px;height:56px;border-radius:10px;background:var(--gray-3);border:1px dashed var(--gray-5);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gray-9);text-align:center;flex-shrink:0;overflow:hidden;">
+                      <span>No logo</span>
+                    </div>
+                    <div>
+                      <label style="display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border:1px solid var(--gray-4);border-radius:6px;font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;background:#fff;">
+                        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l3-3 2 2 4-5 3 4"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+                        Upload Logo
+                        <input type="file" accept="image/*" style="display:none;" onchange="previewLogo(this)">
+                      </label>
+                      <div style="font-size:11px;color:var(--gray-9);margin-top:5px;">PNG, JPG or SVG. Recommended 200×200px or larger. Max 2MB.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="fg full" id="photo-wrap" style="display:none;">
+                  <label class="fl">Profile Photo</label>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div id="photo-preview" style="width:56px;height:56px;border-radius:50%;background:var(--gray-3);border:1px dashed var(--gray-5);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gray-9);text-align:center;flex-shrink:0;overflow:hidden;">
+                      <span>No photo</span>
+                    </div>
+                    <div>
+                      <label style="display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border:1px solid var(--gray-4);border-radius:6px;font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;background:#fff;">
+                        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l3-3 2 2 4-5 3 4"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+                        Upload Photo
+                        <input type="file" accept="image/*" style="display:none;" onchange="previewProfilePhoto(this)">
+                      </label>
+                      <div style="font-size:11px;color:var(--gray-9);margin-top:5px;">Clear headshot or professional photo. JPG or PNG. Max 2MB.</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Reg number: org = Company Reg, sole = UTR — toggled by setContractorType() -->
+                <div class="fg" id="reg-wrap">
                   <label class="fl">Company Registration Number <span class="req">*</span></label>
-                  <input id="f-reg" class="fi" type="text" placeholder="Enter company number">
+                  <input id="f-reg" class="fi" type="text" placeholder="Enter company number (e.g. 12345678)">
+                </div>
+                <div class="fg" id="utr-wrap" style="display:none;">
+                  <label class="fl">UTR Number <span class="req">*</span></label>
+                  <input id="f-utr" class="fi" type="text" placeholder="Enter Unique Taxpayer Reference (10 digits)">
                 </div>
                 <div class="fg">
                   <label class="fl">VAT Registration Number</label>
@@ -610,12 +655,20 @@ a{text-decoration:none}
                 <div class="fg">
                   <label class="fl">Business Type <span class="req">*</span></label>
                   <select id="f-biz-type" class="fs">
-                    <option value="">Select business type</option>
-                    <option>Sole Trader</option>
-                    <option>Partnership</option>
-                    <option>Limited Company (Ltd)</option>
-                    <option>Public Limited Company (PLC)</option>
-                    <option>Limited Liability Partnership (LLP)</option>
+                    <option value="">Select your primary trade</option>
+                    <option>Gas &amp; Heating Engineer</option>
+                    <option>Electrical Contractor</option>
+                    <option>Plumbing &amp; Drainage</option>
+                    <option>Multi-Trade / General Maintenance</option>
+                    <option>Building &amp; Construction</option>
+                    <option>Fire Safety &amp; Security</option>
+                    <option>Mechanical &amp; Electrical (M&amp;E)</option>
+                    <option>Property Maintenance</option>
+                    <option>Compliance &amp; Inspection</option>
+                    <option>Grounds &amp; Landscaping</option>
+                    <option>Specialist Surveys</option>
+                    <option>Consultancy &amp; Advisory</option>
+                    <option>Other</option>
                   </select>
                 </div>
                 <div class="fg">
@@ -650,6 +703,45 @@ a{text-decoration:none}
                     <div class="ph-pre">🇬🇧 +44</div>
                     <input id="f-phone" class="fi" type="tel" placeholder="Enter phone number">
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Business Documents — conditional on contractor type -->
+          <div class="fc" id="fc-biz-docs">
+            <div class="fc-head"><h2>1b. Business Documents</h2></div>
+            <div class="fc-body">
+              <div class="fg2">
+                <!-- Org: Certificate of Incorporation -->
+                <div class="fg" id="doc-cert-wrap">
+                  <label class="fl">Certificate of Incorporation <span class="req">*</span></label>
+                  <label class="upload-area" style="display:block;cursor:pointer;">
+                    <i data-lucide="file-text"></i>
+                    <div class="ua-lbl" id="reg-cert-name">Certificate of Incorporation</div>
+                    <div class="ua-sub">From Companies House · PDF or image, max 10MB</div>
+                    <input type="file" accept=".pdf,.jpg,.png" style="display:none;" onchange="labelUpload(this,'reg-cert-name')">
+                  </label>
+                </div>
+                <!-- Sole trader: HMRC UTR letter -->
+                <div class="fg" id="doc-utr-wrap" style="display:none;">
+                  <label class="fl">HMRC UTR Confirmation Letter <span class="req">*</span></label>
+                  <label class="upload-area" style="display:block;cursor:pointer;">
+                    <i data-lucide="file-text"></i>
+                    <div class="ua-lbl" id="utr-letter-name">UTR Confirmation Letter</div>
+                    <div class="ua-sub">Letter from HMRC confirming your Unique Taxpayer Reference · PDF or image, max 10MB</div>
+                    <input type="file" accept=".pdf,.jpg,.png" style="display:none;" onchange="labelUpload(this,'utr-letter-name')">
+                  </label>
+                </div>
+                <!-- Proof of Address — same for both -->
+                <div class="fg">
+                  <label class="fl">Proof of Address <span class="req">*</span></label>
+                  <label class="upload-area" style="display:block;cursor:pointer;">
+                    <i data-lucide="file"></i>
+                    <div class="ua-lbl" id="poa-name">Proof of Address</div>
+                    <div class="ua-sub">Utility bill or bank statement · dated within last 3 months · PDF or image, max 10MB</div>
+                    <input type="file" accept=".pdf,.jpg,.png" style="display:none;" onchange="labelUpload(this,'poa-name')">
+                  </label>
                 </div>
               </div>
             </div>
@@ -780,6 +872,62 @@ a{text-decoration:none}
                   </div>
                 </div>
               </div>
+              <div class="fg2 mb14">
+                <div class="fg">
+                  <label class="fl">Typical Response Time <span class="req">*</span></label>
+                  <select id="f-response-time" class="fs">
+                    <option value="">Select response time</option>
+                    <option>Under 1 hour</option>
+                    <option>1–2 hours</option>
+                    <option>2–4 hours</option>
+                    <option>Same day</option>
+                    <option>Next day</option>
+                    <option>2–3 days</option>
+                  </select>
+                  <div style="font-size:11px;color:var(--gray-9);margin-top:4px;">Average time to respond to a new job request.</div>
+                </div>
+                <div class="fg">
+                  <label class="fl">Emergency / Out-of-Hours Availability <span class="req">*</span></label>
+                  <div class="radio-grp" style="margin-top:6px;">
+                    <label class="radio-opt"><input type="radio" name="emergency" value="yes"> Yes — available 24/7</label>
+                    <label class="radio-opt"><input type="radio" name="emergency" value="limited"> Limited hours</label>
+                    <label class="radio-opt"><input type="radio" name="emergency" value="no" checked> No</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Service Pricing -->
+              <div class="fg mb14" id="svc-pricing-section">
+                <label class="fl">Service Pricing <span class="req">*</span></label>
+                <div style="font-size:12px;color:var(--gray-9);margin-bottom:10px;">For each service category you selected above, enter your starting price and unit. This is shown on your profile.</div>
+                <table class="dt" id="svc-pricing-tbl" style="min-width:0;">
+                  <thead><tr>
+                    <th style="width:35%;">Service Category</th>
+                    <th style="width:20%;">Starting Price (£)</th>
+                    <th style="width:25%;">Per Unit</th>
+                    <th style="width:20%;">Typical Delivery</th>
+                  </tr></thead>
+                  <tbody id="svc-pricing-tbody">
+                    <tr>
+                      <td><input class="fi" type="text" placeholder="e.g. Core Property Compliance" style="font-size:12px;padding:6px 8px;"></td>
+                      <td><input class="fi" type="number" placeholder="85" min="0" style="font-size:12px;padding:6px 8px;"></td>
+                      <td>
+                        <select class="fs" style="font-size:12px;padding:5px 8px;height:34px;">
+                          <option value="">Select unit</option>
+                          <option>per job</option><option>per hour</option><option>per day</option>
+                          <option>per visit</option><option>per property</option><option>per unit</option><option>fixed price</option>
+                        </select>
+                      </td>
+                      <td><input class="fi" type="text" placeholder="e.g. Same day" style="font-size:12px;padding:6px 8px;"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button type="button" onclick="addPricingRow()" style="margin-top:8px;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border:1px dashed var(--gray-5);border-radius:6px;font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;background:transparent;">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v10M3 8h10"/></svg>
+                  Add category
+                </button>
+              </div>
+
               <div class="fg2 org-only" id="org-fields" style="display:none">
                 <div class="fg">
                   <label class="fl">Number of Employees</label>
@@ -830,6 +978,10 @@ a{text-decoration:none}
                     <label class="fl">Relationship</label>
                     <select class="fs"><option value="">Select relationship</option><option>Previous Client</option><option>Partner Organisation</option><option>Industry Colleague</option></select>
                   </div>
+                  <div class="fg full">
+                    <label class="fl">Reference Statement / Testimonial</label>
+                    <textarea class="ft" style="min-height:72px;" maxlength="500" placeholder="A brief quote or statement from this reference about working with you (optional — shown on your public profile)…"></textarea>
+                  </div>
                 </div>
               </div>
               <div class="ref-blk">
@@ -842,6 +994,51 @@ a{text-decoration:none}
                   <div class="fg">
                     <label class="fl">Relationship</label>
                     <select class="fs"><option value="">Select relationship</option><option>Previous Client</option><option>Partner Organisation</option><option>Industry Colleague</option></select>
+                  </div>
+                  <div class="fg full">
+                    <label class="fl">Reference Statement / Testimonial</label>
+                    <textarea class="ft" style="min-height:72px;" maxlength="500" placeholder="A brief quote or statement from this reference about working with you (optional — shown on your public profile)…"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc">
+            <div class="fc-head" style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;">
+              <div>
+                <h2>3b. Portfolio &amp; Case Studies</h2>
+                <p>Showcase your best work. Each project appears on the Experience tab of your profile.</p>
+              </div>
+              <button type="button" class="btn-cont" onclick="addPortfolioCard()" style="height:32px;font-size:12px;padding:0 14px;flex-shrink:0;margin-top:2px;">
+                <i data-lucide="plus"></i> Add Project
+              </button>
+            </div>
+            <div class="fc-body" id="portfolio-cards">
+              <!-- first card pre-filled -->
+              <div class="portfolio-card">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                  <span style="font-size:12px;font-weight:600;color:var(--gray-11);">Project 1</span>
+                </div>
+                <div class="fg2">
+                  <div class="fg"><label class="fl">Project Title <span class="req">*</span></label><input class="fi" type="text" placeholder="e.g. Boiler Replacement Programme — Orbit Group"></div>
+                  <div class="fg"><label class="fl">Client / Organisation</label><input class="fi" type="text" placeholder="e.g. Orbit Group"></div>
+                  <div class="fg"><label class="fl">Completion Date</label><input class="fi" type="month" style="color:var(--gray-12)"></div>
+                  <div class="fg"><label class="fl">Contract Value (approx.)</label>
+                    <select class="fs">
+                      <option value="">Select range</option>
+                      <option>Under £5,000</option><option>£5,000 – £25,000</option><option>£25,000 – £100,000</option>
+                      <option>£100,000 – £500,000</option><option>£500,000 – £1M</option><option>£1M+</option>
+                    </select>
+                  </div>
+                  <div class="fg full"><label class="fl">Project Description</label><textarea class="ft" style="min-height:80px;" maxlength="600" placeholder="Briefly describe the scope, what you delivered and the outcome…"></textarea></div>
+                  <div class="fg full">
+                    <label class="fl">Project Photo (optional)</label>
+                    <label style="display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border:1px solid var(--gray-4);border-radius:6px;font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;background:#fff;">
+                      <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l3-3 2 2 4-5 3 4"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+                      Upload Photo
+                      <input type="file" accept="image/*" style="display:none;">
+                    </label>
                   </div>
                 </div>
               </div>
@@ -961,26 +1158,6 @@ a{text-decoration:none}
             </div>
           </div>
 
-          <div class="fc">
-            <div class="fc-head"><h2>8. Review &amp; Declaration</h2><p>Please review your information and confirm your declaration.</p></div>
-            <div class="fc-body">
-              <div class="decl-box">
-                <i data-lucide="info"></i>
-                <p>Please ensure all information provided is accurate and all required documents have been uploaded. Inaccurate information may delay your application.</p>
-              </div>
-              <div class="fg mb14">
-                <label class="fl">Declaration <span class="req">*</span></label>
-                <div class="check-row" style="margin-top:6px">
-                  <input type="checkbox" id="decl">
-                  <label for="decl">I confirm that the information in this application is true and accurate to the best of my knowledge. I understand that SafeBuild may verify this information and reserves the right to reject or remove any application that does not meet the framework requirements.</label>
-                </div>
-              </div>
-              <div class="fg2">
-                <div class="fg"><label class="fl">Full Name <span class="req">*</span></label><input class="fi" type="text" placeholder="Enter your full name"></div>
-                <div class="fg"><label class="fl">Date <span class="req">*</span></label><input class="fi" type="date" value="2026-06-11"></div>
-              </div>
-            </div>
-          </div>
         </div><!-- /step 2 -->
 
         <!-- ═══ STEP 3 ═══ -->
@@ -1019,41 +1196,8 @@ a{text-decoration:none}
           </div>
 
           <div class="fc">
-            <div class="fc-head"><h2>10. Key Personnel</h2><p>List key personnel who will be working on projects.</p></div>
-            <div class="fc-body">
-              <table class="dt" id="pers-tbl">
-                <thead><tr>
-                  <th>Full Name</th><th>Job Title / Role</th>
-                  <th>Qualifications (Brief)</th><th>CV</th><th></th>
-                </tr></thead>
-                <tbody>
-                  <tr>
-                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="Michael Brown"></td>
-                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="Operations Manager"></td>
-                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="BSc Construction Management"></td>
-                    <td><button class="btn-ra" title="Upload CV"><i data-lucide="upload"></i></button></td>
-                    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="Sarah White"></td>
-                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="Site Supervisor"></td>
-                    <td><input class="fi" style="font-size:12px;padding:6px 8px" type="text" value="NVQ Level 4, SMSTS"></td>
-                    <td><button class="btn-ra" title="Upload CV"><i data-lucide="upload"></i></button></td>
-                    <td><button class="btn-ra" onclick="this.closest('tr').remove()"><i data-lucide="trash-2"></i></button></td>
-                  </tr>
-                </tbody>
-              </table>
-              <button class="btn-add" onclick="addLegacyPersonnelRow()"><i data-lucide="plus-circle"></i> Add Another Person</button>
-            </div>
-          </div>
-
-          <div class="fc">
             <div class="fc-head"><h2>11. Location &amp; Coverage</h2><p>Where are you based and the areas you are willing to work in?</p></div>
             <div class="fc-body">
-              <div class="fg mb14">
-                <label class="fl">Registered Office Address</label>
-                <textarea class="ft" style="min-height:56px">12 Builder Street, London, SW1A 1AA</textarea>
-              </div>
               <div class="fg2 mb14" style="grid-template-columns:1fr 1fr auto;align-items:end">
                 <div class="fg">
                   <label class="fl">Primary Base / Office Location</label>
@@ -1416,72 +1560,6 @@ a{text-decoration:none}
               </div>
             </div>
             <p class="prog-note" id="prog-note">Please complete all required fields</p>
-          </div>
-        </div>
-
-        <!-- Required Documents -->
-        <div class="rc">
-          <div class="rc-head">
-            <h3>Required Documents</h3>
-            <p>Please upload all required documents. All files must be current and valid.</p>
-          </div>
-          <div class="rc-body" id="rail-docs">
-            <div class="doc-item">
-              <div class="doc-top">
-                <div class="doc-left"><div class="doc-ico pdf"><i data-lucide="file-text"></i></div><div><div class="doc-name">Company Registration Certificate</div><div class="doc-desc">Certificate of Incorporation from Companies House</div></div></div>
-                <span class="doc-badge req">Required</span>
-              </div>
-              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
-            </div>
-            <div class="doc-item">
-              <div class="doc-top">
-                <div class="doc-left"><div class="doc-ico doc"><i data-lucide="file"></i></div><div><div class="doc-name">Proof of Address</div><div class="doc-desc">Utility bill or bank statement (within last 3 months)</div></div></div>
-                <span class="doc-badge req">Required</span>
-              </div>
-              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
-            </div>
-            <div class="doc-item">
-              <div class="doc-top">
-                <div class="doc-left"><div class="doc-ico pdf"><i data-lucide="shield"></i></div><div><div class="doc-name">Public Liability Insurance</div><div class="doc-desc">Minimum £5M cover certificate</div></div></div>
-                <span class="doc-badge req">Required</span>
-              </div>
-              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
-            </div>
-            <div class="doc-item">
-              <div class="doc-top">
-                <div class="doc-left"><div class="doc-ico pdf"><i data-lucide="shield"></i></div><div><div class="doc-name">Employers' Liability Insurance</div><div class="doc-desc">Minimum £10M cover certificate</div></div></div>
-                <span class="doc-badge req">Required</span>
-              </div>
-              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
-            </div>
-            <div class="doc-item">
-              <div class="doc-top">
-                <div class="doc-left"><div class="doc-ico cert"><i data-lucide="file-check"></i></div><div><div class="doc-name">Health &amp; Safety Policy</div><div class="doc-desc">Your company health and safety policy document</div></div></div>
-                <span class="doc-badge req">Required</span>
-              </div>
-              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
-            </div>
-            <div class="doc-item">
-              <div class="doc-top">
-                <div class="doc-left"><div class="doc-ico pdf"><i data-lucide="file-text"></i></div><div><div class="doc-name">Risk Assessments (Sample)</div><div class="doc-desc">A sample risk assessment document</div></div></div>
-                <span class="doc-badge req">Required</span>
-              </div>
-              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
-            </div>
-            <div class="doc-item">
-              <div class="doc-top">
-                <div class="doc-left"><div class="doc-ico cert"><i data-lucide="award"></i></div><div><div class="doc-name">Accreditations &amp; Certifications</div><div class="doc-desc">Any relevant certificates</div></div></div>
-                <span class="doc-badge req">Required</span>
-              </div>
-              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
-            </div>
-            <div class="doc-item">
-              <div class="doc-top">
-                <div class="doc-left"><div class="doc-ico pdf"><i data-lucide="users"></i></div><div><div class="doc-name">DBS / CRB Policy</div><div class="doc-desc">Your safeguarding / DBS policy</div></div></div>
-                <span class="doc-badge req">Required</span>
-              </div>
-              <button class="btn-up-doc"><i data-lucide="upload"></i> Upload</button>
-            </div>
           </div>
         </div>
 
@@ -1872,16 +1950,25 @@ function setContractorType(type) {
   document.getElementById('type-org').classList.toggle('selected', type === 'org');
   document.getElementById('type-notice-sole').classList.toggle('visible', type === 'sole');
   document.getElementById('type-notice-org').classList.toggle('visible', type === 'org');
-  const orgFields = document.getElementById('org-fields');
-  const fcPersonnel = document.getElementById('fc-personnel');
-  if (type === 'sole') {
-    orgFields.style.display = 'none';
-    fcPersonnel.style.display = 'none';
-  } else {
-    orgFields.style.display = '';
-    fcPersonnel.style.display = '';
-    if (!personnelSeeded) { personnelSeeded = true; seedPersonnelData(); }
-  }
+
+  var isSole = type === 'sole';
+
+  // Personnel + org-only fields
+  document.getElementById('org-fields').style.display = isSole ? 'none' : '';
+  document.getElementById('fc-personnel').style.display = isSole ? 'none' : '';
+  if (!isSole && !personnelSeeded) { personnelSeeded = true; seedPersonnelData(); }
+
+  // Logo vs Profile Photo
+  document.getElementById('logo-wrap').style.display = isSole ? 'none' : '';
+  document.getElementById('photo-wrap').style.display = isSole ? '' : 'none';
+
+  // Company Reg Number vs UTR
+  document.getElementById('reg-wrap').style.display = isSole ? 'none' : '';
+  document.getElementById('utr-wrap').style.display = isSole ? '' : 'none';
+
+  // Business Documents: cert of incorporation vs UTR letter
+  document.getElementById('doc-cert-wrap').style.display = isSole ? 'none' : '';
+  document.getElementById('doc-utr-wrap').style.display = isSole ? '' : 'none';
 }
 
 const PERSONNEL_SEED = [
@@ -2038,7 +2125,13 @@ function addPersonnelRow() {
   card.className = 'personnel-card-form';
   card.innerHTML = `
     <div class="personnel-card-header">
-      <div class="personnel-card-initials" id="${id}-initials">—</div>
+      <div style="position:relative;flex-shrink:0;">
+        <div class="personnel-card-initials" id="${id}-initials">—</div>
+        <label title="Upload photo" style="position:absolute;bottom:-4px;right:-4px;width:16px;height:16px;border-radius:50%;background:var(--accent-9);display:flex;align-items:center;justify-content:center;cursor:pointer;border:1.5px solid #fff;">
+          <svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.8" style="width:8px;height:8px;"><path d="M2 10l3-3 2 2 3-4 2 3"/><rect x="1" y="1" width="12" height="12" rx="2"/></svg>
+          <input type="file" accept="image/*" style="display:none;" onchange="previewPersonPhoto('${id}',this)">
+        </label>
+      </div>
       <input class="fi" type="text" placeholder="Full name" oninput="updatePersonInitials('${id}',this.value)" style="flex:2;min-width:120px;height:30px;font-size:12px;font-weight:600;">
       <input class="fi" type="text" placeholder="Position (e.g. Managing Director)" style="flex:2.5;min-width:120px;height:30px;font-size:12px;">
       <input class="fi" type="text" placeholder="Role (e.g. Gas Engineer)" style="flex:2;min-width:110px;height:30px;font-size:12px;">
@@ -2384,10 +2477,21 @@ function addInsRow() {
 }
 
 function toggleRoleDD() {
-  document.getElementById('role-dd').classList.toggle('open');
+  const dd = document.getElementById('role-dd');
+  if (dd.classList.contains('open')) {
+    dd.classList.remove('open');
+    return;
+  }
+  const btn = document.querySelector('.role-sw-btn');
+  const rect = btn.getBoundingClientRect();
+  dd.style.left = rect.left + 'px';
+  dd.style.width = rect.width + 'px';
+  dd.style.bottom = (window.innerHeight - rect.top + 4) + 'px';
+  dd.style.top = 'auto';
+  dd.classList.add('open');
 }
 document.addEventListener('click', function(e) {
-  if (!e.target.closest('.role-sw-wrap')) {
+  if (!e.target.closest('.role-sw-wrap') && !e.target.closest('#role-dd')) {
     const dd = document.getElementById('role-dd');
     if (dd) dd.classList.remove('open');
   }
@@ -2398,6 +2502,101 @@ renderStepper();
 updateProgress();
 showStep(1);
 lucide.createIcons();
+
+function labelUpload(input, spanId) {
+  const span = document.getElementById(spanId);
+  if (span && input.files[0]) span.textContent = input.files[0].name;
+}
+
+function previewLogo(input) {
+  const preview = document.getElementById('logo-preview');
+  if (!preview || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    preview.innerHTML = '<img src="' + e.target.result + '" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function previewProfilePhoto(input) {
+  const preview = document.getElementById('photo-preview');
+  if (!preview || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    preview.innerHTML = '<img src="' + e.target.result + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function previewPersonPhoto(id, input) {
+  const initials = document.getElementById(id + '-initials');
+  if (!initials || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    initials.style.background = 'transparent';
+    initials.innerHTML = '<img src="' + e.target.result + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+var portfolioCount = 1;
+function addPortfolioCard() {
+  portfolioCount++;
+  const container = document.getElementById('portfolio-cards');
+  const card = document.createElement('div');
+  card.className = 'portfolio-card';
+  card.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <span style="font-size:12px;font-weight:600;color:var(--gray-11);">Project ${portfolioCount}</span>
+      <button type="button" onclick="this.closest('.portfolio-card').remove()" style="width:26px;height:26px;border:1px solid rgba(192,57,43,0.3);border-radius:6px;background:rgba(192,57,43,0.05);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#c0392b;">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M2 3h10M5 3V2h4v1M5.5 5.5v5M8.5 5.5v5M3 3l.7 9h6.6L11 3"/></svg>
+      </button>
+    </div>
+    <div class="fg2">
+      <div class="fg"><label class="fl">Project Title <span class="req">*</span></label><input class="fi" type="text" placeholder="e.g. Boiler Replacement Programme — Orbit Group"></div>
+      <div class="fg"><label class="fl">Client / Organisation</label><input class="fi" type="text" placeholder="e.g. Orbit Group"></div>
+      <div class="fg"><label class="fl">Completion Date</label><input class="fi" type="month" style="color:var(--gray-12)"></div>
+      <div class="fg"><label class="fl">Contract Value (approx.)</label>
+        <select class="fs">
+          <option value="">Select range</option>
+          <option>Under £5,000</option><option>£5,000 – £25,000</option><option>£25,000 – £100,000</option>
+          <option>£100,000 – £500,000</option><option>£500,000 – £1M</option><option>£1M+</option>
+        </select>
+      </div>
+      <div class="fg full"><label class="fl">Project Description</label><textarea class="ft" style="min-height:80px;" maxlength="600" placeholder="Briefly describe the scope, what you delivered and the outcome…"></textarea></div>
+      <div class="fg full">
+        <label class="fl">Project Photo (optional)</label>
+        <label style="display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border:1px solid var(--gray-4);border-radius:6px;font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;background:#fff;">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l3-3 2 2 4-5 3 4"/><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+          Upload Photo
+          <input type="file" accept="image/*" style="display:none;">
+        </label>
+      </div>
+    </div>`;
+  container.appendChild(card);
+}
+
+function addPricingRow() {
+  const tbody = document.getElementById('svc-pricing-tbody');
+  if (!tbody) return;
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><input class="fi" type="text" placeholder="e.g. Mechanical & Electrical" style="font-size:12px;padding:6px 8px;"></td>
+    <td><input class="fi" type="number" placeholder="65" min="0" style="font-size:12px;padding:6px 8px;"></td>
+    <td>
+      <select class="fs" style="font-size:12px;padding:5px 8px;height:34px;">
+        <option value="">Select unit</option>
+        <option>per job</option><option>per hour</option><option>per day</option>
+        <option>per visit</option><option>per property</option><option>per unit</option><option>fixed price</option>
+      </select>
+    </td>
+    <td style="display:flex;align-items:center;gap:6px;">
+      <input class="fi" type="text" placeholder="e.g. 1–2 days" style="font-size:12px;padding:6px 8px;flex:1;">
+      <button type="button" onclick="this.closest('tr').remove()" style="width:26px;height:26px;border:1px solid rgba(192,57,43,0.3);border-radius:6px;background:rgba(192,57,43,0.05);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#c0392b;flex-shrink:0;">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;"><path d="M2 2l10 10M12 2L2 12"/></svg>
+      </button>
+    </td>`;
+  tbody.appendChild(tr);
+}
 </script>
 
 <!-- ── PERSONNEL DATALISTS ── -->

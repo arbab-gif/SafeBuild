@@ -1126,6 +1126,89 @@
       margin-bottom: 14px;
       letter-spacing: -0.01em;
     }
+    /* Expandable section-card header */
+    .section-title-row { display:flex;align-items:center;justify-content:space-between;margin-bottom:14px; }
+    .section-title-row .section-title { margin-bottom:0; }
+    .maximize-btn { display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:1px solid var(--gray-alpha-5);border-radius:6px;background:transparent;cursor:pointer;color:var(--gray-alpha-9);flex-shrink:0;transition:background .1s,color .1s; }
+    .maximize-btn:hover { background:var(--gray-alpha-3);color:var(--gray-12);border-color:var(--gray-alpha-7); }
+    .maximize-btn svg { width:13px;height:13px;pointer-events:none; }
+    /* ── Services Offered — accordion redesign ── */
+    .svc-toolbar { display:flex;align-items:center;gap:8px;margin-bottom:12px; }
+    .svc-search { display:flex;align-items:center;gap:6px;height:30px;background:var(--gray-alpha-2);border:1px solid var(--gray-alpha-4);border-radius:7px;padding:0 10px;flex:1; }
+    .svc-search svg { width:12px;height:12px;color:var(--gray-alpha-9);flex-shrink:0; }
+    .svc-search input { border:none;outline:none;background:transparent;font-size:12px;color:var(--gray-12);flex:1;font-family:inherit; }
+    .svc-search input::placeholder { color:var(--gray-alpha-9); }
+    /* Accordion container */
+    .svc-accordion { border:1px solid var(--gray-alpha-4);border-radius:10px;overflow:hidden; }
+    .svc-acc-item { border-bottom:1px solid var(--gray-alpha-4); }
+    .svc-acc-item:last-child { border-bottom:none; }
+    /* Header */
+    .svc-acc-header { display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;background:transparent;border:none;width:100%;text-align:left;transition:background .12s; }
+    .svc-acc-header:hover { background:var(--gray-alpha-1); }
+    .svc-acc-item.open > .svc-acc-header { background:var(--gray-alpha-2); }
+    .svc-acc-hicon { width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .svc-acc-hinfo { flex:1;text-align:left;min-width:0; }
+    .svc-acc-hname { font-size:13px;font-weight:700;color:var(--gray-12); }
+    .svc-acc-hdesc { font-size:11px;color:var(--gray-alpha-10);margin-top:1px; }
+    .svc-acc-hright { display:flex;align-items:center;gap:10px;flex-shrink:0; }
+    .svc-acc-hcount { font-size:10px;font-weight:600;padding:1px 7px;background:var(--gray-alpha-3);border-radius:999px;color:var(--gray-alpha-10); }
+    .svc-acc-hprice { font-size:13px;font-weight:700;color:var(--color-success); }
+    .svc-acc-chevron { width:14px;height:14px;color:var(--gray-alpha-9);transition:transform .22s ease;flex-shrink:0; }
+    .svc-acc-item.open .svc-acc-chevron { transform:rotate(180deg); }
+    /* Body — grid-rows animation */
+    .svc-acc-body { display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s ease; }
+    .svc-acc-item.open .svc-acc-body { grid-template-rows:1fr; }
+    .svc-acc-body-inner { overflow:hidden; }
+    /* Scrollable content pane */
+    .svc-acc-content { border-top:1px solid var(--gray-alpha-4);max-height:300px;overflow-y:auto; }
+    .svc-acc-content::-webkit-scrollbar { width:4px; }
+    .svc-acc-content::-webkit-scrollbar-thumb { background:var(--gray-alpha-5);border-radius:999px; }
+    /* Accordion body: meta row + chips */
+    .svc-acc-meta { display:grid;grid-template-columns:1fr 1fr 2fr;border-bottom:1px solid var(--gray-alpha-3);padding:10px 16px;background:var(--gray-alpha-1);gap:12px; }
+    .svc-acc-meta-label { font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-alpha-9);margin-bottom:3px; }
+    .svc-acc-meta-value { font-size:12.5px;font-weight:500;color:var(--gray-12); }
+    .svc-acc-chips { display:flex;flex-wrap:wrap;gap:6px;padding:12px 16px; }
+    .svc-acc-chip { display:inline-flex;align-items:center;padding:4px 11px;background:var(--gray-alpha-2);border:1px solid var(--gray-alpha-4);border-radius:999px;font-size:12px;font-weight:500;color:var(--gray-11);white-space:nowrap;transition:background .1s; }
+    .svc-acc-chip:hover { background:var(--gray-alpha-3); }
+    /* Modal overrides */
+    .expand-modal-body .svc-accordion { border:none;border-radius:0; }
+    .expand-modal-body .svc-acc-content { max-height:none;overflow:visible; }
+    .expand-modal-body .svc-acc-item { border-bottom:1px solid var(--gray-alpha-4); }
+    /* Service-category-card maximize btn */
+    .service-cat-header { position:relative; }
+    .svc-maximize-btn { display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border:1px solid var(--gray-alpha-4);border-radius:5px;background:transparent;cursor:pointer;color:var(--gray-alpha-9);flex-shrink:0;transition:background .1s;margin-left:10px; }
+    .svc-maximize-btn:hover { background:var(--gray-alpha-3);color:var(--gray-12); }
+    .svc-maximize-btn svg { width:12px;height:12px;pointer-events:none; }
+    /* Expand modal */
+    .expand-overlay { position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:7000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s; }
+    .expand-overlay.open { opacity:1;pointer-events:all; }
+    .expand-modal { background:#fff;border-radius:14px;width:min(860px,94vw);max-height:82vh;display:flex;flex-direction:column;transform:scale(.96) translateY(12px);transition:transform .22s,opacity .22s;opacity:0;box-shadow:0 24px 72px rgba(0,0,0,.18);overflow:hidden; }
+    .expand-overlay.open .expand-modal { transform:scale(1) translateY(0);opacity:1; }
+    .expand-modal-head { display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--gray-alpha-4);flex-shrink:0;gap:12px; }
+    .expand-modal-head-left { display:flex;flex-direction:column;gap:2px; }
+    .expand-modal-title-text { font-size:15px;font-weight:700;color:var(--gray-12); }
+    .expand-modal-subtitle { font-size:12px;color:var(--gray-alpha-11); }
+    .expand-modal-head-right { display:flex;align-items:center;gap:8px; }
+    .expand-modal-search { display:flex;align-items:center;gap:6px;height:30px;background:var(--gray-alpha-2);border:1px solid var(--gray-alpha-4);border-radius:7px;padding:0 10px;min-width:180px; }
+    .expand-modal-search svg { width:12px;height:12px;color:var(--gray-alpha-9);flex-shrink:0; }
+    .expand-modal-search input { border:none;outline:none;background:transparent;font-size:12px;color:var(--gray-12);flex:1;font-family:inherit; }
+    .expand-modal-search input::placeholder { color:var(--gray-alpha-9); }
+    .expand-modal-close { width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:18px;color:var(--gray-alpha-9);border-radius:6px;display:flex;align-items:center;justify-content:center; }
+    .expand-modal-close:hover { background:var(--gray-alpha-3);color:var(--gray-12); }
+    .expand-modal-body { flex:1;overflow-y:auto;padding:20px; }
+    /* Service chips in modal — no collapse */
+    .expand-modal-body .service-cat-chips { max-height:none;overflow:visible; }
+    .expand-modal-body .service-cat-chips::after { display:none; }
+    .expand-modal-body .service-category-card { margin-bottom:14px; }
+    .expand-modal-body .svc-maximize-btn { display:none; }
+    .expand-modal-body .maximize-btn { display:none; }
+    /* Chip count badge */
+    .chip-count-badge { font-size:10px;font-weight:600;color:var(--gray-alpha-11);padding:2px 6px;background:var(--gray-alpha-3);border-radius:999px;margin-left:6px; }
+    /* Table collapsed */
+    .table-wrap-collapsible { position:relative;max-height:260px;overflow:hidden; }
+    .table-wrap-collapsible::after { content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,#fff);pointer-events:none; }
+    .table-wrap-collapsible.table-expanded { max-height:none;overflow:visible; }
+    .table-wrap-collapsible.table-expanded::after { display:none; }
 
     /* ============================================================
        REVIEWS TAB
@@ -1379,6 +1462,28 @@
     .delta-neg-good { background: var(--green-alpha-3); color: var(--color-success); }
     .delta-neg-bad { background: var(--red-alpha-3); color: var(--color-danger); }
 
+    .kpi-donut-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+    .donut-card { background: var(--gray-alpha-2); border-radius: 10px; padding: 16px 10px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    /* fixed 96px chart zone for every card so rows stay level */
+    .donut-chart-area { width: 96px; height: 96px; display: flex; align-items: center; justify-content: center; }
+    .donut-wrap { position: relative; width: 96px; height: 96px; flex-shrink: 0; }
+    .donut-wrap.semi { height: 56px; margin-top: 20px; margin-bottom: 20px; }
+    .donut-svg { width: 96px; height: 96px; overflow: visible; }
+    .donut-svg.semi { width: 96px; height: 56px; overflow: hidden; }
+    .donut-track { fill: none; stroke: var(--gray-alpha-4); stroke-width: 9; }
+    .donut-fill { fill: none; stroke-width: 9; stroke-linecap: round; }
+    .donut-fill.green  { stroke: #30a46c; }
+    .donut-fill.blue   { stroke: #1754d8; }
+    .donut-fill.amber  { stroke: #e79d13; }
+    .donut-fill.violet { stroke: #8e4ec6; }
+    .donut-fill.red    { stroke: #e5484d; }
+    .donut-label { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
+    .donut-label.semi { top: 0; bottom: auto; height: 56px; }
+    .donut-val { font-size: 15px; font-weight: 800; color: var(--gray-12); letter-spacing: -0.03em; line-height: 1; }
+    .donut-unit { font-size: 8px; font-weight: 500; color: var(--gray-alpha-11); margin-top: 2px; }
+    .donut-name { font-size: 11px; font-weight: 600; color: var(--gray-11); text-align: center; line-height: 1.3; }
+    .donut-delta { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 999px; }
+
     .sla-bar-row {
       display: flex; align-items: center; gap: 10px;
       padding: 6px 0; border-bottom: 1px solid var(--gray-alpha-4);
@@ -1454,6 +1559,68 @@
     /* ============================================================
        ACTIVITY TAB
     ============================================================ */
+    /* ── Activity panel shared ── */
+    .act-stat-row { display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin-bottom:14px; }
+    .act-stat-box { background:var(--gray-alpha-2);border:1px solid var(--gray-alpha-4);border-radius:8px;padding:10px 12px;text-align:center; }
+    .act-stat-val { font-size:18px;font-weight:700;color:var(--gray-12);line-height:1; }
+    .act-stat-lbl { font-size:10px;color:var(--gray-alpha-10);margin-top:3px;font-weight:500; }
+    .act-section-label { font-size:11px;font-weight:600;color:var(--gray-alpha-11);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px; }
+    /* Jobs */
+    .act-job-list { display:flex;flex-direction:column;gap:6px; }
+    .act-job-row { display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--gray-alpha-4);border-radius:8px;transition:background .1s; }
+    .act-job-row:hover { background:var(--gray-alpha-1); }
+    .act-job-status-dot { width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px; }
+    .act-job-body { flex:1;min-width:0; }
+    .act-job-top { display:flex;align-items:center;gap:8px;flex-wrap:wrap; }
+    .act-job-num { font-size:10px;font-weight:600;color:var(--gray-alpha-10);font-family:monospace; }
+    .act-job-title { font-size:13px;font-weight:600;color:var(--gray-12);flex:1; }
+    .act-job-meta { font-size:11px;color:var(--gray-alpha-10);margin-top:2px; }
+    .act-job-date { font-size:10px;color:var(--gray-alpha-9);margin-top:2px; }
+    .act-job-pill { display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;white-space:nowrap;flex-shrink:0; }
+    .pill-green { background:rgba(26,127,75,.1);color:#1a7f4b; }
+    .pill-blue { background:rgba(23,84,216,.1);color:var(--accent-9); }
+    .pill-amber { background:rgba(245,158,11,.12);color:#92400e; }
+    .pill-gray { background:var(--gray-3);color:var(--gray-alpha-11); }
+    .pill-red { background:rgba(239,68,68,.1);color:#dc2626; }
+    /* Documents */
+    .act-doc-list { display:flex;flex-direction:column;gap:6px; }
+    .act-doc-row { display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--gray-alpha-4);border-radius:8px;transition:background .1s; }
+    .act-doc-row:hover { background:var(--gray-alpha-1); }
+    .act-doc-icon { flex-shrink:0; }
+    .act-doc-body { flex:1;min-width:0; }
+    .act-doc-name { font-size:13px;font-weight:600;color:var(--gray-12); }
+    .act-doc-meta { font-size:11px;color:var(--gray-alpha-10);margin-top:2px; }
+    .act-doc-right { display:flex;align-items:center;gap:8px;flex-shrink:0; }
+    .act-doc-date { font-size:10px;color:var(--gray-alpha-9); }
+    /* Compliance renewals */
+    .act-renewal-row { display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--gray-alpha-4);border-radius:8px; }
+    .act-renewal-left { flex:1;min-width:0; }
+    .act-renewal-name { font-size:12.5px;font-weight:600;color:var(--gray-12); }
+    .act-renewal-meta { font-size:11px;color:var(--gray-alpha-10);margin-top:1px; }
+    /* Reviews */
+    .act-reviews-summary { display:flex;gap:20px;align-items:center;padding:14px 16px;background:var(--gray-alpha-1);border:1px solid var(--gray-alpha-4);border-radius:10px;margin-bottom:14px; }
+    .act-reviews-score { text-align:center;flex-shrink:0; }
+    .act-reviews-big { font-size:36px;font-weight:800;color:var(--gray-12);line-height:1; }
+    .act-reviews-stars { font-size:14px;color:#f59e0b;margin-top:2px; }
+    .act-reviews-count { font-size:11px;color:var(--gray-alpha-10);margin-top:2px; }
+    .act-reviews-bars { flex:1;display:flex;flex-direction:column;gap:5px; }
+    .act-bar-row { display:flex;align-items:center;gap:8px; }
+    .act-bar-lbl { font-size:11px;font-weight:600;color:var(--gray-alpha-10);width:20px;text-align:right;flex-shrink:0; }
+    .act-bar-track { flex:1;height:6px;background:var(--gray-alpha-3);border-radius:999px;overflow:hidden; }
+    .act-bar-fill { height:100%;background:var(--accent-9);border-radius:999px; }
+    .act-bar-num { font-size:11px;color:var(--gray-alpha-10);width:24px;flex-shrink:0; }
+    .act-review-list { display:flex;flex-direction:column;gap:10px; }
+    .act-review-card { border:1px solid var(--gray-alpha-4);border-radius:10px;padding:14px 16px; }
+    .act-review-top { display:flex;align-items:flex-start;gap:10px;margin-bottom:8px; }
+    .act-review-avatar { width:34px;height:34px;border-radius:50%;background:var(--accent-9);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .act-review-who { flex:1;min-width:0; }
+    .act-review-name { font-size:13px;font-weight:700;color:var(--gray-12); }
+    .act-review-org { font-size:11px;color:var(--gray-alpha-10);margin-top:1px; }
+    .act-review-meta { text-align:right;flex-shrink:0; }
+    .act-review-stars { font-size:12px;color:#f59e0b;display:block; }
+    .act-review-date { font-size:10px;color:var(--gray-alpha-9);margin-top:2px;display:block; }
+    .act-review-body { font-size:12.5px;color:var(--gray-11);line-height:1.6;margin-bottom:10px; }
+    .act-review-tags { display:flex;flex-wrap:wrap;gap:5px; }
     .activity-filter-bar {
       display: flex; align-items: center; gap: 6px;
       margin-bottom: 16px; flex-wrap: wrap;
@@ -1514,6 +1681,68 @@
     .job-num { font-size: 10px; font-weight: 600; color: var(--gray-alpha-11); font-family: 'SF Mono', monospace; }
     .job-title { font-size: 13px; font-weight: 600; color: var(--gray-12); margin-bottom: 3px; }
     .job-meta { font-size: 11px; color: var(--gray-alpha-11); }
+
+    /* ── SLA DRILL-DOWN DRAWER ── */
+    .sla-row-btn { display:flex;align-items:center;justify-content:space-between;width:100%;padding:8px 0;border-bottom:1px solid var(--gray-alpha-4);cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit;transition:background .1s;border-radius:6px;padding:8px 8px; }
+    .sla-row-btn:last-of-type { border-bottom:none; }
+    .sla-row-btn:hover { background:var(--gray-alpha-2); }
+    .sla-row-btn:hover .sla-chevron { opacity:1; }
+    .sla-row-left { display:flex;flex-direction:column;align-items:flex-start;gap:1px; }
+    .sla-row-label { font-size:13px;font-weight:500;color:var(--gray-12); }
+    .sla-row-sub { font-size:11px;color:var(--gray-alpha-11); }
+    .sla-row-right { display:flex;align-items:center;gap:8px; }
+    .sla-pct-badge { font-size:13px;font-weight:700;color:#1a7f4b; }
+    .sla-chevron { width:14px;height:14px;color:var(--gray-alpha-9);opacity:.5;flex-shrink:0; }
+
+    /* Drawer overlay */
+    .sla-overlay { position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:5000;opacity:0;pointer-events:none;transition:opacity .2s; }
+    .sla-overlay.open { opacity:1;pointer-events:all; }
+    /* Drawer panel */
+    .sla-drawer { position:fixed;top:0;right:0;bottom:0;width:660px;background:#fff;z-index:5001;transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-8px 0 32px rgba(0,0,0,.12); }
+    .sla-drawer.open { transform:translateX(0); }
+    .sla-drawer-head { padding:16px 20px 12px;border-bottom:1px solid var(--gray-alpha-4);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-shrink:0; }
+    .sla-drawer-title { font-size:15px;font-weight:700;color:var(--gray-12); }
+    .sla-drawer-sub { font-size:12px;color:var(--gray-alpha-11);margin-top:2px; }
+    .sla-drawer-close { width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:18px;color:var(--gray-alpha-9);display:flex;align-items:center;justify-content:center;border-radius:6px;flex-shrink:0; }
+    .sla-drawer-close:hover { background:var(--gray-alpha-3);color:var(--gray-12); }
+    .sla-stats-bar { display:flex;gap:0;padding:10px 20px;border-bottom:1px solid var(--gray-alpha-4);flex-shrink:0; }
+    .sla-stat-item { flex:1;text-align:center;padding:0 8px; }
+    .sla-stat-item + .sla-stat-item { border-left:1px solid var(--gray-alpha-4); }
+    .sla-stat-val { font-size:20px;font-weight:800;color:var(--gray-12);letter-spacing:-.03em; }
+    .sla-stat-val.green { color:#1a7f4b; }
+    .sla-stat-val.red   { color:#e5484d; }
+    .sla-stat-val.amber { color:#b45309; }
+    .sla-stat-lbl { font-size:10px;font-weight:500;color:var(--gray-alpha-11);margin-top:2px;text-transform:uppercase;letter-spacing:.04em; }
+    .sla-toolbar { display:flex;align-items:center;gap:8px;padding:10px 20px;border-bottom:1px solid var(--gray-alpha-4);flex-shrink:0;flex-wrap:wrap; }
+    .sla-search { display:flex;align-items:center;gap:6px;flex:1;min-width:160px;height:32px;background:var(--gray-alpha-2);border:1px solid var(--gray-alpha-4);border-radius:7px;padding:0 10px; }
+    .sla-search svg { width:13px;height:13px;color:var(--gray-alpha-9);flex-shrink:0; }
+    .sla-search input { border:none;outline:none;background:transparent;font-size:12px;color:var(--gray-12);flex:1;font-family:inherit; }
+    .sla-search input::placeholder { color:var(--gray-alpha-9); }
+    .sla-tab-grp { display:flex;gap:2px;background:var(--gray-alpha-3);border-radius:20px;padding:2px; }
+    .sla-tab { padding:4px 10px;font-size:11px;font-weight:500;border:none;background:none;border-radius:20px;cursor:pointer;color:var(--gray-alpha-11);font-family:inherit;transition:all .1s; }
+    .sla-tab.active { background:#fff;color:var(--gray-12);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08); }
+    .sla-export { display:flex;align-items:center;gap:5px;padding:6px 12px;border:1px solid var(--gray-alpha-4);border-radius:7px;background:#fff;font-size:11px;font-weight:600;color:var(--gray-11);cursor:pointer;font-family:inherit;white-space:nowrap; }
+    .sla-export:hover { background:var(--gray-alpha-2); }
+    .sla-export svg { width:12px;height:12px; }
+    .sla-table-wrap { flex:1;overflow-y:auto; }
+    .sla-table { width:100%;border-collapse:collapse;font-size:12px; }
+    .sla-table th { padding:8px 12px;font-size:10px;font-weight:600;color:var(--gray-alpha-11);text-align:left;border-bottom:1px solid var(--gray-alpha-4);background:var(--gray-alpha-1);white-space:nowrap;position:sticky;top:0;text-transform:uppercase;letter-spacing:.04em; }
+    .sla-table td { padding:10px 12px;border-bottom:1px solid var(--gray-alpha-3);vertical-align:middle; }
+    .sla-table tr:last-child td { border-bottom:none; }
+    .sla-table tr:hover td { background:var(--gray-alpha-1); }
+    .sla-job-id { font-weight:700;color:#1754d8;font-size:11px; }
+    .sla-prop { font-weight:500;color:var(--gray-12); }
+    .sla-prop small { display:block;font-size:10px;color:var(--gray-alpha-11);font-weight:400; }
+    .sla-badge { display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:999px;font-size:10px;font-weight:600; }
+    .sla-badge.completed { background:#f0fdf4;color:#15803d; }
+    .sla-badge.assigned  { background:#fff7ed;color:#c2410c; }
+    .sla-badge.recalled  { background:#fef2f2;color:#e5484d; }
+    .sla-badge-dot { width:4px;height:4px;border-radius:50%;background:currentColor; }
+    .sla-within  { color:#1a7f4b;font-weight:600; }
+    .sla-outside { color:#e5484d;font-weight:600; }
+    .sla-empty { text-align:center;padding:40px 20px;color:var(--gray-alpha-9); }
+    .sla-empty svg { width:32px;height:32px;margin-bottom:8px;opacity:.4; }
+    .sla-footer { padding:10px 20px;border-top:1px solid var(--gray-alpha-4);font-size:11px;color:var(--gray-alpha-9);flex-shrink:0; }
   </style>
 </head>
 <body>
@@ -1710,7 +1939,7 @@
               </div>
               <div class="jobs-stat" style="margin-top:5px;justify-content:flex-end;">
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="7" width="14" height="8" rx="1"/><path d="M5 7V5a3 3 0 016 0v2"/><path d="M8 10v2"/></svg>
-                612 Completed jobs
+                <a href="contractor-jobs.html" style="color:inherit;text-decoration:none;cursor:pointer;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">612 Completed jobs</a>
               </div>
             </div>
           </div>
@@ -2281,10 +2510,10 @@
               <div class="exp-stat-val">14+</div>
               <div class="exp-stat-lbl">Years Experience</div>
             </div>
-            <div class="exp-stat-box">
-              <div class="exp-stat-val">612</div>
-              <div class="exp-stat-lbl">Jobs Completed (12m)</div>
-            </div>
+            <a href="contractor-jobs.html" class="exp-stat-box" style="text-decoration:none;cursor:pointer;" title="View job history">
+              <div class="exp-stat-val" style="color:var(--accent-9)">612</div>
+              <div class="exp-stat-lbl">Jobs Completed (12m) ↗</div>
+            </a>
             <div class="exp-stat-box">
               <div class="exp-stat-val" style="font-size:13px;line-height:1.3;">London &amp; SE</div>
               <div class="exp-stat-lbl">Compliance areas</div>
@@ -3775,10 +4004,10 @@
           <div class="exp-kpi-val">14+</div>
           <div class="exp-kpi-lbl">Years in business</div>
         </div>
-        <div class="exp-kpi-box">
-          <div class="exp-kpi-val">612</div>
-          <div class="exp-kpi-lbl">Jobs completed (12m)</div>
-        </div>
+        <a href="contractor-jobs.html" class="exp-kpi-box" style="text-decoration:none;cursor:pointer;">
+          <div class="exp-kpi-val" style="color:var(--accent-9)">612</div>
+          <div class="exp-kpi-lbl">Jobs completed (12m) ↗</div>
+        </a>
         <div class="exp-kpi-box">
           <div class="exp-kpi-val">4,800+</div>
           <div class="exp-kpi-lbl">Properties served (all-time)</div>
@@ -3953,67 +4182,164 @@
 
     <div class="section-card">
       <div class="section-title">KPI Dashboard <span style="font-weight:400;color:var(--gray-alpha-11);font-size:13px;">(Last 12 months vs previous 12 months)</span></div>
-      <div class="perf-kpi-grid">
-        <div class="perf-kpi-box">
-          <div class="perf-kpi-lbl">SLA met</div>
-          <div class="perf-kpi-val">96%</div>
-          <div class="perf-kpi-delta delta-pos">▲ +2.1% vs prev 12m</div>
+      <div class="kpi-donut-grid">
+
+        <!-- 1 SLA met — full donut -->
+        <div class="donut-card">
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 96 96" style="transform:rotate(-90deg)">
+              <circle class="donut-track" cx="48" cy="48" r="38"/>
+              <circle class="donut-fill green" cx="48" cy="48" r="38" stroke-dasharray="238.76" stroke-dashoffset="9.55"/>
+            </svg>
+            <div class="donut-label"><span class="donut-val">96%</span><span class="donut-unit">SLA met</span></div>
+          </div>
+          <span class="donut-name">SLA Compliance</span>
+          <span class="donut-delta delta-pos">▲ +2.1% vs prev 12m</span>
         </div>
-        <div class="perf-kpi-box">
-          <div class="perf-kpi-lbl">On-time completion</div>
-          <div class="perf-kpi-val">94.3%</div>
-          <div class="perf-kpi-delta delta-pos">▲ +1.8%</div>
+
+        <!-- 2 On-time completion — full donut -->
+        <div class="donut-card">
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 96 96" style="transform:rotate(-90deg)">
+              <circle class="donut-track" cx="48" cy="48" r="38"/>
+              <circle class="donut-fill blue" cx="48" cy="48" r="38" stroke-dasharray="238.76" stroke-dashoffset="13.61"/>
+            </svg>
+            <div class="donut-label"><span class="donut-val">94.3%</span><span class="donut-unit">on time</span></div>
+          </div>
+          <span class="donut-name">On-time Completion</span>
+          <span class="donut-delta delta-pos">▲ +1.8%</span>
         </div>
-        <div class="perf-kpi-box">
-          <div class="perf-kpi-lbl">Quality score</div>
-          <div class="perf-kpi-val">4.8/5</div>
-          <div class="perf-kpi-delta delta-pos">▲ +0.2</div>
+
+        <!-- 3 Quality score — full donut (4.8/5 = 96%) -->
+        <div class="donut-card">
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 96 96" style="transform:rotate(-90deg)">
+              <circle class="donut-track" cx="48" cy="48" r="38"/>
+              <circle class="donut-fill blue" cx="48" cy="48" r="38" stroke-dasharray="238.76" stroke-dashoffset="9.55"/>
+            </svg>
+            <div class="donut-label"><span class="donut-val">4.8/5</span><span class="donut-unit">quality</span></div>
+          </div>
+          <span class="donut-name">Quality Score</span>
+          <span class="donut-delta delta-pos">▲ +0.2</span>
         </div>
-        <div class="perf-kpi-box">
-          <div class="perf-kpi-lbl">First-time fix rate</div>
-          <div class="perf-kpi-val">96%</div>
-          <div class="perf-kpi-delta delta-pos">▲ +1.4%</div>
+
+        <!-- 4 First-time fix rate — full donut -->
+        <div class="donut-card">
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 96 96" style="transform:rotate(-90deg)">
+              <circle class="donut-track" cx="48" cy="48" r="38"/>
+              <circle class="donut-fill green" cx="48" cy="48" r="38" stroke-dasharray="238.76" stroke-dashoffset="9.55"/>
+            </svg>
+            <div class="donut-label"><span class="donut-val">96%</span><span class="donut-unit">first fix</span></div>
+          </div>
+          <span class="donut-name">First-time Fix Rate</span>
+          <span class="donut-delta delta-pos">▲ +1.4%</span>
         </div>
-        <div class="perf-kpi-box">
-          <div class="perf-kpi-lbl">Repeat issue rate</div>
-          <div class="perf-kpi-val">2.1%</div>
-          <div class="perf-kpi-delta delta-neg-good">▼ −0.6% (improved)</div>
+
+        <!-- 5 Repeat issue rate — full donut (inverted: 97.9% issue-free) -->
+        <div class="donut-card">
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 96 96" style="transform:rotate(-90deg)">
+              <circle class="donut-track" cx="48" cy="48" r="38"/>
+              <circle class="donut-fill green" cx="48" cy="48" r="38" stroke-dasharray="238.76" stroke-dashoffset="5.01"/>
+            </svg>
+            <div class="donut-label"><span class="donut-val">2.1%</span><span class="donut-unit">issue rate</span></div>
+          </div>
+          <span class="donut-name">Repeat Issue Rate</span>
+          <span class="donut-delta delta-neg-good">▼ −0.6% (improved)</span>
         </div>
-        <div class="perf-kpi-box">
-          <div class="perf-kpi-lbl">Missed appointments</div>
-          <div class="perf-kpi-val">1.2%</div>
-          <div class="perf-kpi-delta delta-neg-good">▼ −0.3% (improved)</div>
+
+        <!-- 6 Missed appointments — full donut (inverted: 98.8% kept) -->
+        <div class="donut-card">
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 96 96" style="transform:rotate(-90deg)">
+              <circle class="donut-track" cx="48" cy="48" r="38"/>
+              <circle class="donut-fill green" cx="48" cy="48" r="38" stroke-dasharray="238.76" stroke-dashoffset="2.87"/>
+            </svg>
+            <div class="donut-label"><span class="donut-val">1.2%</span><span class="donut-unit">missed</span></div>
+          </div>
+          <span class="donut-name">Missed Appointments</span>
+          <span class="donut-delta delta-neg-good">▼ −0.3% (improved)</span>
         </div>
-        <div class="perf-kpi-box">
-          <div class="perf-kpi-lbl">Customer satisfaction</div>
-          <div class="perf-kpi-val">4.8/5</div>
-          <div class="perf-kpi-delta delta-pos">▲ +0.3</div>
+
+        <!-- 7 Customer satisfaction — full donut (4.8/5 = 96%) -->
+        <div class="donut-card">
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 96 96" style="transform:rotate(-90deg)">
+              <circle class="donut-track" cx="48" cy="48" r="38"/>
+              <circle class="donut-fill violet" cx="48" cy="48" r="38" stroke-dasharray="238.76" stroke-dashoffset="9.55"/>
+            </svg>
+            <div class="donut-label"><span class="donut-val">4.8/5</span><span class="donut-unit">satisfaction</span></div>
+          </div>
+          <span class="donut-name">Customer Satisfaction</span>
+          <span class="donut-delta delta-pos">▲ +0.3</span>
         </div>
-        <div class="perf-kpi-box">
-          <div class="perf-kpi-lbl">Response time (avg.)</div>
-          <div class="perf-kpi-val">2.1 hrs</div>
-          <div class="perf-kpi-delta delta-neg-good">▼ −0.4 hrs (improved)</div>
+
+        <!-- 8 Response time — full donut (47.5% below 4hr SLA target) -->
+        <div class="donut-card">
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 96 96" style="transform:rotate(-90deg)">
+              <circle class="donut-track" cx="48" cy="48" r="38"/>
+              <circle class="donut-fill amber" cx="48" cy="48" r="38" stroke-dasharray="238.76" stroke-dashoffset="125.35"/>
+            </svg>
+            <div class="donut-label"><span class="donut-val">2.1</span><span class="donut-unit">hrs avg</span></div>
+          </div>
+          <span class="donut-name">Response Time</span>
+          <span class="donut-delta delta-neg-good">▼ −0.4 hrs (improved)</span>
         </div>
-        <div class="perf-kpi-box">
-          <div class="perf-kpi-lbl">Resident complaints</div>
-          <div class="perf-kpi-val">0.4%</div>
-          <div class="perf-kpi-delta delta-neg-good">▼ −0.2% (improved)</div>
+
+        <!-- 9 Resident complaints — full donut (inverted: 99.6% clear) -->
+        <div class="donut-card">
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 96 96" style="transform:rotate(-90deg)">
+              <circle class="donut-track" cx="48" cy="48" r="38"/>
+              <circle class="donut-fill green" cx="48" cy="48" r="38" stroke-dasharray="238.76" stroke-dashoffset="0.96"/>
+            </svg>
+            <div class="donut-label"><span class="donut-val">0.4%</span><span class="donut-unit">complaints</span></div>
+          </div>
+          <span class="donut-name">Resident Complaints</span>
+          <span class="donut-delta delta-neg-good">▼ −0.2% (improved)</span>
         </div>
-        <div class="perf-kpi-box">
-          <div class="perf-kpi-lbl">Complaint resolution</div>
-          <div class="perf-kpi-val">98.7%</div>
-          <div class="perf-kpi-delta delta-pos">▲ +0.5%</div>
+
+        <!-- 10 Complaint resolution — full donut -->
+        <div class="donut-card">
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 96 96" style="transform:rotate(-90deg)">
+              <circle class="donut-track" cx="48" cy="48" r="38"/>
+              <circle class="donut-fill blue" cx="48" cy="48" r="38" stroke-dasharray="238.76" stroke-dashoffset="3.10"/>
+            </svg>
+            <div class="donut-label"><span class="donut-val">98.7%</span><span class="donut-unit">resolved</span></div>
+          </div>
+          <span class="donut-name">Complaint Resolution</span>
+          <span class="donut-delta delta-pos">▲ +0.5%</span>
         </div>
-        <div class="perf-kpi-box">
-          <div class="perf-kpi-lbl">Avg. completion time</div>
-          <div class="perf-kpi-val">1.4 days</div>
-          <div class="perf-kpi-delta delta-neg-good">▼ −0.2 days (improved)</div>
+
+        <!-- 11 Avg completion time — full donut (53.3% below 3-day SLA) -->
+        <div class="donut-card">
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 96 96" style="transform:rotate(-90deg)">
+              <circle class="donut-track" cx="48" cy="48" r="38"/>
+              <circle class="donut-fill amber" cx="48" cy="48" r="38" stroke-dasharray="238.76" stroke-dashoffset="111.46"/>
+            </svg>
+            <div class="donut-label"><span class="donut-val">1.4</span><span class="donut-unit">days avg</span></div>
+          </div>
+          <span class="donut-name">Avg. Completion Time</span>
+          <span class="donut-delta delta-neg-good">▼ −0.2 days (improved)</span>
         </div>
-        <div class="perf-kpi-box">
-          <div class="perf-kpi-lbl">Resident satisfaction</div>
-          <div class="perf-kpi-val">★ 4.9</div>
-          <div class="perf-kpi-delta delta-pos">▲ +0.1</div>
+
+        <!-- 12 Resident satisfaction — full donut (4.9/5 = 98%) -->
+        <div class="donut-card">
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 96 96" style="transform:rotate(-90deg)">
+              <circle class="donut-track" cx="48" cy="48" r="38"/>
+              <circle class="donut-fill green" cx="48" cy="48" r="38" stroke-dasharray="238.76" stroke-dashoffset="4.78"/>
+            </svg>
+            <div class="donut-label"><span class="donut-val">4.9/5</span><span class="donut-unit">satisfaction</span></div>
+          </div>
+          <span class="donut-name">Resident Satisfaction</span>
+          <span class="donut-delta delta-pos">▲ +0.1</span>
         </div>
+
       </div>
     </div>
 
@@ -4089,23 +4415,47 @@
       <div style="display:flex;flex-direction:column;gap:14px;">
         <div class="section-card" style="margin-bottom:0;">
           <div class="section-title">Response Time Breakdown</div>
-          <div class="complaint-row">
-            <span class="complaint-label">Emergency (&lt; 2 hrs)</span>
-            <span class="complaint-val" style="color:#1a7f4b;">97.2% within SLA</span>
-          </div>
-          <div class="complaint-row">
-            <span class="complaint-label">Urgent (same day)</span>
-            <span class="complaint-val" style="color:#1a7f4b;">94.8% within SLA</span>
-          </div>
-          <div class="complaint-row">
-            <span class="complaint-label">Standard (next 2 working days)</span>
-            <span class="complaint-val" style="color:#1a7f4b;">98.1% within SLA</span>
-          </div>
-          <div class="complaint-row">
-            <span class="complaint-label">Planned (agreed date)</span>
-            <span class="complaint-val" style="color:#1a7f4b;">96.0% achieved</span>
-          </div>
-          <div class="complaint-row">
+          <button class="sla-row-btn" onclick="openSlaDrawer('Emergency')">
+            <div class="sla-row-left">
+              <span class="sla-row-label">Emergency</span>
+              <span class="sla-row-sub">&lt; 2 hrs target</span>
+            </div>
+            <div class="sla-row-right">
+              <span class="sla-pct-badge">97.2% within SLA</span>
+              <svg class="sla-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg>
+            </div>
+          </button>
+          <button class="sla-row-btn" onclick="openSlaDrawer('Urgent')">
+            <div class="sla-row-left">
+              <span class="sla-row-label">Urgent</span>
+              <span class="sla-row-sub">Same day target</span>
+            </div>
+            <div class="sla-row-right">
+              <span class="sla-pct-badge">94.8% within SLA</span>
+              <svg class="sla-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg>
+            </div>
+          </button>
+          <button class="sla-row-btn" onclick="openSlaDrawer('Standard')">
+            <div class="sla-row-left">
+              <span class="sla-row-label">Standard</span>
+              <span class="sla-row-sub">Next 2 working days</span>
+            </div>
+            <div class="sla-row-right">
+              <span class="sla-pct-badge">98.1% within SLA</span>
+              <svg class="sla-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg>
+            </div>
+          </button>
+          <button class="sla-row-btn" onclick="openSlaDrawer('Planned')">
+            <div class="sla-row-left">
+              <span class="sla-row-label">Planned</span>
+              <span class="sla-row-sub">Agreed date target</span>
+            </div>
+            <div class="sla-row-right">
+              <span class="sla-pct-badge">96.0% achieved</span>
+              <svg class="sla-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg>
+            </div>
+          </button>
+          <div class="complaint-row" style="margin-top:4px">
             <span class="complaint-label">Average response time (all jobs)</span>
             <span class="complaint-val">2.1 hrs</span>
           </div>
@@ -4151,194 +4501,304 @@
   <div class="tab-panel" id="tab-services">
 
     <div class="section-card">
-      <div class="section-title">Services Offered &amp; Pricing</div>
+      <div class="section-title-row">
+        <div class="section-title">Services Offered &amp; Pricing</div>
+        <button class="maximize-btn" onclick="expandSvcAccordion(this)" title="Expand all services">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
 
-      <!-- Core Property Compliance -->
-      <div class="service-category-card">
-        <div class="service-cat-header">
-          <div class="service-cat-left">
-            <div class="service-cat-icon" style="background:#fff7ed;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#ea580c" stroke-width="1.6"><path d="M9 2L3 5.5v6C3 14.8 5.7 17.3 9 18.5c3.3-1.2 6-3.7 6-7V5.5L9 2z"/><path d="M6 9l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div>
-              <div class="service-cat-name">Core Property Compliance</div>
-              <div class="service-cat-desc">Statutory compliance across all building safety disciplines</div>
-            </div>
-          </div>
-          <div class="service-cat-price">
-            <div class="service-cat-price-val">From £85/job</div>
-            <div class="service-cat-price-lbl">Starting price</div>
-          </div>
-        </div>
-        <div class="service-cat-chips">
-          <span class="service-spec-chip">Gas compliance (CP12)</span>
-          <span class="service-spec-chip">Electrical compliance (EICR)</span>
-          <span class="service-spec-chip">Fire safety compliance</span>
-          <span class="service-spec-chip">Water hygiene / legionella</span>
-          <span class="service-spec-chip">Asbestos management</span>
-          <span class="service-spec-chip">Lift compliance (LOLER)</span>
-        </div>
-        <div class="service-cat-details">
-          <div class="service-detail-box">
-            <div class="service-detail-lbl">Typical delivery</div>
-            <div class="service-detail-val">Same day</div>
-          </div>
-          <div class="service-detail-box">
-            <div class="service-detail-lbl">Coverage</div>
-            <div class="service-detail-val">London &amp; SE</div>
-          </div>
-          <div class="service-detail-box">
-            <div class="service-detail-lbl">Compliance deliverables</div>
-            <div class="service-detail-val">CP12, EICR, certs</div>
-          </div>
+      <!-- Search toolbar -->
+      <div class="svc-toolbar">
+        <div class="svc-search">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3" stroke-linecap="round"/></svg>
+          <input type="text" placeholder="Search services, compliance, delivery…" oninput="filterSvcAcc(this.value)" id="svc-acc-search">
         </div>
       </div>
 
-      <!-- Mechanical & Electrical -->
-      <div class="service-category-card">
-        <div class="service-cat-header">
-          <div class="service-cat-left">
-            <div class="service-cat-icon" style="background:#dbeafe;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1d4ed8" stroke-width="1.6"><path d="M10 2L4 9h6l-2 7 8-9h-6l2-5z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div>
-              <div class="service-cat-name">Mechanical &amp; Electrical</div>
-              <div class="service-cat-desc">Full M&amp;E services for residential and commercial properties</div>
-            </div>
-          </div>
-          <div class="service-cat-price">
-            <div class="service-cat-price-val">From £65/hour</div>
-            <div class="service-cat-price-lbl">Starting price</div>
-          </div>
-        </div>
-        <div class="service-cat-chips">
-          <span class="service-spec-chip">Domestic heating engineers</span>
-          <span class="service-spec-chip">Commercial mechanical engineers</span>
-          <span class="service-spec-chip">Electrical engineers (NICEIC)</span>
-          <span class="service-spec-chip">Ventilation specialists</span>
-          <span class="service-spec-chip">Renewables / low-carbon</span>
-          <span class="service-spec-chip">Heat pump installation</span>
-        </div>
-        <div class="service-cat-details">
-          <div class="service-detail-box">
-            <div class="service-detail-lbl">Typical delivery</div>
-            <div class="service-detail-val">1–5 days</div>
-          </div>
-          <div class="service-detail-box">
-            <div class="service-detail-lbl">Coverage</div>
-            <div class="service-detail-val">London &amp; SE</div>
-          </div>
-          <div class="service-detail-box">
-            <div class="service-detail-lbl">Compliance deliverables</div>
-            <div class="service-detail-val">EICR, Gas Safe certs</div>
-          </div>
-        </div>
-      </div>
+      <!-- Accordion -->
+      <div class="svc-accordion" id="svc-accordion">
 
-      <!-- Repairs & Maintenance -->
-      <div class="service-category-card">
-        <div class="service-cat-header">
-          <div class="service-cat-left">
-            <div class="service-cat-icon" style="background:#dcfce7;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#15803d" stroke-width="1.6"><path d="M14 2l-1.5 1.5-3-3L8 2s0 2.5 1.5 4l-7 7 1.5 1.5 7-7c1.5 1.5 4 1.5 4 1.5l1.5-1.5-3-3L14 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <!-- 1. Core Property Compliance -->
+        <div class="svc-acc-item open">
+          <button class="svc-acc-header" onclick="toggleSvcAcc(this)">
+            <div class="svc-acc-hinfo">
+              <div class="svc-acc-hname">Core Property Compliance</div>
+              <div class="svc-acc-hdesc">Statutory compliance across all building safety disciplines</div>
             </div>
-            <div>
-              <div class="service-cat-name">Repairs &amp; Maintenance</div>
-              <div class="service-cat-desc">Responsive and planned repair works across all trades</div>
+            <div class="svc-acc-hright">
+              <span class="svc-acc-hcount">6 services</span>
+              <span class="svc-acc-hprice">From £85/job</span>
+              <svg class="svc-acc-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-          </div>
-          <div class="service-cat-price">
-            <div class="service-cat-price-val">From £240/day</div>
-            <div class="service-cat-price-lbl">Starting price</div>
-          </div>
+          </button>
+          <div class="svc-acc-body"><div class="svc-acc-body-inner"><div class="svc-acc-content">
+            <div class="svc-acc-meta">
+              <div><div class="svc-acc-meta-label">Delivery</div><div class="svc-acc-meta-value">Same day – 3 days</div></div>
+              <div><div class="svc-acc-meta-label">Coverage</div><div class="svc-acc-meta-value">London &amp; SE</div></div>
+              <div><div class="svc-acc-meta-label">Compliance &amp; Notes</div><div class="svc-acc-meta-value">CP12 · EICR · FRA · L8 · AMS · LOLER — certificates issued &amp; uploaded same day</div></div>
+            </div>
+            <div class="svc-acc-chips">
+              <span class="svc-acc-chip">Gas compliance (CP12)</span>
+              <span class="svc-acc-chip">Electrical compliance (EICR)</span>
+              <span class="svc-acc-chip">Fire safety compliance</span>
+              <span class="svc-acc-chip">Water hygiene / legionella</span>
+              <span class="svc-acc-chip">Asbestos management</span>
+              <span class="svc-acc-chip">Lift compliance (LOLER)</span>
+            </div>
+          </div></div></div>
         </div>
-        <div class="service-cat-chips">
-          <span class="service-spec-chip">Responsive repairs operatives</span>
-          <span class="service-spec-chip">Multi-trade operatives</span>
-          <span class="service-spec-chip">Plumbers</span>
-          <span class="service-spec-chip">Electricians</span>
-          <span class="service-spec-chip">Roofers</span>
-          <span class="service-spec-chip">Out-of-hours emergency contractors</span>
-        </div>
-        <div class="service-cat-details">
-          <div class="service-detail-box">
-            <div class="service-detail-lbl">Typical delivery</div>
-            <div class="service-detail-val">Same day – 5 days</div>
-          </div>
-          <div class="service-detail-box">
-            <div class="service-detail-lbl">Coverage</div>
-            <div class="service-detail-val">London &amp; SE</div>
-          </div>
-          <div class="service-detail-box">
-            <div class="service-detail-lbl">Compliance deliverables</div>
-            <div class="service-detail-val">Job sheets, photos</div>
-          </div>
-        </div>
-      </div>
 
-      <div class="emergency-note">
+        <!-- 2. Mechanical & Electrical -->
+        <div class="svc-acc-item">
+          <button class="svc-acc-header" onclick="toggleSvcAcc(this)">
+            <div class="svc-acc-hinfo">
+              <div class="svc-acc-hname">Mechanical &amp; Electrical</div>
+              <div class="svc-acc-hdesc">Full M&amp;E services for residential and commercial properties</div>
+            </div>
+            <div class="svc-acc-hright">
+              <span class="svc-acc-hcount">6 services</span>
+              <span class="svc-acc-hprice">From £65/hr</span>
+              <svg class="svc-acc-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </button>
+          <div class="svc-acc-body"><div class="svc-acc-body-inner"><div class="svc-acc-content">
+            <div class="svc-acc-meta">
+              <div><div class="svc-acc-meta-label">Delivery</div><div class="svc-acc-meta-value">1 – 10 days</div></div>
+              <div><div class="svc-acc-meta-label">Coverage</div><div class="svc-acc-meta-value">London &amp; SE</div></div>
+              <div><div class="svc-acc-meta-label">Compliance &amp; Notes</div><div class="svc-acc-meta-value">Gas Safe · F-Gas · NICEIC · MCS · Benchmark — service records &amp; commissioning sheets provided</div></div>
+            </div>
+            <div class="svc-acc-chips">
+              <span class="svc-acc-chip">Domestic heating engineers</span>
+              <span class="svc-acc-chip">Commercial mechanical engineers</span>
+              <span class="svc-acc-chip">Electrical engineers (NICEIC)</span>
+              <span class="svc-acc-chip">Ventilation specialists</span>
+              <span class="svc-acc-chip">Renewables / low-carbon</span>
+              <span class="svc-acc-chip">Heat pump installation</span>
+            </div>
+          </div></div></div>
+        </div>
+
+        <!-- 3. Repairs & Maintenance -->
+        <div class="svc-acc-item">
+          <button class="svc-acc-header" onclick="toggleSvcAcc(this)">
+            <div class="svc-acc-hinfo">
+              <div class="svc-acc-hname">Repairs &amp; Maintenance</div>
+              <div class="svc-acc-hdesc">Responsive and planned repair works across all trades</div>
+            </div>
+            <div class="svc-acc-hright">
+              <span class="svc-acc-hcount">6 services</span>
+              <span class="svc-acc-hprice">From £240/day</span>
+              <svg class="svc-acc-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </button>
+          <div class="svc-acc-body"><div class="svc-acc-body-inner"><div class="svc-acc-content">
+            <div class="svc-acc-meta">
+              <div><div class="svc-acc-meta-label">Delivery</div><div class="svc-acc-meta-value">Same day – 5 days</div></div>
+              <div><div class="svc-acc-meta-label">Coverage</div><div class="svc-acc-meta-value">London &amp; SE</div></div>
+              <div><div class="svc-acc-meta-label">Compliance &amp; Notes</div><div class="svc-acc-meta-value">WIAPS · Part P — job sheets, photos &amp; sign-off forms. SOR pricing available.</div></div>
+            </div>
+            <div class="svc-acc-chips">
+              <span class="svc-acc-chip">Responsive repairs operatives</span>
+              <span class="svc-acc-chip">Multi-trade operatives</span>
+              <span class="svc-acc-chip">Plumbers</span>
+              <span class="svc-acc-chip">Electricians</span>
+              <span class="svc-acc-chip">Roofers</span>
+              <span class="svc-acc-chip">Out-of-hours emergency</span>
+            </div>
+          </div></div></div>
+        </div>
+
+        <!-- 4. Fire & Life Safety Systems -->
+        <div class="svc-acc-item">
+          <button class="svc-acc-header" onclick="toggleSvcAcc(this)">
+            <div class="svc-acc-hinfo">
+              <div class="svc-acc-hname">Fire &amp; Life Safety Systems</div>
+              <div class="svc-acc-hdesc">Installation, maintenance and inspection of fire detection and suppression systems</div>
+            </div>
+            <div class="svc-acc-hright">
+              <span class="svc-acc-hcount">6 services</span>
+              <span class="svc-acc-hprice">From £110/job</span>
+              <svg class="svc-acc-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </button>
+          <div class="svc-acc-body"><div class="svc-acc-body-inner"><div class="svc-acc-content">
+            <div class="svc-acc-meta">
+              <div><div class="svc-acc-meta-label">Delivery</div><div class="svc-acc-meta-value">Same day – 5 days</div></div>
+              <div><div class="svc-acc-meta-label">Coverage</div><div class="svc-acc-meta-value">London &amp; SE</div></div>
+              <div><div class="svc-acc-meta-label">Compliance &amp; Notes</div><div class="svc-acc-meta-value">BS 5839 · BS 5266 · BS 9990 · BS 5306 · BS EN 12101 · BS EN 12845 — system logbooks updated</div></div>
+            </div>
+            <div class="svc-acc-chips">
+              <span class="svc-acc-chip">Fire alarm servicing</span>
+              <span class="svc-acc-chip">Emergency lighting inspection</span>
+              <span class="svc-acc-chip">Dry riser &amp; wet riser testing</span>
+              <span class="svc-acc-chip">Fire extinguisher servicing</span>
+              <span class="svc-acc-chip">AOV / smoke control systems</span>
+              <span class="svc-acc-chip">Sprinkler system inspection</span>
+            </div>
+          </div></div></div>
+        </div>
+
+        <!-- 5. Planned Preventive Maintenance -->
+        <div class="svc-acc-item">
+          <button class="svc-acc-header" onclick="toggleSvcAcc(this)">
+            <div class="svc-acc-hinfo">
+              <div class="svc-acc-hname">Planned Preventive Maintenance (PPM)</div>
+              <div class="svc-acc-hdesc">Scheduled fabric, plant and building services maintenance programmes</div>
+            </div>
+            <div class="svc-acc-hright">
+              <span class="svc-acc-hcount">6 services</span>
+              <span class="svc-acc-hprice">From £180/visit</span>
+              <svg class="svc-acc-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </button>
+          <div class="svc-acc-body"><div class="svc-acc-body-inner"><div class="svc-acc-content">
+            <div class="svc-acc-meta">
+              <div><div class="svc-acc-meta-label">Delivery</div><div class="svc-acc-meta-value">Same day – 5 days</div></div>
+              <div><div class="svc-acc-meta-label">Coverage</div><div class="svc-acc-meta-value">London &amp; SE</div></div>
+              <div><div class="svc-acc-meta-label">Compliance &amp; Notes</div><div class="svc-acc-meta-value">BS EN 16005 · WRC-coded CCTV — condition reports, logbooks &amp; defect schedules provided</div></div>
+            </div>
+            <div class="svc-acc-chips">
+              <span class="svc-acc-chip">Gutter &amp; downpipe clearance</span>
+              <span class="svc-acc-chip">Communal area fabric checks</span>
+              <span class="svc-acc-chip">Roof &amp; flat roof inspections</span>
+              <span class="svc-acc-chip">Filter &amp; plant room maintenance</span>
+              <span class="svc-acc-chip">Drainage CCTV survey</span>
+              <span class="svc-acc-chip">Door &amp; access control servicing</span>
+            </div>
+          </div></div></div>
+        </div>
+
+        <!-- 6. Grounds & External Works -->
+        <div class="svc-acc-item">
+          <button class="svc-acc-header" onclick="toggleSvcAcc(this)">
+            <div class="svc-acc-hinfo">
+              <div class="svc-acc-hname">Grounds &amp; External Works</div>
+              <div class="svc-acc-hdesc">External fabric, landscaping and site infrastructure maintenance</div>
+            </div>
+            <div class="svc-acc-hright">
+              <span class="svc-acc-hcount">5 services</span>
+              <span class="svc-acc-hprice">From £200/day</span>
+              <svg class="svc-acc-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </button>
+          <div class="svc-acc-body"><div class="svc-acc-body-inner"><div class="svc-acc-content">
+            <div class="svc-acc-meta">
+              <div><div class="svc-acc-meta-label">Delivery</div><div class="svc-acc-meta-value">1 – 15 days</div></div>
+              <div><div class="svc-acc-meta-label">Coverage</div><div class="svc-acc-meta-value">London &amp; SE</div></div>
+              <div><div class="svc-acc-meta-label">Compliance &amp; Notes</div><div class="svc-acc-meta-value">Works completion certs, photographic records &amp; traffic management plans provided</div></div>
+            </div>
+            <div class="svc-acc-chips">
+              <span class="svc-acc-chip">Grounds maintenance</span>
+              <span class="svc-acc-chip">Paving &amp; hard landscaping</span>
+              <span class="svc-acc-chip">Fencing &amp; boundary works</span>
+              <span class="svc-acc-chip">External decoration</span>
+              <span class="svc-acc-chip">Car park line marking</span>
+            </div>
+          </div></div></div>
+        </div>
+
+        <!-- 7. Specialist Surveys & Inspections -->
+        <div class="svc-acc-item">
+          <button class="svc-acc-header" onclick="toggleSvcAcc(this)">
+            <div class="svc-acc-hinfo">
+              <div class="svc-acc-hname">Specialist Surveys &amp; Inspections</div>
+              <div class="svc-acc-hdesc">Technical surveys, condition assessments and energy performance reporting</div>
+            </div>
+            <div class="svc-acc-hright">
+              <span class="svc-acc-hcount">5 services</span>
+              <span class="svc-acc-hprice">From £150/job</span>
+              <svg class="svc-acc-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </button>
+          <div class="svc-acc-body"><div class="svc-acc-body-inner"><div class="svc-acc-content">
+            <div class="svc-acc-meta">
+              <div><div class="svc-acc-meta-label">Delivery</div><div class="svc-acc-meta-value">Same day – 14 days</div></div>
+              <div><div class="svc-acc-meta-label">Coverage</div><div class="svc-acc-meta-value">London &amp; SE</div></div>
+              <div><div class="svc-acc-meta-label">Compliance &amp; Notes</div><div class="svc-acc-meta-value">EPC · PWA 1996 · CAA — reports lodged on statutory registers where applicable</div></div>
+            </div>
+            <div class="svc-acc-chips">
+              <span class="svc-acc-chip">Energy Performance Certificate (EPC)</span>
+              <span class="svc-acc-chip">Damp &amp; structural survey</span>
+              <span class="svc-acc-chip">Thermal imaging survey</span>
+              <span class="svc-acc-chip">Party wall surveying</span>
+              <span class="svc-acc-chip">Drone &amp; facade inspection</span>
+            </div>
+          </div></div></div>
+        </div>
+
+      </div><!-- /svc-accordion -->
+
+      <div class="emergency-note" style="margin-top:12px;">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M8 5.5V8.5L10 10"/></svg>
         24/7 Emergency call-out available. Target response: 90 minutes from call. Out-of-hours rates from £195/visit. Call: 0800 123 4567
       </div>
     </div>
 
     <div class="section-card">
-      <div class="section-title">Service Packages</div>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Service</th>
-            <th>Price from</th>
-            <th>Delivery</th>
-            <th>Compliance deliverables</th>
-            <th>Includes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="font-weight:600;">Gas Safety Inspection (CP12)</td>
-            <td><span class="cell-bold">£85</span></td>
-            <td class="cell-muted">Same day</td>
-            <td class="cell-sub">CP12 certificate — uploaded same day</td>
-            <td class="cell-sub">Appliance checks, flue test, report</td>
-          </tr>
-          <tr>
-            <td style="font-weight:600;">Boiler Service &amp; Repair</td>
-            <td><span class="cell-bold">£120</span></td>
-            <td class="cell-muted">1–2 days</td>
-            <td class="cell-sub">Service record, parts report</td>
-            <td class="cell-sub">Full service, diagnostic, filters</td>
-          </tr>
-          <tr>
-            <td style="font-weight:600;">Emergency Gas Repair</td>
-            <td><span class="cell-bold">£150</span></td>
-            <td class="cell-muted">&lt; 4 hours</td>
-            <td class="cell-sub">Incident report, Gas Safe cert</td>
-            <td class="cell-sub">Call-out, diagnosis, repair, test</td>
-          </tr>
-          <tr>
-            <td style="font-weight:600;">Annual Maintenance Plan</td>
-            <td><span class="cell-bold">£450/yr</span></td>
-            <td class="cell-muted">Ongoing</td>
-            <td class="cell-sub">CP12 annual, service records</td>
-            <td class="cell-sub">Annual service + priority call-out</td>
-          </tr>
-          <tr>
-            <td style="font-weight:600;">Boiler Replacement</td>
-            <td><span class="cell-bold">£1,850</span></td>
-            <td class="cell-muted">1–2 days</td>
-            <td class="cell-sub">Benchmark cert, Gas Safe cert</td>
-            <td class="cell-sub">Remove old, install, commission, test</td>
-          </tr>
-          <tr>
-            <td style="font-weight:600;">EICR (Electrical Inspection)</td>
-            <td><span class="cell-bold">£180</span></td>
-            <td class="cell-muted">Half day</td>
-            <td class="cell-sub">EICR certificate (C1/C2 noted)</td>
-            <td class="cell-sub">Full consumer unit &amp; circuits test</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="section-title-row">
+        <div class="section-title">Service Packages</div>
+        <button class="maximize-btn" onclick="expandSectionCard(this,'Service Packages','Full pricing and service specifications')" title="Expand table">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="table-wrap-collapsible" id="service-packages-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Price from</th>
+              <th>Delivery</th>
+              <th>Compliance deliverables</th>
+              <th>Includes</th>
+            </tr>
+          </thead>
+          <tbody id="service-packages-tbody">
+            <tr>
+              <td style="font-weight:600;">Gas Safety Inspection (CP12)</td>
+              <td><span class="cell-bold">£85</span></td>
+              <td class="cell-muted">Same day</td>
+              <td class="cell-sub">CP12 certificate — uploaded same day</td>
+              <td class="cell-sub">Appliance checks, flue test, report</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Boiler Service &amp; Repair</td>
+              <td><span class="cell-bold">£120</span></td>
+              <td class="cell-muted">1–2 days</td>
+              <td class="cell-sub">Service record, parts report</td>
+              <td class="cell-sub">Full service, diagnostic, filters</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Emergency Gas Repair</td>
+              <td><span class="cell-bold">£150</span></td>
+              <td class="cell-muted">&lt; 4 hours</td>
+              <td class="cell-sub">Incident report, Gas Safe cert</td>
+              <td class="cell-sub">Call-out, diagnosis, repair, test</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Annual Maintenance Plan</td>
+              <td><span class="cell-bold">£450/yr</span></td>
+              <td class="cell-muted">Ongoing</td>
+              <td class="cell-sub">CP12 annual, service records</td>
+              <td class="cell-sub">Annual service + priority call-out</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Boiler Replacement</td>
+              <td><span class="cell-bold">£1,850</span></td>
+              <td class="cell-muted">1–2 days</td>
+              <td class="cell-sub">Benchmark cert, Gas Safe cert</td>
+              <td class="cell-sub">Remove old, install, commission, test</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">EICR (Electrical Inspection)</td>
+              <td><span class="cell-bold">£180</span></td>
+              <td class="cell-muted">Half day</td>
+              <td class="cell-sub">EICR certificate (C1/C2 noted)</td>
+              <td class="cell-sub">Full consumer unit &amp; circuits test</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </div><!-- /tab-services -->
@@ -4349,13 +4809,14 @@
     <div class="section-card">
       <div class="section-title">Activity Feed</div>
       <div class="activity-filter-bar">
-        <button class="act-filter-btn active">All activity</button>
-        <button class="act-filter-btn">Jobs</button>
-        <button class="act-filter-btn">Documents</button>
-        <button class="act-filter-btn">Compliance</button>
-        <button class="act-filter-btn">Reviews</button>
+        <button class="act-filter-btn active" onclick="switchActFilter(this,'act-all')">All activity</button>
+        <button class="act-filter-btn" onclick="switchActFilter(this,'act-jobs')">Jobs</button>
+        <button class="act-filter-btn" onclick="switchActFilter(this,'act-documents')">Documents</button>
+        <button class="act-filter-btn" onclick="switchActFilter(this,'act-compliance')">Compliance</button>
       </div>
 
+      <!-- ── ALL ACTIVITY ── -->
+      <div id="act-all" class="act-panel">
       <div class="activity-grid">
         <!-- Left: full timeline -->
         <div>
@@ -4563,7 +5024,7 @@
           </div>
 
           <div style="margin-top:8px;">
-            <a class="view-link">View all 612 completed jobs →</a>
+            <a class="view-link" href="contractor-jobs.html">View all 612 completed jobs →</a>
           </div>
 
           <div style="margin-top:14px;font-size:11px;font-weight:600;color:var(--gray-alpha-11);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;">Recent Document Uploads</div>
@@ -4587,6 +5048,428 @@
           </div>
         </div>
       </div>
+      </div><!-- /act-all -->
+
+      <!-- ── JOBS PANEL ── -->
+      <!-- ── JOBS PANEL ── -->
+      <div id="act-jobs" class="act-panel" style="display:none">
+        <div class="activity-grid">
+          <!-- Left: jobs timeline -->
+          <div>
+            <div class="act-section-label">Jobs Activity</div>
+            <div class="activity-full-timeline">
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot blue"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">16 Jun 2026</div>
+                  <div class="act-title">Fire Risk Assessment started — Elmwood House, Tower Hamlets</div>
+                  <span class="act-badge act-badge-blue">In progress</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot green"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">15 Jun 2026</div>
+                  <div class="act-title">Gas safety inspection completed — 14 Birch Lane, SE1</div>
+                  <span class="act-badge act-badge-green">Job complete</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot blue"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">14 Jun 2026</div>
+                  <div class="act-title">New quote submitted — Boiler Replacement, 7 units, Hackney</div>
+                  <span class="act-badge act-badge-blue">Quote submitted</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot green"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">05 Jun 2026</div>
+                  <div class="act-title">Emergency boiler repair completed — 221 Lark Road, E8 (4-hour response)</div>
+                  <span class="act-badge act-badge-green">Job complete</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot green"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">28 May 2026</div>
+                  <div class="act-title">Annual boiler service completed — 7–9 Maple Court, Lambeth (3 units)</div>
+                  <span class="act-badge act-badge-green">Job complete</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot green"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">20 May 2026</div>
+                  <div class="act-title">EICR — Electrical Inspection completed — Block C, Fenwick Estate (8 properties)</div>
+                  <span class="act-badge act-badge-green">Job complete</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot green"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">10 May 2026</div>
+                  <div class="act-title">Central Heating System Flush &amp; Balance — 12–18 Orchard Estate (6 properties)</div>
+                  <span class="act-badge act-badge-green">Job complete</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot blue"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">25 Apr 2026</div>
+                  <div class="act-title">Quote submitted — Kitchen Repairs, 3 units, Peckham</div>
+                  <span class="act-badge act-badge-blue">Quote submitted</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot gray"></div></div>
+                <div class="act-content">
+                  <div class="act-date">02 May 2026</div>
+                  <div class="act-title">Batch of 6 gas safety inspections completed — Orbit Group</div>
+                  <span class="act-badge act-badge-gray">6 jobs</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right: in progress + pending -->
+          <div>
+            <div class="act-section-label">In Progress &amp; Pending</div>
+            <div class="job-card">
+              <div class="job-card-top">
+                <span class="job-num">#JB-2026-0621</span>
+                <span class="status-pill" style="background:rgba(23,84,216,.1);color:var(--accent-9);">In Progress</span>
+              </div>
+              <div class="job-title">Fire Risk Assessment</div>
+              <div class="job-meta">Elmwood House, Tower Hamlets, E1 6BT</div>
+              <div class="job-meta" style="margin-top:3px;">Client: L&amp;Q Housing &nbsp;·&nbsp; Engineer: James Cole &nbsp;·&nbsp; Started 16 Jun 2026</div>
+            </div>
+
+            <div class="job-card">
+              <div class="job-card-top">
+                <span class="job-num">#JB-2026-0622</span>
+                <span class="status-pill" style="background:rgba(245,158,11,.12);color:#92400e;">Pending</span>
+              </div>
+              <div class="job-title">Legionella Risk Assessment</div>
+              <div class="job-meta">Civic Centre, Lewisham, SE6 2RT</div>
+              <div class="job-meta" style="margin-top:3px;">Client: LB Lewisham &nbsp;·&nbsp; Scheduled: 20 Jun 2026</div>
+            </div>
+
+            <div class="job-card">
+              <div class="job-card-top">
+                <span class="job-num">#JB-2026-0623</span>
+                <span class="status-pill" style="background:rgba(245,158,11,.12);color:#92400e;">Pending</span>
+              </div>
+              <div class="job-title">Lift LOLER Inspection</div>
+              <div class="job-meta">Parkview Court, Islington, N1 2JF</div>
+              <div class="job-meta" style="margin-top:3px;">Client: Islington Council &nbsp;·&nbsp; Scheduled: 22 Jun 2026</div>
+            </div>
+
+            <div style="margin-top:10px;">
+              <a class="view-link" href="contractor-jobs.html">View all 612 jobs →</a>
+            </div>
+          </div>
+        </div>
+      </div><!-- /act-jobs -->
+
+      <!-- ── DOCUMENTS PANEL ── -->
+      <div id="act-documents" class="act-panel" style="display:none">
+        <div class="activity-grid">
+          <!-- Left: document timeline -->
+          <div>
+            <div class="act-section-label">Document Activity</div>
+            <div class="activity-full-timeline">
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot gray"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">12 Jun 2026</div>
+                  <div class="act-title">CP12 certificates uploaded (batch ×12) — Peabody Trust</div>
+                  <span class="act-badge act-badge-gray">Document upload</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot blue"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">02 Jun 2026</div>
+                  <div class="act-title">Employers' Liability insurance confirmed — renewal submitted to SafeBuild</div>
+                  <span class="act-badge act-badge-blue">Document verified</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot gray"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">20 May 2026</div>
+                  <div class="act-title">EICR certificates uploaded (batch ×8) — LB Hackney</div>
+                  <span class="act-badge act-badge-gray">Document upload</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot gray"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">10 May 2026</div>
+                  <div class="act-title">SMSTS Certificate uploaded — Tony Marsh (valid to Sep 2027)</div>
+                  <span class="act-badge act-badge-gray">Document upload</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot blue"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">06 May 2026</div>
+                  <div class="act-title">Public Liability insurance policy document renewed — valid until Dec 2026</div>
+                  <span class="act-badge act-badge-blue">Document verified</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot gray"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">28 Apr 2026</div>
+                  <div class="act-title">Fire Risk Assessment report uploaded — Horizon Tower, Greenwich</div>
+                  <span class="act-badge act-badge-gray">Document upload</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot blue"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">01 Apr 2026</div>
+                  <div class="act-title">Gas Safe registration certificate uploaded — Reg 510247, valid to Mar 2027</div>
+                  <span class="act-badge act-badge-blue">Document verified</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot gray"></div></div>
+                <div class="act-content">
+                  <div class="act-date">18 Mar 2026</div>
+                  <div class="act-title">NICEIC registration renewal pack submitted</div>
+                  <span class="act-badge act-badge-gray">Document upload</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right: recent docs summary -->
+          <div>
+            <div class="act-section-label">Recent Documents</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+
+              <div class="act-doc-row">
+                <div class="act-doc-icon" style="color:var(--accent-9)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2h8l3 3v9H3z"/><path d="M11 2v3h3"/><path d="M5.5 8h5M5.5 10.5h3.5"/></svg></div>
+                <div class="act-doc-body">
+                  <div class="act-doc-name">CP12 Certificates (batch ×12)</div>
+                  <div class="act-doc-meta">Peabody Trust &nbsp;·&nbsp; Valid to Jun 2027</div>
+                </div>
+                <div class="act-doc-right"><span class="act-doc-date">12 Jun</span><span class="act-job-pill pill-green">Verified</span></div>
+              </div>
+
+              <div class="act-doc-row">
+                <div class="act-doc-icon" style="color:#1a7f4b"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2h8l3 3v9H3z"/><path d="M11 2v3h3"/><path d="M5.5 8h5M5.5 10.5h3.5"/></svg></div>
+                <div class="act-doc-body">
+                  <div class="act-doc-name">EL Insurance Renewal Certificate</div>
+                  <div class="act-doc-meta">Aviva &nbsp;·&nbsp; Valid to May 2027</div>
+                </div>
+                <div class="act-doc-right"><span class="act-doc-date">02 Jun</span><span class="act-job-pill pill-green">Verified</span></div>
+              </div>
+
+              <div class="act-doc-row">
+                <div class="act-doc-icon" style="color:var(--accent-9)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2h8l3 3v9H3z"/><path d="M11 2v3h3"/><path d="M5.5 8h5M5.5 10.5h3.5"/></svg></div>
+                <div class="act-doc-body">
+                  <div class="act-doc-name">EICR Reports (batch ×8)</div>
+                  <div class="act-doc-meta">LB Hackney &nbsp;·&nbsp; Valid to May 2031</div>
+                </div>
+                <div class="act-doc-right"><span class="act-doc-date">20 May</span><span class="act-job-pill pill-green">Verified</span></div>
+              </div>
+
+              <div class="act-doc-row">
+                <div class="act-doc-icon" style="color:#f59e0b"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2h8l3 3v9H3z"/><path d="M11 2v3h3"/><path d="M5.5 8h5M5.5 10.5h3.5"/></svg></div>
+                <div class="act-doc-body">
+                  <div class="act-doc-name">Public Liability Insurance</div>
+                  <div class="act-doc-meta">Zurich &nbsp;·&nbsp; Expires Dec 2026</div>
+                </div>
+                <div class="act-doc-right"><span class="act-doc-date">06 May</span><span class="act-job-pill pill-amber">Expiring</span></div>
+              </div>
+
+              <div class="act-doc-row">
+                <div class="act-doc-icon" style="color:#ef4444"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2h8l3 3v9H3z"/><path d="M11 2v3h3"/><path d="M5.5 8h5M5.5 10.5h3.5"/></svg></div>
+                <div class="act-doc-body">
+                  <div class="act-doc-name">ISO 9001 Certificate</div>
+                  <div class="act-doc-meta">BSI &nbsp;·&nbsp; Expired 15 Mar 2026</div>
+                </div>
+                <div class="act-doc-right"><span class="act-doc-date">15 Mar</span><span class="act-job-pill pill-red">Expired</span></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div><!-- /act-documents -->
+
+      <!-- ── COMPLIANCE PANEL ── -->
+      <div id="act-compliance" class="act-panel" style="display:none">
+        <div class="activity-grid">
+          <!-- Left: compliance timeline -->
+          <div>
+            <div class="act-section-label">Compliance Activity</div>
+            <div class="activity-full-timeline">
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot green"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">28 May 2026</div>
+                  <div class="act-title">Annual compliance audit passed — Southwark Council framework</div>
+                  <span class="act-badge act-badge-green">Passed</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot green"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">10 May 2026</div>
+                  <div class="act-title">SMSTS certification renewed — valid until Sep 2027</div>
+                  <span class="act-badge act-badge-green">Cert renewed</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot blue"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">06 May 2026</div>
+                  <div class="act-title">Public Liability insurance renewed — valid until Dec 2026</div>
+                  <span class="act-badge act-badge-blue">Renewed</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot green"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">01 Apr 2026</div>
+                  <div class="act-title">Gas Safe registration renewed — Reg 510247 (valid to Mar 2027)</div>
+                  <span class="act-badge act-badge-green">Cert renewed</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot red"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">15 Mar 2026</div>
+                  <div class="act-title">ISO 9001 certificate lapsed — renewal in progress</div>
+                  <span class="act-badge act-badge-red">Expired</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot green"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">14 Feb 2026</div>
+                  <div class="act-title">Compliance audit passed — Peabody Trust framework review</div>
+                  <span class="act-badge act-badge-green">Passed</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot green"></div><div class="act-line"></div></div>
+                <div class="act-content">
+                  <div class="act-date">20 Jan 2026</div>
+                  <div class="act-title">NICEIC annual assessment passed — registration renewed</div>
+                  <span class="act-badge act-badge-green">Passed</span>
+                </div>
+              </div>
+
+              <div class="act-item">
+                <div class="act-left"><div class="act-dot gray"></div></div>
+                <div class="act-content">
+                  <div class="act-date">10 Jan 2026</div>
+                  <div class="act-title">DBS Enhanced Check submitted for renewal — Michael Brown</div>
+                  <span class="act-badge act-badge-gray">Pending</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right: upcoming renewals -->
+          <div>
+            <div class="act-section-label">Upcoming Renewals &amp; Deadlines</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+
+              <div class="act-renewal-row">
+                <div class="act-renewal-left">
+                  <div class="act-renewal-name">ISO 9001 Quality Management</div>
+                  <div class="act-renewal-meta">BSI &nbsp;·&nbsp; Expired 15 Mar 2026</div>
+                </div>
+                <span class="act-job-pill pill-red">Overdue</span>
+              </div>
+
+              <div class="act-renewal-row">
+                <div class="act-renewal-left">
+                  <div class="act-renewal-name">Public Liability Insurance</div>
+                  <div class="act-renewal-meta">Zurich &nbsp;·&nbsp; Expires 05 Dec 2026</div>
+                </div>
+                <span class="act-job-pill pill-amber">169 days</span>
+              </div>
+
+              <div class="act-renewal-row">
+                <div class="act-renewal-left">
+                  <div class="act-renewal-name">DBS Enhanced Check — Michael Brown</div>
+                  <div class="act-renewal-meta">Expires 14 Jan 2027</div>
+                </div>
+                <span class="act-job-pill pill-amber">209 days</span>
+              </div>
+
+              <div class="act-renewal-row">
+                <div class="act-renewal-left">
+                  <div class="act-renewal-name">PASMA Licence — Sarah White</div>
+                  <div class="act-renewal-meta">Expires 02 Feb 2027</div>
+                </div>
+                <span class="act-job-pill pill-amber">228 days</span>
+              </div>
+
+              <div class="act-renewal-row">
+                <div class="act-renewal-left">
+                  <div class="act-renewal-name">Gas Safe Registration</div>
+                  <div class="act-renewal-meta">Reg 510247 &nbsp;·&nbsp; Expires 31 Mar 2027</div>
+                </div>
+                <span class="act-job-pill pill-green">285 days</span>
+              </div>
+
+              <div class="act-renewal-row">
+                <div class="act-renewal-left">
+                  <div class="act-renewal-name">NICEIC Registered Contractor</div>
+                  <div class="act-renewal-meta">Expires 30 Jun 2027</div>
+                </div>
+                <span class="act-job-pill pill-green">376 days</span>
+              </div>
+
+              <div class="act-renewal-row">
+                <div class="act-renewal-left">
+                  <div class="act-renewal-name">SMSTS Certificate — Tony Marsh</div>
+                  <div class="act-renewal-meta">Expires 09 Sep 2027</div>
+                </div>
+                <span class="act-job-pill pill-green">447 days</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div><!-- /act-compliance -->
+
     </div>
 
   </div><!-- /tab-activity -->
@@ -4801,6 +5684,274 @@
     var panel = document.getElementById(panelId);
     if (panel) panel.classList.add('active');
   }
+
+  /* ── SERVICE ACCORDION ── */
+  function switchActFilter(btn, panelId) {
+    document.querySelectorAll('.act-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.querySelectorAll('.act-panel').forEach(function(p){ p.style.display = 'none'; });
+    document.getElementById(panelId).style.display = '';
+  }
+
+  function toggleSvcAcc(btn) {
+    var item = btn.closest('.svc-acc-item');
+    var isOpen = item.classList.contains('open');
+    /* close all siblings */
+    item.closest('.svc-accordion').querySelectorAll('.svc-acc-item').forEach(function(i){ i.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  }
+
+  function filterSvcAcc(q) {
+    q = q.trim().toLowerCase();
+    document.querySelectorAll('#svc-accordion .svc-acc-item').forEach(function(item) {
+      var rows = item.querySelectorAll('tbody tr');
+      var anyMatch = false;
+      rows.forEach(function(row) {
+        var match = !q || row.textContent.toLowerCase().includes(q);
+        row.style.display = match ? '' : 'none';
+        if (match) anyMatch = true;
+      });
+      /* auto-open accordion if it has matches; hide item if nothing matches */
+      if (q) {
+        item.style.display = anyMatch ? '' : 'none';
+        if (anyMatch) item.classList.add('open');
+        else item.classList.remove('open');
+      } else {
+        item.style.display = '';
+      }
+    });
+  }
+
+  function expandSvcAccordion(btn) {
+    document.getElementById('expand-modal-title').textContent = 'Services Offered & Pricing';
+    document.getElementById('expand-modal-subtitle').textContent = '18 services across 3 categories';
+    document.getElementById('expand-search-input').value = '';
+    var body = document.getElementById('expand-modal-body');
+    body.innerHTML = '';
+    var acc = document.getElementById('svc-accordion');
+    var clone = acc.cloneNode(true);
+    /* open all items, remove max-height on content, disable toggle */
+    clone.querySelectorAll('.svc-acc-item').forEach(function(i){ i.classList.add('open'); i.style.display = ''; });
+    clone.querySelectorAll('tbody tr').forEach(function(r){ r.style.display = ''; });
+    clone.querySelectorAll('.svc-acc-content').forEach(function(c){ c.style.maxHeight = 'none'; c.style.overflow = 'visible'; });
+    clone.querySelectorAll('.svc-acc-header').forEach(function(h){ h.onclick = null; h.style.cursor = 'default'; });
+    body.appendChild(clone);
+    document.getElementById('expand-overlay').classList.add('open');
+  }
+
+  function expandSectionCard(btn, title, subtitle) {
+    document.getElementById('expand-modal-title').textContent = title;
+    document.getElementById('expand-modal-subtitle').textContent = subtitle || '';
+    document.getElementById('expand-search-input').value = '';
+    var body = document.getElementById('expand-modal-body');
+    body.innerHTML = '';
+    var card = btn.closest('.section-card');
+    var clone = card.cloneNode(true);
+    clone.querySelectorAll('.maximize-btn,.svc-maximize-btn').forEach(function(b){ b.remove(); });
+    clone.querySelectorAll('.section-title-row,.section-title').forEach(function(t){ t.remove(); });
+    clone.querySelectorAll('.table-wrap-collapsible').forEach(function(t){
+      t.classList.remove('table-wrap-collapsible'); t.style.maxHeight = 'none';
+    });
+    body.appendChild(clone);
+    document.getElementById('expand-overlay').classList.add('open');
+  }
+
+  function closeExpandModal() {
+    document.getElementById('expand-overlay').classList.remove('open');
+  }
+
+  function filterExpandModal(q) {
+    q = q.toLowerCase();
+    var body = document.getElementById('expand-modal-body');
+    body.querySelectorAll('.svc-list-item').forEach(function(item){
+      item.style.display = !q || item.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+    body.querySelectorAll('tbody tr').forEach(function(row){
+      row.style.display = !q || row.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  }
+
+  /* ── SLA DRILL-DOWN — same dataset as contractor-jobs.html ── */
+  (function() {
+    const SERVICES = ['Gas Safety Check','Boiler Service','Leak Repair','Emergency Call-out',
+      'Planned Maintenance','Heating Installation','Pipe Repair','Radiator Replacement',
+      'Pressure Test','Annual Service','Boiler Replacement','Flue Inspection'];
+    const PROPERTIES = [
+      {name:'Flat 4, Brixton House',loc:'Brixton, SW9'},
+      {name:'12 Elmwood Estate',loc:'Lewisham, SE13'},
+      {name:'Apt 7B, Canary Wharf Court',loc:'Tower Hamlets, E14'},
+      {name:'24 Meridian Point',loc:'Greenwich, SE10'},
+      {name:'Flat 12, Bermondsey Block',loc:'Bermondsey, SE1'},
+      {name:'8 Peckham Rise',loc:'Peckham, SE15'},
+      {name:'Flat 2A, Hackney Central',loc:'Hackney, E8'},
+      {name:'33 Clapham South Road',loc:'Clapham, SW4'},
+      {name:'Unit 5, Whitechapel Estate',loc:'Whitechapel, E1'},
+      {name:'18 Stockwell Gardens',loc:'Stockwell, SW9'},
+      {name:'Flat 9, Deptford Green',loc:'Deptford, SE8'},
+      {name:'45 Woolwich Common',loc:'Woolwich, SE18'},
+      {name:'Flat 1, Battersea Rise',loc:'Battersea, SW11'},
+      {name:'7 Streatham Hill',loc:'Streatham, SW16'},
+      {name:'Apt 3C, Elephant Park',loc:'Elephant & Castle, SE1'},
+      {name:'22 Forest Gate Lane',loc:'Forest Gate, E7'},
+      {name:'Flat 6, Walthamstow Court',loc:'Walthamstow, E17'},
+      {name:'14 Shepherd\'s Bush Green',loc:'Shepherd\'s Bush, W12'},
+      {name:'Flat 11, Barking Road',loc:'Barking, IG11'},
+      {name:'3 Romford Rise',loc:'Romford, RM1'},
+    ];
+    const PRIORITIES = ['Standard','Standard','Standard','Urgent','Emergency'];
+    function seeded(n, max) { return (n * 2654435769 >>> 0) % max; }
+    function generateDate(i) {
+      var base = new Date('2025-06-18');
+      base.setDate(base.getDate() - Math.floor(seeded(i * 7, 365)));
+      return base.toISOString().slice(0, 10);
+    }
+
+    var ALL_JOBS = [];
+    for (var i = 1; i <= 612; i++) {
+      var prop = PROPERTIES[seeded(i, PROPERTIES.length)];
+      var svc  = SERVICES[seeded(i * 3, SERVICES.length)];
+      var pri  = PRIORITIES[seeded(i * 5, PRIORITIES.length)];
+      var cost = 65 + seeded(i * 11, 60) * 13;
+      var status = 'Completed';
+      if (i > 594) status = 'Assigned';
+      if (i===28||i===71||i===154||i===299||i===412) status = 'Recalled';
+      /* Map to SLA tier: Emergency pri → Emergency, Urgent → Urgent,
+         Standard + Planned Maintenance svc → Planned, else Standard */
+      var tier = pri === 'Emergency' ? 'Emergency'
+               : pri === 'Urgent'    ? 'Urgent'
+               : svc === 'Planned Maintenance' ? 'Planned'
+               : 'Standard';
+      /* Simulate within-SLA flag using seeded value */
+      var slaRates = {Emergency:0.972, Urgent:0.948, Standard:0.981, Planned:0.960};
+      var withinSla = seeded(i * 17, 1000) < slaRates[tier] * 1000;
+      ALL_JOBS.push({
+        id: 'JOB-' + String(i).padStart(5,'0'),
+        date: generateDate(i),
+        prop: prop.name, loc: prop.loc,
+        service: svc, priority: pri, tier: tier,
+        status: status, cost: cost, withinSla: withinSla
+      });
+    }
+    ALL_JOBS.sort(function(a,b){ return b.date.localeCompare(a.date); });
+    window._SLA_JOBS = ALL_JOBS;
+
+    /* SLA tier config */
+    var TIER_INFO = {
+      Emergency: { label:'Emergency', sub:'< 2 hrs target', sla:'97.2%', color:'#dc2626' },
+      Urgent:    { label:'Urgent',    sub:'Same day target', sla:'94.8%', color:'#ea580c' },
+      Standard:  { label:'Standard',  sub:'Next 2 working days', sla:'98.1%', color:'#1754d8' },
+      Planned:   { label:'Planned',   sub:'Agreed date target', sla:'96.0%', color:'#7c3aed' },
+    };
+
+    var drawerTier = null, drawerTab = 'all', drawerSearch = '';
+
+    window.openSlaDrawer = function(tier) {
+      drawerTier = tier;
+      drawerTab = 'all';
+      drawerSearch = '';
+      var info = TIER_INFO[tier];
+      var jobs = ALL_JOBS.filter(function(j){ return j.tier === tier; });
+      var within = jobs.filter(function(j){ return j.withinSla; }).length;
+      var outside = jobs.length - within;
+
+      document.getElementById('sla-drawer-title').textContent = info.label + ' — Job Breakdown';
+      document.getElementById('sla-drawer-sub').textContent = info.sub + '  ·  ' + info.sla + ' within SLA';
+      document.getElementById('sla-stat-total').textContent = jobs.length;
+      document.getElementById('sla-stat-within').textContent = within;
+      document.getElementById('sla-stat-outside').textContent = outside;
+      document.getElementById('sla-search-input').value = '';
+      document.querySelectorAll('.sla-tab').forEach(function(b){ b.classList.remove('active'); });
+      document.querySelector('.sla-tab[data-tab="all"]').classList.add('active');
+
+      renderSlaTable(jobs);
+      document.getElementById('sla-overlay').classList.add('open');
+      document.getElementById('sla-drawer').classList.add('open');
+    };
+
+    window.closeSlaDrawer = function() {
+      document.getElementById('sla-overlay').classList.remove('open');
+      document.getElementById('sla-drawer').classList.remove('open');
+    };
+
+    window.setSlaTab = function(btn, tab) {
+      drawerTab = tab;
+      document.querySelectorAll('.sla-tab').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      applyDrawerFilters();
+    };
+
+    window.slaSearchInput = function(val) {
+      drawerSearch = val.toLowerCase();
+      applyDrawerFilters();
+    };
+
+    function applyDrawerFilters() {
+      var jobs = (window._SLA_JOBS || []).filter(function(j){ return j.tier === drawerTier; });
+      if (drawerTab === 'within')  jobs = jobs.filter(function(j){ return j.withinSla; });
+      if (drawerTab === 'outside') jobs = jobs.filter(function(j){ return !j.withinSla; });
+      if (drawerTab === 'assigned')   jobs = jobs.filter(function(j){ return j.status === 'Assigned'; });
+      if (drawerTab === 'completed')  jobs = jobs.filter(function(j){ return j.status === 'Completed'; });
+      if (drawerSearch) {
+        jobs = jobs.filter(function(j){
+          return j.id.toLowerCase().includes(drawerSearch) ||
+                 j.prop.toLowerCase().includes(drawerSearch) ||
+                 j.service.toLowerCase().includes(drawerSearch);
+        });
+      }
+      renderSlaTable(jobs);
+    }
+
+    function renderSlaTable(jobs) {
+      var tbody = document.getElementById('sla-tbody');
+      var footer = document.getElementById('sla-footer');
+      if (!jobs.length) {
+        tbody.innerHTML = '<tr><td colspan="6"><div class="sla-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><div>No jobs found</div></td></tr>';
+        footer.textContent = '0 jobs';
+        return;
+      }
+      footer.textContent = jobs.length + ' job' + (jobs.length !== 1 ? 's' : '');
+      tbody.innerHTML = jobs.map(function(j) {
+        var fmtDate = new Date(j.date).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+        var statusBadge = j.status === 'Completed'
+          ? '<span class="sla-badge completed"><span class="sla-badge-dot"></span>Completed</span>'
+          : j.status === 'Assigned'
+          ? '<span class="sla-badge assigned"><span class="sla-badge-dot"></span>Assigned</span>'
+          : '<span class="sla-badge recalled"><span class="sla-badge-dot"></span>Recalled</span>';
+        var slaCell = j.withinSla
+          ? '<span class="sla-within">✓ Within SLA</span>'
+          : '<span class="sla-outside">✗ Breached</span>';
+        return '<tr>'
+          + '<td><span class="sla-job-id">' + j.id + '</span></td>'
+          + '<td><div class="sla-prop">' + j.prop + '<small>' + j.loc + '</small></div></td>'
+          + '<td style="font-size:11px;color:var(--gray-alpha-11);white-space:nowrap">' + fmtDate + '</td>'
+          + '<td style="font-size:11px;color:var(--gray-11)">' + j.service + '</td>'
+          + '<td>' + statusBadge + '</td>'
+          + '<td style="font-weight:600;white-space:nowrap">£' + j.cost.toLocaleString() + '</td>'
+          + '<td>' + slaCell + '</td>'
+          + '</tr>';
+      }).join('');
+    }
+
+    window.exportSlaCSV = function() {
+      var jobs = (window._SLA_JOBS || []).filter(function(j){ return j.tier === drawerTier; });
+      var headers = ['Job ID','Property','Location','Date','Service','Priority','Status','Cost (£)','Within SLA'];
+      var rows = jobs.map(function(j){ return [
+        j.id, j.prop, j.loc,
+        new Date(j.date).toLocaleDateString('en-GB'),
+        j.service, j.priority, j.status, j.cost,
+        j.withinSla ? 'Yes' : 'No'
+      ]; });
+      var csv = [headers].concat(rows).map(function(r){
+        return r.map(function(c){ return '"' + String(c).replace(/"/g,'""') + '"'; }).join(',');
+      }).join('\r\n');
+      var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'SLA_' + drawerTier + '_Jobs.csv';
+      document.body.appendChild(a); a.click();
+      document.body.removeChild(a); URL.revokeObjectURL(url);
+    };
+  })();
 </script>
 
 <!-- Certificate Viewer Modal -->
@@ -4927,6 +6078,92 @@
 
     <button onclick="document.getElementById('contact-modal').style.display='none'" style="width:100%;margin-top:14px;height:36px;border:1px solid var(--gray-alpha-4);border-radius:8px;background:transparent;font-size:13px;font-weight:500;color:var(--gray-alpha-11);cursor:pointer;">Cancel</button>
   </div>
+</div>
+
+<!-- Service Expand Modal -->
+<div class="expand-overlay" id="expand-overlay" onclick="closeExpandModal()">
+  <div class="expand-modal" onclick="event.stopPropagation()">
+    <div class="expand-modal-head">
+      <div class="expand-modal-head-left">
+        <span class="expand-modal-title-text" id="expand-modal-title">Services</span>
+        <span class="expand-modal-subtitle" id="expand-modal-subtitle"></span>
+      </div>
+      <div class="expand-modal-head-right">
+        <div class="expand-modal-search">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3" stroke-linecap="round"/></svg>
+          <input type="text" placeholder="Search services…" oninput="filterExpandModal(this.value)" id="expand-search-input">
+        </div>
+        <button class="expand-modal-close" onclick="closeExpandModal()">×</button>
+      </div>
+    </div>
+    <div class="expand-modal-body" id="expand-modal-body"></div>
+  </div>
+</div>
+
+<!-- SLA Drill-down Overlay -->
+<div class="sla-overlay" id="sla-overlay" onclick="closeSlaDrawer()"></div>
+
+<!-- SLA Drill-down Drawer -->
+<div class="sla-drawer" id="sla-drawer">
+  <div class="sla-drawer-head">
+    <div>
+      <div class="sla-drawer-title" id="sla-drawer-title">SLA Job Breakdown</div>
+      <div class="sla-drawer-sub" id="sla-drawer-sub"></div>
+    </div>
+    <button class="sla-drawer-close" onclick="closeSlaDrawer()">×</button>
+  </div>
+
+  <div class="sla-stats-bar">
+    <div class="sla-stat-item">
+      <div class="sla-stat-val" id="sla-stat-total">—</div>
+      <div class="sla-stat-lbl">Total Jobs</div>
+    </div>
+    <div class="sla-stat-item">
+      <div class="sla-stat-val green" id="sla-stat-within">—</div>
+      <div class="sla-stat-lbl">Within SLA</div>
+    </div>
+    <div class="sla-stat-item">
+      <div class="sla-stat-val red" id="sla-stat-outside">—</div>
+      <div class="sla-stat-lbl">SLA Breached</div>
+    </div>
+  </div>
+
+  <div class="sla-toolbar">
+    <div class="sla-search">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3" stroke-linecap="round"/></svg>
+      <input id="sla-search-input" type="text" placeholder="Search job ID, property, service…" oninput="slaSearchInput(this.value)">
+    </div>
+    <div class="sla-tab-grp">
+      <button class="sla-tab active" data-tab="all"       onclick="setSlaTab(this,'all')">All</button>
+      <button class="sla-tab"        data-tab="within"    onclick="setSlaTab(this,'within')">Within SLA</button>
+      <button class="sla-tab"        data-tab="outside"   onclick="setSlaTab(this,'outside')">Breached</button>
+      <button class="sla-tab"        data-tab="assigned"  onclick="setSlaTab(this,'assigned')">Assigned</button>
+      <button class="sla-tab"        data-tab="completed" onclick="setSlaTab(this,'completed')">Completed</button>
+    </div>
+    <button class="sla-export" onclick="exportSlaCSV()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2v8m0 0l-3-3m3 3l3-3"/><path d="M2 12h12"/></svg>
+      Export CSV
+    </button>
+  </div>
+
+  <div class="sla-table-wrap">
+    <table class="sla-table">
+      <thead>
+        <tr>
+          <th>Job ID</th>
+          <th>Property</th>
+          <th>Date</th>
+          <th>Service</th>
+          <th>Status</th>
+          <th>Cost</th>
+          <th>SLA</th>
+        </tr>
+      </thead>
+      <tbody id="sla-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="sla-footer" id="sla-footer"></div>
 </div>
 
 </body>
