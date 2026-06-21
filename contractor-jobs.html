@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job History — MJ Mechanical Ltd — SafeBuild Cloud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gray-1:#fcfcfc;--gray-2:#f5f5f5;--gray-3:#efefef;--gray-4:#e8e8e8;
+  --gray-5:#e0e0e0;--gray-6:#d8d8d8;--gray-7:#cecece;--gray-8:#bbbbbb;
+  --gray-9:#8d8d8d;--gray-10:#838383;--gray-11:#646464;--gray-12:#202020;
+  --accent-1:#f4f7fe;--accent-2:#e8f0fd;--accent-9:#1754d8;--accent-10:#1249c4;
+  --accent-11:#1040a8;
+  --red-9:#e5484d;--green-9:#30a46c;--orange-9:#f76b15;--amber-9:#ffc53d;
+  --panel:#ffffff;--bg:#fafafa;
+  --r1:4px;--r2:6px;--r3:8px;--r4:10px;--rf:9999px;
+  --s1:0 1px 2px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);
+  --s2:0 2px 8px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.05);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--gray-12);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+input,select,textarea,button{font-family:inherit}
+a{text-decoration:none}
+
+/* SHELL */
+.shell{display:flex;height:100vh;overflow:hidden}
+
+/* SIDEBAR */
+.sidebar{width:220px;background:var(--panel);border-right:1px solid rgba(0,0,0,.06);display:flex;flex-direction:column;height:100vh;position:fixed;left:0;top:0;z-index:200;overflow-y:auto;overflow-x:hidden}
+.sidebar-logo{height:56px;display:flex;align-items:center;gap:9px;padding:0 16px;border-bottom:1px solid rgba(0,0,0,.06);flex-shrink:0}
+.logo-mark{width:28px;height:28px;background:var(--accent-9);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-wordmark{font-size:13px;font-weight:700;color:var(--gray-12);letter-spacing:-.02em;line-height:1.15}
+.logo-wordmark span{display:block;font-weight:400;font-size:10px;color:rgba(0,0,0,.61);letter-spacing:0}
+.sidebar-scroll{flex:1;padding:8px;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:8px;height:34px;padding:0 10px 0 12px;border-radius:var(--r3);font-size:13px;font-weight:500;color:rgba(0,0,0,.61);cursor:pointer;transition:background 80ms,color 80ms;white-space:nowrap;overflow:hidden}
+.nav-item:hover{background:var(--gray-3);color:var(--gray-12)}
+.nav-item.active{background:var(--accent-9);color:#fff}
+.nav-item svg{width:15px;height:15px;flex-shrink:0;opacity:.65}
+.nav-item.active svg{opacity:1}
+.sidebar-footer{padding:10px 8px;border-top:1px solid rgba(0,0,0,.06);flex-shrink:0}
+.org-pill{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:var(--r3);cursor:pointer;margin-bottom:4px}
+.org-thumb{width:22px;height:22px;border-radius:var(--r1);background:var(--accent-9);font-size:9px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.org-label{font-size:12px;font-weight:500;color:var(--gray-12);flex:1}
+.view-as-lbl{font-size:10px;font-weight:500;color:rgba(0,0,0,.61);text-transform:uppercase;letter-spacing:.06em;padding:0 12px 4px;display:block}
+.role-chip{display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:var(--r3);font-size:12px;font-weight:500;color:var(--gray-12);background:var(--gray-2)}
+.role-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-9);flex-shrink:0}
+
+/* MAIN */
+.main{margin-left:220px;flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+
+/* TOPBAR */
+.topbar{height:56px;background:var(--panel);border-bottom:1px solid var(--gray-4);display:flex;align-items:center;padding:0 24px;flex-shrink:0;gap:10px}
+.tb-back{display:flex;align-items:center;gap:6px;padding:6px 10px;background:none;border:1px solid var(--gray-4);border-radius:var(--r3);font-size:12px;font-weight:500;color:var(--gray-9);cursor:pointer;transition:background 80ms,color 80ms;white-space:nowrap}
+.tb-back:hover{background:var(--gray-2);color:var(--gray-12)}
+.tb-title{font-size:13px;font-weight:600;color:var(--gray-12)}
+.tb-sep{color:var(--gray-7);font-size:13px}
+.tb-spacer{flex:1}
+.btn-dl{display:flex;align-items:center;gap:6px;padding:8px 14px;background:var(--panel);border:1px solid var(--gray-5);border-radius:var(--r2);font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;transition:background 80ms}
+.btn-dl:hover{background:var(--gray-2)}
+.btn-dl svg{width:14px;height:14px}
+.btn-primary{display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--accent-9);border:none;border-radius:var(--r2);font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:background 80ms}
+.btn-primary:hover{background:var(--accent-10)}
+.tb-icon{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--r2);cursor:pointer;color:var(--gray-11);border:none;background:none;position:relative}
+.tb-icon:hover{background:var(--gray-2)}
+.tb-icon svg{width:17px;height:17px}
+.notif-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;background:var(--red-9);border-radius:50%;border:1.5px solid var(--panel)}
+.user-chip{display:flex;align-items:center;gap:8px;cursor:pointer;padding:3px 6px;border-radius:var(--r2)}
+.u-ava{width:30px;height:30px;border-radius:50%;overflow:hidden;font-size:0;flex-shrink:0}
+.u-ava img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.u-name{font-size:12px;font-weight:600;color:var(--gray-12)}
+.u-role{font-size:10px;color:var(--gray-9)}
+
+/* SCROLL */
+.scroll{flex:1;overflow-y:auto;padding:24px 28px 40px}
+
+/* CONTRACTOR HEADER */
+.ctc-header{background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r4);padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.ctc-avatar{width:52px;height:52px;border-radius:50%;overflow:hidden;flex-shrink:0}
+.ctc-avatar img{width:100%;height:100%;object-fit:cover}
+.ctc-info{flex:1;min-width:0}
+.ctc-name{font-size:18px;font-weight:700;color:var(--gray-12);display:flex;align-items:center;gap:8px}
+.ctc-sub{font-size:13px;color:var(--gray-9);margin-top:2px}
+.verified-badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;background:#f0fdf4;border-radius:var(--rf);font-size:11px;font-weight:600;color:var(--green-9)}
+.ctc-meta{display:flex;align-items:center;gap:16px;margin-top:8px;flex-wrap:wrap}
+.ctc-meta span{font-size:12px;color:var(--gray-9);display:flex;align-items:center;gap:4px}
+.ctc-meta strong{color:var(--gray-12)}
+.ctc-actions{display:flex;gap:8px;flex-shrink:0}
+
+/* KPI STRIP */
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.kpi{background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r4);padding:16px 20px}
+.kpi-label{font-size:11px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.kpi-value{font-size:24px;font-weight:700;color:var(--gray-12);line-height:1}
+.kpi-sub{font-size:11px;color:var(--gray-9);margin-top:4px}
+.kpi-sub.up{color:var(--green-9)}
+.kpi-sub.down{color:var(--red-9)}
+
+/* EXPERIENCE OVERVIEW */
+.exp-card{background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r4);padding:20px 24px;margin-bottom:20px}
+.exp-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.exp-head h2{font-size:14px;font-weight:700;color:var(--gray-12)}
+.exp-head p{font-size:12px;color:var(--gray-9);margin-top:2px}
+.exp-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.exp-stat{text-align:center}
+.exp-stat-val{font-size:20px;font-weight:700;color:var(--gray-12)}
+.exp-stat-lbl{font-size:11px;color:var(--gray-9);margin-top:2px}
+.chart-wrap{overflow-x:auto}
+.bar-chart{display:flex;align-items:flex-end;gap:6px;height:80px;padding-bottom:20px;position:relative;min-width:520px}
+.bar-chart::after{content:'';position:absolute;bottom:20px;left:0;right:0;height:1px;background:var(--gray-4)}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:default}
+.bar{border-radius:3px 3px 0 0;background:var(--accent-9);width:100%;min-height:2px;transition:opacity 80ms}
+.bar.dimmed{background:var(--gray-5)}
+.bar-col:hover .bar{opacity:.75}
+.bar-lbl{font-size:9px;color:var(--gray-9);white-space:nowrap;position:absolute;bottom:2px}
+.bar-val{font-size:9px;font-weight:600;color:var(--gray-11)}
+
+/* FILTER BAR */
+.filter-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.search-wrap{display:flex;align-items:center;gap:8px;flex:1;min-width:200px;max-width:320px;background:var(--panel);border:1px solid var(--gray-5);border-radius:var(--r3);padding:0 10px;height:36px}
+.search-wrap svg{width:14px;height:14px;color:var(--gray-8);flex-shrink:0}
+.search-wrap input{border:none;outline:none;background:transparent;font-size:13px;color:var(--gray-12);flex:1;min-width:0}
+.search-wrap input::placeholder{color:var(--gray-8)}
+.tab-grp{display:flex;align-items:center;gap:2px;background:var(--gray-2);border-radius:var(--rf);padding:2px}
+.tab-btn{padding:5px 14px;font-size:12px;font-weight:500;border-radius:var(--rf);cursor:pointer;color:var(--gray-11);border:none;background:none;transition:background .15s,color .15s;white-space:nowrap}
+.tab-btn.active{background:var(--panel);color:var(--gray-12);box-shadow:var(--s1);font-weight:600}
+.filter-select{height:36px;padding:0 10px;border:1px solid var(--gray-5);border-radius:var(--r3);background:var(--panel);font-size:12px;color:var(--gray-12);font-family:inherit;outline:none;cursor:pointer}
+.filter-select:focus{border-color:var(--accent-9)}
+.results-count{font-size:12px;color:var(--gray-9);margin-left:auto;white-space:nowrap}
+
+/* TABLE */
+.tbl-wrap{background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r4);overflow:hidden}
+.tbl-head-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--gray-4)}
+.tbl-head-bar h3{font-size:13px;font-weight:700;color:var(--gray-12)}
+table.jobs-tbl{width:100%;border-collapse:collapse}
+table.jobs-tbl th{font-size:11px;font-weight:600;color:var(--gray-9);text-align:left;padding:10px 14px;border-bottom:1px solid var(--gray-4);background:var(--gray-1);white-space:nowrap;cursor:pointer;user-select:none}
+table.jobs-tbl th:hover{color:var(--gray-12)}
+table.jobs-tbl th .sort-arrow{display:inline-block;margin-left:4px;opacity:.4;font-size:10px}
+table.jobs-tbl th.sorted .sort-arrow{opacity:1;color:var(--accent-9)}
+table.jobs-tbl td{padding:11px 14px;border-bottom:1px solid var(--gray-3);font-size:13px;vertical-align:middle}
+table.jobs-tbl tr:last-child td{border-bottom:none}
+table.jobs-tbl tr:hover td{background:var(--gray-1)}
+.job-id{font-weight:600;color:var(--accent-9);font-size:12px;white-space:nowrap}
+.job-prop{font-weight:500;color:var(--gray-12)}
+.job-prop small{display:block;font-size:11px;color:var(--gray-9);font-weight:400;margin-top:1px}
+.job-cost{font-weight:600;color:var(--gray-12);white-space:nowrap}
+.job-date{font-size:12px;color:var(--gray-9);white-space:nowrap}
+
+/* STATUS BADGES */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:var(--rf);font-size:11px;font-weight:600;white-space:nowrap}
+.badge-completed{background:#f0fdf4;color:#15803d}
+.badge-assigned{background:#fff7ed;color:#c2410c}
+.badge-recalled{background:#fef2f2;color:var(--red-9)}
+.badge-priority-std{background:var(--gray-2);color:var(--gray-11)}
+.badge-priority-urg{background:#fff7ed;color:#c2410c}
+.badge-priority-em{background:#fef2f2;color:var(--red-9)}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+/* THREE-DOT MENU */
+.menu-wrap{position:relative;display:inline-block}
+.menu-btn{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:none;background:none;cursor:pointer;color:var(--gray-8);border-radius:var(--r2);transition:background 80ms,color 80ms}
+.menu-btn:hover{background:var(--gray-3);color:var(--gray-12)}
+.menu-btn svg{width:16px;height:16px;pointer-events:none}
+.ctx-menu{display:none;position:fixed;background:var(--panel);border:1px solid var(--gray-5);border-radius:var(--r3);box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:8000;min-width:170px;padding:4px;animation:menuIn 80ms ease}
+@keyframes menuIn{from{opacity:0;transform:scale(.96) translateY(-4px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.ctx-menu.open{display:block}
+.ctx-item{display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:var(--r2);font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;transition:background 80ms}
+.ctx-item:hover{background:var(--gray-2);color:var(--gray-12)}
+.ctx-item.danger{color:var(--red-9)}
+.ctx-item.danger:hover{background:#fef2f2}
+.ctx-item svg{width:14px;height:14px;flex-shrink:0;opacity:.7}
+.ctx-sep{height:1px;background:var(--gray-4);margin:3px 0}
+
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--gray-4)}
+.pg-info{font-size:12px;color:var(--gray-9)}
+.pg-btns{display:flex;align-items:center;gap:4px}
+.pg-btn{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid var(--gray-4);border-radius:var(--r2);background:var(--panel);font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;transition:all 80ms}
+.pg-btn:hover:not(:disabled){background:var(--gray-2);color:var(--gray-12)}
+.pg-btn.active{background:var(--accent-9);border-color:var(--accent-9);color:#fff}
+.pg-btn:disabled{opacity:.4;cursor:default}
+.pg-ellipsis{font-size:12px;color:var(--gray-8);padding:0 4px}
+.per-page{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-9)}
+.per-page select{height:28px;padding:0 6px;border:1px solid var(--gray-4);border-radius:var(--r2);font-size:12px;font-family:inherit;background:var(--panel);color:var(--gray-12);cursor:pointer;outline:none}
+
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 200ms}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--panel);border-radius:var(--r4);box-shadow:0 20px 60px rgba(0,0,0,.18);width:100%;max-width:440px;transform:scale(.96) translateY(8px);transition:transform 200ms,opacity 200ms;opacity:0;padding:0;overflow:hidden}
+.modal-overlay.open .modal-box{transform:scale(1) translateY(0);opacity:1}
+.modal-header{padding:18px 20px 16px;border-bottom:1px solid var(--gray-4);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.modal-header h3{font-size:15px;font-weight:700;color:var(--gray-12)}
+.modal-header p{font-size:12px;color:var(--gray-9);margin-top:3px}
+.modal-close{width:28px;height:28px;border:none;background:none;cursor:pointer;color:var(--gray-8);font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;border-radius:var(--r2);flex-shrink:0}
+.modal-close:hover{background:var(--gray-2);color:var(--gray-12)}
+.modal-body{padding:20px}
+.modal-footer{padding:12px 20px;border-top:1px solid var(--gray-4);display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.modal-job-ref{background:var(--gray-2);border-radius:var(--r3);padding:10px 12px;margin-bottom:16px;font-size:12px}
+.modal-job-ref strong{display:block;font-size:13px;font-weight:600;color:var(--gray-12);margin-bottom:2px}
+.modal-job-ref span{color:var(--gray-9)}
+.fg{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.fg label{font-size:12px;font-weight:500;color:var(--gray-12)}
+.fg select,.fg textarea,.fg input{width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--gray-5);border-radius:var(--r2);background:var(--panel);color:var(--gray-12);outline:none;font-family:inherit;transition:border-color .15s}
+.fg select:focus,.fg textarea:focus,.fg input:focus{border-color:var(--accent-9);box-shadow:0 0 0 2px rgba(23,84,216,.1)}
+.fg textarea{resize:vertical;min-height:80px}
+.btn-ghost{padding:8px 14px;background:none;border:1px solid var(--gray-5);border-radius:var(--r2);font-size:13px;font-weight:500;color:var(--gray-11);cursor:pointer;transition:background 80ms}
+.btn-ghost:hover{background:var(--gray-2)}
+.btn-danger{padding:8px 16px;background:var(--red-9);border:none;border-radius:var(--r2);font-size:13px;font-weight:600;color:#fff;cursor:pointer;transition:background 80ms}
+.btn-danger:hover{background:#d73b3f}
+.info-box{background:var(--accent-1);border:1px solid var(--accent-2);border-radius:var(--r3);padding:10px 12px;font-size:12px;color:var(--accent-11);line-height:1.5;margin-bottom:14px}
+.warn-box{background:#fff7ed;border:1px solid rgba(247,107,21,.2);border-radius:var(--r3);padding:10px 12px;font-size:12px;color:#9a3412;line-height:1.5;margin-bottom:14px}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:60px 20px;color:var(--gray-9)}
+.empty-state svg{width:40px;height:40px;margin-bottom:12px;opacity:.4}
+.empty-state p{font-size:14px;font-weight:500;color:var(--gray-11);margin-bottom:4px}
+.empty-state small{font-size:12px}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--gray-12);color:#fff;padding:10px 16px;border-radius:var(--r3);font-size:13px;font-weight:500;z-index:9999;transform:translateY(60px);opacity:0;transition:transform .25s,opacity .25s;pointer-events:none;display:flex;align-items:center;gap:8px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast svg{width:14px;height:14px;flex-shrink:0}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 1.5L14.5 5.25V10.75L8 14.5L1.5 10.75V5.25L8 1.5Z" fill="white" opacity="0.9"/>
+        <path d="M8 4.5L11.5 6.5V10.5L8 12.5L4.5 10.5V6.5L8 4.5Z" fill="white"/>
+      </svg>
+    </div>
+    <div class="logo-wordmark">SafeBuild Cloud<span>Compliance Platform</span></div>
+  </div>
+  <div class="sidebar-scroll">
+    <div class="nav-item" onclick="location.href='marketplace.html'">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h5v5H2zm7 0h5v5H9zM2 9h5v5H2zm7 0h5v5H9z" opacity=".8"/></svg>Dashboard
+    </div>
+    <div class="nav-item" onclick="location.href='marketplace.html'">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4h12M2 8h8M2 12h5"/></svg>Portfolio
+    </div>
+    <div class="nav-item" onclick="location.href='marketplace.html'">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="6" r="3"/><path d="M1.5 14c0-2.5 2.5-4.5 5.5-4.5s5.5 2 5.5 4.5"/></svg>Residents
+    </div>
+    <div class="nav-item" onclick="location.href='marketplace.html'">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 1.5L14.5 5.25V10.75L8 14.5L1.5 10.75V5.25L8 1.5Z"/></svg>Repairs
+    </div>
+    <div class="nav-item" onclick="location.href='marketplace.html'">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M5 4V3a1 1 0 011-1h4a1 1 0 011 1v1"/></svg>Planned Maintenance
+    </div>
+    <div class="nav-item" onclick="location.href='marketplace.html'">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.6 3.5L8 10l-3.1 1.5.6-3.5L3 5.5l3.5-.5z"/></svg>Compliance
+    </div>
+    <div class="nav-item active">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="6" r="3"/><path d="M1.5 14c0-2.5 2.5-4.5 5.5-4.5s5.5 2 5.5 4.5"/><path d="M10.5 9l1 1 2-2" stroke-linecap="round"/></svg>Contractors &amp; DLOs
+    </div>
+    <div class="nav-item" onclick="location.href='marketplace.html'">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4h12l-1.5 7H3.5L2 4z"/><path d="M5 4V3h6v1"/></svg>Procurement
+    </div>
+    <div class="nav-item" onclick="location.href='marketplace.html'">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Orders
+    </div>
+    <div class="nav-item" onclick="location.href='marketplace.html'">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 11V6l4-3 4 3v5H2z"/><path d="M10 11V8a2 2 0 014 0v3h-4"/></svg>Finance
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4h12M2 8h8M2 12h5"/></svg>Reports
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>Insights
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="12" height="12" rx="1.5"/><path d="M5 5.5h6M5 8h4M5 10.5h3"/></svg>Documents
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="2"/><path d="M8 2v2M8 12v2M2 8h2M12 8h2"/></svg>Settings
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <div class="org-pill">
+      <div class="org-thumb">SH</div>
+      <span class="org-label">SafeBuild Housing</span>
+    </div>
+    <span class="view-as-lbl">View as</span>
+    <div class="role-chip"><span class="dot"></span> Company Admin</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="tb-back" onclick="history.length>1?history.back():location.href='contractor-profile.html'">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg>
+      Contractors &amp; DLOs
+    </button>
+    <span class="tb-sep">›</span>
+    <span class="tb-title">MJ Mechanical Ltd — Job History</span>
+    <div class="tb-spacer"></div>
+    <button class="btn-dl" onclick="downloadCSV()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2v8m0 0l-3-3m3 3l3-3"/><path d="M2 12h12"/></svg>
+      Export CSV
+    </button>
+    <button class="btn-dl" onclick="window.print()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="5" width="10" height="7" rx="1"/><path d="M5 5V3h6v2M5 12v1h6v-1"/></svg>
+      Print
+    </button>
+    <div style="width:1px;height:24px;background:var(--gray-4);margin:0 2px"></div>
+    <button class="tb-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="notif-dot"></span>
+    </button>
+    <div class="user-chip">
+      <div class="u-ava"><img src="https://i.pravatar.cc/40?img=8" alt="James Martin"></div>
+      <div>
+        <div class="u-name">James Martin</div>
+        <div class="u-role">Company Admin</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SCROLL -->
+  <div class="scroll">
+
+    <!-- KPI STRIP -->
+    <div class="kpi-strip">
+      <div class="kpi">
+        <div class="kpi-label">Total Jobs</div>
+        <div class="kpi-value" id="kpi-total">612</div>
+        <div class="kpi-sub">All time</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Assigned</div>
+        <div class="kpi-value" style="color:var(--orange-9)" id="kpi-assigned">18</div>
+        <div class="kpi-sub">Pending completion</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Completed</div>
+        <div class="kpi-value" style="color:var(--green-9)" id="kpi-completed">594</div>
+        <div class="kpi-sub up">↑ 97% completion rate</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Total Value</div>
+        <div class="kpi-value" id="kpi-value">—</div>
+        <div class="kpi-sub">All jobs combined</div>
+      </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3" stroke-linecap="round"/></svg>
+        <input id="search-input" type="text" placeholder="Search job ID, property, service…" oninput="applyFilters()">
+      </div>
+      <div class="tab-grp">
+        <button class="tab-btn active" onclick="setTab(this,'all')">All <span id="cnt-all"></span></button>
+        <button class="tab-btn" onclick="setTab(this,'Assigned')">Assigned <span id="cnt-assigned"></span></button>
+        <button class="tab-btn" onclick="setTab(this,'Completed')">Completed <span id="cnt-completed"></span></button>
+        <button class="tab-btn" onclick="setTab(this,'Recalled')">Recalled <span id="cnt-recalled"></span></button>
+      </div>
+      <select class="filter-select" id="priority-filter" onchange="applyFilters()">
+        <option value="">All priorities</option>
+        <option>Standard</option>
+        <option>Urgent</option>
+        <option>Emergency</option>
+      </select>
+      <select class="filter-select" id="service-filter" onchange="applyFilters()">
+        <option value="">All services</option>
+        <option>Gas Safety Check</option>
+        <option>Boiler Service</option>
+        <option>Leak Repair</option>
+        <option>Emergency Call-out</option>
+        <option>Planned Maintenance</option>
+        <option>Heating Installation</option>
+        <option>Pipe Repair</option>
+        <option>Radiator Replacement</option>
+        <option>Pressure Test</option>
+        <option>Annual Service</option>
+        <option>Boiler Replacement</option>
+        <option>Flue Inspection</option>
+      </select>
+      <select class="filter-select" id="sort-filter" onchange="applyFilters()">
+        <option value="date-desc">Newest first</option>
+        <option value="date-asc">Oldest first</option>
+        <option value="cost-desc">Cost: high to low</option>
+        <option value="cost-asc">Cost: low to high</option>
+      </select>
+      <span class="results-count" id="results-count"></span>
+    </div>
+
+    <!-- TABLE -->
+    <div class="tbl-wrap">
+      <table class="jobs-tbl" id="jobs-tbl">
+        <thead>
+          <tr>
+            <th onclick="sortBy('id')">Job ID <span class="sort-arrow">↕</span></th>
+            <th onclick="sortBy('date')">Date <span class="sort-arrow">↕</span></th>
+            <th>Property / Location</th>
+            <th onclick="sortBy('service')">Service Type <span class="sort-arrow">↕</span></th>
+            <th>Priority</th>
+            <th onclick="sortBy('status')">Status <span class="sort-arrow">↕</span></th>
+            <th onclick="sortBy('cost')">Cost <span class="sort-arrow">↕</span></th>
+            <th style="width:40px"></th>
+          </tr>
+        </thead>
+        <tbody id="jobs-tbody"></tbody>
+      </table>
+      <div id="empty-state" class="empty-state" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <p>No jobs found</p>
+        <small>Try adjusting your search or filters</small>
+      </div>
+      <div class="pagination" id="pagination"></div>
+    </div>
+
+  </div><!-- /scroll -->
+</div><!-- /main -->
+</div><!-- /shell -->
+
+<!-- RECALL MODAL -->
+<div class="modal-overlay" id="recall-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <h3>Recall Job</h3>
+        <p>Request the contractor to return and complete the work again</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('recall-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="warn-box">⚠️ Recalling a job will notify <strong>MJ Mechanical Ltd</strong> and create a new visit. The original job will be marked as <strong>Recalled</strong>.</div>
+      <div class="modal-job-ref" id="recall-job-ref">
+        <strong>—</strong><span>—</span>
+      </div>
+      <div class="fg">
+        <label>Reason for recall <span style="color:var(--red-9)">*</span></label>
+        <select id="recall-reason">
+          <option value="">Select reason…</option>
+          <option>Work not completed to standard</option>
+          <option>Issue has recurred</option>
+          <option>Incomplete repair — leak returned</option>
+          <option>Follow-up required after inspection</option>
+          <option>Parts needed to be ordered</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Additional notes</label>
+        <textarea id="recall-notes" placeholder="Describe the issue in detail…"></textarea>
+      </div>
+      <div class="fg">
+        <label>Requested revisit date</label>
+        <input type="date" id="recall-date">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeModal('recall-modal')">Cancel</button>
+      <button class="btn-danger" onclick="confirmRecall()">Recall Job</button>
+    </div>
+  </div>
+</div>
+
+<!-- REASSIGN MODAL -->
+<div class="modal-overlay" id="reassign-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <h3>Reassign Job</h3>
+        <p>Assign this job to a different contractor</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('reassign-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="info-box">ℹ️ MJ Mechanical Ltd will be removed from this job and the selected contractor will be notified.</div>
+      <div class="modal-job-ref" id="reassign-job-ref">
+        <strong>—</strong><span>—</span>
+      </div>
+      <div class="fg">
+        <label>Assign to contractor <span style="color:var(--red-9)">*</span></label>
+        <select id="reassign-contractor">
+          <option value="">Select contractor…</option>
+          <option>ElectroServe Group</option>
+          <option>FireCare Solutions</option>
+          <option>DampResolve UK</option>
+          <option>BuildRight Roofing</option>
+          <option>AquaFlow Systems</option>
+          <option>ThermoControl Ltd</option>
+          <option>SafeGas Engineers</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Reason for reassignment <span style="color:var(--red-9)">*</span></label>
+        <select id="reassign-reason">
+          <option value="">Select reason…</option>
+          <option>Contractor unavailable</option>
+          <option>Contractor not qualified for this work</option>
+          <option>Cost too high</option>
+          <option>Poor performance on previous jobs</option>
+          <option>Client request</option>
+          <option>Emergency — faster response needed</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Notes</label>
+        <textarea id="reassign-notes" placeholder="Add any relevant notes for the new contractor…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeModal('reassign-modal')">Cancel</button>
+      <button class="btn-primary" onclick="confirmReassign()">Reassign Job</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 8 7 12 13 4"/></svg>
+  <span id="toast-msg"></span>
+</div>
+
+<script>
+/* ── DATA ── */
+const SERVICES = ['Gas Safety Check','Boiler Service','Leak Repair','Emergency Call-out',
+  'Planned Maintenance','Heating Installation','Pipe Repair','Radiator Replacement',
+  'Pressure Test','Annual Service','Boiler Replacement','Flue Inspection'];
+
+const PROPERTIES = [
+  {name:'Flat 4, Brixton House',loc:'Brixton, SW9'},
+  {name:'12 Elmwood Estate',loc:'Lewisham, SE13'},
+  {name:'Apt 7B, Canary Wharf Court',loc:'Tower Hamlets, E14'},
+  {name:'24 Meridian Point',loc:'Greenwich, SE10'},
+  {name:'Flat 12, Bermondsey Block',loc:'Bermondsey, SE1'},
+  {name:'8 Peckham Rise',loc:'Peckham, SE15'},
+  {name:'Flat 2A, Hackney Central',loc:'Hackney, E8'},
+  {name:'33 Clapham South Road',loc:'Clapham, SW4'},
+  {name:'Unit 5, Whitechapel Estate',loc:'Whitechapel, E1'},
+  {name:'18 Stockwell Gardens',loc:'Stockwell, SW9'},
+  {name:'Flat 9, Deptford Green',loc:'Deptford, SE8'},
+  {name:'45 Woolwich Common',loc:'Woolwich, SE18'},
+  {name:'Flat 1, Battersea Rise',loc:'Battersea, SW11'},
+  {name:'7 Streatham Hill',loc:'Streatham, SW16'},
+  {name:'Apt 3C, Elephant Park',loc:'Elephant & Castle, SE1'},
+  {name:'22 Forest Gate Lane',loc:'Forest Gate, E7'},
+  {name:'Flat 6, Walthamstow Court',loc:'Walthamstow, E17'},
+  {name:'14 Shepherd\'s Bush Green',loc:'Shepherd\'s Bush, W12'},
+  {name:'Flat 11, Barking Road',loc:'Barking, IG11'},
+  {name:'3 Romford Rise',loc:'Romford, RM1'},
+];
+
+const PRIORITIES = ['Standard','Standard','Standard','Urgent','Emergency'];
+
+function seeded(n, max) { return (n * 2654435769 >>> 0) % max; }
+
+function generateDate(i) {
+  const base = new Date('2025-06-18');
+  base.setDate(base.getDate() - Math.floor(seeded(i * 7, 365)));
+  return base.toISOString().slice(0, 10);
+}
+
+const ALL_JOBS = [];
+for (let i = 1; i <= 612; i++) {
+  const prop = PROPERTIES[seeded(i, PROPERTIES.length)];
+  const svc  = SERVICES[seeded(i * 3, SERVICES.length)];
+  const pri  = PRIORITIES[seeded(i * 5, PRIORITIES.length)];
+  const cost = 65 + seeded(i * 11, 60) * 13;
+  let status = 'Completed';
+  if (i > 594) status = 'Assigned';
+  if (i === 28 || i === 71 || i === 154 || i === 299 || i === 412) status = 'Recalled';
+  ALL_JOBS.push({
+    id: 'JOB-' + String(i).padStart(5,'0'),
+    date: generateDate(i),
+    prop: prop.name,
+    loc: prop.loc,
+    service: svc,
+    priority: pri,
+    status,
+    cost,
+    ref: 'REF-' + (10000 + i)
+  });
+}
+ALL_JOBS.sort((a,b)=>b.date.localeCompare(a.date));
+
+/* ── STATE ── */
+let filtered = [...ALL_JOBS];
+let curTab   = 'all';
+let curSort  = 'date-desc';
+let curPage  = 1;
+let perPage  = 50;
+let activeMenu = null;
+let activeJobId = null;
+
+/* ── INIT ── */
+window.onload = () => {
+  applyFilters();
+  renderChart(12);
+  updateKPIs();
+  updateTabCounts();
+};
+
+function updateKPIs() {
+  const total = ALL_JOBS.reduce((s,j)=>s+j.cost,0);
+  document.getElementById('kpi-value').textContent = '£' + total.toLocaleString();
+}
+
+function updateTabCounts() {
+  document.getElementById('cnt-all').textContent      = '(' + ALL_JOBS.length + ')';
+  document.getElementById('cnt-assigned').textContent = '(' + ALL_JOBS.filter(j=>j.status==='Assigned').length + ')';
+  document.getElementById('cnt-completed').textContent= '(' + ALL_JOBS.filter(j=>j.status==='Completed').length + ')';
+  document.getElementById('cnt-recalled').textContent = '(' + ALL_JOBS.filter(j=>j.status==='Recalled').length + ')';
+}
+
+/* ── FILTERS ── */
+function setTab(el, tab) {
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  curTab = tab;
+  curPage = 1;
+  applyFilters();
+}
+
+function applyFilters() {
+  const q     = document.getElementById('search-input').value.toLowerCase();
+  const pri   = document.getElementById('priority-filter').value;
+  const svc   = document.getElementById('service-filter').value;
+  curSort     = document.getElementById('sort-filter').value;
+
+  filtered = ALL_JOBS.filter(j => {
+    if (curTab !== 'all' && j.status !== curTab) return false;
+    if (pri && j.priority !== pri) return false;
+    if (svc && j.service !== svc) return false;
+    if (q && !j.id.toLowerCase().includes(q) && !j.prop.toLowerCase().includes(q)
+          && !j.service.toLowerCase().includes(q) && !j.loc.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  filtered.sort((a,b) => {
+    if (curSort === 'date-desc') return b.date.localeCompare(a.date);
+    if (curSort === 'date-asc')  return a.date.localeCompare(b.date);
+    if (curSort === 'cost-desc') return b.cost - a.cost;
+    if (curSort === 'cost-asc')  return a.cost - b.cost;
+    if (curSort === 'status')    return a.status.localeCompare(b.status);
+    return 0;
+  });
+
+  curPage = 1;
+  document.getElementById('results-count').textContent = filtered.length + ' job' + (filtered.length !== 1 ? 's' : '');
+  renderTable();
+  renderPagination();
+}
+
+let sortCol = '', sortDir = 1;
+function sortBy(col) {
+  if (sortCol === col) sortDir *= -1; else { sortCol = col; sortDir = 1; }
+  document.querySelectorAll('.jobs-tbl th').forEach(th => th.classList.remove('sorted'));
+  filtered.sort((a,b) => {
+    const va = a[col], vb = b[col];
+    if (typeof va === 'number') return (va - vb) * sortDir;
+    return va.localeCompare(vb) * sortDir;
+  });
+  renderTable();
+}
+
+/* ── TABLE RENDER ── */
+function renderTable() {
+  const tbody = document.getElementById('jobs-tbody');
+  const start = (curPage - 1) * perPage;
+  const page  = filtered.slice(start, start + perPage);
+
+  if (!page.length) {
+    tbody.innerHTML = '';
+    document.getElementById('empty-state').style.display = 'block';
+    document.getElementById('pagination').style.display  = 'none';
+    return;
+  }
+  document.getElementById('empty-state').style.display = 'none';
+  document.getElementById('pagination').style.display  = '';
+
+  tbody.innerHTML = page.map(j => {
+    const statusBadge = j.status === 'Completed'
+      ? `<span class="badge badge-completed"><span class="badge-dot"></span>Completed</span>`
+      : j.status === 'Assigned'
+      ? `<span class="badge badge-assigned"><span class="badge-dot"></span>Assigned</span>`
+      : `<span class="badge badge-recalled"><span class="badge-dot"></span>Recalled</span>`;
+    const priBadge = j.priority === 'Emergency'
+      ? `<span class="badge badge-priority-em">Emergency</span>`
+      : j.priority === 'Urgent'
+      ? `<span class="badge badge-priority-urg">Urgent</span>`
+      : `<span class="badge badge-priority-std">Standard</span>`;
+    const fmtDate = new Date(j.date).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+    return `<tr>
+      <td><span class="job-id">${j.id}</span><br><span style="font-size:10px;color:var(--gray-9)">${j.ref}</span></td>
+      <td><span class="job-date">${fmtDate}</span></td>
+      <td><div class="job-prop">${j.prop}<small>${j.loc}</small></div></td>
+      <td style="font-size:12px;color:var(--gray-11)">${j.service}</td>
+      <td>${priBadge}</td>
+      <td>${statusBadge}</td>
+      <td><span class="job-cost">£${j.cost.toLocaleString()}</span></td>
+      <td>
+        <div class="menu-wrap">
+          <button class="menu-btn" onclick="toggleMenu(event,'${j.id}')">
+            <svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="1.3"/><circle cx="8" cy="8" r="1.3"/><circle cx="8" cy="13" r="1.3"/></svg>
+          </button>
+          <div class="ctx-menu" id="menu-${j.id}">
+            <div class="ctx-item" onclick="openRecall('${j.id}')">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8a5 5 0 1 0 1-3" stroke-linecap="round"/><path d="M1 3l2 2 2-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Recall Job
+            </div>
+            <div class="ctx-item" onclick="openReassign('${j.id}')">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"/><path d="M1.5 13.5c0-2.5 2-4 4.5-4"/><path d="M10 9l3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 12H9" stroke-linecap="round"/></svg>
+              Reassign Job
+            </div>
+            <div class="ctx-sep"></div>
+            <div class="ctx-item" onclick="viewDetails('${j.id}')">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1.5"/><path d="M5 5.5h6M5 8h4M5 10.5h3"/></svg>
+              View Details
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+/* ── PAGINATION ── */
+function renderPagination() {
+  const totalPages = Math.ceil(filtered.length / perPage);
+  const el = document.getElementById('pagination');
+  if (totalPages <= 1) { el.innerHTML = `<span class="pg-info">Showing all ${filtered.length} jobs</span><div></div>`; return; }
+
+  const start = (curPage - 1) * perPage + 1;
+  const end   = Math.min(curPage * perPage, filtered.length);
+
+  let pages = '';
+  const range = pageRange(curPage, totalPages);
+  let prev = null;
+  for (const p of range) {
+    if (prev !== null && p - prev > 1) pages += `<span class="pg-ellipsis">…</span>`;
+    pages += `<button class="pg-btn ${p===curPage?'active':''}" onclick="goPage(${p})">${p}</button>`;
+    prev = p;
+  }
+
+  el.innerHTML = `
+    <span class="pg-info">Showing ${start}–${end} of ${filtered.length} jobs</span>
+    <div class="pg-btns">
+      <button class="pg-btn" onclick="goPage(${curPage-1})" ${curPage<=1?'disabled':''}>‹</button>
+      ${pages}
+      <button class="pg-btn" onclick="goPage(${curPage+1})" ${curPage>=totalPages?'disabled':''}>›</button>
+    </div>
+    <div class="per-page">
+      Rows:
+      <select onchange="setPerPage(+this.value)">
+        ${[25,50,100,250].map(n=>`<option ${n===perPage?'selected':''}>${n}</option>`).join('')}
+      </select>
+    </div>`;
+}
+
+function pageRange(cur, total) {
+  if (total <= 7) return Array.from({length:total},(_,i)=>i+1);
+  const r = new Set([1,2,cur-1,cur,cur+1,total-1,total].filter(p=>p>=1&&p<=total));
+  return [...r].sort((a,b)=>a-b);
+}
+
+function goPage(p) {
+  const total = Math.ceil(filtered.length / perPage);
+  if (p < 1 || p > total) return;
+  curPage = p;
+  renderTable();
+  renderPagination();
+  document.querySelector('.scroll').scrollTo({top:0,behavior:'smooth'});
+}
+
+function setPerPage(n) { perPage = n; curPage = 1; renderTable(); renderPagination(); }
+
+/* ── 3-DOT MENU ── */
+function toggleMenu(e, jobId) {
+  e.stopPropagation();
+  const menu = document.getElementById('menu-' + jobId);
+  const btn  = e.currentTarget;
+  const rect = btn.getBoundingClientRect();
+  if (activeMenu && activeMenu !== menu) activeMenu.classList.remove('open');
+  if (menu.classList.contains('open')) { menu.classList.remove('open'); activeMenu = null; return; }
+  menu.style.top  = (rect.bottom + 4) + 'px';
+  menu.style.right = (window.innerWidth - rect.right) + 'px';
+  menu.style.left  = 'auto';
+  menu.classList.add('open');
+  activeMenu = menu;
+  activeJobId = jobId;
+}
+
+document.addEventListener('click', () => { if (activeMenu) { activeMenu.classList.remove('open'); activeMenu = null; } });
+
+/* ── MODALS ── */
+function openRecall(jobId) {
+  const j = ALL_JOBS.find(x=>x.id===jobId);
+  if (!j) return;
+  const fmtDate = new Date(j.date).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  document.getElementById('recall-job-ref').innerHTML =
+    `<strong>${j.id} — ${j.service}</strong><span>${j.prop} · ${fmtDate} · £${j.cost}</span>`;
+  document.getElementById('recall-reason').value = '';
+  document.getElementById('recall-notes').value   = '';
+  document.getElementById('recall-date').value    = '';
+  document.getElementById('recall-modal').activeJob = jobId;
+  openModal('recall-modal');
+}
+
+function openReassign(jobId) {
+  const j = ALL_JOBS.find(x=>x.id===jobId);
+  if (!j) return;
+  const fmtDate = new Date(j.date).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  document.getElementById('reassign-job-ref').innerHTML =
+    `<strong>${j.id} — ${j.service}</strong><span>${j.prop} · ${fmtDate} · £${j.cost}</span>`;
+  document.getElementById('reassign-contractor').value = '';
+  document.getElementById('reassign-reason').value     = '';
+  document.getElementById('reassign-notes').value      = '';
+  document.getElementById('reassign-modal').activeJob  = jobId;
+  openModal('reassign-modal');
+}
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function confirmRecall() {
+  const reason = document.getElementById('recall-reason').value;
+  if (!reason) { alert('Please select a reason.'); return; }
+  const modal  = document.getElementById('recall-modal');
+  const jobId  = modal.activeJob;
+  const job    = ALL_JOBS.find(j=>j.id===jobId);
+  if (job) job.status = 'Recalled';
+  closeModal('recall-modal');
+  applyFilters();
+  updateTabCounts();
+  showToast('Job ' + jobId + ' recalled — contractor notified');
+}
+
+function confirmReassign() {
+  const contractor = document.getElementById('reassign-contractor').value;
+  const reason     = document.getElementById('reassign-reason').value;
+  if (!contractor || !reason) { alert('Please fill in all required fields.'); return; }
+  const modal = document.getElementById('reassign-modal');
+  const jobId = modal.activeJob;
+  closeModal('reassign-modal');
+  showToast('Job ' + jobId + ' reassigned to ' + contractor);
+}
+
+function viewDetails(jobId) {
+  closeMenu();
+  showToast('Opening job ' + jobId + '…');
+}
+
+function closeMenu() { if (activeMenu) { activeMenu.classList.remove('open'); activeMenu = null; } }
+
+/* ── TOAST ── */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3500);
+}
+
+/* ── CHART ── */
+const MONTHS = ['Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'];
+const MONTH_DATA_12 = [38,42,35,47,29,52,41,46,39,48,44,45];
+const MONTH_DATA_6  = MONTH_DATA_12.slice(6);
+const MONTH_DATA_3  = MONTH_DATA_12.slice(9);
+
+function renderChart(n) {
+  const data   = n==12 ? MONTH_DATA_12 : n==6 ? MONTH_DATA_6 : MONTH_DATA_3;
+  const months = n==12 ? MONTHS : n==6 ? MONTHS.slice(6) : MONTHS.slice(9);
+  const maxVal = Math.max(...data);
+  const wrap   = document.getElementById('bar-chart');
+  wrap.innerHTML = data.map((v,i)=>`
+    <div class="bar-col" title="${months[i]}: ${v} jobs">
+      <span class="bar-val" style="font-size:9px;font-weight:600;color:var(--gray-11);margin-bottom:2px">${v}</span>
+      <div class="bar ${i===data.length-1?'':''}${v===maxVal?'':''}" style="height:${Math.round(v/maxVal*56)}px;background:${v===maxVal?'var(--accent-9)':'var(--accent-2)'};border-radius:3px 3px 0 0;width:100%"></div>
+      <span style="font-size:9px;color:var(--gray-9);margin-top:4px">${months[i]}</span>
+    </div>`).join('');
+
+  const total = data.reduce((s,v)=>s+v,0);
+  const avg   = (total/data.length).toFixed(1);
+  document.getElementById('exp-total').textContent = total;
+  document.getElementById('exp-avg').textContent   = avg;
+  document.getElementById('exp-value').textContent = '£' + (total * 465).toLocaleString();
+}
+
+function updateChart(n) { renderChart(+n); }
+
+/* ── DOWNLOAD CSV ── */
+function downloadCSV() {
+  const headers = ['Job ID','Reference','Date','Property','Location','Service Type','Priority','Status','Cost (£)'];
+  const rows = ALL_JOBS.map(j=>[
+    j.id, j.ref,
+    new Date(j.date).toLocaleDateString('en-GB'),
+    j.prop, j.loc, j.service, j.priority, j.status, j.cost
+  ]);
+  const csv = [headers,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\r\n');
+  const blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'MJ_Mechanical_Jobs_' + new Date().toISOString().slice(0,10) + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Exporting ' + ALL_JOBS.length + ' jobs to CSV…');
+}
+</script>
+</body>
+</html>
