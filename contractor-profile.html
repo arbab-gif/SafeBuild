@@ -1943,10 +1943,6 @@
               </div>
             </div>
           </div>
-          <!-- Reference number -->
-          <div style="font-size:11px;color:var(--gray-alpha-11);text-align:right;margin-top:2px;">
-            Ref: <span style="font-family:monospace;font-weight:600;color:var(--gray-12);letter-spacing:0.04em;" id="contractor-ref">SB-CTR-2024-7842</span>
-          </div>
           <div class="header-actions" style="margin-top:6px;">
             <button class="btn-outline">
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="5" cy="8" r="1.5"/><circle cx="11" cy="4" r="1.5"/><circle cx="11" cy="12" r="1.5"/><path d="M6.5 7.25l3-2M6.5 8.75l3 2"/></svg>
@@ -1994,47 +1990,6 @@
     <button class="tab" onclick="setTab(this,'tab-performance')">Performance</button>
     <button class="tab" onclick="setTab(this,'tab-services')">Services</button>
     <button class="tab" onclick="setTab(this,'tab-activity')">Activity</button>
-  </div>
-
-  <!-- ============================================================
-       INFO STRIP
-  ============================================================ -->
-  <div class="info-strip">
-    <div class="info-strip-item">
-      <div class="info-strip-label">Company type</div>
-      <div class="info-strip-value">DLO Partner</div>
-    </div>
-    <div class="info-strip-item">
-      <div class="info-strip-label">Key specialisms</div>
-      <div class="info-strip-value" style="font-size:11px;line-height:1.4;">Gas Safety, Boiler Servicing,<br>Emergency Gas Repairs, CP12</div>
-    </div>
-    <div class="info-strip-item">
-      <div class="info-strip-label">Service categories</div>
-      <div class="info-strip-value" style="font-size:11px;">Planned • Reactive • Compliance • Emergency</div>
-    </div>
-    <div class="info-strip-item">
-      <div class="info-strip-label">Availability</div>
-      <div class="info-strip-value available">
-        <span class="avail-dot"></span>Available
-      </div>
-      <div class="info-strip-sub">Next available: Today</div>
-    </div>
-    <div class="info-strip-item">
-      <div class="info-strip-label">Avg. SLA response</div>
-      <div class="info-strip-value">2 Hours</div>
-    </div>
-    <div class="info-strip-item">
-      <div class="info-strip-label">First-time fix rate</div>
-      <div class="info-strip-value" style="color:#1a7f4b;">96%</div>
-    </div>
-    <div class="info-strip-item">
-      <div class="info-strip-label">Avg. completion time</div>
-      <div class="info-strip-value">1.4 days</div>
-    </div>
-    <div class="info-strip-item">
-      <div class="info-strip-label">Resident rating</div>
-      <div class="info-strip-value" style="color:#92400e;">★ 4.9/5</div>
-    </div>
   </div>
 
   <!-- ============================================================
@@ -2204,6 +2159,44 @@
 
   <!-- ── OVERVIEW TAB ── -->
   <div class="tab-panel active" id="tab-overview">
+
+  <div class="info-strip">
+    <div class="info-strip-item">
+      <div class="info-strip-label">Company type</div>
+      <div class="info-strip-value">DLO Partner</div>
+    </div>
+    <div class="info-strip-item">
+      <div class="info-strip-label">Key specialisms</div>
+      <div class="info-strip-value" style="font-size:11px;line-height:1.4;">Gas Safety, Boiler Servicing,<br>Emergency Gas Repairs, CP12</div>
+    </div>
+    <div class="info-strip-item">
+      <div class="info-strip-label">Service categories</div>
+      <div class="info-strip-value" style="font-size:11px;">Planned • Reactive • Compliance • Emergency</div>
+    </div>
+    <div class="info-strip-item">
+      <div class="info-strip-label">Availability</div>
+      <div class="info-strip-value available">
+        <span class="avail-dot"></span>Available
+      </div>
+      <div class="info-strip-sub">Next available: Today</div>
+    </div>
+    <div class="info-strip-item">
+      <div class="info-strip-label">Avg. SLA response</div>
+      <div class="info-strip-value">2 Hours</div>
+    </div>
+    <div class="info-strip-item">
+      <div class="info-strip-label">First-time fix rate</div>
+      <div class="info-strip-value" style="color:#1a7f4b;">96%</div>
+    </div>
+    <div class="info-strip-item">
+      <div class="info-strip-label">Avg. completion time</div>
+      <div class="info-strip-value">1.4 days</div>
+    </div>
+    <div class="info-strip-item">
+      <div class="info-strip-label">Resident rating</div>
+      <div class="info-strip-value" style="color:#92400e;">★ 4.9/5</div>
+    </div>
+  </div>
 
   <!-- ============================================================
        3-COLUMN CONTENT GRID
@@ -3339,8 +3332,32 @@
   <div class="tab-panel" id="tab-accreditations">
 
     <div class="section-card">
-      <div class="section-title">Accreditations &amp; Memberships</div>
-      <table class="acred-table">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+        <div class="section-title" style="margin:0;">Accreditations &amp; Memberships</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <!-- Search -->
+          <div style="position:relative;">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:13px;height:13px;position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--gray-9);pointer-events:none;"><circle cx="6.5" cy="6.5" r="4"/><path d="M11 11l2.5 2.5" stroke-linecap="round"/></svg>
+            <input id="acred-search" type="text" placeholder="Search accreditations…" oninput="filterAcredTable()" style="height:30px;padding:0 10px 0 28px;border:1px solid var(--gray-alpha-5);border-radius:7px;font-size:12px;color:var(--gray-12);background:var(--color-background);outline:none;width:200px;">
+          </div>
+          <!-- Type dropdown -->
+          <select id="acred-type-filter" onchange="filterAcredTable()" style="height:30px;padding:0 28px 0 10px;border:1px solid var(--gray-alpha-5);border-radius:7px;font-size:12px;color:var(--gray-12);background:var(--color-background);outline:none;cursor:pointer;appearance:none;background-image:url(\"data:image/svg+xml,%3Csvg viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 8px center;background-size:10px;">
+            <option value="all">All Types</option>
+            <option value="certification">Certification</option>
+            <option value="accreditation">Accreditation</option>
+            <option value="membership">Membership</option>
+          </select>
+          <!-- Status filter -->
+          <div id="acred-status-filters" style="display:flex;gap:4px;">
+            <button class="acred-filter-btn active" data-status="all" onclick="setAcredFilter(this)" style="height:30px;padding:0 11px;border:1px solid var(--gray-alpha-5);border-radius:7px;font-size:12px;font-weight:500;cursor:pointer;background:var(--accent-9);color:#fff;border-color:var(--accent-9);">All</button>
+            <button class="acred-filter-btn" data-status="valid" onclick="setAcredFilter(this)" style="height:30px;padding:0 11px;border:1px solid var(--gray-alpha-5);border-radius:7px;font-size:12px;font-weight:500;cursor:pointer;background:var(--color-background);color:var(--gray-11);">Valid</button>
+            <button class="acred-filter-btn" data-status="active" onclick="setAcredFilter(this)" style="height:30px;padding:0 11px;border:1px solid var(--gray-alpha-5);border-radius:7px;font-size:12px;font-weight:500;cursor:pointer;background:var(--color-background);color:var(--gray-11);">Active</button>
+            <button class="acred-filter-btn" data-status="expired" onclick="setAcredFilter(this)" style="height:30px;padding:0 11px;border:1px solid var(--gray-alpha-5);border-radius:7px;font-size:12px;font-weight:500;cursor:pointer;background:var(--color-background);color:var(--gray-11);">Expired</button>
+          </div>
+        </div>
+      </div>
+      <div id="acred-no-results" style="display:none;text-align:center;padding:28px 0;font-size:12px;color:var(--gray-9);">No accreditations match your search.</div>
+      <table class="acred-table" id="acred-table">
         <thead>
           <tr>
             <th>Accreditation</th>
@@ -3352,8 +3369,8 @@
             <th>Certificate</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
+        <tbody id="acred-tbody">
+          <tr data-type="certification">
             <td>Gas Safe Register</td>
             <td><span class="cell-mono">553421</span></td>
             <td>Gas Safe Register</td>
@@ -3362,7 +3379,7 @@
             <td><span class="status-pill status-valid">Valid</span></td>
             <td><button onclick="viewCert('Gas Safe Register','553421')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
           </tr>
-          <tr>
+          <tr data-type="accreditation">
             <td>CHAS Accredited Contractor</td>
             <td><span class="cell-mono">CHAS-553421</span></td>
             <td>CHAS (Contractors Health &amp; Safety)</td>
@@ -3371,7 +3388,7 @@
             <td><span class="status-pill status-valid">Valid</span></td>
             <td><button onclick="viewCert('CHAS Accredited Contractor','CHAS-553421')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
           </tr>
-          <tr>
+          <tr data-type="accreditation">
             <td>NICEIC Approved Contractor</td>
             <td><span class="cell-mono">NICEIC-112233</span></td>
             <td>NICEIC</td>
@@ -3380,7 +3397,7 @@
             <td><span class="status-pill status-valid">Valid</span></td>
             <td><button onclick="viewCert('NICEIC Approved Contractor','NICEIC-112233')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
           </tr>
-          <tr>
+          <tr data-type="certification">
             <td>SMSTS Certificate</td>
             <td><span class="cell-mono">CITB-445566</span></td>
             <td>CITB</td>
@@ -3389,7 +3406,7 @@
             <td><span class="status-pill status-valid">Valid</span></td>
             <td><button onclick="viewCert('SMSTS Certificate','CITB-445566')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
           </tr>
-          <tr>
+          <tr data-type="membership">
             <td>NHF Preferred Supplier</td>
             <td><span class="cell-mono">NHF-2024-MJ</span></td>
             <td>National Housing Federation</td>
@@ -3398,7 +3415,7 @@
             <td><span class="status-pill status-valid">Active</span></td>
             <td><button onclick="viewCert('NHF Preferred Supplier','NHF-2024-MJ')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
           </tr>
-          <tr>
+          <tr data-type="accreditation">
             <td>Trustmark Registered</td>
             <td><span class="cell-mono">TM-2024-MJ</span></td>
             <td>Trustmark (Govt. Endorsed)</td>
@@ -3407,7 +3424,7 @@
             <td><span class="status-pill status-valid">Valid</span></td>
             <td><button onclick="viewCert('Trustmark Registered','TM-2024-MJ')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
           </tr>
-          <tr>
+          <tr data-type="certification">
             <td>CSCS Card (CITB)</td>
             <td><span class="cell-mono">CSCS-778899</span></td>
             <td>CITB / CSCS</td>
@@ -3416,7 +3433,7 @@
             <td><span class="status-pill status-valid">Valid</span></td>
             <td><button onclick="viewCert('CSCS Card','CSCS-778899')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
           </tr>
-          <tr>
+          <tr data-type="membership">
             <td>Considerate Constructors Scheme</td>
             <td><span class="cell-mono">CCS-MJ-2023</span></td>
             <td>Considerate Constructors</td>
@@ -3425,7 +3442,7 @@
             <td><span class="status-pill status-valid">Active</span></td>
             <td><button onclick="viewCert('Considerate Constructors Scheme','CCS-MJ-2023')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
           </tr>
-          <tr>
+          <tr data-type="accreditation">
             <td>SafeContractor Approved</td>
             <td><span class="cell-mono">SC-998877</span></td>
             <td>Alcumus SafeContractor</td>
@@ -3434,7 +3451,7 @@
             <td><span class="status-pill status-valid">Valid</span></td>
             <td><button onclick="viewCert('SafeContractor Approved','SC-998877')" style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1px solid rgba(23,84,216,0.25);border-radius:6px;background:rgba(23,84,216,0.05);font-size:11px;font-weight:600;color:var(--accent-9);cursor:pointer;white-space:nowrap;"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="width:11px;height:11px;"><path d="M1 7s2-4 6-4 6 4 6 4-2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.5"/></svg> View</button></td>
           </tr>
-          <tr>
+          <tr data-type="certification">
             <td>ISO 9001:2015 (QMS)</td>
             <td><span class="cell-mono">QMS/ISO9001/21</span></td>
             <td>BSI</td>
@@ -3452,10 +3469,35 @@
     </div>
 
     <div class="section-card">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-        <div class="section-title" style="margin:0;">Key Personnel</div>
-        <div style="font-size:12px;color:var(--gray-alpha-11);">24 team members · <span style="color:#1a7f4b;font-weight:600;">All documents verified</span></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="section-title" style="margin:0;">Key Personnel</div>
+          <div style="font-size:12px;color:var(--gray-alpha-11);">24 team members · <span style="color:#1a7f4b;font-weight:600;">All documents verified</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <!-- Search by name -->
+          <div style="position:relative;">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:13px;height:13px;position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--gray-9);pointer-events:none;"><circle cx="6.5" cy="6.5" r="4"/><path d="M11 11l2.5 2.5" stroke-linecap="round"/></svg>
+            <input id="personnel-search" type="text" placeholder="Search by name…" oninput="filterPersonnel()" style="height:30px;padding:0 10px 0 28px;border:1px solid var(--gray-alpha-5);border-radius:7px;font-size:12px;color:var(--gray-12);background:var(--color-background);outline:none;width:170px;">
+          </div>
+          <!-- Filter by accreditation -->
+          <select id="personnel-acred-filter" onchange="filterPersonnel()" style="height:30px;padding:0 28px 0 10px;border:1px solid var(--gray-alpha-5);border-radius:7px;font-size:12px;color:var(--gray-12);background:var(--color-background);outline:none;cursor:pointer;appearance:none;background-image:url(\"data:image/svg+xml,%3Csvg viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 8px center;background-size:10px;">
+            <option value="all">All Accreditations</option>
+            <option value="smsts">SMSTS</option>
+            <option value="gas safe">Gas Safe Register</option>
+            <option value="niceic">NICEIC</option>
+            <option value="chas">CHAS Accredited</option>
+            <option value="cscs">CSCS Gold Card</option>
+            <option value="first aid">First Aid at Work</option>
+            <option value="nvq">NVQ Level 3</option>
+            <option value="safecontractor">SafeContractor</option>
+            <option value="constructionline">Constructionline</option>
+            <option value="iso 45001">ISO 45001</option>
+            <option value="insurance">Insurance</option>
+          </select>
+        </div>
       </div>
+      <div id="personnel-no-results" style="display:none;text-align:center;padding:28px 0;font-size:12px;color:var(--gray-9);">No team members match your search.</div>
 
       <!-- Sub-table column headers -->
       <div style="display:grid;grid-template-columns:1fr 140px 120px 96px 72px;gap:0;background:var(--gray-2);border:1px solid var(--gray-alpha-4);border-radius:8px 8px 0 0;border-bottom:none;padding:7px 14px;font-size:10px;font-weight:600;color:var(--gray-9);text-transform:uppercase;letter-spacing:.05em;">
@@ -3467,7 +3509,7 @@
       </div>
 
       <!-- Person 1: Michael Johnson -->
-      <div style="border:1px solid var(--gray-alpha-4);border-top:none;margin-bottom:16px;">
+      <div class="personnel-profile-card" data-name="michael johnson" data-accreds="smsts first aid at work chas accredited public liability insurance" style="border:1px solid var(--gray-alpha-4);border-top:none;margin-bottom:16px;">
         <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4);">
           <div style="width:32px;height:32px;border-radius:50%;background:rgba(23,84,216,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:var(--accent-9);">MJ</div>
           <div style="flex:1;min-width:0;">
@@ -3485,7 +3527,7 @@
       </div>
 
       <!-- Person 2: Sarah Ahmed -->
-      <div style="border:1px solid var(--gray-alpha-4);margin-bottom:16px;">
+      <div class="personnel-profile-card" data-name="sarah ahmed" data-accreds="gas safe register nvq level 3 safecontractor approved employers liability insurance" style="border:1px solid var(--gray-alpha-4);margin-bottom:16px;">
         <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4);">
           <div style="width:32px;height:32px;border-radius:50%;background:rgba(23,84,216,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:var(--accent-9);">SA</div>
           <div style="flex:1;min-width:0;">
@@ -3503,7 +3545,7 @@
       </div>
 
       <!-- Person 3: David Clarke -->
-      <div style="border:1px solid var(--gray-alpha-4);margin-bottom:16px;">
+      <div class="personnel-profile-card" data-name="david clarke" data-accreds="niceic approved contractor 18th edition wiring regulations eca member public liability insurance professional indemnity insurance" style="border:1px solid var(--gray-alpha-4);margin-bottom:16px;">
         <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4);">
           <div style="width:32px;height:32px;border-radius:50%;background:rgba(23,84,216,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:var(--accent-9);">DC</div>
           <div style="flex:1;min-width:0;">
@@ -3522,7 +3564,7 @@
       </div>
 
       <!-- Person 4: Priya Patel -->
-      <div style="border:1px solid var(--gray-alpha-4);margin-bottom:16px;">
+      <div class="personnel-profile-card" data-name="priya patel" data-accreds="smsts iosh managing safely iso 45001 chas accredited employers liability insurance" style="border:1px solid var(--gray-alpha-4);margin-bottom:16px;">
         <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4);">
           <div style="width:32px;height:32px;border-radius:50%;background:rgba(23,84,216,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:var(--accent-9);">PP</div>
           <div style="flex:1;min-width:0;">
@@ -3541,7 +3583,7 @@
       </div>
 
       <!-- Person 5: James Okafor -->
-      <div style="border:1px solid var(--gray-alpha-4);margin-bottom:16px;">
+      <div class="personnel-profile-card" data-name="james okafor" data-accreds="smsts cscs gold card constructionline gold public liability insurance professional indemnity insurance" style="border:1px solid var(--gray-alpha-4);margin-bottom:16px;">
         <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--gray-1);border-bottom:1px solid var(--gray-alpha-4);">
           <div style="width:32px;height:32px;border-radius:50%;background:rgba(23,84,216,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:var(--accent-9);">JO</div>
           <div style="flex:1;min-width:0;">
@@ -4122,6 +4164,90 @@
             <div class="portfolio-card-sub">LB Hackney · 2023</div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title" style="display:flex;align-items:center;justify-content:space-between;">
+        <span>Recently Completed Jobs</span>
+        <span style="font-size:11px;font-weight:400;color:var(--gray-alpha-11);">Showing 12 of 612</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;" id="exp-jobs-grid">
+        <div class="job-card" style="cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent-9)'" onmouseleave="this.style.borderColor=''" onclick="showJobDetail({id:'#JB-2026-0614',title:'Gas Safety Inspection (CP12)',addr:'14 Birch Lane, Southwark, SE1 3DP',date:'15 Jun 2026',client:'Southwark Council',engineer:'Tony Marsh',type:'Planned',response:'—',duration:'1 day',outcome:'CP12 issued. All appliances passed.',value:'£145'})">
+          <div class="job-card-top"><span class="job-num">#JB-2026-0614</span><span class="status-pill status-valid">Completed</span></div>
+          <div class="job-title">Gas Safety Inspection (CP12)</div>
+          <div class="job-meta">Southwark Council · 15 Jun 2026</div>
+          <div class="job-meta">Engineer: Tony Marsh</div>
+        </div>
+        <div class="job-card" style="cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent-9)'" onmouseleave="this.style.borderColor=''" onclick="showJobDetail({id:'#JB-2026-0612',title:'Boiler Repair (Emergency)',addr:'221 Lark Road, Hackney, E8 1PQ',date:'05 Jun 2026',client:'LB Hackney',engineer:'Michael Brown',type:'Emergency',response:'1.8 hrs',duration:'3 hrs',outcome:'Faulty heat exchanger replaced. System recommissioned.',value:'£380'})">
+          <div class="job-card-top"><span class="job-num">#JB-2026-0612</span><span class="status-pill status-valid">Completed</span></div>
+          <div class="job-title">Boiler Repair (Emergency)</div>
+          <div class="job-meta">LB Hackney · 05 Jun 2026</div>
+          <div class="job-meta">Response: 1.8 hrs</div>
+        </div>
+        <div class="job-card" style="cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent-9)'" onmouseleave="this.style.borderColor=''" onclick="showJobDetail({id:'#JB-2026-0608',title:'Annual Boiler Service',addr:'7–9 Maple Court, Lambeth, SE11 4AT',date:'28 May 2026',client:'Peabody Trust',engineer:'Sarah Ahmed',type:'Planned',response:'—',duration:'1 day',outcome:'3 units serviced. No defects found.',value:'£420'})">
+          <div class="job-card-top"><span class="job-num">#JB-2026-0608</span><span class="status-pill status-valid">Completed</span></div>
+          <div class="job-title">Annual Boiler Service</div>
+          <div class="job-meta">Peabody Trust · 28 May 2026</div>
+          <div class="job-meta">3 units serviced</div>
+        </div>
+        <div class="job-card" style="cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent-9)'" onmouseleave="this.style.borderColor=''" onclick="showJobDetail({id:'#JB-2026-0601',title:'EICR — Electrical Inspection',addr:'Block C, Fenwick Estate, SE5 8EQ',date:'20 May 2026',client:'LB Hackney',engineer:'Sarah White',type:'Planned',response:'—',duration:'2 days',outcome:'8 properties inspected. 2 C2 observations raised.',value:'£960'})">
+          <div class="job-card-top"><span class="job-num">#JB-2026-0601</span><span class="status-pill status-valid">Completed</span></div>
+          <div class="job-title">EICR — Electrical Inspection</div>
+          <div class="job-meta">LB Hackney · 20 May 2026</div>
+          <div class="job-meta">8 properties</div>
+        </div>
+        <div class="job-card" style="cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent-9)'" onmouseleave="this.style.borderColor=''" onclick="showJobDetail({id:'#JB-2026-0589',title:'Central Heating System Flush & Balance',addr:'12–18 Orchard Estate, Orbit, SE17 2NG',date:'10 May 2026',client:'Orbit Group',engineer:'David Clarke',type:'Planned',response:'—',duration:'2 days',outcome:'6 properties completed. System pressure balanced.',value:'£780'})">
+          <div class="job-card-top"><span class="job-num">#JB-2026-0589</span><span class="status-pill status-valid">Completed</span></div>
+          <div class="job-title">Central Heating System Flush &amp; Balance</div>
+          <div class="job-meta">Orbit Group · 10 May 2026</div>
+          <div class="job-meta">6 properties · 2 days</div>
+        </div>
+        <div class="job-card" style="cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent-9)'" onmouseleave="this.style.borderColor=''" onclick="showJobDetail({id:'#JB-2026-0577',title:'Gas Leak Investigation',addr:'45 Terrace Walk, Southwark, SE1 7TR',date:'02 May 2026',client:'Southwark Council',engineer:'James Okafor',type:'Emergency',response:'0.9 hrs',duration:'4 hrs',outcome:'Leak isolated at meter. Temporary cap fitted. Full repair next day.',value:'£520'})">
+          <div class="job-card-top"><span class="job-num">#JB-2026-0577</span><span class="status-pill status-valid">Completed</span></div>
+          <div class="job-title">Gas Leak Investigation</div>
+          <div class="job-meta">Southwark Council · 02 May 2026</div>
+          <div class="job-meta">Emergency · Response: 0.9 hrs</div>
+        </div>
+        <div class="job-card" style="cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent-9)'" onmouseleave="this.style.borderColor=''" onclick="showJobDetail({id:'#JB-2026-0563',title:'Legionella Risk Assessment',addr:'Clarion Block A–D, SE4 1BN',date:'24 Apr 2026',client:'Clarion Housing Group',engineer:'Priya Patel',type:'Planned',response:'—',duration:'3 days',outcome:'14 risk points identified. Action plan issued.',value:'£1,240'})">
+          <div class="job-card-top"><span class="job-num">#JB-2026-0563</span><span class="status-pill status-valid">Completed</span></div>
+          <div class="job-title">Legionella Risk Assessment</div>
+          <div class="job-meta">Clarion Housing Group · 24 Apr 2026</div>
+          <div class="job-meta">3 days</div>
+        </div>
+        <div class="job-card" style="cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent-9)'" onmouseleave="this.style.borderColor=''" onclick="showJobDetail({id:'#JB-2026-0551',title:'Boiler Replacement — Void Property',addr:'19 Heathway, Hackney, E9 5RT',date:'18 Apr 2026',client:'LB Hackney',engineer:'Michael Johnson',type:'Planned',response:'—',duration:'1 day',outcome:'Worcester Bosch 30i installed. Commissioned and signed off.',value:'£2,100'})">
+          <div class="job-card-top"><span class="job-num">#JB-2026-0551</span><span class="status-pill status-valid">Completed</span></div>
+          <div class="job-title">Boiler Replacement — Void Property</div>
+          <div class="job-meta">LB Hackney · 18 Apr 2026</div>
+          <div class="job-meta">Engineer: Michael Johnson</div>
+        </div>
+        <div class="job-card" style="cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent-9)'" onmouseleave="this.style.borderColor=''" onclick="showJobDetail({id:'#JB-2026-0539',title:'CP12 Gas Safety Batch — 22 Units',addr:'Peabody Estate, Lambeth, SE11',date:'10 Apr 2026',client:'Peabody Trust',engineer:'Tony Marsh + Team',type:'Planned',response:'—',duration:'4 days',outcome:'22 CP12 certificates issued. 1 appliance condemned.',value:'£3,190'})">
+          <div class="job-card-top"><span class="job-num">#JB-2026-0539</span><span class="status-pill status-valid">Completed</span></div>
+          <div class="job-title">CP12 Gas Safety Batch — 22 Units</div>
+          <div class="job-meta">Peabody Trust · 10 Apr 2026</div>
+          <div class="job-meta">22 units · 4 days</div>
+        </div>
+        <div class="job-card" style="cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent-9)'" onmouseleave="this.style.borderColor=''" onclick="showJobDetail({id:'#JB-2026-0524',title:'Fire Alarm System Service',addr:'ABC Estate, Tower Hamlets, E1 4RS',date:'02 Apr 2026',client:'ABC Housing Association',engineer:'David Clarke',type:'Planned',response:'—',duration:'1 day',outcome:'Full system tested. 2 detectors replaced. Signed off.',value:'£680'})">
+          <div class="job-card-top"><span class="job-num">#JB-2026-0524</span><span class="status-pill status-valid">Completed</span></div>
+          <div class="job-title">Fire Alarm System Service</div>
+          <div class="job-meta">ABC Housing Association · 02 Apr 2026</div>
+          <div class="job-meta">Engineer: David Clarke</div>
+        </div>
+        <div class="job-card" style="cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent-9)'" onmouseleave="this.style.borderColor=''" onclick="showJobDetail({id:'#JB-2026-0511',title:'Urgent Heating Repair',addr:'88 Coldharbour Ln, Lambeth, SE5 9NR',date:'26 Mar 2026',client:'Orbit Group',engineer:'Sarah Ahmed',type:'Urgent',response:'3.5 hrs',duration:'2 hrs',outcome:'Faulty pump replaced. Heating restored same day.',value:'£290'})">
+          <div class="job-card-top"><span class="job-num">#JB-2026-0511</span><span class="status-pill status-valid">Completed</span></div>
+          <div class="job-title">Urgent Heating Repair</div>
+          <div class="job-meta">Orbit Group · 26 Mar 2026</div>
+          <div class="job-meta">Urgent · Response: 3.5 hrs</div>
+        </div>
+        <div class="job-card" style="cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent-9)'" onmouseleave="this.style.borderColor=''" onclick="showJobDetail({id:'#JB-2026-0498',title:'EICR — Commercial Unit',addr:'Unit 4, Bermondsey Trading Est, SE1 5QN',date:'18 Mar 2026',client:'Southwark Council',engineer:'Sarah White',type:'Planned',response:'—',duration:'1 day',outcome:'Satisfactory. Certificate issued.',value:'£445'})">
+          <div class="job-card-top"><span class="job-num">#JB-2026-0498</span><span class="status-pill status-valid">Completed</span></div>
+          <div class="job-title">EICR — Commercial Unit</div>
+          <div class="job-meta">Southwark Council · 18 Mar 2026</div>
+          <div class="job-meta">Engineer: Sarah White</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;text-align:center;">
+        <a class="view-link">View all 612 completed jobs →</a>
       </div>
     </div>
 
@@ -5676,6 +5802,41 @@
     }, 1200);
   }
 
+  var _acredStatusFilter = 'all';
+
+  function setAcredFilter(btn) {
+    _acredStatusFilter = btn.dataset.status;
+    document.querySelectorAll('.acred-filter-btn').forEach(function(b) {
+      var active = b === btn;
+      b.style.background = active ? 'var(--accent-9)' : 'var(--color-background)';
+      b.style.color = active ? '#fff' : 'var(--gray-11)';
+      b.style.borderColor = active ? 'var(--accent-9)' : 'var(--gray-alpha-5)';
+    });
+    filterAcredTable();
+  }
+
+  function filterAcredTable() {
+    var q = (document.getElementById('acred-search').value || '').toLowerCase().trim();
+    var typeFilter = (document.getElementById('acred-type-filter').value || 'all');
+    var rows = document.querySelectorAll('#acred-tbody tr');
+    var shown = 0;
+    rows.forEach(function(row) {
+      var name = (row.cells[0] ? row.cells[0].textContent : '').toLowerCase();
+      var cert = (row.cells[1] ? row.cells[1].textContent : '').toLowerCase();
+      var body = (row.cells[2] ? row.cells[2].textContent : '').toLowerCase();
+      var status = (row.cells[5] ? row.cells[5].textContent : '').toLowerCase().trim();
+      var rowType = (row.dataset.type || '').toLowerCase();
+      var matchSearch = !q || name.includes(q) || cert.includes(q) || body.includes(q);
+      var matchStatus = _acredStatusFilter === 'all' || status === _acredStatusFilter;
+      var matchType = typeFilter === 'all' || rowType === typeFilter;
+      var visible = matchSearch && matchStatus && matchType;
+      row.style.display = visible ? '' : 'none';
+      if (visible) shown++;
+    });
+    document.getElementById('acred-no-results').style.display = shown === 0 ? '' : 'none';
+    document.getElementById('acred-table').style.display = shown === 0 ? 'none' : '';
+  }
+
   function setTab(el, panelId) {
     document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
     el.classList.add('active');
@@ -5952,6 +6113,39 @@
       document.body.removeChild(a); URL.revokeObjectURL(url);
     };
   })();
+
+  function filterPersonnel() {
+    var q = (document.getElementById('personnel-search').value || '').toLowerCase().trim();
+    var acred = (document.getElementById('personnel-acred-filter').value || 'all').toLowerCase();
+    var cards = document.querySelectorAll('.personnel-profile-card');
+    var shown = 0;
+    cards.forEach(function(card) {
+      var name = (card.dataset.name || '').toLowerCase();
+      var accreds = (card.dataset.accreds || '').toLowerCase();
+      var matchName = !q || name.includes(q);
+      var matchAcred = acred === 'all' || accreds.includes(acred);
+      var visible = matchName && matchAcred;
+      card.style.display = visible ? '' : 'none';
+      if (visible) shown++;
+    });
+    var noRes = document.getElementById('personnel-no-results');
+    if (noRes) noRes.style.display = shown === 0 ? '' : 'none';
+  }
+
+  function showJobDetail(job) {
+    document.getElementById('jd-id').textContent = job.id;
+    document.getElementById('jd-title').textContent = job.title;
+    document.getElementById('jd-client').textContent = job.client;
+    document.getElementById('jd-engineer').textContent = job.engineer;
+    document.getElementById('jd-type').textContent = job.type;
+    document.getElementById('jd-date').textContent = job.date;
+    document.getElementById('jd-response').textContent = job.response || '—';
+    document.getElementById('jd-duration').textContent = job.duration || '—';
+    document.getElementById('jd-addr').textContent = job.addr;
+    document.getElementById('jd-outcome').textContent = job.outcome;
+    document.getElementById('jd-value').textContent = job.value || '—';
+    document.getElementById('job-detail-modal').style.display = 'flex';
+  }
 </script>
 
 <!-- Certificate Viewer Modal -->
@@ -5980,6 +6174,62 @@
   </div>
 </div>
 
+<!-- Job Detail Modal -->
+<div id="job-detail-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1002;align-items:center;justify-content:center;backdrop-filter:blur(4px);" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#fff;border-radius:14px;width:520px;max-width:92vw;max-height:88vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.22);">
+    <div style="padding:20px 24px 16px;border-bottom:1px solid var(--gray-alpha-4);display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;background:#fff;z-index:1;">
+      <div>
+        <div style="font-size:11px;font-weight:600;color:var(--gray-alpha-11);font-family:monospace;" id="jd-id"></div>
+        <div style="font-size:16px;font-weight:700;color:var(--gray-12);margin-top:2px;" id="jd-title"></div>
+      </div>
+      <button onclick="document.getElementById('job-detail-modal').style.display='none'" style="width:28px;height:28px;border:none;background:var(--gray-2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--gray-9);flex-shrink:0;">×</button>
+    </div>
+    <div style="padding:20px 24px;display:flex;flex-direction:column;gap:14px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="background:var(--gray-1);border-radius:8px;padding:12px 14px;">
+          <div style="font-size:10px;font-weight:600;color:var(--gray-alpha-11);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;">Client</div>
+          <div style="font-size:13px;font-weight:600;color:var(--gray-12);" id="jd-client"></div>
+        </div>
+        <div style="background:var(--gray-1);border-radius:8px;padding:12px 14px;">
+          <div style="font-size:10px;font-weight:600;color:var(--gray-alpha-11);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;">Engineer</div>
+          <div style="font-size:13px;font-weight:600;color:var(--gray-12);" id="jd-engineer"></div>
+        </div>
+        <div style="background:var(--gray-1);border-radius:8px;padding:12px 14px;">
+          <div style="font-size:10px;font-weight:600;color:var(--gray-alpha-11);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;">Job Type</div>
+          <div style="font-size:13px;font-weight:600;color:var(--gray-12);" id="jd-type"></div>
+        </div>
+        <div style="background:var(--gray-1);border-radius:8px;padding:12px 14px;">
+          <div style="font-size:10px;font-weight:600;color:var(--gray-alpha-11);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;">Date</div>
+          <div style="font-size:13px;font-weight:600;color:var(--gray-12);" id="jd-date"></div>
+        </div>
+        <div style="background:var(--gray-1);border-radius:8px;padding:12px 14px;">
+          <div style="font-size:10px;font-weight:600;color:var(--gray-alpha-11);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;">Response Time</div>
+          <div style="font-size:13px;font-weight:600;color:var(--gray-12);" id="jd-response"></div>
+        </div>
+        <div style="background:var(--gray-1);border-radius:8px;padding:12px 14px;">
+          <div style="font-size:10px;font-weight:600;color:var(--gray-alpha-11);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;">Duration</div>
+          <div style="font-size:13px;font-weight:600;color:var(--gray-12);" id="jd-duration"></div>
+        </div>
+      </div>
+      <div style="background:var(--gray-1);border-radius:8px;padding:12px 14px;">
+        <div style="font-size:10px;font-weight:600;color:var(--gray-alpha-11);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Address</div>
+        <div style="font-size:12px;color:var(--gray-12);" id="jd-addr"></div>
+      </div>
+      <div style="background:rgba(23,84,216,0.04);border:1px solid rgba(23,84,216,0.12);border-radius:8px;padding:12px 14px;">
+        <div style="font-size:10px;font-weight:600;color:var(--accent-9);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Outcome</div>
+        <div style="font-size:12px;color:var(--gray-12);" id="jd-outcome"></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:11px;color:var(--gray-alpha-11);">Job value</span>
+        <span style="font-size:16px;font-weight:700;color:var(--gray-12);" id="jd-value"></span>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <span class="status-pill status-valid" style="font-size:11px;">Completed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- QR Modal -->
 <div id="qr-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1001;align-items:center;justify-content:center;backdrop-filter:blur(4px);" onclick="if(event.target===this)this.style.display='none'">
   <div style="background:#fff;border-radius:16px;padding:32px 36px;display:flex;flex-direction:column;align-items:center;gap:20px;box-shadow:0 24px 64px rgba(0,0,0,0.22);max-width:340px;width:90vw;position:relative;">
@@ -6000,8 +6250,12 @@
     </div>
 
     <div style="display:flex;gap:8px;width:100%;">
-      <button onclick="navigator.clipboard?.writeText('https://safebuild.cloud/verify/SB-CTR-2024-7842').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy link',1500)})" class="btn-outline" style="flex:1;height:34px;justify-content:center;">Copy link</button>
-      <button onclick="window.print()" class="btn-outline" style="flex:1;height:34px;justify-content:center;">
+      <button onclick="navigator.clipboard?.writeText('https://safebuild.cloud/verify/SB-CTR-2024-7842').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy link',1500)})" class="btn-outline" style="flex:1;height:34px;justify-content:center;font-size:12px;">Copy link</button>
+      <button onclick="if(navigator.share){navigator.share({title:'MJ Mechanical Ltd — SafeBuild Verification',text:'Verify MJ Mechanical Ltd on SafeBuild Cloud',url:'https://safebuild.cloud/verify/SB-CTR-2024-7842'}).catch(function(){})}else{navigator.clipboard?.writeText('https://safebuild.cloud/verify/SB-CTR-2024-7842').then(function(){var b=event.currentTarget;b.textContent='Link copied!';setTimeout(function(){b.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.4\' style=\'width:13px;height:13px;\'><path d=\'M10 3H13V6M13 3L8 8M6 4H3V13H12V10\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg> Share\'},1500)})}" class="btn-outline" style="flex:1;height:34px;justify-content:center;font-size:12px;display:flex;align-items:center;gap:5px;">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" style="width:13px;height:13px;"><path d="M10 3H13V6M13 3L8 8M6 4H3V13H12V10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Share
+      </button>
+      <button onclick="window.print()" class="btn-outline" style="flex:1;height:34px;justify-content:center;font-size:12px;display:flex;align-items:center;gap:5px;">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" style="width:13px;height:13px;"><path d="M4 6V2h8v4M4 12H2V7h12v5h-2M4 10h8v4H4v-4z"/></svg>
         Print
       </button>

@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Add Control / Mitigation — SafeBuild Cloud</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --accent:#1754d8;--accent-lt:rgba(23,84,216,.12);
+  --green:#16a34a;--red:#dc2626;--amber:#d97706;--orange:#ea580c;
+  --g1:#f8f9fb;--g2:#f1f3f5;--g3:#e9ecef;--g4:#dee2e6;--g5:#ced4da;
+  --g6:#adb5bd;--g7:#868e96;--g8:#495057;--g9:#343a40;--g10:#212529;--g12:#101113;
+  --panel:#fff;--bg:#f4f5f7;
+  --dk:#0e1628;--dk2:#162040;--dk3:#1e2d4f;--dk4:#263560;
+  --dkt:rgba(255,255,255,.55);--dkta:rgba(255,255,255,.08);--dktb:rgba(255,255,255,.14);
+  --r2:4px;--r3:6px;--r4:8px;--r5:10px;
+  --sh:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--g10);font-size:14px;min-height:100vh;}
+
+/* ══ TOPBAR (dark) ══ */
+.topbar{height:54px;background:var(--dk);display:flex;align-items:center;padding:0 18px;gap:14px;position:fixed;top:0;left:0;right:0;z-index:200;}
+.tb-logo{display:flex;align-items:center;gap:9px;min-width:188px;}
+.tb-logo-icon{width:30px;height:30px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.tb-logo-text{display:flex;flex-direction:column;line-height:1;}
+.tb-logo-name{font-size:13px;font-weight:700;color:#fff;}
+.tb-logo-sub{font-size:10px;color:var(--dkt);margin-top:1px;}
+.tb-search{flex:1;max-width:340px;display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:var(--r3);padding:6px 10px;cursor:text;}
+.tb-search input{border:none;background:none;outline:none;font-size:12.5px;color:rgba(255,255,255,.75);font-family:inherit;flex:1;width:0;}
+.tb-search input::placeholder{color:rgba(255,255,255,.4);}
+.tb-kbd{font-size:10px;color:rgba(255,255,255,.35);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:1px 5px;white-space:nowrap;}
+.tb-xclear{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.4);display:flex;align-items:center;}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:2px;}
+.tb-icon-btn{display:flex;align-items:center;gap:5px;background:none;border:none;padding:6px 10px;border-radius:var(--r3);cursor:pointer;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.75);}
+.tb-icon-btn:hover{background:var(--dkta);}
+.tb-badge{background:#ef4444;color:#fff;font-size:9.5px;font-weight:700;border-radius:10px;padding:1px 5px;min-width:18px;text-align:center;}
+.tb-badge.blue{background:var(--accent);}
+.tb-divider{width:1px;height:20px;background:rgba(255,255,255,.12);}
+.tb-user{display:flex;align-items:center;gap:8px;padding:4px 8px;border-radius:var(--r3);cursor:pointer;}
+.tb-user:hover{background:var(--dkta);}
+.tb-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#1754d8,#3b82f6);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;border:2px solid rgba(255,255,255,.2);}
+.tb-user-info{display:flex;flex-direction:column;line-height:1;}
+.tb-user-name{font-size:12.5px;font-weight:600;color:#fff;}
+.tb-user-role{font-size:10px;color:var(--dkt);}
+
+/* ══ SIDEBAR (dark) ══ */
+.sidebar{width:196px;min-width:196px;background:var(--dk);position:fixed;top:54px;left:0;bottom:0;overflow-y:auto;z-index:100;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.06);}
+.sb-nav{flex:1;padding:6px 0;}
+.sb-group{font-size:9px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:rgba(255,255,255,.3);padding:12px 14px 4px;}
+.sb-item{display:flex;align-items:center;gap:9px;padding:7px 14px;font-size:13px;color:var(--dkt);cursor:pointer;text-decoration:none;transition:background .1s;}
+.sb-item:hover{background:var(--dkta);color:rgba(255,255,255,.85);}
+.sb-item.active{background:var(--dktb);color:#fff;font-weight:600;}
+.sb-item svg{opacity:.6;flex-shrink:0;}
+.sb-item.active svg{opacity:1;}
+.sb-ibadge{margin-left:auto;background:var(--accent);color:#fff;font-size:9.5px;font-weight:700;border-radius:10px;padding:1px 6px;}
+.sb-footer{padding:10px;border-top:1px solid rgba(255,255,255,.07);}
+.sb-help{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r4);padding:12px;text-align:center;}
+.sb-help-icon{width:26px;height:26px;background:rgba(23,84,216,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;}
+.sb-help-title{font-size:12px;font-weight:600;color:#fff;margin-bottom:2px;}
+.sb-help-sub{font-size:10.5px;color:var(--dkt);margin-bottom:8px;line-height:1.4;}
+.sb-contact{width:100%;background:var(--accent);color:#fff;border:none;border-radius:var(--r3);padding:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:5px;}
+
+/* ══ LAYOUT ══ */
+.body-layout{display:flex;margin-top:54px;min-height:calc(100vh - 54px);}
+.main{margin-left:196px;flex:1;display:flex;min-height:calc(100vh - 54px);}
+.content{flex:1;padding:22px 22px 60px;min-width:0;}
+.right-col{width:252px;min-width:252px;padding:20px 14px;border-left:1px solid var(--g3);background:var(--panel);overflow-y:auto;position:sticky;top:54px;height:calc(100vh - 54px);}
+
+/* ══ BREADCRUMB ══ */
+.bc{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--g6);margin-bottom:14px;flex-wrap:wrap;}
+.bc a{color:var(--g6);text-decoration:none;} .bc a:hover{color:var(--accent);}
+.bc-sep{color:var(--g5);}
+.bc span{color:var(--g8);}
+
+/* ══ PAGE HEADER ══ */
+.page-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px;}
+.page-hdr h1{font-size:21px;font-weight:700;color:var(--g12);}
+.page-hdr p{font-size:13px;color:var(--g7);margin-top:3px;}
+.hdr-btns{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.btn-ghost{background:var(--panel);border:1px solid var(--g4);border-radius:var(--r3);padding:7px 16px;font-size:13px;font-weight:500;color:var(--g9);cursor:pointer;font-family:inherit;}
+.btn-ghost:hover{background:var(--g1);}
+.btn-primary{background:var(--accent);border:none;border-radius:var(--r3);padding:7px 18px;font-size:13px;font-weight:600;color:#fff;cursor:pointer;font-family:inherit;}
+.btn-primary:hover{background:#1448b8;}
+
+/* ══ FORM CARDS ══ */
+.fcard{background:var(--panel);border:1px solid var(--g3);border-radius:var(--r5);box-shadow:var(--sh);padding:20px;margin-bottom:14px;}
+.fcard-hdr{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.fnum{width:23px;height:23px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ftitle{font-size:14.5px;font-weight:700;color:var(--g12);}
+
+.frow{display:grid;gap:12px;margin-bottom:12px;}
+.frow:last-child{margin-bottom:0;}
+.frow.c2{grid-template-columns:1fr 1fr;}
+.frow.c3{grid-template-columns:1fr 1fr 1fr;}
+.frow.c1{grid-template-columns:1fr;}
+
+.fg{display:flex;flex-direction:column;gap:5px;}
+.flabel{font-size:12px;font-weight:500;color:var(--g9);}
+.req{color:#ef4444;margin-left:1px;}
+.fsub{font-size:10.5px;color:var(--g6);margin-top:1px;}
+.fi{width:100%;border:1px solid var(--g4);border-radius:var(--r3);padding:7px 11px;font-size:13px;font-family:inherit;color:var(--g10);background:var(--panel);outline:none;transition:border-color .15s,box-shadow .15s;}
+.fi:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(23,84,216,.1);}
+.fi::placeholder{color:var(--g5);}
+.fi.ro{background:var(--g1);color:var(--g7);}
+.fta{width:100%;border:1px solid var(--g4);border-radius:var(--r3);padding:7px 11px;font-size:12.5px;font-family:inherit;color:var(--g10);background:var(--panel);outline:none;resize:vertical;min-height:80px;line-height:1.55;transition:border-color .15s,box-shadow .15s;}
+.fta:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(23,84,216,.1);}
+.fta::placeholder{color:var(--g5);}
+.cc{font-size:10.5px;color:var(--g6);text-align:right;margin-top:2px;}
+.fsel{width:100%;border:1px solid var(--g4);border-radius:var(--r3);padding:7px 28px 7px 10px;font-size:13px;font-family:inherit;color:var(--g7);background:var(--panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5l3 3 3-3' stroke='%23868e96' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 8px center;appearance:none;outline:none;cursor:pointer;transition:border-color .15s,box-shadow .15s;}
+.fsel:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(23,84,216,.1);}
+.fsel.hasval{color:var(--g10);}
+.date-wrap{position:relative;}
+.date-wrap .fi{padding-right:32px;}
+.date-icon{position:absolute;right:9px;top:50%;transform:translateY(-50%);pointer-events:none;}
+
+/* Priority / Status badges in selects */
+.dot-high::before{content:"● ";color:#ea580c;}
+.dot-med::before{content:"● ";color:#d97706;}
+.dot-low::before{content:"● ";color:var(--green);}
+.dot-l2::before{content:"● ";color:#d97706;}
+
+/* Tags input */
+.tags-box{border:1px solid var(--g4);border-radius:var(--r3);padding:5px 8px;display:flex;flex-wrap:wrap;gap:5px;cursor:text;min-height:36px;align-items:center;}
+.tags-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(23,84,216,.1);}
+.tag-chip{display:flex;align-items:center;gap:4px;background:rgba(23,84,216,.1);border:1px solid rgba(23,84,216,.2);border-radius:12px;padding:2px 8px;font-size:12px;color:var(--accent);font-weight:500;white-space:nowrap;}
+.tag-chip .tx{cursor:pointer;color:rgba(23,84,216,.5);font-size:11px;line-height:1;}
+.tag-chip .tx:hover{color:var(--accent);}
+.tags-ghost{border:none;outline:none;font-size:12.5px;color:var(--g8);font-family:inherit;flex:1;min-width:140px;padding:1px 2px;background:none;}
+.tags-ghost::placeholder{color:var(--g5);}
+.linked-action-chip{display:flex;align-items:center;gap:4px;background:var(--g1);border:1px solid var(--g3);border-radius:12px;padding:3px 10px;font-size:12px;color:var(--g8);white-space:nowrap;}
+.linked-action-chip .tx{cursor:pointer;color:var(--g6);}
+.linked-action-chip .tx:hover{color:var(--red);}
+.linked-add{background:none;border:none;font-size:12px;color:var(--accent);cursor:pointer;font-family:inherit;padding:2px 4px;}
+.linked-add:hover{text-decoration:underline;}
+
+/* Upload zone */
+.upload-zone{border:2px dashed var(--g4);border-radius:var(--r4);padding:22px;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--g1);cursor:pointer;}
+.upload-zone:hover{border-color:var(--accent);background:rgba(23,84,216,.04);}
+.upload-row{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--g7);}
+.btn-choose{background:none;border:1.5px solid var(--accent);color:var(--accent);border-radius:var(--r2);padding:4px 14px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;}
+
+/* Bottom bar */
+.bottom-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 0 0;border-top:1px solid var(--g3);}
+.btn-cancel{background:none;border:none;font-size:13px;color:var(--g7);cursor:pointer;padding:7px 10px;border-radius:var(--r3);font-family:inherit;}
+.btn-cancel:hover{background:var(--g2);}
+
+/* ══ RIGHT COLUMN ══ */
+.rp-section{margin-bottom:16px;}
+.rp-title{font-size:13px;font-weight:700;color:var(--g12);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.sum-block{background:var(--g1);border:1px solid var(--g3);border-radius:var(--r4);padding:12px 14px;margin-bottom:14px;}
+.sum-linked{font-size:10.5px;font-weight:600;color:var(--g6);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
+.sum-ref{font-size:13px;font-weight:700;color:var(--accent);}
+.sum-desc{font-size:12px;color:var(--g7);}
+.sum-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--g2);font-size:12px;}
+.sum-row:last-child{border-bottom:none;}
+.sum-key{color:var(--g7);}
+.sum-val{color:var(--g9);font-weight:500;}
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:2px 9px;border-radius:10px;}
+.badge-high{background:rgba(234,88,12,.12);color:var(--orange);}
+.badge-planned{background:rgba(23,84,216,.12);color:var(--accent);}
+.badge-yes{background:rgba(22,163,74,.12);color:var(--green);}
+.sum-owner{display:flex;align-items:center;gap:6px;}
+.sum-av{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#1754d8,#3b82f6);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;}
+.sum-owner-info{display:flex;flex-direction:column;line-height:1;}
+.sum-oname{font-size:12px;font-weight:600;color:var(--g9);}
+.sum-orole{font-size:10px;color:var(--g7);}
+.rp-divider{height:1px;background:var(--g3);margin:14px 0;}
+
+.guid-item{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:var(--g7);margin-bottom:8px;line-height:1.5;}
+.guid-link{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--accent);font-weight:500;text-decoration:none;margin-top:4px;}
+.guid-link:hover{text-decoration:underline;}
+
+.cat-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--g2);}
+.cat-item:last-child{border-bottom:none;}
+.cat-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;}
+.cat-text{display:flex;flex-direction:column;}
+.cat-name{font-size:12px;font-weight:600;color:var(--g9);}
+.cat-sub{font-size:11px;color:var(--g6);}
+
+/* Workflow steps */
+.wf-steps{display:flex;flex-direction:column;gap:2px;margin:10px 0;}
+.wf-step{display:flex;align-items:center;gap:8px;padding:5px 0;}
+.wf-circle{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.wf-circle.active{background:var(--accent);color:#fff;}
+.wf-circle.pending{background:var(--g3);color:var(--g7);}
+.wf-info{flex:1;}
+.wf-name{font-size:12px;font-weight:600;color:var(--g9);}
+.wf-name.pending-text{color:var(--g7);}
+.wf-status{font-size:10.5px;}
+.wf-status.in-progress{color:var(--accent);}
+.wf-status.pending{color:var(--g6);}
+</style>
+</head>
+<body>
+
+<!-- ══ TOPBAR ══ -->
+<header class="topbar">
+  <div class="tb-logo">
+    <div class="tb-logo-icon">
+      <svg viewBox="0 0 20 20" fill="white" width="15" height="15"><path d="M10 2L3 6.5V18h4.5v-5.5h5V18H17V6.5L10 2z"/></svg>
+    </div>
+    <div class="tb-logo-text">
+      <div class="tb-logo-name">SafeBuild Cloud</div>
+      <div class="tb-logo-sub">Building Safety Management</div>
+    </div>
+  </div>
+
+  <div class="tb-search">
+    <svg viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.5" width="13" height="13"><circle cx="7" cy="7" r="4.5"/><path d="M11 11l2 2" stroke-linecap="round"/></svg>
+    <input type="text" placeholder="Search properties, risks, documents...">
+    <span class="tb-kbd">⌘ K</span>
+    <button class="tb-xclear">
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><path d="M2 2l8 8M10 2l-8 8"/></svg>
+    </button>
+  </div>
+
+  <div class="tb-right">
+    <button class="tb-icon-btn">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="14" height="14"><path d="M8 2a5 5 0 0 1 5 5v2.5l1 2H2l1-2V7a5 5 0 0 1 5-5zM6.5 13.5a1.5 1.5 0 0 0 3 0"/></svg>
+      Notifications <span class="tb-badge">12</span>
+    </button>
+    <button class="tb-icon-btn">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="14" height="14"><path d="M2 4h12v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4z"/><path d="M2 4l6 4.5L14 4"/></svg>
+      Messages <span class="tb-badge blue">5</span>
+    </button>
+    <div class="tb-divider"></div>
+    <div class="tb-user">
+      <div class="tb-avatar">JS</div>
+      <div class="tb-user-info">
+        <div class="tb-user-name">John Smith</div>
+        <div class="tb-user-role">DLO</div>
+      </div>
+      <svg viewBox="0 0 12 12" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.5" width="10" height="10" style="margin-left:3px;"><path d="M3 4.5l3 3 3-3"/></svg>
+    </div>
+  </div>
+</header>
+
+<!-- ══ SIDEBAR ══ -->
+<aside class="sidebar">
+  <nav class="sb-nav">
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><path d="M13 2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zM5 6h6M5 9.5h4"/></svg>
+      My Projects
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><rect x="2" y="3" width="12" height="11" rx="1"/><path d="M5 1v4M11 1v4M2 7h12"/></svg>
+      My Bookings
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><path d="M2 4h12v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4z"/><path d="M2 4l6 4.5L14 4"/></svg>
+      Messages <span class="sb-ibadge">8</span>
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><path d="M8 2l1.4 4.2H14l-3.7 2.7 1.4 4.3L8 10.5l-3.7 2.7 1.4-4.3L2 5.8h4.6z"/></svg>
+      Saved
+    </a>
+
+    <div class="sb-group">Property Management</div>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><path d="M8 2L2 6v9h4v-4h4v4h4V6L8 2z"/></svg>
+      Properties
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><circle cx="8" cy="6" r="3"/><path d="M2.5 14c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5"/></svg>
+      Occupancy
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><path d="M13 5H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM5 5V4a3 3 0 0 1 6 0v1"/></svg>
+      Compliance
+    </a>
+    <a href="#" class="sb-item active">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M8 1.5l1.6 4.2H14l-3.6 2.6 1.3 4.2L8 10l-3.7 2.5 1.3-4.2L2 5.7h4.4z"/></svg>
+      Risks
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><rect x="2" y="4" width="12" height="10" rx="1"/><path d="M5 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1M8 8v3M7 9.5h2"/></svg>
+      Certificates
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><path d="M14 10H2l1-7h10l1 7zM5 10v3M11 10v3M2 13h12"/></svg>
+      Work Orders
+    </a>
+
+    <div class="sb-group">Marketplace</div>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><circle cx="6.5" cy="6.5" r="4"/><path d="M11.5 11.5l2 2" stroke-linecap="round"/></svg>
+      Browse Contractors
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><path d="M2 4h12M2 8h9M2 12h6"/></svg>
+      Categories
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><path d="M8 1.5l1.5 4H14l-3.5 2.5 1.3 4L8 9.5l-3.8 2.5 1.3-4L2 5.5h4.5z"/></svg>
+      Special Offers
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><path d="M8 1l2 5h5l-4 3 1.5 5L8 11l-4.5 3L5 9 1 6h5z"/></svg>
+      Highest Rated
+    </a>
+
+    <div class="sb-group">Manage</div>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><circle cx="8" cy="6" r="3"/><path d="M2.5 14c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5"/></svg>
+      My Profile
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><circle cx="6" cy="6" r="2.5"/><circle cx="11" cy="10" r="2.5"/><path d="M8.5 6H14M2 10h6"/></svg>
+      Team
+    </a>
+    <a href="#" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13"><circle cx="8" cy="8" r="2"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.2 3.2l1.4 1.4M11.4 11.4l1.4 1.4M3.2 12.8l1.4-1.4M11.4 4.6l1.4-1.4"/></svg>
+      Settings
+    </a>
+  </nav>
+  <div class="sb-footer">
+    <div class="sb-help">
+      <div class="sb-help-icon">
+        <svg viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5" width="12" height="12"><circle cx="8" cy="8" r="6"/><path d="M8 6a2 2 0 0 1 2 2c0 1-.7 1.5-1.5 2C8 10.3 8 11 8 11M8 13v.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="sb-help-title">Need help?</div>
+      <div class="sb-help-sub">Our support team is here to help you.</div>
+      <button class="sb-contact">
+        <svg viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="1.5" width="10" height="10"><path d="M2 4h10v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4z"/><path d="M2 4l5 3.5 5-3.5"/></svg>
+        Contact Support
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- ══ BODY ══ -->
+<div class="body-layout">
+<div class="main">
+<div class="content">
+
+  <!-- Breadcrumb -->
+  <nav class="bc">
+    <a href="#">Dashboard</a><span class="bc-sep"> › </span>
+    <a href="#">Risks</a><span class="bc-sep"> › </span>
+    <a href="#">Riverside Heights</a><span class="bc-sep"> › </span>
+    <a href="#">Risks</a><span class="bc-sep"> › </span>
+    <a href="#">Risk: RISK-2024-000123</a><span class="bc-sep"> › </span>
+    <span>Add Control / Mitigation</span>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-hdr">
+    <div>
+      <h1>Add Control / Mitigation</h1>
+      <p>Capture a new control, mitigation, or safety measure for an identified risk.</p>
+    </div>
+    <div class="hdr-btns">
+      <button class="btn-ghost">Save as Draft</button>
+      <button class="btn-primary">Create Control</button>
+    </div>
+  </div>
+
+  <!-- 1. Control / Mitigation Overview -->
+  <div class="fcard">
+    <div class="fcard-hdr">
+      <div class="fnum">1</div>
+      <div class="ftitle">Control / Mitigation Overview</div>
+    </div>
+    <div class="frow c2">
+      <div class="fg">
+        <label class="flabel">Control / Mitigation Title <span class="req">*</span></label>
+        <input class="fi" type="text" value="Install cavity barriers to external walls">
+      </div>
+      <div class="fg">
+        <label class="flabel">Reference Number <span style="font-size:11px;color:var(--g6);font-weight:400;">(Auto-generated)</span></label>
+        <input class="fi ro" type="text" value="CTRL-2024-000456" readonly>
+        <div class="fsub">Will be generated on save</div>
+      </div>
+    </div>
+    <div class="frow c2">
+      <div class="fg">
+        <label class="flabel">Linked Risk <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>RISK-2024-000123 – Combustible cladding system</option>
+          <option>RISK-2024-000118 – Fire door deficiencies</option>
+          <option>RISK-2024-000101 – Compartmentation breach</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Control Type <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option>Mitigation</option>
+          <option>Prevention</option>
+          <option>Remediation</option>
+          <option>Monitoring</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow c2">
+      <div class="fg">
+        <label class="flabel">Mitigation Category <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option>Engineering Control</option>
+          <option>Administrative Control</option>
+          <option>PPE</option>
+          <option>Elimination</option>
+          <option>Substitution</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Description <span class="req">*</span></label>
+        <textarea class="fta" style="min-height:72px;">Install compliant cavity barriers at compartment lines and at floor interfaces to limit the spread of fire within the external wall system.</textarea>
+        <div class="cc">139 / 2000</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Location & Asset -->
+  <div class="fcard">
+    <div class="fcard-hdr">
+      <div class="fnum">2</div>
+      <div class="ftitle">Location &amp; Asset</div>
+    </div>
+    <div class="frow c3">
+      <div class="fg">
+        <label class="flabel">Property <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>Riverside Heights</option>
+          <option>Riverside House</option>
+          <option>Marina Court</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Block <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>Block A</option>
+          <option>Block B</option>
+          <option>Block C</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Floor / Area <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>Level 10 – External Walls</option>
+          <option>Level 1 – Ground Floor</option>
+          <option>Roof Level</option>
+          <option>Plant Room</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow c3">
+      <div class="fg">
+        <label class="flabel">Asset / Element Affected <span class="req">*</span></label>
+        <input class="fi" type="text" value="External Wall System – South Elevation">
+      </div>
+      <div class="fg">
+        <label class="flabel">Asset Type <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>Wall System</option>
+          <option>Structural Element</option>
+          <option>Mechanical</option>
+          <option>Electrical</option>
+          <option>Fire Safety System</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">QR / Element Reference</label>
+        <input class="fi" type="text" value="QR-EXT-A-10-S">
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Control Details -->
+  <div class="fcard">
+    <div class="fcard-hdr">
+      <div class="fnum">3</div>
+      <div class="ftitle">Control Details</div>
+    </div>
+    <div class="frow c3">
+      <div class="fg">
+        <label class="flabel">Existing or New Control <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>New Control</option>
+          <option>Existing Control</option>
+          <option>Enhanced Existing</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Priority <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option value="high" selected>● High</option>
+          <option value="medium">● Medium</option>
+          <option value="low">● Low</option>
+          <option value="critical">● Critical</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Implementation Type <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>Planned</option>
+          <option>Immediate</option>
+          <option>Phased</option>
+          <option>Ongoing</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow c3">
+      <div class="fg">
+        <label class="flabel">Control Effectiveness Rating <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>● High</option>
+          <option>● Medium</option>
+          <option>● Low</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Residual Risk Impact <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option>● High</option>
+          <option selected>● Medium</option>
+          <option>● Low</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Is this Temporary or Permanent? <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>Permanent</option>
+          <option>Temporary</option>
+          <option>Interim</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow c3">
+      <div class="fg">
+        <label class="flabel">Start Date <span class="req">*</span></label>
+        <div class="date-wrap">
+          <input class="fi" type="text" value="15/05/2024">
+          <svg class="date-icon" viewBox="0 0 14 14" fill="none" stroke="#adb5bd" stroke-width="1.3" width="12" height="12"><rect x="1" y="2.5" width="12" height="10" rx="1"/><path d="M4 1v3M10 1v3M1 6h12"/></svg>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="flabel">Target Completion Date <span class="req">*</span></label>
+        <div class="date-wrap">
+          <input class="fi" type="text" value="30/07/2024">
+          <svg class="date-icon" viewBox="0 0 14 14" fill="none" stroke="#adb5bd" stroke-width="1.3" width="12" height="12"><rect x="1" y="2.5" width="12" height="10" rx="1"/><path d="M4 1v3M10 1v3M1 6h12"/></svg>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="flabel">Review Date <span class="req">*</span></label>
+        <div class="date-wrap">
+          <input class="fi" type="text" value="30/07/2025">
+          <svg class="date-icon" viewBox="0 0 14 14" fill="none" stroke="#adb5bd" stroke-width="1.3" width="12" height="12"><rect x="1" y="2.5" width="12" height="10" rx="1"/><path d="M4 1v3M10 1v3M1 6h12"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Assignment & Ownership -->
+  <div class="fcard">
+    <div class="fcard-hdr">
+      <div class="fnum">4</div>
+      <div class="ftitle">Assignment &amp; Ownership</div>
+    </div>
+    <div class="frow c3">
+      <div class="fg">
+        <label class="flabel">Responsible Team <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>Building Safety Team</option>
+          <option>Maintenance Team</option>
+          <option>Fire Safety Team</option>
+          <option>Structural Team</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Assigned Individual <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>Sarah Johnson</option>
+          <option>David Wilson</option>
+          <option>Emily Carter</option>
+          <option>James Whitfield</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Contractor / DLO</label>
+        <select class="fsel hasval">
+          <option selected>SafeBuild Solutions Ltd</option>
+          <option>Acme Housing Group</option>
+          <option>BuildSafe Ltd</option>
+          <option>DLO In-House</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow c3">
+      <div class="fg">
+        <label class="flabel">Risk Owner <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>John Smith</option>
+          <option>Sarah Johnson</option>
+          <option>David Wilson</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Escalation Level <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option>Level 1</option>
+          <option selected>● Level 2</option>
+          <option>Level 3</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Approval Required? <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>Yes</option>
+          <option>No</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow c2">
+      <div class="fg">
+        <label class="flabel">Status <span class="req">*</span></label>
+        <select class="fsel hasval">
+          <option selected>Planned</option>
+          <option>In Progress</option>
+          <option>Completed</option>
+          <option>On Hold</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Approver</label>
+        <select class="fsel hasval">
+          <option selected>Head of Building Safety</option>
+          <option>Senior Risk Manager</option>
+          <option>Director of Safety</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Actions & Monitoring -->
+  <div class="fcard">
+    <div class="fcard-hdr">
+      <div class="fnum">5</div>
+      <div class="ftitle">Actions &amp; Monitoring</div>
+    </div>
+    <div class="frow c2">
+      <div class="fg">
+        <label class="flabel">Actions Required <span class="req">*</span></label>
+        <textarea class="fta" style="min-height:96px;">• Procure and schedule installation contractor
+• Carry out detailed survey and measurements
+• Install cavity barriers to manufacturer's specification
+• Record works and update fire strategy</textarea>
+        <div class="cc">167 / 2000</div>
+      </div>
+      <div class="fg">
+        <label class="flabel">Monitoring Method <span class="req">*</span></label>
+        <textarea class="fta" style="min-height:96px;">Site inspections, installation sign-off, photographic evidence, and compliance documentation.</textarea>
+        <div class="cc">86 / 1000</div>
+      </div>
+    </div>
+    <div class="frow c2">
+      <div class="fg">
+        <label class="flabel">Success Criteria <span class="req">*</span></label>
+        <textarea class="fta">All cavity barriers installed as per design and manufacturer instructions. Verified by competent person and recorded.</textarea>
+        <div class="cc">117 / 1000</div>
+      </div>
+      <div class="fg">
+        <label class="flabel">Follow-up Frequency <span class="req">*</span></label>
+        <select class="fsel hasval" style="margin-bottom:8px;">
+          <option selected>3 months</option>
+          <option>1 month</option>
+          <option>6 months</option>
+          <option>12 months</option>
+          <option>As required</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow c1">
+      <div class="fg">
+        <label class="flabel">Comments / Notes</label>
+        <textarea class="fta">Coordinate with scaffold contractor. Works to be completed before re-cladding commences.</textarea>
+        <div class="cc">79 / 1000</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Cost & Evidence -->
+  <div class="fcard">
+    <div class="fcard-hdr">
+      <div class="fnum">6</div>
+      <div class="ftitle">Cost &amp; Evidence</div>
+    </div>
+    <div class="frow c2">
+      <div class="fg">
+        <label class="flabel">Estimated Cost / Budget (£)</label>
+        <input class="fi" type="text" value="£18,500.00">
+      </div>
+      <div class="fg">
+        <label class="flabel">Funding Source</label>
+        <select class="fsel hasval">
+          <option selected>Reserve Fund</option>
+          <option>Capital Budget</option>
+          <option>Insurance</option>
+          <option>Grant Funding</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg" style="margin-top:4px;">
+      <label class="flabel" style="margin-bottom:6px;">Upload Evidence</label>
+      <div class="upload-zone" onclick="document.getElementById('fup').click()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#adb5bd" stroke-width="1.4" width="28" height="28"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="upload-row">
+          Drag and drop files here or
+          <button class="btn-choose" onclick="event.stopPropagation()">Choose Files</button>
+        </div>
+        <div style="font-size:11.5px;color:var(--g6);">Accepted formats: PDF, JPG, PNG, DOCX, XLSX (Max 20MB per file)</div>
+        <input type="file" id="fup" multiple accept=".pdf,.jpg,.jpeg,.png,.docx,.xlsx" style="display:none;">
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Additional Information -->
+  <div class="fcard">
+    <div class="fcard-hdr">
+      <div class="fnum">7</div>
+      <div class="ftitle">Additional Information</div>
+    </div>
+    <div class="fg" style="margin-bottom:14px;">
+      <label class="flabel" style="margin-bottom:6px;">Tags</label>
+      <div class="tags-box">
+        <span class="tag-chip">Fire Safety <span class="tx" onclick="this.closest('.tag-chip').remove()">✕</span></span>
+        <span class="tag-chip">External Walls <span class="tx" onclick="this.closest('.tag-chip').remove()">✕</span></span>
+        <span class="tag-chip">Cavity Barriers <span class="tx" onclick="this.closest('.tag-chip').remove()">✕</span></span>
+        <input class="tags-ghost" type="text" placeholder="Add a tag and press Enter..." onkeydown="handleTag(event,this)">
+      </div>
+    </div>
+    <div class="fg" style="margin-bottom:14px;">
+      <label class="flabel" style="margin-bottom:6px;">Linked Remedial Actions</label>
+      <div class="tags-box">
+        <span class="linked-action-chip">REM-2024-00125 – Scaffolding Installation <span class="tx" onclick="this.closest('.linked-action-chip').remove()">✕</span></span>
+        <span class="linked-action-chip">REM-2024-00130 – Cladding Replacement <span class="tx" onclick="this.closest('.linked-action-chip').remove()">✕</span></span>
+        <input class="tags-ghost" type="text" placeholder="Add remedial action..." style="min-width:160px;">
+      </div>
+    </div>
+    <div class="fg">
+      <label class="flabel" style="margin-bottom:5px;">Additional Notes</label>
+      <textarea class="fta" placeholder="Any other information relevant to this control or mitigation." oninput="this.nextElementSibling.textContent=this.value.length+' / 1000'"></textarea>
+      <div class="cc">0 / 1000</div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="bottom-bar">
+    <button class="btn-cancel">Cancel</button>
+    <div style="display:flex;gap:8px;">
+      <button class="btn-ghost">Save as Draft</button>
+      <button class="btn-primary">Create Control</button>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<!-- ══ RIGHT COLUMN ══ -->
+<div class="right-col">
+
+  <!-- Mitigation Summary -->
+  <div class="rp-section">
+    <div class="rp-title">
+      <svg viewBox="0 0 14 14" fill="none" stroke="var(--accent)" stroke-width="1.4" width="13" height="13"><path d="M7 1l1.5 4H13l-3.5 2.5L11 12 7 9.5 3 12l1.5-4.5L1 5h4.5z"/></svg>
+      Mitigation Summary
+    </div>
+    <div class="sum-block">
+      <div class="sum-linked">Linked Risk</div>
+      <div class="sum-ref">RISK-2024-000123</div>
+      <div class="sum-desc">Combustible cladding system</div>
+    </div>
+    <div class="sum-row"><span class="sum-key">Priority</span><span class="badge badge-high">● High</span></div>
+    <div class="sum-row"><span class="sum-key">Status</span><span class="badge badge-planned">Planned</span></div>
+    <div class="sum-row" style="flex-direction:column;align-items:flex-start;gap:4px;">
+      <span class="sum-key">Responsible Owner</span>
+      <div class="sum-owner">
+        <div class="sum-av">JS</div>
+        <div class="sum-owner-info">
+          <div class="sum-oname">John Smith</div>
+          <div class="sum-orole">DLO</div>
+        </div>
+      </div>
+    </div>
+    <div class="sum-row">
+      <span class="sum-key">Target Completion</span>
+      <span class="sum-val" style="display:flex;align-items:center;gap:4px;">
+        <svg viewBox="0 0 12 12" fill="none" stroke="#adb5bd" stroke-width="1.2" width="11" height="11"><rect x="1" y="2" width="10" height="9" rx="1"/><path d="M3 1v2M9 1v2M1 5h10"/></svg>
+        30/07/2024
+      </span>
+    </div>
+  </div>
+
+  <div class="rp-divider"></div>
+
+  <!-- Guidance -->
+  <div class="rp-section">
+    <div class="rp-title">
+      <svg viewBox="0 0 14 14" fill="none" stroke="var(--accent)" stroke-width="1.4" width="13" height="13"><circle cx="7" cy="7" r="6"/><path d="M7 6v4M7 4.5v.5" stroke-linecap="round"/></svg>
+      Guidance
+    </div>
+    <div class="guid-item">
+      <svg viewBox="0 0 12 12" fill="none" stroke="var(--accent)" stroke-width="1.4" width="12" height="12" style="flex-shrink:0;margin-top:1px;"><path d="M3 6l2.5 2.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Select the most effective control using the hierarchy of control.
+    </div>
+    <div class="guid-item">
+      <svg viewBox="0 0 12 12" fill="none" stroke="var(--green)" stroke-width="1.4" width="12" height="12" style="flex-shrink:0;margin-top:1px;"><path d="M3 6l2.5 2.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Ensure the control addresses the root cause of the risk.
+    </div>
+    <div class="guid-item">
+      <svg viewBox="0 0 12 12" fill="none" stroke="var(--green)" stroke-width="1.4" width="12" height="12" style="flex-shrink:0;margin-top:1px;"><path d="M3 6l2.5 2.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Set clear success criteria and monitor regularly.
+    </div>
+    <div class="guid-item">
+      <svg viewBox="0 0 12 12" fill="none" stroke="var(--g7)" stroke-width="1.4" width="12" height="12" style="flex-shrink:0;margin-top:1px;"><rect x="2" y="1" width="8" height="10" rx="1"/><path d="M4 4h4M4 6.5h4M4 9h2.5"/></svg>
+      Upload evidence to demonstrate implementation and compliance.
+    </div>
+    <a href="#" class="guid-link" onclick="return false;">
+      View Control Guidance
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" width="10" height="10"><path d="M9 3H3M9 3v6M9 3L3 9" stroke-linecap="round"/></svg>
+    </a>
+  </div>
+
+  <div class="rp-divider"></div>
+
+  <!-- Control Categories -->
+  <div class="rp-section">
+    <div class="rp-title">
+      <svg viewBox="0 0 14 14" fill="none" stroke="var(--g8)" stroke-width="1.4" width="13" height="13"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="8" y="1" width="5" height="5" rx="1"/><rect x="1" y="8" width="5" height="5" rx="1"/><rect x="8" y="8" width="5" height="5" rx="1"/></svg>
+      Control Categories
+    </div>
+    <div class="cat-item">
+      <div class="cat-icon" style="background:#f0fdf4;">
+        <svg viewBox="0 0 14 14" fill="none" stroke="#16a34a" stroke-width="1.4" width="11" height="11"><circle cx="7" cy="7" r="5.5"/><path d="M4.5 7l2 2 3-3" stroke-linecap="round"/></svg>
+      </div>
+      <div class="cat-text"><div class="cat-name">Elimination</div><div class="cat-sub">Remove the hazard completely</div></div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-icon" style="background:#eff6ff;">
+        <svg viewBox="0 0 14 14" fill="none" stroke="#2563eb" stroke-width="1.4" width="11" height="11"><path d="M7 1l1.5 4H13l-3.5 2.5L11 12 7 9.5 3 12l1.5-4.5L1 5h4.5z"/></svg>
+      </div>
+      <div class="cat-text"><div class="cat-name">Substitution</div><div class="cat-sub">Replace with a safer alternative</div></div>
+    </div>
+    <div class="cat-item" style="background:rgba(23,84,216,.04);border-radius:6px;padding:6px 6px;border-bottom:none;margin-bottom:2px;border:1px solid rgba(23,84,216,.15);">
+      <div class="cat-icon" style="background:#eff6ff;">
+        <svg viewBox="0 0 14 14" fill="none" stroke="#1754d8" stroke-width="1.4" width="11" height="11"><circle cx="7" cy="7" r="5.5"/><path d="M5 7h4M7 5v4" stroke-linecap="round"/></svg>
+      </div>
+      <div class="cat-text"><div class="cat-name" style="color:var(--accent);">Engineering Control</div><div class="cat-sub">Isolate people from the hazard</div></div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-icon" style="background:#fefce8;">
+        <svg viewBox="0 0 14 14" fill="none" stroke="#ca8a04" stroke-width="1.4" width="11" height="11"><path d="M2 4h10v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4z"/><path d="M2 4l5 3.5 5-3.5"/></svg>
+      </div>
+      <div class="cat-text"><div class="cat-name">Administrative Control</div><div class="cat-sub">Change the way people work</div></div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-icon" style="background:#fff7ed;">
+        <svg viewBox="0 0 14 14" fill="none" stroke="#ea580c" stroke-width="1.4" width="11" height="11"><circle cx="7" cy="5" r="2.5"/><path d="M3 13c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>
+      </div>
+      <div class="cat-text"><div class="cat-name">PPE</div><div class="cat-sub">Protect people with equipment</div></div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-icon" style="background:#f0fdf4;">
+        <svg viewBox="0 0 14 14" fill="none" stroke="#16a34a" stroke-width="1.4" width="11" height="11"><circle cx="7" cy="7" r="5.5"/><path d="M7 4v3.5L9 9" stroke-linecap="round"/></svg>
+      </div>
+      <div class="cat-text"><div class="cat-name">Temporary Measure</div><div class="cat-sub">Short-term control solution</div></div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-icon" style="background:#fef2f2;">
+        <svg viewBox="0 0 14 14" fill="none" stroke="#dc2626" stroke-width="1.4" width="11" height="11"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5V7l1.5 1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="cat-text"><div class="cat-name">Permanent Remedial Action</div><div class="cat-sub">Long-term permanent solution</div></div>
+    </div>
+  </div>
+
+  <div class="rp-divider"></div>
+
+  <!-- Approval & Escalation -->
+  <div class="rp-section">
+    <div class="rp-title">
+      <svg viewBox="0 0 14 14" fill="none" stroke="var(--g8)" stroke-width="1.4" width="13" height="13"><path d="M7 1.5l1.5 4H13l-3.5 2.5 1.3 4L7 9.5 3.2 12 4.5 8 1 5.5h4.5z"/></svg>
+      Approval &amp; Escalation
+    </div>
+    <div class="sum-row"><span class="sum-key">Approval Required</span><span class="badge badge-yes">Yes</span></div>
+    <div class="sum-row"><span class="sum-key">Approver</span><span class="sum-val" style="font-size:12px;">Head of Building Safety</span></div>
+
+    <div style="margin-top:10px;margin-bottom:6px;font-size:11.5px;font-weight:600;color:var(--g7);">Workflow Status</div>
+    <div class="wf-steps">
+      <div class="wf-step">
+        <div class="wf-circle active">01</div>
+        <div class="wf-info">
+          <div class="wf-name">Draft</div>
+          <div class="wf-status in-progress">In Progress</div>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-circle pending">02</div>
+        <div class="wf-info">
+          <div class="wf-name pending-text">Submitted</div>
+          <div class="wf-status pending">Pending</div>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-circle pending">03</div>
+        <div class="wf-info">
+          <div class="wf-name pending-text">Under Review</div>
+          <div class="wf-status pending">Pending</div>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-circle pending">04</div>
+        <div class="wf-info">
+          <div class="wf-name pending-text">Approved</div>
+          <div class="wf-status pending">Pending</div>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-circle pending">05</div>
+        <div class="wf-info">
+          <div class="wf-name pending-text">Implemented</div>
+          <div class="wf-status pending">Pending</div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="guid-link" style="margin-top:4px;" onclick="return false;">
+      View Workflow
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" width="10" height="10"><path d="M9 3H3M9 3v6M9 3L3 9" stroke-linecap="round"/></svg>
+    </a>
+  </div>
+
+</div><!-- /right-col -->
+</div><!-- /main -->
+</div><!-- /body-layout -->
+
+<script>
+function handleTag(e, inp) {
+  if (e.key === 'Enter' && inp.value.trim()) {
+    var chip = document.createElement('span');
+    chip.className = 'tag-chip';
+    chip.innerHTML = inp.value.trim() + ' <span class="tx" onclick="this.closest(\'.tag-chip\').remove()">✕</span>';
+    inp.parentNode.insertBefore(chip, inp);
+    inp.value = '';
+  }
+}
+</script>
+</body>
+</html>

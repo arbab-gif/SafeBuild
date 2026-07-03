@@ -12,17 +12,23 @@
 <style>
 /* ── TOKENS ── */
 :root {
-  --gray-1:#fcfcfc; --gray-2:#f5f5f5; --gray-3:#efefef; --gray-4:#e8e8e8;
-  --gray-5:#e0e0e0; --gray-6:#d8d8d8; --gray-7:#cecece; --gray-8:#bbbbbb;
-  --gray-9:#8d8d8d; --gray-10:#838383; --gray-11:#646464; --gray-12:#202020;
+  --gray-1:#fafafa; --gray-2:#f4f4f5; --gray-3:#ececec; --gray-4:#e4e4e4;
+  --gray-5:#d4d4d4; --gray-6:#c4c4c4; --gray-7:#b4b4b4; --gray-8:#a1a1a1;
+  --gray-9:#8a8a8a; --gray-10:#838383; --gray-11:rgba(0,0,0,0.61); --gray-12:#202020;
   --gray-a9:rgba(0,0,0,.55); --gray-a11:rgba(0,0,0,.61); --gray-a12:rgba(0,0,0,.88);
+  --gray-alpha-4:rgba(0,0,0,0.09); --gray-alpha-5:rgba(0,0,0,0.11);
+  --gray-alpha-11:rgba(0,0,0,0.61);
   --accent-1:#f4f7fe; --accent-2:#e8f0fd; --accent-9:#1754d8; --accent-10:#1249c4;
-  --accent-11:#1040a8; --accent-c:#fff;
+  --accent-11:#1040a8; --accent-alpha-3:rgba(0,90,255,0.08); --accent-c:#fff;
   --red-9:#e5484d; --green-9:#30a46c; --orange-9:#f76b15;
-  --panel:#ffffff; --bg:#fafafa;
+  --color-success:#1a7f4b; --color-warning:#b45309; --color-danger:#c0392b;
+  --green-alpha-3:rgba(34,197,94,0.12); --amber-alpha-3:rgba(245,158,11,0.12);
+  --red-alpha-3:rgba(239,68,68,0.12); --blue-alpha-3:rgba(23,84,216,0.08);
+  --panel:#ffffff; --color-background:#fafafa; --bg:#fafafa;
   --r1:4px; --r2:6px; --r3:8px; --r4:10px; --rf:9999px;
   --s1:0 1px 2px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);
   --s2:0 2px 8px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.05);
+  --shadow-card:0 1px 4px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
@@ -40,10 +46,11 @@ a{text-decoration:none}
 .logo-wordmark{font-size:13px;font-weight:700;color:var(--gray-12);letter-spacing:-.02em;line-height:1.15}
 .logo-wordmark span{display:block;font-weight:400;font-size:10px;color:rgba(0,0,0,.61);letter-spacing:0}
 .sidebar-scroll{flex:1;padding:8px;overflow-y:auto;overflow-x:hidden}
-.nav-group-label{font-size:10px;font-weight:500;color:rgba(0,0,0,.61);text-transform:uppercase;letter-spacing:.06em;padding:14px 8px 4px}
-.nav-item{display:flex;align-items:center;gap:8px;height:34px;padding:0 10px 0 12px;border-radius:var(--r3);font-size:13px;font-weight:500;color:rgba(0,0,0,.61);cursor:pointer;transition:background 80ms ease,color 80ms ease;border-left:2px solid transparent;white-space:nowrap;overflow:hidden}
+.nav-section-label{font-size:10px;font-weight:700;color:var(--gray-8);text-transform:uppercase;letter-spacing:.06em;padding:8px 12px 4px}
+.nav-group-label{font-size:10px;font-weight:700;color:var(--gray-8);text-transform:uppercase;letter-spacing:.06em;padding:8px 12px 4px}
+.nav-item{display:flex;align-items:center;gap:8px;height:34px;padding:0 10px 0 12px;border-radius:var(--r3);font-size:13px;font-weight:500;color:var(--gray-alpha-11);cursor:pointer;transition:background 80ms,color 80ms;white-space:nowrap;overflow:hidden}
 .nav-item:hover{background:var(--gray-3);color:var(--gray-12)}
-.nav-item.active{background:var(--accent-9);border-left-color:transparent;color:#fff}
+.nav-item.active{background:var(--accent-9);color:#fff}
 .nav-item svg{width:15px;height:15px;flex-shrink:0;opacity:.65}
 .nav-item.active svg{opacity:1;color:#fff}
 .nav-item .badge{margin-left:auto;background:rgba(229,72,77,.12);color:#e5484d;font-size:10px;font-weight:600;padding:1px 5px;border-radius:var(--rf)}
@@ -72,24 +79,25 @@ a{text-decoration:none}
 .main{margin-left:220px;flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden}
 
 /* ── TOPBAR ── */
-.topbar{height:56px;background:var(--panel);border-bottom:1px solid var(--gray-4);display:flex;align-items:center;padding:0 24px;flex-shrink:0;gap:10px;position:sticky;top:0;z-index:50}
-.topbar-title{font-size:13px;font-weight:600;color:var(--gray-12)}
+.topbar{height:52px;background:var(--panel);border-bottom:1px solid var(--gray-alpha-4);display:flex;align-items:center;padding:0 24px;flex-shrink:0;gap:10px;position:sticky;top:0;z-index:50}
+.topbar-title{font-size:14px;font-weight:700;color:var(--gray-12)}
 .topbar-spacer{flex:1}
 .role-sw{display:flex;align-items:center;gap:2px;background:var(--gray-2);border-radius:var(--rf);padding:2px}
 .role-pill{padding:5px 12px;font-size:12px;font-weight:500;border-radius:var(--rf);cursor:pointer;color:var(--gray-11);border:none;background:none;transition:background .15s,color .15s;white-space:nowrap}
 .role-pill.active{background:var(--panel);color:var(--gray-12);box-shadow:var(--s1);font-weight:600}
-.tb-div{width:1px;height:24px;background:var(--gray-4);margin:0 2px}
-.tb-icon{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--r2);cursor:pointer;color:var(--gray-11);border:none;background:none;position:relative}
-.tb-icon:hover{background:var(--gray-2)}
-.tb-icon svg{width:17px;height:17px}
+.tb-div{width:1px;height:20px;background:var(--gray-alpha-4);margin:0 2px}
+.tb-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--r3);cursor:pointer;color:var(--gray-alpha-11);border:none;background:none;position:relative;transition:background 80ms}
+.tb-icon:hover{background:var(--gray-3);color:var(--gray-12)}
+.tb-icon svg{width:16px;height:16px}
 .notif-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;background:var(--red-9);border-radius:50%;border:1.5px solid var(--panel)}
-.user-chip{display:flex;align-items:center;gap:8px;cursor:pointer;padding:3px 6px;border-radius:var(--r2)}
-.user-chip:hover{background:var(--gray-2)}
-.u-ava{width:30px;height:30px;border-radius:50%;overflow:hidden;padding:0;font-size:0;flex-shrink:0}
+.notif-badge{position:absolute;top:4px;right:3px;background:var(--red-9);color:white;font-size:9px;font-weight:700;min-width:14px;height:14px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 3px;border:1.5px solid white}
+.user-chip{display:flex;align-items:center;gap:8px;cursor:pointer;padding:3px 8px 3px 3px;border-radius:var(--rf);transition:background 80ms}
+.user-chip:hover{background:var(--gray-3)}
+.u-ava{width:28px;height:28px;border-radius:50%;overflow:hidden;padding:0;font-size:0;flex-shrink:0}
 .u-ava img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
 .u-meta{display:flex;flex-direction:column;line-height:1.2}
-.u-name{font-size:12px;font-weight:600;color:var(--gray-12)}
-.u-role{font-size:10px;color:var(--gray-9)}
+.u-name{font-size:13px;font-weight:500;color:var(--gray-12)}
+.u-role{font-size:11px;color:var(--gray-9)}
 
 /* ── PAGE SCROLL ── */
 .scroll{flex:1;overflow-y:auto;padding:24px 28px 40px}
@@ -100,7 +108,7 @@ a{text-decoration:none}
 .page-head p{font-size:13px;color:var(--gray-a11)}
 
 /* ── STEPPER ── */
-.stepper{display:flex;align-items:center;justify-content:center;gap:0;background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r3);padding:20px 24px;margin-bottom:24px}
+.stepper{display:flex;align-items:center;justify-content:center;gap:0;background:var(--panel);border:1px solid var(--gray-alpha-4);border-radius:var(--r4);padding:20px 24px;margin-bottom:20px;box-shadow:var(--shadow-card)}
 .step-item{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;min-width:0}
 .step-conn{flex:1;height:2px;background:var(--gray-5);align-self:flex-start;margin-top:13px;min-width:20px;transition:background .3s}
 .step-conn.done{background:var(--accent-9)}
@@ -148,9 +156,9 @@ a{text-decoration:none}
 .cg{display:grid;grid-template-columns:1fr 296px;gap:20px;align-items:start}
 
 /* ── FORM CARD ── */
-.fc{background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r4);margin-bottom:14px;overflow:hidden}
-.fc-head{padding:14px 20px;border-bottom:1px solid var(--gray-4)}
-.fc-head h2{font-size:14px;font-weight:700;color:var(--gray-12)}
+.fc{background:var(--panel);border:1px solid var(--gray-alpha-4);border-radius:var(--r4);margin-bottom:14px;overflow:hidden;box-shadow:var(--shadow-card)}
+.fc-head{padding:12px 20px;border-bottom:1px solid var(--gray-alpha-4);display:flex;align-items:center;gap:8px;background:var(--panel)}
+.fc-head h2{font-size:13px;font-weight:700;color:var(--gray-12);flex:1}
 .fc-head p{font-size:12px;color:var(--gray-a11);margin-top:2px}
 .fc-body{padding:20px}
 
@@ -253,22 +261,62 @@ a{text-decoration:none}
 .ms-opt input{accent-color:var(--accent-9);width:14px;height:14px;cursor:pointer;flex-shrink:0}
 
 /* ── SERVICES OFFERED ── */
-.svc-cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
-.svc-cat-chip{padding:7px 14px;border:1.5px solid var(--gray-5);border-radius:var(--rf);font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;transition:all 80ms;user-select:none;background:var(--panel)}
-.svc-cat-chip:hover{border-color:var(--accent-9);color:var(--accent-9)}
-.svc-cat-chip.sel{border-color:var(--accent-9);background:var(--accent-9);color:#fff}
-.svc-subs{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-.svc-sub-group{background:var(--gray-2);border-radius:var(--r3);padding:14px 16px;border-left:3px solid var(--accent-9)}
-.svc-sub-head{font-size:11px;font-weight:600;color:var(--accent-11);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
-.svc-sub-chips{display:flex;flex-wrap:wrap;gap:6px}
-.svc-sub-chip{padding:5px 10px;border:1px solid var(--gray-5);border-radius:var(--r2);font-size:12px;color:var(--gray-11);cursor:pointer;transition:all 80ms;background:var(--panel);user-select:none}
+/* ── SERVICES v3 TWO-COLUMN ── */
+.svc-two-col{display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--gray-alpha-4);border-radius:10px;overflow:hidden;background:var(--panel)}
+.svc-left-col{border-right:1px solid var(--gray-alpha-4);display:flex;flex-direction:column;min-height:420px}
+.svc-right-col{display:flex;flex-direction:column}
+.svc-col-hdr{padding:9px 14px;background:var(--gray-2);border-bottom:1px solid var(--gray-alpha-4);font-size:10px;font-weight:700;color:var(--gray-9);text-transform:uppercase;letter-spacing:.06em;flex-shrink:0}
+.svc-col-body{padding:10px 12px;flex:1;overflow-y:auto;max-height:260px}
+/* Dropdown */
+.svc-dd-wrap{position:relative;margin-bottom:8px}
+.svc-dd-inp{width:100%;height:32px;padding:0 30px 0 10px;border:1px solid var(--gray-alpha-5);border-radius:7px;font-size:12px;color:var(--gray-12);background:var(--color-background);outline:none;box-sizing:border-box;cursor:pointer}
+.svc-dd-inp:focus{border-color:var(--accent-9)}
+.svc-dd-arrow{position:absolute;right:9px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--gray-9)}
+.svc-dd-list{position:absolute;top:36px;left:0;right:0;background:#fff;border:1px solid var(--gray-alpha-5);border-radius:8px;z-index:200;box-shadow:0 6px 24px rgba(0,0,0,.1);max-height:240px;overflow-y:auto;display:none}
+.svc-dd-list.open{display:block}
+.svc-dd-opt{padding:7px 12px;font-size:12px;color:var(--gray-12);cursor:pointer;display:flex;align-items:center;gap:8px}
+.svc-dd-opt:hover,.svc-dd-opt:focus{background:var(--gray-1)}
+.svc-dd-opt.added{color:var(--gray-8);pointer-events:none}
+.svc-dd-opt .svc-dd-icon{font-size:13px;width:18px;text-align:center;flex-shrink:0}
+.svc-dd-own-row{padding:7px 12px;font-size:12px;color:var(--accent-9);font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;border-top:1px solid var(--gray-alpha-3);position:sticky;bottom:0;background:#fff}
+.svc-dd-own-row:hover{background:rgba(23,84,216,0.04)}
+/* Selected service list */
+.svc-sel-list{display:flex;flex-direction:column;gap:3px}
+.svc-sel-item{display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:7px;cursor:pointer;border:1.5px solid transparent;transition:all 80ms;user-select:none}
+.svc-sel-item:hover{background:var(--gray-1)}
+.svc-sel-item.active{background:rgba(23,84,216,0.08);border-color:rgba(23,84,216,0.3)}
+.svc-sel-icon{font-size:13px;width:18px;text-align:center;flex-shrink:0}
+.svc-sel-name{font-size:12px;font-weight:600;color:var(--gray-12);flex:1;line-height:1.3}
+.svc-sel-badge{font-size:10px;font-weight:700;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent-9);color:#fff;display:none;align-items:center;justify-content:center}
+.svc-sel-item.has-sub .svc-sel-badge{display:inline-flex}
+.svc-sel-del{background:none;border:none;cursor:pointer;color:var(--gray-7);font-size:15px;line-height:1;padding:1px 3px;border-radius:4px;flex-shrink:0}
+.svc-sel-del:hover{background:rgba(220,50,50,0.1);color:#d33}
+/* Right panel sub-services */
+.svc-sub-hdr{font-size:11px;font-weight:600;color:var(--gray-9);margin-bottom:8px}
+.svc-sub-chips-wrap{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.svc-sub-chip{padding:4px 11px;border:1.5px solid var(--gray-5);border-radius:20px;font-size:11.5px;font-weight:500;color:var(--gray-11);cursor:pointer;transition:all 80ms;user-select:none;background:var(--panel)}
 .svc-sub-chip:hover{border-color:var(--accent-9);color:var(--accent-9)}
-.svc-sub-chip.sel{border-color:var(--accent-9);background:var(--accent-1);color:var(--accent-11);font-weight:500}
-.svc-price-row{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--gray-4);flex-wrap:wrap}
-.svc-price-lbl{font-size:12px;font-weight:500;color:var(--gray-11);white-space:nowrap}
-.svc-cur{font-size:13px;font-weight:600;color:var(--gray-12)}
-.svc-price{width:90px!important;padding:6px 8px!important;font-size:13px!important}
-.svc-unit{width:90px;padding:5px 8px;font-size:12px;border:1px solid var(--gray-5);border-radius:var(--r2);background:var(--panel);font-family:inherit;color:var(--gray-12)}
+.svc-sub-chip.sel{border-color:var(--accent-9);background:var(--accent-9);color:#fff}
+.svc-empty-state{font-size:12px;color:var(--gray-8);padding:28px 0;text-align:center;line-height:1.6}
+/* Price row */
+.svc-price-row{display:flex;align-items:center;gap:7px;margin:10px 0 4px;padding:10px 12px;background:var(--gray-1);border-radius:8px;border:1px solid var(--gray-alpha-4);flex-wrap:wrap}
+.svc-price-lbl{font-size:11px;font-weight:600;color:var(--gray-9);white-space:nowrap}
+.svc-price-inp{width:90px;height:30px;padding:0 8px;border:1px solid var(--gray-alpha-5);border-radius:6px;font-size:12px;background:var(--color-background);color:var(--gray-12);outline:none}
+.svc-price-inp:focus{border-color:var(--accent-9)}
+.svc-price-unit{height:30px;padding:0 8px;border:1px solid var(--gray-alpha-5);border-radius:6px;font-size:12px;background:var(--color-background);color:var(--gray-12);outline:none;cursor:pointer}
+/* Own input row */
+.svc-own-row{display:flex;gap:6px;align-items:center;margin-top:6px}
+.svc-own-inp{flex:1;height:29px;padding:0 10px;border:1px dashed var(--gray-5);border-radius:20px;font-size:12px;color:var(--gray-12);background:var(--color-background);outline:none;min-width:0}
+.svc-own-inp:focus{border-color:var(--accent-9);border-style:solid}
+.svc-own-btn{height:29px;padding:0 12px;border:none;border-radius:20px;background:var(--accent-9);color:#fff;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0}
+/* Coverage */
+.svc-cov-wrap{border-top:1px solid var(--gray-alpha-4);flex-shrink:0}
+.svc-cov-hdr{padding:9px 14px;background:var(--gray-2);border-bottom:1px solid var(--gray-alpha-4);font-size:10px;font-weight:700;color:var(--gray-9);text-transform:uppercase;letter-spacing:.06em}
+.svc-cov-body{padding:10px 14px 12px}
+.svc-area-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.svc-area-chip{padding:4px 11px;border:1.5px solid var(--gray-5);border-radius:20px;font-size:11.5px;font-weight:500;color:var(--gray-11);cursor:pointer;transition:all 80ms;user-select:none;background:var(--panel)}
+.svc-area-chip:hover{border-color:var(--accent-9);color:var(--accent-9)}
+.svc-area-chip.sel{border-color:var(--accent-9);background:var(--accent-9);color:#fff}
 
 /* ── COMPLIANCE CHECKS ── */
 .check-list{display:flex;flex-direction:column;gap:12px}
@@ -311,7 +359,7 @@ a{text-decoration:none}
 .rv-v{font-size:12px;font-weight:500;color:var(--gray-12)}
 
 /* ── FORM NAV ── */
-.form-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r4)}
+.form-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--panel);border:1px solid var(--gray-alpha-4);border-radius:var(--r4);box-shadow:var(--shadow-card)}
 .btn-prev{display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--panel);border:1px solid var(--gray-5);border-radius:var(--r2);font-size:13px;font-weight:500;color:var(--gray-11);cursor:pointer}
 .btn-prev:hover{background:var(--gray-2)}
 .btn-prev svg{width:14px;height:14px}
@@ -325,8 +373,8 @@ a{text-decoration:none}
 
 /* ── RIGHT RAIL ── */
 .rail{display:flex;flex-direction:column;gap:14px;position:sticky;top:20px}
-.rc{background:var(--panel);border:1px solid var(--gray-4);border-radius:var(--r4);overflow:hidden}
-.rc-head{padding:12px 14px;border-bottom:1px solid var(--gray-4)}
+.rc{background:var(--panel);border:1px solid var(--gray-alpha-4);border-radius:var(--r4);overflow:hidden;box-shadow:var(--shadow-card)}
+.rc-head{padding:12px 14px;border-bottom:1px solid var(--gray-alpha-4)}
 .rc-head h3{font-size:13px;font-weight:700;color:var(--gray-12)}
 .rc-head p{font-size:11px;color:var(--gray-a11);margin-top:1px}
 .rc-body{padding:14px}
@@ -426,39 +474,61 @@ a{text-decoration:none}
   </div>
 
   <div class="sidebar-scroll">
+    <!-- Organisation context switcher -->
+    <div style="padding:8px 8px 4px;">
+      <div style="display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--r3);background:var(--gray-2);border:1px solid var(--gray-alpha-4);cursor:pointer;transition:background 80ms;" onmouseover="this.style.background='var(--gray-3)'" onmouseout="this.style.background='var(--gray-2)'">
+        <div style="width:28px;height:28px;border-radius:6px;background:var(--accent-9);font-size:11px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;">MJ</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:12.5px;font-weight:700;color:var(--gray-12);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">MJ Mechanical Ltd</div>
+          <div style="font-size:10.5px;color:var(--gray-9);margin-top:1px;">Contractor Account</div>
+        </div>
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="var(--gray-7)" stroke-width="1.5" style="flex-shrink:0;"><path d="M2 4.5l4.5 4 4.5-4"/></svg>
+      </div>
+    </div>
+    <div class="nav-section-label">Contractor</div>
     <div class="nav-item" onclick="window.location.href='marketplace.html'">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h5v5H2zm7 0h5v5H9zM2 9h5v5H2zm7 0h5v5H9z" opacity="0.8"/></svg>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M1 6h14M6 6v9"/></svg>
       Dashboard
     </div>
     <div class="nav-item active">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="12" height="12" rx="1.5"/><path d="M5 5.5h6M5 8h4M5 10.5h3"/></svg>
       My Application
     </div>
-    <div class="nav-item">
+    <div class="nav-item" onclick="window.location.href='contractor-profile.html'">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="6" r="2.5"/><path d="M3 13.5c0-2.761 2.239-5 5-5s5 2.239 5 5"/></svg>
       My Profile
     </div>
     <div class="nav-item">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 2h8l-1 4H5L4 2z"/><path d="M5.5 6l1 8h3l1-8"/></svg>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 2h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M5 6h6M5 9h4"/></svg>
       Documents
     </div>
+    <div class="nav-section-label">Compliance</div>
+    <div class="nav-item" onclick="window.location.href='building-safety-cases.html'">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 1.5L2 4.5v4c0 3 2.5 5.5 6 6 3.5-.5 6-3 6-6v-4L8 1.5z"/><path d="M5.5 8l1.8 1.8L10.5 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Building Safety Cases
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4h12v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4z"/><path d="M2 4l6-3 6 3"/></svg>
+      Compliance Register
+    </div>
+    <div class="nav-section-label">Account</div>
     <div class="nav-item">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2.5 2A1.5 1.5 0 001 3.5v6A1.5 1.5 0 002.5 11H5l2.5 2.5L10 11h2.5A1.5 1.5 0 0014 9.5v-6A1.5 1.5 0 0012.5 2h-10z"/></svg>
       Messages
       <span class="badge">3</span>
     </div>
     <div class="nav-item">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="2"/><path d="M8 2v2.5M8 11.5V14M2 8h2.5M11.5 8H14M3.75 3.75l1.77 1.77M10.48 10.48l1.77 1.77M3.75 12.25l1.77-1.77M10.48 5.52l1.77-1.77"/></svg>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="2.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M3.1 12.9l1.4-1.4M11.5 4.5l1.4-1.4"/></svg>
       Settings
     </div>
     <div class="nav-item">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="6.5" r="2.5"/><path d="M3.5 13.5c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5"/></svg>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.5"/><path d="M6 6a2 2 0 1 1 2.5 1.9C8 8.4 8 9 8 9.5M8 11.5v.5"/></svg>
       Help &amp; Support
     </div>
   </div>
 
   <div class="sidebar-footer">
-    <div style="font-size:10px;font-weight:500;color:rgba(0,0,0,.61);text-transform:uppercase;letter-spacing:0.06em;padding:0 8px 5px;">Organisation</div>
+    <div style="font-size:10px;font-weight:700;color:var(--gray-8);text-transform:uppercase;letter-spacing:0.06em;padding:0 4px 5px;">Organisation</div>
     <div class="org-pill">
       <div class="org-thumb">MJ</div>
       <span class="org-label">MJ Mechanical Ltd</span>
@@ -488,27 +558,30 @@ a{text-decoration:none}
 
   <!-- TOPBAR -->
   <header class="topbar">
-    <button style="display:flex;align-items:center;gap:6px;padding:6px 10px;background:none;border:1px solid var(--gray-4);border-radius:var(--r3);font-size:12px;font-weight:500;color:var(--gray-9);cursor:pointer;transition:background 80ms,color 80ms;white-space:nowrap;flex-shrink:0" onmouseover="this.style.background='var(--gray-2)';this.style.color='var(--gray-12)'" onmouseout="this.style.background='none';this.style.color='var(--gray-9)'" onclick="history.length > 1 ? history.back() : location.href='marketplace.html'">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
-      Dashboard
-    </button>
-    <span class="topbar-title" style="margin-left:4px">Contractor Application</span>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="topbar-title">Contractor Application</span>
+      <div style="display:flex;align-items:center;gap:5px;cursor:pointer;padding:4px 8px;border:1px solid var(--gray-alpha-4);border-radius:var(--r2);font-size:12px;color:var(--gray-9);" onclick="history.length > 1 ? history.back() : location.href='marketplace.html'">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4.5l3 3 3-3"/></svg>
+        MJ Mechanical Ltd
+      </div>
+    </div>
     <div class="topbar-spacer"></div>
 
-    <button class="tb-icon" title="Notifications">
-      <i data-lucide="bell"></i>
-      <span class="notif-dot"></span>
-    </button>
-    <button class="tb-icon" title="Messages">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    </button>
-    <div class="tb-div"></div>
-
-    <div class="user-chip">
-      <div class="u-ava"><img src="https://i.pravatar.cc/40?img=11" alt="Michael Brown"></div>
-      <div class="u-meta">
-        <span class="u-name">Michael Brown</span>
-        <span class="u-role">Contractor</span>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <button class="tb-icon" title="Notifications">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1.5a5 5 0 0 1 5 5v3l1.5 2H1.5L3 9.5v-3a5 5 0 0 1 5-5z"/><path d="M6.5 13a1.5 1.5 0 0 0 3 0"/></svg>
+        <span class="notif-badge">3</span>
+      </button>
+      <button class="tb-icon" title="Help">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="M6 6a2 2 0 1 1 2.5 1.9C8 8.4 8 9 8 9.5M8 11.5v.5"/></svg>
+      </button>
+      <div class="tb-div"></div>
+      <div class="user-chip">
+        <div class="u-ava"><img src="https://i.pravatar.cc/40?img=11" alt="Michael Brown"></div>
+        <div class="u-meta">
+          <span class="u-name">Michael Brown</span>
+          <span class="u-role">Contractor</span>
+        </div>
       </div>
     </div>
   </header>
@@ -757,117 +830,66 @@ a{text-decoration:none}
               </div>
               <div class="fg mb14">
                 <label class="fl">Services Offered <span class="req">*</span></label>
-                <div style="font-size:12px;color:var(--gray-9);margin-bottom:10px">Select your main service categories, then choose specific specialisms for each.</div>
-                <div class="svc-cats" id="svc-cats">
-                  <div class="svc-cat-chip" data-cat="Core Property Compliance" onclick="toggleSvcCat(this)">Core Property Compliance</div>
-                  <div class="svc-cat-chip" data-cat="Mechanical &amp; Electrical" onclick="toggleSvcCat(this)">Mechanical &amp; Electrical</div>
-                  <div class="svc-cat-chip" data-cat="Repairs &amp; Maintenance" onclick="toggleSvcCat(this)">Repairs &amp; Maintenance</div>
-                  <div class="svc-cat-chip" data-cat="Building Safety" onclick="toggleSvcCat(this)">Building Safety</div>
-                  <div class="svc-cat-chip" data-cat="Damp, Mould &amp; Disrepair" onclick="toggleSvcCat(this)">Damp, Mould &amp; Disrepair</div>
-                  <div class="svc-cat-chip" data-cat="Asset Management" onclick="toggleSvcCat(this)">Asset Management</div>
-                  <div class="svc-cat-chip" data-cat="Professional Consultancy" onclick="toggleSvcCat(this)">Professional Consultancy</div>
-                </div>
-                <div class="svc-subs" id="svc-subs">
-                  <div class="svc-sub-group" data-cat="Core Property Compliance" style="display:none">
-                    <div class="svc-sub-head">Core Property Compliance — Specialisms</div>
-                    <div class="svc-sub-chips">
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Gas compliance</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Electrical compliance</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Fire safety compliance</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Asbestos management</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Water hygiene / legionella</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Lift compliance</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Pressure systems</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Play area / external safety</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Environmental hazards</div>
+                <div style="font-size:12px;color:var(--gray-9);margin-bottom:12px;">Select a service, choose sub-services, set your price, and coverage area.</div>
+
+                <div class="svc-two-col">
+                  <!-- LEFT: Service selector -->
+                  <div class="svc-left-col">
+                    <div class="svc-col-hdr">Service</div>
+                    <div class="svc-col-body">
+                      <div class="svc-dd-wrap">
+                        <input class="svc-dd-inp" id="svc-dd-inp" type="text" placeholder="Search or select service…" autocomplete="off"
+                          oninput="svcDdFilter(this.value)" onclick="svcDdOpen()" onkeydown="svcDdKey(event)">
+                        <svg class="svc-dd-arrow" viewBox="0 0 10 6" fill="none" width="10" height="6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        <div class="svc-dd-list" id="svc-dd-list"></div>
+                      </div>
+                      <div class="svc-sel-list" id="svc-sel-list">
+                        <div id="svc-sel-empty" class="svc-empty-state" style="padding:12px 0;font-size:11px;">No services added yet.<br>Use the dropdown above.</div>
+                      </div>
                     </div>
                   </div>
-                  <div class="svc-sub-group" data-cat="Mechanical &amp; Electrical" style="display:none">
-                    <div class="svc-sub-head">Mechanical &amp; Electrical — Specialisms</div>
-                    <div class="svc-sub-chips">
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Domestic heating engineers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Commercial mechanical engineers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Electrical engineers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Mechanical design consultants</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Electrical design consultants</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Ventilation specialists</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Controls / BMS specialists</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Renewables / low-carbon specialists</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Metering &amp; billing specialists</div>
+
+                  <!-- RIGHT: Sub-services + Price + Coverage -->
+                  <div class="svc-right-col">
+                    <div class="svc-col-hdr" id="svc-right-hdr">Sub-Services &amp; Pricing</div>
+                    <div class="svc-col-body" id="svc-right-body">
+                      <div class="svc-empty-state" id="svc-right-empty">← Select a service on the left to configure it.</div>
+                      <div id="svc-right-content" style="display:none;">
+                        <div class="svc-sub-hdr" id="svc-sub-label">Sub-Services</div>
+                        <div class="svc-sub-chips-wrap" id="svc-sub-chips"></div>
+                        <div class="svc-own-row">
+                          <input class="svc-own-inp" id="svc-sub-own" type="text" placeholder="Write your own sub-service…" onkeydown="if(event.key==='Enter')svcAddOwnSub()">
+                          <button type="button" class="svc-own-btn" onclick="svcAddOwnSub()">Add</button>
+                        </div>
+                        <!-- Price -->
+                        <div class="svc-price-row">
+                          <span class="svc-price-lbl">Starting price (optional)</span>
+                          <span style="font-size:13px;font-weight:600;color:var(--gray-9);">£</span>
+                          <input class="svc-price-inp" id="svc-price-inp" type="number" min="0" placeholder="0.00" oninput="svcSavePrice()">
+                          <span style="font-size:12px;color:var(--gray-9);">per</span>
+                          <select class="svc-price-unit" id="svc-price-unit" onchange="svcSavePrice()">
+                            <option value="job">job</option>
+                            <option value="hour">hour</option>
+                            <option value="day">day</option>
+                            <option value="visit">visit</option>
+                            <option value="m²">m²</option>
+                            <option value="unit">unit</option>
+                            <option value="fixed">fixed price</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="svc-sub-group" data-cat="Repairs &amp; Maintenance" style="display:none">
-                    <div class="svc-sub-head">Repairs &amp; Maintenance — Specialisms</div>
-                    <div class="svc-sub-chips">
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Responsive repairs operatives</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Multi-trade operatives</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Plumbers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Electricians</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Carpenters / joiners</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Roofers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Glaziers / window specialists</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Drainage contractors</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Groundworkers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Voids team</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Out-of-hours emergency contractors</div>
-                    </div>
-                  </div>
-                  <div class="svc-sub-group" data-cat="Building Safety" style="display:none">
-                    <div class="svc-sub-head">Building Safety — Specialisms</div>
-                    <div class="svc-sub-chips">
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Building Safety Manager / Lead</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Fire engineers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Structural engineers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Clerk of Works / Quality Inspector</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Facade / cladding consultants</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Building control consultants</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Resident safety engagement specialists</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Golden thread / building info managers</div>
-                    </div>
-                  </div>
-                  <div class="svc-sub-group" data-cat="Damp, Mould &amp; Disrepair" style="display:none">
-                    <div class="svc-sub-head">Damp, Mould &amp; Disrepair — Specialisms</div>
-                    <div class="svc-sub-chips">
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Damp and mould surveyors</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Building pathologists</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Ventilation engineers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Mould remediation contractors</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Leak detection specialists</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Retrofit assessors / coordinators</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Environmental health / HHSRS specialists</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Disrepair surveyors</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Tenant liaison officers</div>
-                    </div>
-                  </div>
-                  <div class="svc-sub-group" data-cat="Asset Management" style="display:none">
-                    <div class="svc-sub-head">Asset Management — Specialisms</div>
-                    <div class="svc-sub-chips">
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Asset strategy managers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Stock condition surveyors</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Asset data analysts</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Planned maintenance managers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Quantity surveyors</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Project managers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Energy / sustainability specialists</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Decent Homes / property standards specialists</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">GIS / property data specialists</div>
-                    </div>
-                  </div>
-                  <div class="svc-sub-group" data-cat="Professional Consultancy" style="display:none">
-                    <div class="svc-sub-head">Professional Consultancy — Specialisms</div>
-                    <div class="svc-sub-chips">
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Building surveyors</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Chartered surveyors</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">M&amp;E consultants</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Fire risk assessors / engineers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Structural engineers</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Asbestos consultants</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Principal designers / CDM advisors</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Cost consultants / QS</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Clerk of Works</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Legal disrepair experts</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Procurement consultants</div>
-                      <div class="svc-sub-chip" onclick="this.classList.toggle('sel')">Data / systems consultants</div>
+
+                    <!-- Coverage & Delivery Area -->
+                    <div class="svc-cov-wrap">
+                      <div class="svc-cov-hdr">Coverage &amp; Delivery Area</div>
+                      <div class="svc-cov-body">
+                        <div class="svc-area-chips" id="svc-area-chips"></div>
+                        <div class="svc-own-row">
+                          <input class="svc-own-inp" id="svc-area-own" type="text" placeholder="Type your own area…" onkeydown="if(event.key==='Enter')svcAddOwnArea()">
+                          <button type="button" class="svc-own-btn" onclick="svcAddOwnArea()">Add</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -896,37 +918,6 @@ a{text-decoration:none}
                 </div>
               </div>
 
-              <!-- Service Pricing -->
-              <div class="fg mb14" id="svc-pricing-section">
-                <label class="fl">Service Pricing <span class="req">*</span></label>
-                <div style="font-size:12px;color:var(--gray-9);margin-bottom:10px;">For each service category you selected above, enter your starting price and unit. This is shown on your profile.</div>
-                <table class="dt" id="svc-pricing-tbl" style="min-width:0;">
-                  <thead><tr>
-                    <th style="width:35%;">Service Category</th>
-                    <th style="width:20%;">Starting Price (£)</th>
-                    <th style="width:25%;">Per Unit</th>
-                    <th style="width:20%;">Typical Delivery</th>
-                  </tr></thead>
-                  <tbody id="svc-pricing-tbody">
-                    <tr>
-                      <td><input class="fi" type="text" placeholder="e.g. Core Property Compliance" style="font-size:12px;padding:6px 8px;"></td>
-                      <td><input class="fi" type="number" placeholder="85" min="0" style="font-size:12px;padding:6px 8px;"></td>
-                      <td>
-                        <select class="fs" style="font-size:12px;padding:5px 8px;height:34px;">
-                          <option value="">Select unit</option>
-                          <option>per job</option><option>per hour</option><option>per day</option>
-                          <option>per visit</option><option>per property</option><option>per unit</option><option>fixed price</option>
-                        </select>
-                      </td>
-                      <td><input class="fi" type="text" placeholder="e.g. Same day" style="font-size:12px;padding:6px 8px;"></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <button type="button" onclick="addPricingRow()" style="margin-top:8px;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border:1px dashed var(--gray-5);border-radius:6px;font-size:12px;font-weight:500;color:var(--gray-11);cursor:pointer;background:transparent;">
-                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v10M3 8h10"/></svg>
-                  Add category
-                </button>
-              </div>
 
               <div class="fg2 org-only" id="org-fields" style="display:none">
                 <div class="fg">
@@ -2323,34 +2314,249 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-function toggleSvcCat(el) {
-  const isOn = el.classList.toggle('sel');
-  const cat = el.dataset.cat;
-  const subGroup = Array.from(document.querySelectorAll('.svc-sub-group')).find(g => g.dataset.cat === cat);
-  if (!subGroup) return;
-  subGroup.style.display = isOn ? '' : 'none';
-  if (!isOn) {
-    subGroup.querySelectorAll('.svc-sub-chip.sel').forEach(c => c.classList.remove('sel'));
-    return;
-  }
-  if (!subGroup.querySelector('.svc-price-row')) {
-    const row = document.createElement('div');
-    row.className = 'svc-price-row';
-    row.innerHTML = `
-      <span class="svc-price-lbl">Starting price from</span>
-      <span class="svc-cur">£</span>
-      <input type="number" class="fi svc-price" placeholder="0.00" min="0" step="0.01" style="width:90px;padding:6px 8px;font-size:13px">
-      <span style="font-size:12px;color:var(--gray-9)">per</span>
-      <select class="svc-unit">
-        <option>hour</option>
-        <option>day</option>
-        <option>job</option>
-        <option>visit</option>
-        <option>m²</option>
-      </select>`;
-    subGroup.appendChild(row);
+/* ── SERVICES v3 ── */
+const SVC_DATA = [
+  { icon:'🔒', label:'Core Property Compliance', subs:['Gas safety (CP12)','Electrical EICR','Fire risk assessment','Asbestos management','Water hygiene / Legionella','Lift & escalator compliance','Pressure systems','Play area & external safety','PAT testing','Smoke & CO alarm compliance','Emergency lighting','Lightning protection'] },
+  { icon:'⚡', label:'Mechanical & Electrical', subs:['Domestic heating engineers','Commercial mechanical engineers','Electrical engineers','M&E design consultants','Ventilation / MVHR specialists','Controls / BMS specialists','Renewable energy / low-carbon','Metering & billing','Air conditioning / HVAC','Heat pump installation','Solar PV installation','Electric vehicle charging'] },
+  { icon:'🔧', label:'Repairs & Maintenance', subs:['Responsive repairs','Multi-trade operatives','Plumbers','Electricians','Carpenters / joiners','Roofers','Glaziers / window specialists','Drainage contractors','Groundworkers','Void property works','Out-of-hours emergency','Painters & decorators','Plasterers','Tilers','Locksmiths','Fencing & boundary works'] },
+  { icon:'🏗️', label:'Building Safety', subs:['Building Safety Manager','Fire engineers','Structural engineers','Clerk of Works','Façade & cladding consultants','Building control consultants','Resident safety engagement','Golden thread / BIM managers','EWS1 assessors','Fire door inspection','Waking watch services','Fire suppression systems'] },
+  { icon:'💧', label:'Damp, Mould & Disrepair', subs:['Damp & mould surveyors','Building pathologists','Ventilation engineers','Mould remediation','Leak detection','Retrofit assessors / coordinators','HHSRS specialists','Disrepair surveyors','Tenant liaison officers','Thermal imaging','Waterproofing','Rising damp treatment'] },
+  { icon:'📊', label:'Asset Management', subs:['Asset strategy managers','Stock condition surveyors','Asset data analysts','Planned maintenance managers','Quantity surveyors','Project managers','Energy & sustainability specialists','Decent Homes specialists','GIS / property data specialists','Capital programme delivery','Lifecycle costing analysts','Procurement & contract managers'] },
+  { icon:'📋', label:'Professional Consultancy', subs:['Building surveyors','Chartered surveyors (RICS)','M&E consultants','Fire risk assessors','Structural engineers','Asbestos consultants','Principal designers / CDM advisors','Cost consultants / QS','Clerk of Works','Legal disrepair experts','Procurement consultants','Data & systems consultants','Planning consultants','Acoustic consultants'] },
+  { icon:'🏠', label:'Refurbishment & Planned Works', subs:['Kitchen installations','Bathroom installations','Windows & external doors','Roofing programmes','External wall insulation (EWI)','Boiler & heating replacements','Full electrical rewires','Loft & floor insulation','Communal area refurbishment','Landscaping & hard-standings','Door entry system upgrades','Communal decoration'] },
+  { icon:'🌱', label:'Energy Efficiency & Retrofit', subs:['EPC assessors','Retrofit coordinators (PAS 2035)','Cavity wall insulation','Solid wall insulation','Solar PV & battery storage','Air source heat pumps','Ground source heat pumps','Smart metering','Air tightness testing','Green deal assessors','MVHR systems','Biomass heating'] },
+  { icon:'🔐', label:'Security & Access Control', subs:['Door entry & intercom systems','CCTV design & installation','Access control systems','Intruder alarm systems','Concierge & security services','Fire alarm systems','Automatic gates & barriers','Communal security','Smart lock installation','Security lighting','ANPR systems'] },
+  { icon:'🧹', label:'Cleaning & Facilities Management', subs:['Communal area cleaning','Window cleaning','Grounds maintenance','Pest control','Tree surgery','Graffiti removal','Waste & refuse management','Deep cleaning / biohazard','Caretaking services','Winter gritting & snow clearance','Lift cleaning & maintenance'] },
+  { icon:'💻', label:'Digital & Technology', subs:['Housing management systems','Asset management software','Mobile workforce solutions','IoT / smart building','Data analytics & reporting','Document management systems','Resident portals & apps','Cybersecurity consultants','AI & automation specialists','GIS mapping & data','Digital twin services','Cloud infrastructure'] },
+  { icon:'🚧', label:'Construction & Major Works', subs:['Principal contractors','Main contractors','Demolition contractors','Groundworks & civil engineering','Steel frame erection','Concrete works','Cladding & curtain walling','Roofing (new build)','Fit-out contractors','Modular / offsite construction','Infrastructure works','Planning & development consultants'] },
+  { icon:'♿', label:'Accessibility & Adaptations', subs:['Disabled facilities grants works','Stairlift installation','Level-access shower / wetroom','Grab rails & handrails','Ramp installation','Widened doorways','Raised toilet seats & aids','Occupational therapy assessments','Ceiling track hoists','Accessible kitchen adaptations','Community alarm systems'] }
+];
+
+const SVC_AREAS = ['London','South East','South West','Midlands','North West','North East','Yorkshire & Humber','East of England','East Midlands','West Midlands','Scotland','Wales','Northern Ireland','National (UK-wide)'];
+
+// State: array of { dataIdx, label, icon, subs: Set, customSubs: [], price: '', unit: 'job' }
+let svcSelected = [];
+let svcActiveId = null; // index in svcSelected
+
+function svcInit() {
+  svcBuildDd();
+  svcBuildAreas();
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.svc-dd-wrap')) svcDdClose();
+  });
+}
+
+function svcBuildDd() {
+  const list = document.getElementById('svc-dd-list');
+  if (!list) return;
+  list.innerHTML = SVC_DATA.map((s, i) =>
+    `<div class="svc-dd-opt" data-idx="${i}" onclick="svcSelectService(${i})"><span class="svc-dd-icon">${s.icon}</span>${s.label}</div>`
+  ).join('') +
+  `<div class="svc-dd-own-row" onclick="svcAddOwnService()">
+    <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 3v10M3 8h10"/></svg>
+    Write my own service…
+  </div>`;
+}
+
+function svcBuildAreas() {
+  const wrap = document.getElementById('svc-area-chips');
+  if (!wrap) return;
+  wrap.innerHTML = SVC_AREAS.map(a =>
+    `<div class="svc-area-chip" onclick="this.classList.toggle('sel')">${a}</div>`
+  ).join('');
+}
+
+function svcDdFilter(q) {
+  svcDdOpen();
+  const lq = q.toLowerCase();
+  document.querySelectorAll('#svc-dd-list .svc-dd-opt').forEach(opt => {
+    opt.style.display = !lq || opt.textContent.toLowerCase().includes(lq) ? '' : 'none';
+  });
+}
+
+function svcDdOpen() {
+  document.getElementById('svc-dd-list').classList.add('open');
+}
+
+function svcDdClose() {
+  const list = document.getElementById('svc-dd-list');
+  if (list) list.classList.remove('open');
+  const inp = document.getElementById('svc-dd-inp');
+  if (inp) inp.value = '';
+  if (list) list.querySelectorAll('.svc-dd-opt').forEach(o => o.style.display = '');
+}
+
+function svcDdKey(e) {
+  if (e.key === 'Escape') svcDdClose();
+  if (e.key === 'Enter') {
+    const v = e.target.value.trim();
+    if (v) svcAddCustomService(v);
   }
 }
+
+function svcSelectService(dataIdx) {
+  svcDdClose();
+  // Don't add duplicates
+  if (svcSelected.find(s => s.dataIdx === dataIdx)) {
+    svcSetActive(svcSelected.findIndex(s => s.dataIdx === dataIdx));
+    return;
+  }
+  const d = SVC_DATA[dataIdx];
+  svcSelected.push({ dataIdx, label: d.label, icon: d.icon, subs: new Set(), customSubs: [], price: '', unit: 'job' });
+  svcSetActive(svcSelected.length - 1);
+  svcRenderLeft();
+}
+
+function svcAddOwnService() {
+  const inp = document.getElementById('svc-dd-inp');
+  const val = (inp.value || '').trim();
+  svcDdClose();
+  if (!val) {
+    inp.focus();
+    inp.placeholder = 'Type your own service name…';
+    return;
+  }
+  svcAddCustomService(val);
+}
+
+function svcAddCustomService(label) {
+  if (!label) return;
+  svcSelected.push({ dataIdx: -1, label, icon: '✏️', subs: new Set(), customSubs: [], price: '', unit: 'job' });
+  svcSetActive(svcSelected.length - 1);
+  svcRenderLeft();
+  document.getElementById('svc-dd-inp').value = '';
+}
+
+function svcRemoveService(selIdx) {
+  svcSelected.splice(selIdx, 1);
+  if (svcActiveId === selIdx) svcActiveId = svcSelected.length > 0 ? 0 : null;
+  else if (svcActiveId > selIdx) svcActiveId--;
+  svcRenderLeft();
+  svcRenderRight();
+}
+
+function svcSetActive(selIdx) {
+  // Save current price before switching
+  if (svcActiveId !== null && svcSelected[svcActiveId]) {
+    const pi = document.getElementById('svc-price-inp');
+    const pu = document.getElementById('svc-price-unit');
+    if (pi) svcSelected[svcActiveId].price = pi.value;
+    if (pu) svcSelected[svcActiveId].unit = pu.value;
+  }
+  svcActiveId = selIdx;
+  svcRenderLeft();
+  svcRenderRight();
+}
+
+function svcRenderLeft() {
+  const list = document.getElementById('svc-sel-list');
+  const empty = document.getElementById('svc-sel-empty');
+  if (!list) return;
+  if (svcSelected.length === 0) {
+    list.innerHTML = '';
+    list.appendChild(empty || (() => { const d = document.createElement('div'); d.id='svc-sel-empty'; d.className='svc-empty-state'; d.style='padding:12px 0;font-size:11px;'; d.innerHTML='No services added yet.<br>Use the dropdown above.'; return d; })());
+    return;
+  }
+  list.innerHTML = svcSelected.map((s, i) => {
+    const subCount = s.subs.size + s.customSubs.length;
+    return `<div class="svc-sel-item${i === svcActiveId ? ' active' : ''}${subCount > 0 ? ' has-sub' : ''}" onclick="svcSetActive(${i})">
+      <span class="svc-sel-icon">${s.icon}</span>
+      <span class="svc-sel-name">${s.label}</span>
+      <span class="svc-sel-badge">${subCount || ''}</span>
+      <button class="svc-sel-del" type="button" onclick="event.stopPropagation();svcRemoveService(${i})" title="Remove">×</button>
+    </div>`;
+  }).join('');
+}
+
+function svcRenderRight() {
+  const empty = document.getElementById('svc-right-empty');
+  const content = document.getElementById('svc-right-content');
+  if (svcActiveId === null || !svcSelected[svcActiveId]) {
+    if (empty) empty.style.display = '';
+    if (content) content.style.display = 'none';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+  if (content) content.style.display = '';
+  const s = svcSelected[svcActiveId];
+  const d = s.dataIdx >= 0 ? SVC_DATA[s.dataIdx] : null;
+  const label = document.getElementById('svc-sub-label');
+  if (label) label.textContent = s.label + ' — Sub-Services';
+  // Build sub chips
+  const chipsWrap = document.getElementById('svc-sub-chips');
+  if (chipsWrap) {
+    const builtIn = d ? d.subs.map(sub =>
+      `<div class="svc-sub-chip${s.subs.has(sub) ? ' sel' : ''}" onclick="svcToggleSub(this,'${sub.replace(/'/g,"\\'")}') ">${sub}</div>`
+    ).join('') : '';
+    const custom = s.customSubs.map((sub, ci) =>
+      `<div class="svc-sub-chip sel" onclick="svcToggleCustomSub(this,${svcActiveId},${ci})">${sub}</div>`
+    ).join('');
+    chipsWrap.innerHTML = builtIn + custom;
+  }
+  // Price
+  const pi = document.getElementById('svc-price-inp');
+  const pu = document.getElementById('svc-price-unit');
+  if (pi) pi.value = s.price;
+  if (pu) pu.value = s.unit;
+}
+
+function svcToggleSub(chip, sub) {
+  if (svcActiveId === null) return;
+  const s = svcSelected[svcActiveId];
+  if (s.subs.has(sub)) s.subs.delete(sub);
+  else s.subs.add(sub);
+  chip.classList.toggle('sel');
+  svcUpdateBadge();
+}
+
+function svcToggleCustomSub(chip, selIdx, ci) {
+  chip.classList.toggle('sel');
+  // Custom subs are always "selected" — toggle just removes them
+  if (!chip.classList.contains('sel')) {
+    svcSelected[selIdx].customSubs.splice(ci, 1);
+    svcRenderRight();
+  }
+  svcUpdateBadge();
+}
+
+function svcAddOwnSub() {
+  const inp = document.getElementById('svc-sub-own');
+  const val = (inp.value || '').trim();
+  if (!val || svcActiveId === null) return;
+  svcSelected[svcActiveId].customSubs.push(val);
+  inp.value = '';
+  svcRenderRight();
+  svcUpdateBadge();
+}
+
+function svcSavePrice() {
+  if (svcActiveId === null) return;
+  const pi = document.getElementById('svc-price-inp');
+  const pu = document.getElementById('svc-price-unit');
+  if (pi) svcSelected[svcActiveId].price = pi.value;
+  if (pu) svcSelected[svcActiveId].unit = pu.value;
+}
+
+function svcUpdateBadge() {
+  svcRenderLeft();
+}
+
+function svcAddOwnArea() {
+  const inp = document.getElementById('svc-area-own');
+  const val = (inp.value || '').trim();
+  if (!val) return;
+  const wrap = document.getElementById('svc-area-chips');
+  const chip = document.createElement('div');
+  chip.className = 'svc-area-chip sel';
+  chip.textContent = val;
+  chip.onclick = function() { this.classList.toggle('sel'); };
+  wrap.appendChild(chip);
+  inp.value = '';
+}
+
+document.addEventListener('DOMContentLoaded', svcInit);
+function toggleSvcCat(el) {}
+function buildSvcAccordion() {}
 
 function toggleAccredCustom(sel) {
   const input = sel.closest('td')?.querySelector('.accred-custom-input');
